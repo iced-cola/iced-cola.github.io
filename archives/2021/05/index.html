@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="个人博客">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Chenxii" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Chenxii&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://iced-cola.github.io/archives/2021/05/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('/images/th.jpeg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Chenxii
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/Tags/">Tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+
+<!-- Page Header -->
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
+    <div class="row">
+        <header class="intro-header">
+            <div class="container">
+                <div class="site-heading text-center">
+                    <div class="about-me">
+                        <!--移动端头部显示-->
+                        <img src=""/>
+                        <h5 style="font-size: 40px;"><a href="/about/">Chenxii</a></h5>
+                        <p>求知若饥，虚心若愚。</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+</div>
+<!-- Main Content -->
+<div class="container custom-haojen-container">
+    <!-- Post Container -->
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
+            <!-- Main Content -->
+
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2021/05/30/大数据入门/">
+        <h2 class="post-title">
+            大数据入门
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2021-05-30
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                Hadoop的安装和配置Hadoop下载Hadoop环境变量Hadoop启动和停止
+
+Hive的安装和配置Hive-3.1.2版本下载地址：apache-hive-3.1.2-bin.tar.gz
+下载之后解压并复制到 /opt 目录下
+123tar -zxvf apache-hive-3.1...
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2021/05/13/Element的Nav导航高亮/">
+        <h2 class="post-title">
+            Element的Nav导航高亮
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2021-05-13
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                这两天遇到一个问题：element的Nav菜单点击之后，跳转到相应页面，然后点击之后的菜单要高亮显示。菜单写成了组件。
+研究了好长时间没解决，今天晚上找到一个解决方案，完美的解决了问题！记录一下。
+链接🔗：vue 中使用element-ui的menu选中项高亮的问题
+
+
+
+
+nav组件：
+12..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2021/05/09/Vue-cli项目配置代理不生效/">
+        <h2 class="post-title">
+            Vue-cli项目配置代理不生效
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2021-05-09
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                详解webpack的proxyTable无效的解决方案
+webpack下配置proxyTable的问题Vue-cli@2创建的项目，用的webpack，配置了 config/index.js ：
+123456789101112131415161718module.exports = &#123;..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2021/05/09/MacBook-Pro-2020指纹无反应/">
+        <h2 class="post-title">
+            MacBook Pro 2020指纹无反应
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2021-05-09
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                
+记得上个月重装了一次系统，然后指纹都被清掉了，重装完系统之后发现无法录入指纹，按压指纹没有反应。
+
+
+
+昨天晚上发版，有一个配置没有提交，导致今天早上☀️生产部署失败⚠️了，七点不到⏰就去公司🏙处理。想趁着今天刚好周末有时间，去售后看看。可是售后人🚶太多了，笔记本💻的号都排完了，只能预..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2021/05/01/Reset-Your-IDE-Eval-Information/">
+        <h2 class="post-title">
+            Reset Your IDE Eval Information
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2021-05-01
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                IDEA无限试用
+
+
+
+Reset Your IDE Eval Information
+Download and install plugin from
+ Download Link: Download Link
+
+Alternative installation method:
+Add “Cu..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+
+<!-- 翻页 pager -->
+
+<ul class="pager">
+    
+    
+</ul>
+
+
+        </div>
+        <!-- Sidebar Container -->
+        <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+
+            <!-- About Me -->
+            <section class="visible-md visible-lg" style="padding: 0 18px;margin-bottom: 35px;">
+                <div class="short-about">
+                    <!--侧边栏头像-->
+                    
+                    <h5 style="font-size: 40px;">
+                        <!-- <a href="/about/">
+                            Chenxii
+                        </a> -->
+                        Chenxii
+                    </h5>
+                    
+                    <p>求知若饥，虚心若愚。</p>
+                    
+                    <hr>
+                    <!-- SNS Link 社交 -->
+                    <ul class="list-inline">
+                        
+                        
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Featured Tags  标签 -->
+            
+            <section style="margin-bottom: 25px;">
+                <h5 style="text-align: center;">Tags</h5>
+                <div class="tags">
+                    
+                        
+                        <a href="/tags/#生活" title="生活"
+                        rel="1">生活</a>
+                        
+                    
+                        
+                        <a href="/tags/#Element" title="Element"
+                        rel="1">Element</a>
+                        
+                    
+                        
+                        <a href="/tags/#git" title="git"
+                        rel="2">git</a>
+                        
+                    
+                        
+                        <a href="/tags/#博客维护" title="博客维护"
+                        rel="6">博客维护</a>
+                        
+                    
+                        
+                        <a href="/tags/#IDEA" title="IDEA"
+                        rel="3">IDEA</a>
+                        
+                    
+                        
+                        <a href="/tags/#Java" title="Java"
+                        rel="6">Java</a>
+                        
+                    
+                        
+                        <a href="/tags/#设计模式" title="设计模式"
+                        rel="1">设计模式</a>
+                        
+                    
+                        
+                        <a href="/tags/#Jenkins" title="Jenkins"
+                        rel="1">Jenkins</a>
+                        
+                    
+                        
+                        <a href="/tags/#LeetCode" title="LeetCode"
+                        rel="7">LeetCode</a>
+                        
+                    
+                        
+                        <a href="/tags/#其他" title="其他"
+                        rel="7">其他</a>
+                        
+                    
+                        
+                        <a href="/tags/#Markdown" title="Markdown"
+                        rel="1">Markdown</a>
+                        
+                    
+                        
+                        <a href="/tags/#数据库" title="数据库"
+                        rel="2">数据库</a>
+                        
+                    
+                        
+                        <a href="/tags/#OpenCV" title="OpenCV"
+                        rel="6">OpenCV</a>
+                        
+                    
+                        
+                        <a href="/tags/#SpringSecurity" title="SpringSecurity"
+                        rel="1">SpringSecurity</a>
+                        
+                    
+                        
+                        <a href="/tags/#SpringMVC" title="SpringMVC"
+                        rel="1">SpringMVC</a>
+                        
+                    
+                        
+                        <a href="/tags/#SpringBoot" title="SpringBoot"
+                        rel="3">SpringBoot</a>
+                        
+                    
+                        
+                        <a href="/tags/#Spring" title="Spring"
+                        rel="3">Spring</a>
+                        
+                    
+                        
+                        <a href="/tags/#Vue" title="Vue"
+                        rel="2">Vue</a>
+                        
+                    
+                        
+                        <a href="/tags/#MySQL" title="MySQL"
+                        rel="1">MySQL</a>
+                        
+                    
+                        
+                        <a href="/tags/#ajax" title="ajax"
+                        rel="1">ajax</a>
+                        
+                    
+                        
+                        <a href="/tags/#Thymeleaf" title="Thymeleaf"
+                        rel="2">Thymeleaf</a>
+                        
+                    
+                        
+                        <a href="/tags/#dubbo" title="dubbo"
+                        rel="1">dubbo</a>
+                        
+                    
+                        
+                        <a href="/tags/#Linux" title="Linux"
+                        rel="1">Linux</a>
+                        
+                    
+                        
+                        <a href="/tags/#日语" title="日语"
+                        rel="4">日语</a>
+                        
+                    
+                        
+                        <a href="/tags/#Swagger" title="Swagger"
+                        rel="1">Swagger</a>
+                        
+                    
+                        
+                        <a href="/tags/#SSL" title="SSL"
+                        rel="1">SSL</a>
+                        
+                    
+                        
+                        <a href="/tags/#折腾" title="折腾"
+                        rel="3">折腾</a>
+                        
+                    
+                        
+                        <a href="/tags/#树莓派" title="树莓派"
+                        rel="4">树莓派</a>
+                        
+                    
+                        
+                        <a href="/tags/#大数据" title="大数据"
+                        rel="1">大数据</a>
+                        
+                    
+                        
+                        <a href="/tags/#JavaScript" title="JavaScript"
+                        rel="1">JavaScript</a>
+                        
+                    
+                        
+                        <a href="/tags/#SpringCloud" title="SpringCloud"
+                        rel="1">SpringCloud</a>
+                        
+                    
+                        
+                        <a href="/tags/#Echarts" title="Echarts"
+                        rel="1">Echarts</a>
+                        
+                    
+                        
+                        <a href="/tags/#Tomcat" title="Tomcat"
+                        rel="1">Tomcat</a>
+                        
+                    
+                </div>
+            </section>
+            
+
+            
+            <hr>
+            <h5 style="text-align: center;">Friends</h5>
+            <ul class="list-inline" style="text-align: center;">
+                
+                <li><a href="https://baidu.com" target="_blank">Kaijun&#39;s Blog</a></li>
+                
+                <li><a href="https://baidu.com" target="_blank">Hux Blog</a></li>
+                
+                <li><a href="https://baidu.com" target="_blank">Hux Blog</a></li>
+                
+                <li><a href="https://baidu.com" target="_blank">Hux Blog</a></li>
+                
+                <li><a href="https://baidu.com" target="_blank">Hux Blog</a></li>
+                
+            </ul>
+            
+
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Chenxii 2018-2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme is <a target="_blank" rel="noopener" href="https://github.com/Haojen/hexo-theme-Anisina">Anisina</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://iced-cola.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>

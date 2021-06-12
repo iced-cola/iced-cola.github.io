@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="个人博客">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Chenxii" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Java字节码解析｜Chenxii&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://iced-cola.github.io/2020/11/18/Java字节码解析/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('/images/th.jpeg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Chenxii
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/Tags/">Tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="/images/th.jpeg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('/images/th.jpeg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Java字节码解析</h1>
+                    
+                    <span class="meta">
+                         作者 Chenxii
+                        <span>
+                          日期 2020-11-18
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Java"
+                           title="Java">Java</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Java字节码解析
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/252f381a6bc4">一文让你明白Java字节码</a></p>
+<span id="more"></span>
+
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>从一个简单类 Math.java 开始：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用 <code>javac Math.java</code> 得到字节码文件 Math.class，文件内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">cafe babe 0000 0034 0013 0a00 0400 0f09</span><br><span class="line">0003 0010 0700 1107 0012 0100 016d 0100</span><br><span class="line">0149 0100 063c 696e 6974 3e01 0003 2829</span><br><span class="line">5601 0004 436f 6465 0100 0f4c 696e 654e</span><br><span class="line">756d 6265 7254 6162 6c65 0100 0369 6e63</span><br><span class="line">0100 0328 2949 0100 0a53 6f75 7263 6546</span><br><span class="line">696c 6501 0009 4d61 7468 2e6a 6176 610c</span><br><span class="line">0007 0008 0c00 0500 0601 0004 4d61 7468</span><br><span class="line">0100 106a 6176 612f 6c61 6e67 2f4f 626a</span><br><span class="line">6563 7400 2100 0300 0400 0000 0100 0200</span><br><span class="line">0500 0600 0000 0200 0100 0700 0800 0100</span><br><span class="line">0900 0000 1d00 0100 0100 0000 052a b700</span><br><span class="line">01b1 0000 0001 000a 0000 0006 0001 0000</span><br><span class="line">0001 0001 000b 000c 0001 0009 0000 001f</span><br><span class="line">0002 0001 0000 0007 2ab4 0002 0460 ac00</span><br><span class="line">0000 0100 0a00 0000 0600 0100 0000 0600</span><br><span class="line">0100 0d00 0000 0200 0e</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="内容解读"><a href="#内容解读" class="headerlink" title="内容解读"></a>内容解读</h2><p>参照图例：</p>
+<p><img src="https://images2.imgbox.com/08/79/8kGgoJqq_o.jpeg"></p>
+<p><img src="https://images2.imgbox.com/61/17/vm6prCvK_o.png"></p>
+<h3 id="魔数"><a href="#魔数" class="headerlink" title="魔数"></a>魔数</h3><p>cafe babe：魔数，文件后缀标识，被java虚拟机接受。</p>
+<br>
+
+<h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>0000：次版本号</p>
+<p>0034：主版本号=52，java 1.8</p>
+<br>
+
+<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>0013：常量池入口，2+n，十进制=19，表明有18个常量，从1开始</p>
+<p>0a：十进制=10，对应CONSTANT_Methodref_info，指向声明方法</p>
+<p>0004：常量索引#4</p>
+<p>000f：常量索引#15</p>
+<p>09：十进制=9，对应CONSTANT_Fieldref_info，指向字段的类或接口描述</p>
+<p>0003：常量索引#3</p>
+<p>0010：常量索引#16</p>
+<p>07：十进制=7，对应CONSTANT_Class_info，指向全限定名常量项的索引</p>
+<p>0011：常量索引#17</p>
+<p>07：同上</p>
+<p>0012：常量索引#18</p>
+<p>01：十进制=1，对应表中的CONSTANT_Utf8_info，utf8编码的字符串长度</p>
+<p>0001：字符串长度为1</p>
+<p>6d：109=”m”</p>
+<p>01：同上</p>
+<p>0001：同上</p>
+<p>49：49=”1”</p>
+<p>01：同上</p>
+<p>0006：同上</p>
+<p>3c 696e 6974 3e：字符串=<init></p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>2829 56：()V</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>436f 6465：C_de</p>
+<p>01：同上</p>
+<p>000f：同上</p>
+<p>4c 696e 654e 756d 6265 7254 6162 6c65：LineNumberTable</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>69 6e63：inc</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>28 2949：()I</p>
+<p>01：同上</p>
+<p>000a：长度为10的字符串</p>
+<p>53 6f75 7263 6546 696c 65：SourceFile</p>
+<p>01：同上</p>
+<p>0009：同上</p>
+<p>4d61 7468 2e6a 6176 61：Math.java</p>
+<p>0c：十进制=12，CONSTANT_NameAndType_info，指向该字段或方法名称常量项的索引</p>
+<p>0007：字段或者名字名称常量项索引#7</p>
+<p>0008：字段或者名字名称常量项索引#8</p>
+<p>0c：同上</p>
+<p>0005：字段或者名字名称常量项索引#5</p>
+<p>0006：字段或者名字名称常量项索引#6</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>4d61 7468：Math</p>
+<p>01：同上</p>
+<p>0010：同上</p>
+<p>6a 6176 612f 6c61 6e67 2f4f 626a 6563 74：java/lang/Object</p>
+<p>==== 常量解析完毕，共18个常量</p>
+<br>
+
+<h2 id="Access-Flag-访问标志部分"><a href="#Access-Flag-访问标志部分" class="headerlink" title="Access_Flag 访问标志部分"></a>Access_Flag 访问标志部分</h2><blockquote>
+<p>0x0021：是 0x0020 和 0x0001 的并集。</p>
+</blockquote>
+<p>0021：ACC_PUBLIC，访问修饰符为Public。</p>
+<br>
+
+<h2 id="类索引"><a href="#类索引" class="headerlink" title="类索引"></a>类索引</h2><p>类索引用于确定类的全限定名。</p>
+<p>0003：引用第3个常量，第3个常量引用第17个常量，为 Math。</p>
+<br>
+
+<h2 id="父类索引"><a href="#父类索引" class="headerlink" title="父类索引"></a>父类索引</h2><p>0004：引用第18个常量，为 java/lang/Object。</p>
+<br>
+
+<h2 id="接口索引"><a href="#接口索引" class="headerlink" title="接口索引"></a>接口索引</h2><p>0000：没有接口。</p>
+<br>
+
+<h2 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h2><p>字段表用于描述类和接口中声明的变量。这里的字段包含了类级别变量以及实例变量，但是不包括方法内部声明的局部变量。</p>
+<p><img src="https://images2.imgbox.com/46/18/b007hXKr_o.png"></p>
+<p>0001：字段属性。</p>
+<p>0002：Private访问。</p>
+<p>0005：常量索引#5，为”m”。</p>
+<p>0006：常量索引#6，为”1”。</p>
+<p>0000：属性表数量为0。</p>
+<br>
+
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://images2.imgbox.com/b5/62/ZKPXcYOv_o.png"></p>
+<p>to be continued…</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/11/21/Required-request-body-is-missing/" data-toggle="tooltip" data-placement="top"
+                           title="Required request body is missing">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/11/07/使用Let’s-Encrypt给网站加密/" data-toggle="tooltip" data-placement="top"
+                           title="使用Let’s Encrypt给网站加密">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="toc-text">示例代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E8%A7%A3%E8%AF%BB"><span class="toc-text">内容解读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AD%94%E6%95%B0"><span class="toc-text">魔数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="toc-text">版本号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="toc-text">常量池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Access-Flag-%E8%AE%BF%E9%97%AE%E6%A0%87%E5%BF%97%E9%83%A8%E5%88%86"><span class="toc-text">Access_Flag 访问标志部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%B4%A2%E5%BC%95"><span class="toc-text">类索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%B6%E7%B1%BB%E7%B4%A2%E5%BC%95"><span class="toc-text">父类索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E7%B4%A2%E5%BC%95"><span class="toc-text">接口索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E8%A1%A8%E9%9B%86%E5%90%88"><span class="toc-text">字段表集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-text">方法</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                <!-- 
+                <section>
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Java"
+                           title="Java">Java</a>
+                        
+                    </div>
+                </section>
+                 -->
+
+                <!-- Friends Blog -->
+                <!-- 
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Kaijun&#39;s Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                    </ul>
+                </div>
+                 -->
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Chenxii 2018-2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme is <a target="_blank" rel="noopener" href="https://github.com/Haojen/hexo-theme-Anisina">Anisina</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://iced-cola.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="个人博客">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Chenxii" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Hexo博客备份｜Chenxii&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://iced-cola.github.io/2018/11/18/Hexo博客备份/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('/images/th.jpeg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Chenxii
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/Tags/">Tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="/images/th.jpeg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('/images/th.jpeg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Hexo博客备份</h1>
+                    
+                    <span class="meta">
+                         作者 Chenxii
+                        <span>
+                          日期 2018-11-18
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#博客维护"
+                           title="博客维护">博客维护</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Hexo博客备份
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="养成备份的好习惯"><a href="#养成备份的好习惯" class="headerlink" title="养成备份的好习惯"></a>养成备份的好习惯</h3><p>花了好长时间总算是把博客搭建起来了，之前自己买的服务器用Wordpress搭建博客，但是因为服务器经常需要使用，安装一些其他软件什么的，导致Wordpress运行不是很稳定，还很容易被墙。</p>
+<p>因为Hexo每次执行hexo g -d之后发布的都是生成的静态文件，站点以及主题的配置文件不会一同发布到github上，最重要的是，如果在另一个机器上要更新博客，根本做不到。所以就想着把源文件备份一下。</p>
+<span id="more"></span>
+
+
+
+<hr>
+<h3 id="使用github备份轻松备份"><a href="#使用github备份轻松备份" class="headerlink" title="使用github备份轻松备份"></a>使用github备份轻松备份</h3><p>github本来就是一个仓库，用它来备份最合适不过了。</p>
+<ol>
+<li>建立本地文件夹，将需要备份的文件存拷贝到该文件夹中；</li>
+<li>在username.github.io仓库下新建一个分支；</li>
+<li>建立本地备份文件夹与远程仓库的关联；</li>
+<li>将本地文件夹push到仓库；</li>
+<li>每次博客更新，先发布静态文件，然后在提交源文件。</li>
+</ol>
+<hr>
+<h3 id="需要备份的文件"><a href="#需要备份的文件" class="headerlink" title="需要备份的文件"></a>需要备份的文件</h3><ol>
+<li>_config.yml</li>
+<li>package.json</li>
+<li>/scaffolds</li>
+<li>/source</li>
+<li>/themes</li>
+</ol>
+<hr>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>感觉每次更新博客之后都需要拷贝一下上面这几个文件，感觉还是比较麻烦，没想到什么好办法。</p>
+<p><strong>git第一次commit之后才能查看到本地分支，push之后能显示远程分支。</strong></p>
+<hr>
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>用python脚本来复制文件，并且将执行命令添加到终端命令中，这样只需要多执行一个自定义命令来运行脚本，更方便。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!user/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">source_path = <span class="string">&quot;/Users/youyou2608/Kotobuki&quot;</span></span><br><span class="line">target_path = <span class="string">&quot;/Users/youyou2608/BlogBack&quot;</span></span><br><span class="line">filter_files = [<span class="string">&quot;db.json&quot;</span>, <span class="string">&quot;public&quot;</span>, <span class="string">&quot;package-lock.json&quot;</span>, <span class="string">&quot;node_modules&quot;</span>, <span class="string">&quot;.deploy_git&quot;</span>]</span><br><span class="line">file_updated = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">copy_files</span>(<span class="params">source_dir, target_dir</span>):</span></span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> os.listdir(source_dir):</span><br><span class="line">        <span class="keyword">if</span> f <span class="keyword">in</span> filter_files:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        source_file = os.path.join(source_dir, f)</span><br><span class="line">        target_file = os.path.join(target_dir, f)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(source_file):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_dir):</span><br><span class="line">                os.makedirs(target_dir)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_file) <span class="keyword">or</span> (</span><br><span class="line">                    os.path.exists(target_file) <span class="keyword">and</span> os.path.getsize(target_file) != os.path.getsize(source_file)):</span><br><span class="line">                <span class="built_in">open</span>(target_file, <span class="string">&quot;wb&quot;</span>).write(<span class="built_in">open</span>(source_file, <span class="string">&quot;rb&quot;</span>).read())</span><br><span class="line">                file_updated.append(source_file)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(source_file):</span><br><span class="line">            copy_files(source_file, target_file)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;开始Hexo站点源文件复制..&quot;</span>)</span><br><span class="line">    copy_files(source_path, target_path)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;站点源文件复制完毕..&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在 /etc/profile 中添加一行：alias ‘copy_hexo_source’=’python copy_hexo_source.py’ ，这样终端运行 copy_hexo_source 就可以复制文件了。</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/11/19/Hexo博客同时部署到github和coding并设置双线解析/" data-toggle="tooltip" data-placement="top"
+                           title="Hexo博客同时部署到github和coding并设置双线解析">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/11/17/Spring学习笔记-第二章-装配Bean/" data-toggle="tooltip" data-placement="top"
+                           title="Spring学习笔记-第二章-装配Bean">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%BB%E6%88%90%E5%A4%87%E4%BB%BD%E7%9A%84%E5%A5%BD%E4%B9%A0%E6%83%AF"><span class="toc-text">养成备份的好习惯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8github%E5%A4%87%E4%BB%BD%E8%BD%BB%E6%9D%BE%E5%A4%87%E4%BB%BD"><span class="toc-text">使用github备份轻松备份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E5%A4%87%E4%BB%BD%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-text">需要备份的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0"><span class="toc-text">更新</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                <!-- 
+                <section>
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#博客维护"
+                           title="博客维护">博客维护</a>
+                        
+                    </div>
+                </section>
+                 -->
+
+                <!-- Friends Blog -->
+                <!-- 
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Kaijun&#39;s Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                    </ul>
+                </div>
+                 -->
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Chenxii 2018-2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme is <a target="_blank" rel="noopener" href="https://github.com/Haojen/hexo-theme-Anisina">Anisina</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://iced-cola.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>

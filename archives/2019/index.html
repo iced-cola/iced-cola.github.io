@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="个人博客">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Chenxii" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Chenxii&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://iced-cola.github.io/archives/2019/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('/images/th.jpeg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Chenxii
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/Tags/">Tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+
+<!-- Page Header -->
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
+    <div class="row">
+        <header class="intro-header">
+            <div class="container">
+                <div class="site-heading text-center">
+                    <div class="about-me">
+                        <!--移动端头部显示-->
+                        <img src=""/>
+                        <h5 style="font-size: 40px;"><a href="/about/">Chenxii</a></h5>
+                        <p>求知若饥，虚心若愚。</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+</div>
+<!-- Main Content -->
+<div class="container custom-haojen-container">
+    <!-- Post Container -->
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
+            <!-- Main Content -->
+
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2019/12/31/Mac更改MySQL字符集/">
+        <h2 class="post-title">
+            Mac系统下更改MySQL字符集
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-12-31
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                解决方案： Mac环境下的MySQL编码设置
+
+
+
+
+昨天晚上造测试数据的时候，无意间加进去几条中文数据，然后在终端里select出来之后发现中文全部变成问号了。然后就上网搜“Mac系统下修改MySQL字符集”，很多教程的内容是：
+
+去 /etc 目录下找是否有 my.cnf 文件；
+
+如果没有..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2019/12/29/OpenCV打不开摄像头-Process-finished-with-exit-code-134/">
+        <h2 class="post-title">
+            OpenCV打不开摄像头:Process finished with exit code 134
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-12-29
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                报错信息：
+1Process finished with exit code 134 (interrupted by signal 6: SIGABRT)
+
+
+
+
+
+
+
+一个在树莓派上完全没有问题的打开摄像头的脚本，在笔记本上跑时报错，摄像头无法打开：
+123456789101112131415..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2019/12/17/将YouTube直播转播到bilibili的想法及尝试/">
+        <h2 class="post-title">
+            将YouTube直播转播到bilibili的想法及尝试
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-12-17
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                将YouTube直播转播到bilibili的想法及尝试
+周末的时候本来在学习Swift的，不经意间打开Youtube直播，看到 大阪伊丹国际机场的 live camera 直播，出于对民航的兴趣，觉得直播里的陆空对话可以很好的打发时间，于是产生了能否24小时将Youtube的直播转播到墙内的疑问..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2019/11/10/树莓派安装OpenCV-Python/">
+        <h2 class="post-title">
+            树莓派安装OpenCV-Python
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-10
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                之前在MacOS上安装OpenCV还比较顺利，直接在PyCharm里用pip安装就成功了。但是在树莓派上安装OpenCV一直依赖关系的错。最终在重新安装完Raspberry OS之后，用清华的源安装成功了。
+
+
+
+
+更换清华源官方资料：Raspbian 镜像使用帮助
+设置：
+1234567# 编..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2019/11/10/更换七牛云过期SSL证书/">
+        <h2 class="post-title">
+            更换七牛云过期SSL证书
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-10
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                更换七牛云过期SSL证书
+转眼博客已经跑了一年了，最近又是域名到期、又是SSL证书到期。
+刚给域名续了5年的费，存储在七牛云的图片因为SSL证书到期加载不出来了。提示“存在隐私安全隐患”，通过图片外链访问也无法加载图片，Chrome直接拒绝连接。
+一年前配置的，流程有些忘了，今天晚上又摸索了一遍..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2019/11/09/Mac-OS下RIME输入法的配置/">
+        <h2 class="post-title">
+            Mac OS下RIME输入法的配置
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-09
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                Mac OS下RIME输入法配置
+之前一直用的搜狗输入法，不得不说，搜狗输入法确实做得很不错，精准快速。但是毕竟是国产软件，联网之后隐私方面存在安全隐患，还没发布到网络的文本已经有人提前知道了💦。本想直接设置成单机版以避免输入法上传输入记录，但是貌似防火墙和改hosts文件对搜狗都不管用。于是..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2019/11/03/scp-Linux文件复制命令/">
+        <h2 class="post-title">
+            scp-Linux文件复制命令
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-03
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                scp — Linux文件复制命令
+
+用于在Linux下进行远程拷贝文件的命令，和它类似的命令有cp，不过cp只是在本机进行拷贝不能跨服务器，而且scp传输是加密的。当你服务器硬盘变为只读 read only system时，用scp可以帮你把文件移出来。
+
+
+
+
+
+常用参数
+-P: 端口号
+-..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
+    <a href="/2019/10/27/硝酸甘油炸药的制作/">
+        <h2 class="post-title">
+            硝酸甘油炸药的制作
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-10-27
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                炸弹​ 💣 制作从入门到入土 👻
+
+在 YouTube 上看到了“回形针📎”的“原子弹制作教程”，感觉是一个提高动手能力的项目，尽管原理和流程都很简单，但是材料和设备不易得。于是想先从普通的硝酸甘油炸药开始学习吧，原料易得，危险性也不是那么高。
+
+学习资料：自制炸药制作方法
+
+
+
+
+方式一..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+
+<!-- 翻页 pager -->
+
+<ul class="pager">
+    
+    
+    <li class="next">
+        <a href="/archives/2019/page/2/">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
+
+
+        </div>
+        <!-- Sidebar Container -->
+        <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+
+            <!-- About Me -->
+            <section class="visible-md visible-lg" style="padding: 0 18px;margin-bottom: 35px;">
+                <div class="short-about">
+                    <!--侧边栏头像-->
+                    
+                    <h5 style="font-size: 40px;">
+                        <!-- <a href="/about/">
+                            Chenxii
+                        </a> -->
+                        Chenxii
+                    </h5>
+                    
+                    <p>求知若饥，虚心若愚。</p>
+                    
+                    <hr>
+                    <!-- SNS Link 社交 -->
+                    <ul class="list-inline">
+                        
+                        
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Featured Tags  标签 -->
+            
+            <section style="margin-bottom: 25px;">
+                <h5 style="text-align: center;">Tags</h5>
+                <div class="tags">
+                    
+                        
+                        <a href="/tags/#生活" title="生活"
+                        rel="1">生活</a>
+                        
+                    
+                        
+                        <a href="/tags/#Element" title="Element"
+                        rel="1">Element</a>
+                        
+                    
+                        
+                        <a href="/tags/#git" title="git"
+                        rel="2">git</a>
+                        
+                    
+                        
+                        <a href="/tags/#博客维护" title="博客维护"
+                        rel="6">博客维护</a>
+                        
+                    
+                        
+                        <a href="/tags/#IDEA" title="IDEA"
+                        rel="3">IDEA</a>
+                        
+                    
+                        
+                        <a href="/tags/#Java" title="Java"
+                        rel="6">Java</a>
+                        
+                    
+                        
+                        <a href="/tags/#设计模式" title="设计模式"
+                        rel="1">设计模式</a>
+                        
+                    
+                        
+                        <a href="/tags/#Jenkins" title="Jenkins"
+                        rel="1">Jenkins</a>
+                        
+                    
+                        
+                        <a href="/tags/#LeetCode" title="LeetCode"
+                        rel="7">LeetCode</a>
+                        
+                    
+                        
+                        <a href="/tags/#其他" title="其他"
+                        rel="7">其他</a>
+                        
+                    
+                        
+                        <a href="/tags/#Markdown" title="Markdown"
+                        rel="1">Markdown</a>
+                        
+                    
+                        
+                        <a href="/tags/#数据库" title="数据库"
+                        rel="2">数据库</a>
+                        
+                    
+                        
+                        <a href="/tags/#OpenCV" title="OpenCV"
+                        rel="6">OpenCV</a>
+                        
+                    
+                        
+                        <a href="/tags/#SpringSecurity" title="SpringSecurity"
+                        rel="1">SpringSecurity</a>
+                        
+                    
+                        
+                        <a href="/tags/#SpringMVC" title="SpringMVC"
+                        rel="1">SpringMVC</a>
+                        
+                    
+                        
+                        <a href="/tags/#SpringBoot" title="SpringBoot"
+                        rel="3">SpringBoot</a>
+                        
+                    
+                        
+                        <a href="/tags/#Spring" title="Spring"
+                        rel="3">Spring</a>
+                        
+                    
+                        
+                        <a href="/tags/#Vue" title="Vue"
+                        rel="2">Vue</a>
+                        
+                    
+                        
+                        <a href="/tags/#MySQL" title="MySQL"
+                        rel="1">MySQL</a>
+                        
+                    
+                        
+                        <a href="/tags/#ajax" title="ajax"
+                        rel="1">ajax</a>
+                        
+                    
+                        
+                        <a href="/tags/#Thymeleaf" title="Thymeleaf"
+                        rel="2">Thymeleaf</a>
+                        
+                    
+                        
+                        <a href="/tags/#dubbo" title="dubbo"
+                        rel="1">dubbo</a>
+                        
+                    
+                        
+                        <a href="/tags/#Linux" title="Linux"
+                        rel="1">Linux</a>
+                        
+                    
+                        
+                        <a href="/tags/#日语" title="日语"
+                        rel="4">日语</a>
+                        
+                    
+                        
+                        <a href="/tags/#Swagger" title="Swagger"
+                        rel="1">Swagger</a>
+                        
+                    
+                        
+                        <a href="/tags/#SSL" title="SSL"
+                        rel="1">SSL</a>
+                        
+                    
+                        
+                        <a href="/tags/#折腾" title="折腾"
+                        rel="3">折腾</a>
+                        
+                    
+                        
+                        <a href="/tags/#树莓派" title="树莓派"
+                        rel="4">树莓派</a>
+                        
+                    
+                        
+                        <a href="/tags/#大数据" title="大数据"
+                        rel="1">大数据</a>
+                        
+                    
+                        
+                        <a href="/tags/#JavaScript" title="JavaScript"
+                        rel="1">JavaScript</a>
+                        
+                    
+                        
+                        <a href="/tags/#SpringCloud" title="SpringCloud"
+                        rel="1">SpringCloud</a>
+                        
+                    
+                        
+                        <a href="/tags/#Echarts" title="Echarts"
+                        rel="1">Echarts</a>
+                        
+                    
+                        
+                        <a href="/tags/#Tomcat" title="Tomcat"
+                        rel="1">Tomcat</a>
+                        
+                    
+                </div>
+            </section>
+            
+
+            
+            <hr>
+            <h5 style="text-align: center;">Friends</h5>
+            <ul class="list-inline" style="text-align: center;">
+                
+                <li><a href="https://baidu.com" target="_blank">Kaijun&#39;s Blog</a></li>
+                
+                <li><a href="https://baidu.com" target="_blank">Hux Blog</a></li>
+                
+                <li><a href="https://baidu.com" target="_blank">Hux Blog</a></li>
+                
+                <li><a href="https://baidu.com" target="_blank">Hux Blog</a></li>
+                
+                <li><a href="https://baidu.com" target="_blank">Hux Blog</a></li>
+                
+            </ul>
+            
+
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Chenxii 2018-2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme is <a target="_blank" rel="noopener" href="https://github.com/Haojen/hexo-theme-Anisina">Anisina</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://iced-cola.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>
