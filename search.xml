@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>25岁的最后一天</title>
+    <url>/2020/09/30/25%E5%B2%81%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/</url>
+    <content><![CDATA[<p>刚才把之前写的内容都整理了一遍，挂的图片能换的都换了，还有些现在看起来很尴尬的内容直接删掉了，折腾一次真累。歇了一下打开日历才发现今天已经是9月30号了。今年很巧的是中秋节和国庆节碰在了一起，在贴吧里看到很多学生还因为假期的问题耿耿于怀，但是对于像我一样的待业青年，好像每一天都是假期，只不过心里不是那么放松。</p>
+<br>
+
+<span id="more"></span>
+
+<p>昨天下午回到空无一人的家里，虽然什么吃的也没有，但是家里的干净舒服的大床倒是让我好好睡了一觉，很久没有睡得这么舒服了。以前总是觉得买房的人很傻，买完房子就要一直住在一个地方，而且还要背负繁重的房贷。但是最近我突然有了很强烈的想买房的愿望，自己的房子才是真正能落脚的地方。现在就想好好工作努力攒钱，希望能在一两年之内有一套自己的房子，不管是在哪个城市，偏远一点也无所谓。</p>
+<br>
+
+<p>昨天晚上联系上了一个住得不远的初中同学，刚好放假她也在家，聊了一会儿通过她介绍了一个房东，希望能找到一个地方安静的待一段时间。</p>
+<br>
+
+<p>25岁今天就要画上句号了，希望26岁能交上好运吧。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git配置代理</title>
+    <url>/2019/04/06/Git%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<p>git的代理配置</p>
+<p>给sublime安装插件的时候又碰到git clone速度过慢的问题，记录一哈！</p>
+<span id="more"></span>
+
+
+
+<ol>
+<li><p>打开ss全局代理；</p>
+</li>
+<li><p>到 <a href="https://www.ipaddress.com/">IPAddress.com</a> 根据 github.global.ssl.fastly.net 获取github服务器地址；</p>
+</li>
+<li><p>在 /etc/hosts 或者C:/windows/system32/driver/etc/hosts 文件中添加对应的记录：</p>
+<p>ip github.global.ssl.fastly.net</p>
+</li>
+<li><p>设置git代理：</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> http和https协议代理：</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sock5的情况</span></span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消代理</span></span><br><span class="line">git config --global unset http.proxy</span><br><span class="line">git config --global unset https.proxy</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh协议代理：在用户目录下建立如下文件 ~/.ssh/config，对 GitHub 的域名做单独的处理</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里必须是 github.com，因为这个跟我们 <span class="built_in">clone</span> 代码时的链接有关</span></span><br><span class="line">Host github.com</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果用默认端口，这里是 github.com，如果想用443端口，这里就是 ssh.github.com 详见 https://help.github.com/articles/using-ssh-over-the-https-port/</span></span><br><span class="line">   HostName github.com</span><br><span class="line">   User git</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 HTTP 代理，把下面这行取消注释，并把 proxyport 改成自己的 http 代理的端口</span></span><br><span class="line">     ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=6667</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 socks5 代理，则把下面这行取消注释，并把 6666 改成自己 socks5 代理的端口</span></span><br><span class="line">     ProxyCommand nc -v -x 127.0.0.1:6666 %h %p</span><br></pre></td></tr></table></figure>
+
+<p>==&gt;&gt; <a href="https://imciel.com/2016/06/28/git-proxy/">设置 git 代理</a> </p>
+<p>在Ubuntu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Element的Nav导航高亮</title>
     <url>/2021/05/13/Element%E7%9A%84Nav%E5%AF%BC%E8%88%AA%E9%AB%98%E4%BA%AE/</url>
     <content><![CDATA[<p>这两天遇到一个问题：element的Nav菜单点击之后，跳转到相应页面，然后点击之后的菜单要高亮显示。菜单写成了组件。</p>
@@ -32,29 +87,6 @@
       </categories>
       <tags>
         <tag>Element</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>25岁的最后一天</title>
-    <url>/2020/09/30/25%E5%B2%81%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/</url>
-    <content><![CDATA[<p>刚才把之前写的内容都整理了一遍，挂的图片能换的都换了，还有些现在看起来很尴尬的内容直接删掉了，折腾一次真累。歇了一下打开日历才发现今天已经是9月30号了。今年很巧的是中秋节和国庆节碰在了一起，在贴吧里看到很多学生还因为假期的问题耿耿于怀，但是对于像我一样的待业青年，好像每一天都是假期，只不过心里不是那么放松。</p>
-<br>
-
-<span id="more"></span>
-
-<p>昨天下午回到空无一人的家里，虽然什么吃的也没有，但是家里的干净舒服的大床倒是让我好好睡了一觉，很久没有睡得这么舒服了。以前总是觉得买房的人很傻，买完房子就要一直住在一个地方，而且还要背负繁重的房贷。但是最近我突然有了很强烈的想买房的愿望，自己的房子才是真正能落脚的地方。现在就想好好工作努力攒钱，希望能在一两年之内有一套自己的房子，不管是在哪个城市，偏远一点也无所谓。</p>
-<br>
-
-<p>昨天晚上联系上了一个住得不远的初中同学，刚好放假她也在家，聊了一会儿通过她介绍了一个房东，希望能找到一个地方安静的待一段时间。</p>
-<br>
-
-<p>25岁今天就要画上句号了，希望26岁能交上好运吧。</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
@@ -90,38 +122,6 @@
       </categories>
       <tags>
         <tag>博客维护</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git配置代理</title>
-    <url>/2019/04/06/Git%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<p>git的代理配置</p>
-<p>给sublime安装插件的时候又碰到git clone速度过慢的问题，记录一哈！</p>
-<span id="more"></span>
-
-
-
-<ol>
-<li><p>打开ss全局代理；</p>
-</li>
-<li><p>到 <a href="https://www.ipaddress.com/">IPAddress.com</a> 根据 github.global.ssl.fastly.net 获取github服务器地址；</p>
-</li>
-<li><p>在 /etc/hosts 或者C:/windows/system32/driver/etc/hosts 文件中添加对应的记录：</p>
-<p>ip github.global.ssl.fastly.net</p>
-</li>
-<li><p>设置git代理：</p>
-</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> http和https协议代理：</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sock5的情况</span></span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消代理</span></span><br><span class="line">git config --global unset http.proxy</span><br><span class="line">git config --global unset https.proxy</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh协议代理：在用户目录下建立如下文件 ~/.ssh/config，对 GitHub 的域名做单独的处理</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里必须是 github.com，因为这个跟我们 <span class="built_in">clone</span> 代码时的链接有关</span></span><br><span class="line">Host github.com</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果用默认端口，这里是 github.com，如果想用443端口，这里就是 ssh.github.com 详见 https://help.github.com/articles/using-ssh-over-the-https-port/</span></span><br><span class="line">   HostName github.com</span><br><span class="line">   User git</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 HTTP 代理，把下面这行取消注释，并把 proxyport 改成自己的 http 代理的端口</span></span><br><span class="line">     ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=6667</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 socks5 代理，则把下面这行取消注释，并把 6666 改成自己 socks5 代理的端口</span></span><br><span class="line">     ProxyCommand nc -v -x 127.0.0.1:6666 %h %p</span><br></pre></td></tr></table></figure>
-
-<p>==&gt;&gt; <a href="https://imciel.com/2016/06/28/git-proxy/">设置 git 代理</a> </p>
-<p>在Ubuntu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -164,6 +164,25 @@
       </categories>
       <tags>
         <tag>博客维护</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IDEA Terminal闪退</title>
+    <url>/2019/04/09/IDEA-Terminal%E9%97%AA%E9%80%80/</url>
+    <content><![CDATA[<p>IDEA Terminal闪退</p>
+<ol>
+<li>查看help &gt; Show Log in File，查看日志；</li>
+</ol>
+<ol>
+<li>查看File &gt; Settings &gt; Terminal &gt; shell path，=&gt; /bin/bash，重启终端。</li>
+</ol>
+<p> <a href="https://youtrack.jetbrains.com/issue/IDEA-202821">Black Terminal or Terminal doesnot work</a> </p>
+]]></content>
+      <categories>
+        <category>IDEA</category>
+      </categories>
+      <tags>
+        <tag>IDEA</tag>
       </tags>
   </entry>
   <entry>
@@ -304,6 +323,47 @@
       </tags>
   </entry>
   <entry>
+    <title>Java注解简单例子</title>
+    <url>/2019/05/15/Java%E6%B3%A8%E8%A7%A3%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90/</url>
+    <content><![CDATA[<p>了解Java注解（@Annotation）</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
+</blockquote>
+<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
+<span id="more"></span>
+
+
+
+<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
+<p>四个元注解：</p>
+<ul>
+<li>@Target</li>
+<li>@Retention</li>
+<li>@Document</li>
+<li>Inherited</li>
+</ul>
+<p>注解主要是用户按自己的需求来实现。</p>
+<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>先创建两个注解，@Digits和@NotEmpty，用来注解属性是否满足给定条件。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段只能为数字，且最大长度为maxLength，最大小数位为fraction</span></span><br><span class="line"><span class="comment"> * 默认没有小数位</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Digits &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxLength</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fraction</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段不能为空</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotEmpty &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>定义一个处理类处理自定义注解：（主要利用反射机制）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 处理自定义注解</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationProcesser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Table table)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Class clazz = table.getClass();</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(<span class="string">&quot;class not found!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        String fieldName;</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------------------------&quot;</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Annotation[] annotations = field.getDeclaredAnnotations();</span><br><span class="line">            fieldName = field.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot;--&gt; info: into &quot;</span> + fieldName);</span><br><span class="line">            <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + annotation.annotationType());</span><br><span class="line">                <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Digits) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @Digits annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">int</span> maxLength = ((Digits) annotation).maxLength();</span><br><span class="line">                    <span class="keyword">int</span> annotatedFraction = ((Digits) annotation).fraction();</span><br><span class="line">                    String[] fraction = String.valueOf(table.getCount()).split(<span class="string">&quot;\\.&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (String.valueOf(table.getCount()).length() &gt; maxLength) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: maxLength exceed!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (fraction.length &gt; <span class="number">1</span> &amp;&amp; fraction[<span class="number">1</span>].length() &gt; annotatedFraction) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error：fraction length exceed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> NotEmpty) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @NotEmpty annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">if</span> (table.getDescription() == <span class="keyword">null</span> || <span class="string">&quot;&quot;</span>.equals(table.getDescription())) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: empty is not allowed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>主测试类：（<strong>省略getter和setter</strong>）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits(maxLength = 6, fraction = 2)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">&quot;description1&quot;</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">&quot;description2&quot;</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description3&quot;</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java字节码解析</title>
     <url>/2020/11/18/Java%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a href="https://www.jianshu.com/p/252f381a6bc4">一文让你明白Java字节码</a></p>
@@ -416,25 +476,6 @@
       </categories>
       <tags>
         <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IDEA Terminal闪退</title>
-    <url>/2019/04/09/IDEA-Terminal%E9%97%AA%E9%80%80/</url>
-    <content><![CDATA[<p>IDEA Terminal闪退</p>
-<ol>
-<li>查看help &gt; Show Log in File，查看日志；</li>
-</ol>
-<ol>
-<li>查看File &gt; Settings &gt; Terminal &gt; shell path，=&gt; /bin/bash，重启终端。</li>
-</ol>
-<p> <a href="https://youtrack.jetbrains.com/issue/IDEA-202821">Black Terminal or Terminal doesnot work</a> </p>
-]]></content>
-      <categories>
-        <category>IDEA</category>
-      </categories>
-      <tags>
-        <tag>IDEA</tag>
       </tags>
   </entry>
   <entry>
@@ -648,6 +689,91 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.typeinfo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018-06-08 11:51</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnonymousImplementation</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException,</span></span><br><span class="line"><span class="function">            InvocationTargetException </span>&#123;</span><br><span class="line">        A a = AnonymousA.makeA();</span><br><span class="line">        a.f();</span><br><span class="line">        System.out.println(a.getClass().getName());</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;g&quot;</span>);</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;u&quot;</span>);</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;v&quot;</span>);</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnonymousA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> A <span class="title">makeA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> A() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;public c.f()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;public c.g()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">void</span> <span class="title">u</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;package u()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">v</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;protected v()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">w</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;private w()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>output:</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> c.f()</span><br><span class="line">com.typeinfo.AnonymousA$<span class="number">1</span></span><br><span class="line"><span class="keyword">public</span> c.g()</span><br><span class="line"><span class="function"><span class="keyword">package</span> <span class="title">u</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="title">v</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">w</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java面试题</title>
+    <url>/2020/10/29/Java%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
+    <content><![CDATA[<p>最近在面试中遇到的一些问题，虽然很多都是最最基础的问题，但是很多问题要么是没回答出来要么是说的丢三落四。作为工作两年的我来说，感觉很丢人啊。顺便记下来，给后来人做个参考，最近自己也多花点时间打打基础。题目顺序不分类型和先后。</p>
+<span id="more"></span>
+
+<ol>
+<li>byte,char,short,int各占几个字节？</li>
+<li>char能存下一个汉字吗？</li>
+<li>数据库常加哪些索引？不常用哪些索引？</li>
+<li>SpringBoot启动类注解都有哪些？</li>
+<li>SpringBoot怎么加载配置文件？</li>
+<li>实现多线程的方式？</li>
+<li>start() 方法和run() 的方法的区别？</li>
+<li>jdk有几种线程池？newSingleThreadPool有什么作用？</li>
+<li>ThreadPoolExecuror类的几个构造参数及其含义？拒绝策略有哪些？</li>
+<li>String，StringBuffer，StringBuilder的异同？</li>
+<li>String类为什么要设计成不可变的？</li>
+<li>MySQL有哪些类型的索引？</li>
+<li>大概说一下你对SpringMVC的理解？</li>
+</ol>
+<hr>
+<ol>
+<li>Integer a = 123;<br>Integer b = Integer.valueOf(123);</li>
+</ol>
+<p>Integer a = 300;<br>Integer b = Integer.valueOf(300);<br>（-128到127 IntegerCache）</p>
+<p>说一说以上代码执行的细节？说说拆装箱的细节？</p>
+<ol start="2">
+<li><p>什么时候需要重写hashCode()方法和equals()方法？两个对象相等hashcode一定相等吗？</p>
+</li>
+<li><p>说一说HashMap的实现原理？当我put一个已经存在的键值对时怎么更新值的？</p>
+</li>
+<li><p>Spring中@Autowired和@Resource的区别？</p>
+</li>
+<li><p>ThreadPoolExecuror类的几个构造参数及其含义？</p>
+</li>
+<li><p>MySQL分页最后的页特别慢，说一说优化策略？</p>
+</li>
+<li><p>Java中的锁有了解吗？synchronized和Lock的区别？说一说synchronized的实现？</p>
+</li>
+</ol>
+<hr>
+<ol>
+<li>String类是可变的吗？底层数据结构是什么？为什么要设计成不可变的？</li>
+<li>ArrayList和LinkedList的区别？</li>
+<li>HashMap的实现原理？构造方法及参数的含义？初始容量是多大？扩容策略？</li>
+<li>有了解过B+树吗？</li>
+<li>说一说你对IOC和AOP的理解？</li>
+<li>说一说你对反射以及动态代理的理解？</li>
+<li>如何实现进程间通信？</li>
+<li>线程的生命周期？</li>
+<li>一次Http请求的过程（osi七层模型以及三次握手）？两台主机断开连接的过程？</li>
+<li>MySQL有哪些存储引擎，都在什么场景使用？</li>
+</ol>
+<hr>
+<ol>
+<li>有用过dubbo、RabbitMQ之类的中间件吗？</li>
+<li>Java中的锁有了解过吗？</li>
+<li>HashSet如何保证数据不重复？</li>
+<li>说一说你对ConcurrentHashMap的理解？</li>
+<li>concurrent包下面有哪些常用的类？</li>
+<li>什么叫值传递？什么叫引用传递？Java属于哪种？为什么？</li>
+<li>SpringCloud微服务有了解吗？</li>
+<li>有做过Linux服务器上的应用部署吗？</li>
+<li>Apache poi如何读取百万规模的数据？</li>
+<li>你觉得Java和其他语言最显著的特征是什么？</li>
+<li>在你的项目经历中有没有印象特别深刻的经历、有没有让你觉得成长很迅速的经历、有没有让你感觉很有成就感的经历、有没有曾经为项目突破瓶颈的经历？</li>
+<li>有用过redis缓存吗？</li>
+</ol>
+<hr>
+<ol>
+<li>你有比较长远的职业生涯规划吗？</li>
+<li>如果工作需要学习比如小程序开发之类的，你的态度是什么样？</li>
+<li>你对待的加班的态度是什么样的？</li>
+</ol>
+<hr>
+<p>暂时就能想起这么多了…</p>
+]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -949,129 +1075,39 @@
       </tags>
   </entry>
   <entry>
-    <title>Java注解简单例子</title>
-    <url>/2019/05/15/Java%E6%B3%A8%E8%A7%A3%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90/</url>
-    <content><![CDATA[<p>了解Java注解（@Annotation）</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
+    <title>Jenkinsfile cd命令不生效的问题</title>
+    <url>/2021/06/05/Jenkinsfile-cd%E5%91%BD%E4%BB%A4%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>今天晚上给前端项目配置Jenkins流水线的时候遇到一个问题：cd 命令不生效，<code>sh 'cd ask_front'</code> 这个语句执行前后 <code>pwd</code> 的输出是一样的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ pwd</span><br><span class="line">/home/jingh527/.jenkins/workspace/try-ask_master</span><br></pre></td></tr></table></figure>
+
+<p>去Jenkins机器上看了上面这个目录结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">try-ask_master</span><br><span class="line">-- ask</span><br><span class="line">-- ask_front</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>Jenkinsfile的定义：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm uninstall *&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf node_modules&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf package-lock.json&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm cache clean --force&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在执行到 npm 命令相关的地方就开始报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ npm run dev</span><br><span class="line">npm ERR! code ENOENT</span><br><span class="line">npm ERR! syscall open</span><br><span class="line">npm ERR! path /home/jingh527/.jenkins/workspace/try-ask_master/package.json</span><br><span class="line">npm ERR! errno -2</span><br><span class="line">npm ERR! enoent ENOENT: no such file or directory, open &#x27;/home/jingh527/.jenkins/workspace/try-ask_master/package.json&#x27;</span><br><span class="line">npm ERR! enoent This is related to npm not being able to find a file.</span><br><span class="line">npm ERR! enoent </span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /home/node/.npm/_logs/2021-06-04T17_20_39_229Z-debug.log</span><br><span class="line">script returned exit code 254</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在网上找了一会儿资料，看到一个帖子：<a href="https://blog.csdn.net/liumiaocn/article/details/102632742">Jenkins基础：Jenkinsfile注意事项：条件跳转与当前路径</a></p>
+<blockquote>
+<p>cd demo、npm install、npm run build这本是三条命令，强硬地使用&amp;&amp;写在了一起，为什么不能分开使用三个sh ‘’的原因是因为，在具体的实现的时候，显然执行完返回当前目录会恢复为原始状态。这是一个非常容易被忘记的问题。</p>
 </blockquote>
-<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
-<span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">stage(&#x27;Build Angular Project&#x27;) &#123; // build angular demo app</span><br><span class="line">    sh &#x27;cd demo &amp;&amp; npm install &amp;&amp; npm run build&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
-<p>四个元注解：</p>
-<ul>
-<li>@Target</li>
-<li>@Retention</li>
-<li>@Document</li>
-<li>Inherited</li>
-</ul>
-<p>注解主要是用户按自己的需求来实现。</p>
-<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>先创建两个注解，@Digits和@NotEmpty，用来注解属性是否满足给定条件。</p>
-<p>代码如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段只能为数字，且最大长度为maxLength，最大小数位为fraction</span></span><br><span class="line"><span class="comment"> * 默认没有小数位</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Digits &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxLength</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fraction</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段不能为空</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotEmpty &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>定义一个处理类处理自定义注解：（主要利用反射机制）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 处理自定义注解</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationProcesser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Table table)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Class clazz = table.getClass();</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(<span class="string">&quot;class not found!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        String fieldName;</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------------------------&quot;</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Annotation[] annotations = field.getDeclaredAnnotations();</span><br><span class="line">            fieldName = field.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot;--&gt; info: into &quot;</span> + fieldName);</span><br><span class="line">            <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + annotation.annotationType());</span><br><span class="line">                <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Digits) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @Digits annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">int</span> maxLength = ((Digits) annotation).maxLength();</span><br><span class="line">                    <span class="keyword">int</span> annotatedFraction = ((Digits) annotation).fraction();</span><br><span class="line">                    String[] fraction = String.valueOf(table.getCount()).split(<span class="string">&quot;\\.&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (String.valueOf(table.getCount()).length() &gt; maxLength) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: maxLength exceed!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (fraction.length &gt; <span class="number">1</span> &amp;&amp; fraction[<span class="number">1</span>].length() &gt; annotatedFraction) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error：fraction length exceed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> NotEmpty) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @NotEmpty annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">if</span> (table.getDescription() == <span class="keyword">null</span> || <span class="string">&quot;&quot;</span>.equals(table.getDescription())) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: empty is not allowed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>主测试类：（<strong>省略getter和setter</strong>）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits(maxLength = 6, fraction = 2)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">&quot;description1&quot;</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">&quot;description2&quot;</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description3&quot;</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>才反应过来脚本写得有问题，于是改了一下，将多个操作用 &amp;&amp; 连接起来，就部署成功了。</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm uninstall * &amp;&amp; rm -rf node_modules &amp;&amp; rm -rf package-lock.json &amp;&amp; npm cache clean --force &amp;&amp; npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>Jenkins</category>
       </categories>
       <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java面试题</title>
-    <url>/2020/10/29/Java%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
-    <content><![CDATA[<p>最近在面试中遇到的一些问题，虽然很多都是最最基础的问题，但是很多问题要么是没回答出来要么是说的丢三落四。作为工作两年的我来说，感觉很丢人啊。顺便记下来，给后来人做个参考，最近自己也多花点时间打打基础。题目顺序不分类型和先后。</p>
-<span id="more"></span>
-
-<ol>
-<li>byte,char,short,int各占几个字节？</li>
-<li>char能存下一个汉字吗？</li>
-<li>数据库常加哪些索引？不常用哪些索引？</li>
-<li>SpringBoot启动类注解都有哪些？</li>
-<li>SpringBoot怎么加载配置文件？</li>
-<li>实现多线程的方式？</li>
-<li>start() 方法和run() 的方法的区别？</li>
-<li>jdk有几种线程池？newSingleThreadPool有什么作用？</li>
-<li>ThreadPoolExecuror类的几个构造参数及其含义？拒绝策略有哪些？</li>
-<li>String，StringBuffer，StringBuilder的异同？</li>
-<li>String类为什么要设计成不可变的？</li>
-<li>MySQL有哪些类型的索引？</li>
-<li>大概说一下你对SpringMVC的理解？</li>
-</ol>
-<hr>
-<ol>
-<li>Integer a = 123;<br>Integer b = Integer.valueOf(123);</li>
-</ol>
-<p>Integer a = 300;<br>Integer b = Integer.valueOf(300);<br>（-128到127 IntegerCache）</p>
-<p>说一说以上代码执行的细节？说说拆装箱的细节？</p>
-<ol start="2">
-<li><p>什么时候需要重写hashCode()方法和equals()方法？两个对象相等hashcode一定相等吗？</p>
-</li>
-<li><p>说一说HashMap的实现原理？当我put一个已经存在的键值对时怎么更新值的？</p>
-</li>
-<li><p>Spring中@Autowired和@Resource的区别？</p>
-</li>
-<li><p>ThreadPoolExecuror类的几个构造参数及其含义？</p>
-</li>
-<li><p>MySQL分页最后的页特别慢，说一说优化策略？</p>
-</li>
-<li><p>Java中的锁有了解吗？synchronized和Lock的区别？说一说synchronized的实现？</p>
-</li>
-</ol>
-<hr>
-<ol>
-<li>String类是可变的吗？底层数据结构是什么？为什么要设计成不可变的？</li>
-<li>ArrayList和LinkedList的区别？</li>
-<li>HashMap的实现原理？构造方法及参数的含义？初始容量是多大？扩容策略？</li>
-<li>有了解过B+树吗？</li>
-<li>说一说你对IOC和AOP的理解？</li>
-<li>说一说你对反射以及动态代理的理解？</li>
-<li>如何实现进程间通信？</li>
-<li>线程的生命周期？</li>
-<li>一次Http请求的过程（osi七层模型以及三次握手）？两台主机断开连接的过程？</li>
-<li>MySQL有哪些存储引擎，都在什么场景使用？</li>
-</ol>
-<hr>
-<ol>
-<li>有用过dubbo、RabbitMQ之类的中间件吗？</li>
-<li>Java中的锁有了解过吗？</li>
-<li>HashSet如何保证数据不重复？</li>
-<li>说一说你对ConcurrentHashMap的理解？</li>
-<li>concurrent包下面有哪些常用的类？</li>
-<li>什么叫值传递？什么叫引用传递？Java属于哪种？为什么？</li>
-<li>SpringCloud微服务有了解吗？</li>
-<li>有做过Linux服务器上的应用部署吗？</li>
-<li>Apache poi如何读取百万规模的数据？</li>
-<li>你觉得Java和其他语言最显著的特征是什么？</li>
-<li>在你的项目经历中有没有印象特别深刻的经历、有没有让你觉得成长很迅速的经历、有没有让你感觉很有成就感的经历、有没有曾经为项目突破瓶颈的经历？</li>
-<li>有用过redis缓存吗？</li>
-</ol>
-<hr>
-<ol>
-<li>你有比较长远的职业生涯规划吗？</li>
-<li>如果工作需要学习比如小程序开发之类的，你的态度是什么样？</li>
-<li>你对待的加班的态度是什么样的？</li>
-</ol>
-<hr>
-<p>暂时就能想起这么多了…</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
+        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -1136,39 +1172,33 @@
       </tags>
   </entry>
   <entry>
-    <title>Jenkinsfile cd命令不生效的问题</title>
-    <url>/2021/06/05/Jenkinsfile-cd%E5%91%BD%E4%BB%A4%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>今天晚上给前端项目配置Jenkins流水线的时候遇到一个问题：cd 命令不生效，<code>sh 'cd ask_front'</code> 这个语句执行前后 <code>pwd</code> 的输出是一样的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ pwd</span><br><span class="line">/home/jingh527/.jenkins/workspace/try-ask_master</span><br></pre></td></tr></table></figure>
+    <title>LeetCode之二叉树非递归后续遍历</title>
+    <url>/2018/11/17/LeetCode%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E9%9D%9E%E9%80%92%E5%BD%92%E5%90%8E%E7%BB%AD%E9%81%8D%E5%8E%86/</url>
+    <content><![CDATA[<p>周末突然降温，哪儿也去不了，不如在家刷题。</p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Given a binary tree, return the <em>postorder</em> traversal of its nodes’ values.</p>
+<p>For example:<br>Given binary tree{1,#,2,3},</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line"> /</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
 
-<p>去Jenkins机器上看了上面这个目录结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">try-ask_master</span><br><span class="line">-- ask</span><br><span class="line">-- ask_front</span><br></pre></td></tr></table></figure>
-
+<p>return[3,2,1].</p>
+<p><strong>Note:</strong> Recursive solution is trivial, could you do it iteratively？</p>
+<p><strong>使用非递归方法后序遍历二叉树。</strong></p>
 <span id="more"></span>
 
-<p>Jenkinsfile的定义：</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm uninstall *&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf node_modules&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf package-lock.json&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm cache clean --force&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在执行到 npm 命令相关的地方就开始报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ npm run dev</span><br><span class="line">npm ERR! code ENOENT</span><br><span class="line">npm ERR! syscall open</span><br><span class="line">npm ERR! path /home/jingh527/.jenkins/workspace/try-ask_master/package.json</span><br><span class="line">npm ERR! errno -2</span><br><span class="line">npm ERR! enoent ENOENT: no such file or directory, open &#x27;/home/jingh527/.jenkins/workspace/try-ask_master/package.json&#x27;</span><br><span class="line">npm ERR! enoent This is related to npm not being able to find a file.</span><br><span class="line">npm ERR! enoent </span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /home/node/.npm/_logs/2021-06-04T17_20_39_229Z-debug.log</span><br><span class="line">script returned exit code 254</span><br></pre></td></tr></table></figure>
 
-<br>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>二叉树后序遍历就是对每个节点按照左、右、中的顺序进行遍历。</p>
+<p>详细的解析参见：<a href="https://www.jianshu.com/p/456af5480cee">二叉树遍历(先序、中序、后序)</a> ，讲得非常详细易懂。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.postorder.raversal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午1:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        TreeNode pointer = root;</span><br><span class="line">        TreeNode lastVisit = root;</span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty() || pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                stack.push(pointer);</span><br><span class="line">                pointer = pointer.left;</span><br><span class="line">            &#125;</span><br><span class="line">            pointer = stack.peek();</span><br><span class="line">            <span class="keyword">if</span> (pointer.right == <span class="keyword">null</span> || pointer.right == lastVisit) &#123;</span><br><span class="line">                list.add(pointer.val);</span><br><span class="line">                lastVisit = pointer;</span><br><span class="line">                stack.pop();</span><br><span class="line">                pointer = <span class="keyword">null</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                pointer = pointer.right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在网上找了一会儿资料，看到一个帖子：<a href="https://blog.csdn.net/liumiaocn/article/details/102632742">Jenkins基础：Jenkinsfile注意事项：条件跳转与当前路径</a></p>
-<blockquote>
-<p>cd demo、npm install、npm run build这本是三条命令，强硬地使用&amp;&amp;写在了一起，为什么不能分开使用三个sh ‘’的原因是因为，在具体的实现的时候，显然执行完返回当前目录会恢复为原始状态。这是一个非常容易被忘记的问题。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">stage(&#x27;Build Angular Project&#x27;) &#123; // build angular demo app</span><br><span class="line">    sh &#x27;cd demo &amp;&amp; npm install &amp;&amp; npm run build&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>才反应过来脚本写得有问题，于是改了一下，将多个操作用 &amp;&amp; 连接起来，就部署成功了。</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm uninstall * &amp;&amp; rm -rf node_modules &amp;&amp; rm -rf package-lock.json &amp;&amp; npm cache clean --force &amp;&amp; npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>是时候好好重修一下数据结构了。</p>
 ]]></content>
       <categories>
-        <category>Jenkins</category>
+        <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>Jenkins</tag>
+        <tag>LeetCode</tag>
       </tags>
   </entry>
   <entry>
@@ -1257,36 +1287,6 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode之二叉树非递归后续遍历</title>
-    <url>/2018/11/17/LeetCode%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91%E9%9D%9E%E9%80%92%E5%BD%92%E5%90%8E%E7%BB%AD%E9%81%8D%E5%8E%86/</url>
-    <content><![CDATA[<p>周末突然降温，哪儿也去不了，不如在家刷题。</p>
-<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Given a binary tree, return the <em>postorder</em> traversal of its nodes’ values.</p>
-<p>For example:<br>Given binary tree{1,#,2,3},</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line"> /</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
-<p>return[3,2,1].</p>
-<p><strong>Note:</strong> Recursive solution is trivial, could you do it iteratively？</p>
-<p><strong>使用非递归方法后序遍历二叉树。</strong></p>
-<span id="more"></span>
-
-
-
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>二叉树后序遍历就是对每个节点按照左、右、中的顺序进行遍历。</p>
-<p>详细的解析参见：<a href="https://www.jianshu.com/p/456af5480cee">二叉树遍历(先序、中序、后序)</a> ，讲得非常详细易懂。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.postorder.raversal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午1:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        TreeNode pointer = root;</span><br><span class="line">        TreeNode lastVisit = root;</span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty() || pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                stack.push(pointer);</span><br><span class="line">                pointer = pointer.left;</span><br><span class="line">            &#125;</span><br><span class="line">            pointer = stack.peek();</span><br><span class="line">            <span class="keyword">if</span> (pointer.right == <span class="keyword">null</span> || pointer.right == lastVisit) &#123;</span><br><span class="line">                list.add(pointer.val);</span><br><span class="line">                lastVisit = pointer;</span><br><span class="line">                stack.pop();</span><br><span class="line">                pointer = <span class="keyword">null</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                pointer = pointer.right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>是时候好好重修一下数据结构了。</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LeetCode之单链表重排序</title>
     <url>/2018/11/17/LeetCode%E5%AD%90%E5%8D%95%E9%93%BE%E8%A1%A8%E9%87%8D%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Given a singly linked list <em>L</em>: <em>L</em> 0→<em>L</em> 1→…→<em>L</em> <em>n</em>-1→<em>L</em> n,<br>reorder it to: <em>L</em> 0→<em>L</em> <em>n</em> →<em>L</em> 1→<em>L</em> <em>n</em>-1→<em>L</em> 2→<em>L</em> <em>n</em>-2→…</p>
@@ -1362,6 +1362,59 @@
       </tags>
   </entry>
   <entry>
+    <title>MacBook Pro 2020指纹无反应</title>
+    <url>/2021/05/09/MacBook-Pro-2020%E6%8C%87%E7%BA%B9%E6%97%A0%E5%8F%8D%E5%BA%94/</url>
+    <content><![CDATA[<blockquote>
+<p>记得上个月重装了一次系统，然后指纹都被清掉了，重装完系统之后发现无法录入指纹，按压指纹没有反应。</p>
+</blockquote>
+<br>
+
+<p>昨天晚上发版，有一个配置没有提交，导致今天早上☀️生产部署失败⚠️了，七点不到⏰就去公司🏙处理。想趁着今天刚好周末有时间，去售后看看。可是售后人🚶太多了，笔记本💻的号都排完了，只能预约下周六。</p>
+<p>回来之后无意之间搜了一下这个问题，其实之前就有搜过很多帖子，但是没找到有用的信息。第一个搜索结果很熟悉：<a href="https://discussionschinese.apple.com/thread/251698511">Macbook Pro 2020 指纹识别失灵 无法使用</a> ，因为以前就看过，不抱希望的点进去看了一下，结果发现之前没仔细看描述：<strong>插上电源 大部分时候就是不灵敏 开屏解锁，填充密码等都是，不插电源正常。</strong> 回想了一下，好像我确实一直插着电在用，我把电源拔掉一试，竟然可以正常使用。</p>
+<p>但是每次用指纹都要拔掉电源很麻烦，往下看到一个有用答案⭐️：</p>
+<blockquote>
+<p>我也有同样的问题 研究了半天 感觉是电源没有接地的原因 我在楼上插着充电器就不能用指纹 楼下就能 好无语😓 然后我偶然间发现插着电源用指纹的时候手掌手臂尽量接触电脑的金属表面 指纹也能重新识别😂</p>
+</blockquote>
+<p><strong>只要用指纹的时候手掌接触机身就可以正常识别。</strong></p>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mac系统下更改MySQL字符集</title>
+    <url>/2019/12/31/Mac%E6%9B%B4%E6%94%B9MySQL%E5%AD%97%E7%AC%A6%E9%9B%86/</url>
+    <content><![CDATA[<p>解决方案： <a href="https://zhuanlan.zhihu.com/p/34655552">Mac环境下的MySQL编码设置</a></p>
+<span id="more"></span>
+
+<br>
+
+<p>昨天晚上造测试数据的时候，无意间加进去几条中文数据，然后在终端里select出来之后发现中文全部变成问号了。然后就上网搜“Mac系统下修改MySQL字符集”，很多教程的内容是：</p>
+<ol>
+<li><p>去 /etc 目录下找是否有 my.cnf 文件；</p>
+</li>
+<li><p>如果没有的话去 /usr/local/mysql/support-files 文件夹下找 my-default.cnf 文件并复制到 /etc/my.cnf ，在[client]和[mysqld]标签下加上：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">default-character-set</span> = <span class="string">utf8</span></span><br><span class="line"></span><br><span class="line"><span class="meta">default-storage-engine</span> = <span class="string">INNODB</span></span><br><span class="line"><span class="meta">character-set-server</span> = <span class="string">utf8</span></span><br><span class="line"><span class="meta">collation-server</span> = <span class="string">utf8_general_ci </span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>但是我本地的 /usr/local/mysql/support-files 目录下并没有 .cnf 文件，后来才知道是版本的问题，我本地装的 MySQL 是 5.7.28 ，已经没有了这个文件。</p>
+<br>
+
+<p>解决方案：</p>
+<p>先在系统偏好设置里停掉 MySQL 服务，然后自己在 /etc 下创建一个 my.cnf 文件，保存之后再重启 MySQL 即可。</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Example MySQL config file for medium systems. </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># This is for a system with little memory (32M - 64M) where MySQL plays </span></span><br><span class="line"><span class="comment"># an important part, or systems up to 128M where MySQL is used together with </span></span><br><span class="line"><span class="comment"># other programs (such as a web server) </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># MySQL programs look for option files in a set of </span></span><br><span class="line"><span class="comment"># locations which depend on the deployment platform. </span></span><br><span class="line"><span class="comment"># You can copy this option file to one of those </span></span><br><span class="line"><span class="comment"># locations. For information about these locations, see: </span></span><br><span class="line"><span class="comment"># http://dev.mysql.com/doc/mysql/en/option-files.html </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># In this file, you can use all long options that a program supports. </span></span><br><span class="line"><span class="comment"># If you want to know which options a program supports, run the program </span></span><br><span class="line"><span class="comment"># with the &quot;--help&quot; option. </span></span><br><span class="line"><span class="comment"># The following options will be passed to all MySQL clients </span></span><br><span class="line"><span class="attr">[client]</span></span><br><span class="line"><span class="meta">default-character-set</span>=<span class="string">utf8</span></span><br><span class="line"><span class="comment">#password = your_password </span></span><br><span class="line"><span class="attr">port</span> = <span class="string">3306 </span></span><br><span class="line"><span class="attr">socket</span> = <span class="string">/tmp/mysql.sock </span></span><br><span class="line"><span class="comment"># Here follows entries for some specific programs </span></span><br><span class="line"><span class="comment"># The MySQL server </span></span><br><span class="line"><span class="attr">[mysqld]</span></span><br><span class="line"><span class="meta">character-set-server</span>=<span class="string">utf8</span></span><br><span class="line"><span class="attr">init_connect</span>=<span class="string">&#x27;SET NAMES utf8</span></span><br><span class="line"><span class="attr">port</span> = <span class="string">3306 </span></span><br><span class="line"><span class="attr">socket</span> = <span class="string">/tmp/mysql.sock </span></span><br><span class="line"><span class="meta">skip-external-locking</span> <span class="string"></span></span><br><span class="line"><span class="attr">key_buffer_size</span> = <span class="string">16M </span></span><br><span class="line"><span class="attr">max_allowed_packet</span> = <span class="string">1M </span></span><br><span class="line"><span class="attr">table_open_cache</span> = <span class="string">64 </span></span><br><span class="line"><span class="attr">sort_buffer_size</span> = <span class="string">512K </span></span><br><span class="line"><span class="attr">net_buffer_length</span> = <span class="string">8K </span></span><br><span class="line"><span class="attr">read_buffer_size</span> = <span class="string">256K </span></span><br><span class="line"><span class="attr">read_rnd_buffer_size</span> = <span class="string">512K </span></span><br><span class="line"><span class="attr">myisam_sort_buffer_size</span> = <span class="string">8M </span></span><br><span class="line"><span class="meta">character-set-server</span>=<span class="string">utf8 </span></span><br><span class="line"><span class="attr">init_connect</span>=<span class="string">&#x27;SET NAMES utf8&#x27; </span></span><br><span class="line"><span class="comment"># Don&#x27;t listen on a TCP/IP port at all. This can be a security enhancement, </span></span><br><span class="line"><span class="comment"># if all processes that need to connect to mysqld run on the same host. </span></span><br><span class="line"><span class="comment"># All interaction with mysqld must be made via Unix sockets or named pipes. </span></span><br><span class="line"><span class="comment"># Note that using this option without enabling named pipes on Windows </span></span><br><span class="line"><span class="comment"># (via the &quot;enable-named-pipe&quot; option) will render mysqld useless! </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment">#skip-networking</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># Replication Master Server (default) </span></span><br><span class="line"><span class="comment"># binary logging is required for replication </span></span><br><span class="line"><span class="meta">log-bin</span>=<span class="string">mysql-bin</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># binary logging format - mixed recommended </span></span><br><span class="line"><span class="attr">binlog_format</span>=<span class="string">mixed</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># required unique id between 1 and 2^32 - 1 </span></span><br><span class="line"><span class="comment"># defaults to 1 if master-host is not set </span></span><br><span class="line"><span class="comment"># but will not function as a master if omitted </span></span><br><span class="line"><span class="meta">server-id</span> = <span class="string">1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># Replication Slave (comment out master section to use this) </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># To configure this host as a replication slave, you can choose between </span></span><br><span class="line"><span class="comment"># two methods : </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># 1) Use the CHANGE MASTER TO command (fully described in our manual) - </span></span><br><span class="line"><span class="comment"># the syntax is: </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># CHANGE MASTER TO MASTER_HOST=&lt;host&gt;, MASTER_PORT=&lt;port&gt;, </span></span><br><span class="line"><span class="comment"># MASTER_USER=&lt;user&gt;, MASTER_PASSWORD=&lt;password&gt; ; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># where you replace &lt;host&gt;, &lt;user&gt;, &lt;password&gt; by quoted strings and </span></span><br><span class="line"><span class="comment"># &lt;port&gt; by the master&#x27;s port number (3306 by default). </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Example: </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># CHANGE MASTER TO MASTER_HOST=&#x27;125.564.12.1&#x27;, MASTER_PORT=3306, </span></span><br><span class="line"><span class="comment"># MASTER_USER=&#x27;joe&#x27;, MASTER_PASSWORD=&#x27;secret&#x27;; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># OR </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># 2) Set the variables below. However, in case you choose this method, then </span></span><br><span class="line"><span class="comment"># start replication for the first time (even unsuccessfully, for example </span></span><br><span class="line"><span class="comment"># if you mistyped the password in master-password and the slave fails to </span></span><br><span class="line"><span class="comment"># connect), the slave will create a master.info file, and any later </span></span><br><span class="line"><span class="comment"># change in this file to the variables&#x27; values below will be ignored and </span></span><br><span class="line"><span class="comment"># overridden by the content of the master.info file, unless you shutdown </span></span><br><span class="line"><span class="comment"># the slave server, delete master.info and restart the slaver server. </span></span><br><span class="line"><span class="comment"># For that reason, you may want to leave the lines below untouched </span></span><br><span class="line"><span class="comment"># (commented) and instead use CHANGE MASTER TO (see above) </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># required unique id between 2 and 2^32 - 1 </span></span><br><span class="line"><span class="comment"># (and different from the master) </span></span><br><span class="line"><span class="comment"># defaults to 2 if master-host is set </span></span><br><span class="line"><span class="comment"># but will not function as a slave if omitted </span></span><br><span class="line"><span class="comment">#server-id = 2 </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># The replication master for this slave - required </span></span><br><span class="line"><span class="comment">#master-host = &lt;hostname&gt; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># The username the slave will use for authentication when connecting </span></span><br><span class="line"><span class="comment"># to the master - required </span></span><br><span class="line"><span class="comment">#master-user = &lt;username&gt; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># The password the slave will authenticate with when connecting to </span></span><br><span class="line"><span class="comment"># the master - required </span></span><br><span class="line"><span class="comment">#master-password = &lt;password&gt; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># The port the master is listening on. </span></span><br><span class="line"><span class="comment"># optional - defaults to 3306 </span></span><br><span class="line"><span class="comment">#master-port = &lt;port&gt; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># binary logging - not required for slaves, but recommended </span></span><br><span class="line"><span class="comment">#log-bin=mysql-bin</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># Uncomment the following if you are using InnoDB tables </span></span><br><span class="line"><span class="comment">#innodb_data_home_dir = /usr/local/mysql/data </span></span><br><span class="line"><span class="comment">#innodb_data_file_path = ibdata1:10M:autoextend </span></span><br><span class="line"><span class="comment">#innodb_log_group_home_dir = /usr/local/mysql/data </span></span><br><span class="line"><span class="comment"># You can set .._buffer_pool_size up to 50 - 80 % </span></span><br><span class="line"><span class="comment"># of RAM but beware of setting memory usage too high </span></span><br><span class="line"><span class="comment">#innodb_buffer_pool_size = 16M </span></span><br><span class="line"><span class="comment">#innodb_additional_mem_pool_size = 2M </span></span><br><span class="line"><span class="comment"># Set .._log_file_size to 25 % of buffer pool size </span></span><br><span class="line"><span class="comment">#innodb_log_file_size = 5M </span></span><br><span class="line"><span class="comment">#innodb_log_buffer_size = 8M </span></span><br><span class="line"><span class="comment">#innodb_flush_log_at_trx_commit = 1 </span></span><br><span class="line"><span class="comment">#innodb_lock_wait_timeout = 50</span></span><br><span class="line"></span><br><span class="line"><span class="meta">[mysqldump]</span> <span class="string"></span></span><br><span class="line"><span class="attr">quick</span> <span class="string"></span></span><br><span class="line"><span class="attr">max_allowed_packet</span> = <span class="string">16M</span></span><br><span class="line"></span><br><span class="line"><span class="meta">[mysql]</span> <span class="string"></span></span><br><span class="line"><span class="meta">no-auto-rehash</span> <span class="string"></span></span><br><span class="line"><span class="comment"># Remove the next comment character if you are not familiar with SQL </span></span><br><span class="line"><span class="comment">#safe-updates </span></span><br><span class="line"><span class="meta">default-character-set</span>=<span class="string">utf8</span></span><br><span class="line"></span><br><span class="line"><span class="meta">[myisamchk]</span> <span class="string"></span></span><br><span class="line"><span class="attr">key_buffer_size</span> = <span class="string">20M </span></span><br><span class="line"><span class="attr">sort_buffer_size</span> = <span class="string">20M </span></span><br><span class="line"><span class="attr">read_buffer</span> = <span class="string">2M </span></span><br><span class="line"><span class="attr">write_buffer</span> = <span class="string">2M</span></span><br><span class="line"></span><br><span class="line"><span class="meta">[mysqlhotcopy]</span> <span class="string"></span></span><br><span class="line"><span class="attr">interactive-timeout</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Markdown语法进阶</title>
     <url>/2020/10/16/Markdown%E8%AF%AD%E6%B3%95%E8%BF%9B%E9%98%B6/</url>
     <content><![CDATA[<p>[TOC]</p>
@@ -1417,59 +1470,6 @@
       </categories>
       <tags>
         <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mac系统下更改MySQL字符集</title>
-    <url>/2019/12/31/Mac%E6%9B%B4%E6%94%B9MySQL%E5%AD%97%E7%AC%A6%E9%9B%86/</url>
-    <content><![CDATA[<p>解决方案： <a href="https://zhuanlan.zhihu.com/p/34655552">Mac环境下的MySQL编码设置</a></p>
-<span id="more"></span>
-
-<br>
-
-<p>昨天晚上造测试数据的时候，无意间加进去几条中文数据，然后在终端里select出来之后发现中文全部变成问号了。然后就上网搜“Mac系统下修改MySQL字符集”，很多教程的内容是：</p>
-<ol>
-<li><p>去 /etc 目录下找是否有 my.cnf 文件；</p>
-</li>
-<li><p>如果没有的话去 /usr/local/mysql/support-files 文件夹下找 my-default.cnf 文件并复制到 /etc/my.cnf ，在[client]和[mysqld]标签下加上：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">default-character-set</span> = <span class="string">utf8</span></span><br><span class="line"></span><br><span class="line"><span class="meta">default-storage-engine</span> = <span class="string">INNODB</span></span><br><span class="line"><span class="meta">character-set-server</span> = <span class="string">utf8</span></span><br><span class="line"><span class="meta">collation-server</span> = <span class="string">utf8_general_ci </span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>但是我本地的 /usr/local/mysql/support-files 目录下并没有 .cnf 文件，后来才知道是版本的问题，我本地装的 MySQL 是 5.7.28 ，已经没有了这个文件。</p>
-<br>
-
-<p>解决方案：</p>
-<p>先在系统偏好设置里停掉 MySQL 服务，然后自己在 /etc 下创建一个 my.cnf 文件，保存之后再重启 MySQL 即可。</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Example MySQL config file for medium systems. </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># This is for a system with little memory (32M - 64M) where MySQL plays </span></span><br><span class="line"><span class="comment"># an important part, or systems up to 128M where MySQL is used together with </span></span><br><span class="line"><span class="comment"># other programs (such as a web server) </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># MySQL programs look for option files in a set of </span></span><br><span class="line"><span class="comment"># locations which depend on the deployment platform. </span></span><br><span class="line"><span class="comment"># You can copy this option file to one of those </span></span><br><span class="line"><span class="comment"># locations. For information about these locations, see: </span></span><br><span class="line"><span class="comment"># http://dev.mysql.com/doc/mysql/en/option-files.html </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># In this file, you can use all long options that a program supports. </span></span><br><span class="line"><span class="comment"># If you want to know which options a program supports, run the program </span></span><br><span class="line"><span class="comment"># with the &quot;--help&quot; option. </span></span><br><span class="line"><span class="comment"># The following options will be passed to all MySQL clients </span></span><br><span class="line"><span class="attr">[client]</span></span><br><span class="line"><span class="meta">default-character-set</span>=<span class="string">utf8</span></span><br><span class="line"><span class="comment">#password = your_password </span></span><br><span class="line"><span class="attr">port</span> = <span class="string">3306 </span></span><br><span class="line"><span class="attr">socket</span> = <span class="string">/tmp/mysql.sock </span></span><br><span class="line"><span class="comment"># Here follows entries for some specific programs </span></span><br><span class="line"><span class="comment"># The MySQL server </span></span><br><span class="line"><span class="attr">[mysqld]</span></span><br><span class="line"><span class="meta">character-set-server</span>=<span class="string">utf8</span></span><br><span class="line"><span class="attr">init_connect</span>=<span class="string">&#x27;SET NAMES utf8</span></span><br><span class="line"><span class="attr">port</span> = <span class="string">3306 </span></span><br><span class="line"><span class="attr">socket</span> = <span class="string">/tmp/mysql.sock </span></span><br><span class="line"><span class="meta">skip-external-locking</span> <span class="string"></span></span><br><span class="line"><span class="attr">key_buffer_size</span> = <span class="string">16M </span></span><br><span class="line"><span class="attr">max_allowed_packet</span> = <span class="string">1M </span></span><br><span class="line"><span class="attr">table_open_cache</span> = <span class="string">64 </span></span><br><span class="line"><span class="attr">sort_buffer_size</span> = <span class="string">512K </span></span><br><span class="line"><span class="attr">net_buffer_length</span> = <span class="string">8K </span></span><br><span class="line"><span class="attr">read_buffer_size</span> = <span class="string">256K </span></span><br><span class="line"><span class="attr">read_rnd_buffer_size</span> = <span class="string">512K </span></span><br><span class="line"><span class="attr">myisam_sort_buffer_size</span> = <span class="string">8M </span></span><br><span class="line"><span class="meta">character-set-server</span>=<span class="string">utf8 </span></span><br><span class="line"><span class="attr">init_connect</span>=<span class="string">&#x27;SET NAMES utf8&#x27; </span></span><br><span class="line"><span class="comment"># Don&#x27;t listen on a TCP/IP port at all. This can be a security enhancement, </span></span><br><span class="line"><span class="comment"># if all processes that need to connect to mysqld run on the same host. </span></span><br><span class="line"><span class="comment"># All interaction with mysqld must be made via Unix sockets or named pipes. </span></span><br><span class="line"><span class="comment"># Note that using this option without enabling named pipes on Windows </span></span><br><span class="line"><span class="comment"># (via the &quot;enable-named-pipe&quot; option) will render mysqld useless! </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment">#skip-networking</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># Replication Master Server (default) </span></span><br><span class="line"><span class="comment"># binary logging is required for replication </span></span><br><span class="line"><span class="meta">log-bin</span>=<span class="string">mysql-bin</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># binary logging format - mixed recommended </span></span><br><span class="line"><span class="attr">binlog_format</span>=<span class="string">mixed</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># required unique id between 1 and 2^32 - 1 </span></span><br><span class="line"><span class="comment"># defaults to 1 if master-host is not set </span></span><br><span class="line"><span class="comment"># but will not function as a master if omitted </span></span><br><span class="line"><span class="meta">server-id</span> = <span class="string">1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># Replication Slave (comment out master section to use this) </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># To configure this host as a replication slave, you can choose between </span></span><br><span class="line"><span class="comment"># two methods : </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># 1) Use the CHANGE MASTER TO command (fully described in our manual) - </span></span><br><span class="line"><span class="comment"># the syntax is: </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># CHANGE MASTER TO MASTER_HOST=&lt;host&gt;, MASTER_PORT=&lt;port&gt;, </span></span><br><span class="line"><span class="comment"># MASTER_USER=&lt;user&gt;, MASTER_PASSWORD=&lt;password&gt; ; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># where you replace &lt;host&gt;, &lt;user&gt;, &lt;password&gt; by quoted strings and </span></span><br><span class="line"><span class="comment"># &lt;port&gt; by the master&#x27;s port number (3306 by default). </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># Example: </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># CHANGE MASTER TO MASTER_HOST=&#x27;125.564.12.1&#x27;, MASTER_PORT=3306, </span></span><br><span class="line"><span class="comment"># MASTER_USER=&#x27;joe&#x27;, MASTER_PASSWORD=&#x27;secret&#x27;; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># OR </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># 2) Set the variables below. However, in case you choose this method, then </span></span><br><span class="line"><span class="comment"># start replication for the first time (even unsuccessfully, for example </span></span><br><span class="line"><span class="comment"># if you mistyped the password in master-password and the slave fails to </span></span><br><span class="line"><span class="comment"># connect), the slave will create a master.info file, and any later </span></span><br><span class="line"><span class="comment"># change in this file to the variables&#x27; values below will be ignored and </span></span><br><span class="line"><span class="comment"># overridden by the content of the master.info file, unless you shutdown </span></span><br><span class="line"><span class="comment"># the slave server, delete master.info and restart the slaver server. </span></span><br><span class="line"><span class="comment"># For that reason, you may want to leave the lines below untouched </span></span><br><span class="line"><span class="comment"># (commented) and instead use CHANGE MASTER TO (see above) </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># required unique id between 2 and 2^32 - 1 </span></span><br><span class="line"><span class="comment"># (and different from the master) </span></span><br><span class="line"><span class="comment"># defaults to 2 if master-host is set </span></span><br><span class="line"><span class="comment"># but will not function as a slave if omitted </span></span><br><span class="line"><span class="comment">#server-id = 2 </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># The replication master for this slave - required </span></span><br><span class="line"><span class="comment">#master-host = &lt;hostname&gt; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># The username the slave will use for authentication when connecting </span></span><br><span class="line"><span class="comment"># to the master - required </span></span><br><span class="line"><span class="comment">#master-user = &lt;username&gt; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># The password the slave will authenticate with when connecting to </span></span><br><span class="line"><span class="comment"># the master - required </span></span><br><span class="line"><span class="comment">#master-password = &lt;password&gt; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># The port the master is listening on. </span></span><br><span class="line"><span class="comment"># optional - defaults to 3306 </span></span><br><span class="line"><span class="comment">#master-port = &lt;port&gt; </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># binary logging - not required for slaves, but recommended </span></span><br><span class="line"><span class="comment">#log-bin=mysql-bin</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># Uncomment the following if you are using InnoDB tables </span></span><br><span class="line"><span class="comment">#innodb_data_home_dir = /usr/local/mysql/data </span></span><br><span class="line"><span class="comment">#innodb_data_file_path = ibdata1:10M:autoextend </span></span><br><span class="line"><span class="comment">#innodb_log_group_home_dir = /usr/local/mysql/data </span></span><br><span class="line"><span class="comment"># You can set .._buffer_pool_size up to 50 - 80 % </span></span><br><span class="line"><span class="comment"># of RAM but beware of setting memory usage too high </span></span><br><span class="line"><span class="comment">#innodb_buffer_pool_size = 16M </span></span><br><span class="line"><span class="comment">#innodb_additional_mem_pool_size = 2M </span></span><br><span class="line"><span class="comment"># Set .._log_file_size to 25 % of buffer pool size </span></span><br><span class="line"><span class="comment">#innodb_log_file_size = 5M </span></span><br><span class="line"><span class="comment">#innodb_log_buffer_size = 8M </span></span><br><span class="line"><span class="comment">#innodb_flush_log_at_trx_commit = 1 </span></span><br><span class="line"><span class="comment">#innodb_lock_wait_timeout = 50</span></span><br><span class="line"></span><br><span class="line"><span class="meta">[mysqldump]</span> <span class="string"></span></span><br><span class="line"><span class="attr">quick</span> <span class="string"></span></span><br><span class="line"><span class="attr">max_allowed_packet</span> = <span class="string">16M</span></span><br><span class="line"></span><br><span class="line"><span class="meta">[mysql]</span> <span class="string"></span></span><br><span class="line"><span class="meta">no-auto-rehash</span> <span class="string"></span></span><br><span class="line"><span class="comment"># Remove the next comment character if you are not familiar with SQL </span></span><br><span class="line"><span class="comment">#safe-updates </span></span><br><span class="line"><span class="meta">default-character-set</span>=<span class="string">utf8</span></span><br><span class="line"></span><br><span class="line"><span class="meta">[myisamchk]</span> <span class="string"></span></span><br><span class="line"><span class="attr">key_buffer_size</span> = <span class="string">20M </span></span><br><span class="line"><span class="attr">sort_buffer_size</span> = <span class="string">20M </span></span><br><span class="line"><span class="attr">read_buffer</span> = <span class="string">2M </span></span><br><span class="line"><span class="attr">write_buffer</span> = <span class="string">2M</span></span><br><span class="line"></span><br><span class="line"><span class="meta">[mysqlhotcopy]</span> <span class="string"></span></span><br><span class="line"><span class="attr">interactive-timeout</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MacBook Pro 2020指纹无反应</title>
-    <url>/2021/05/09/MacBook-Pro-2020%E6%8C%87%E7%BA%B9%E6%97%A0%E5%8F%8D%E5%BA%94/</url>
-    <content><![CDATA[<blockquote>
-<p>记得上个月重装了一次系统，然后指纹都被清掉了，重装完系统之后发现无法录入指纹，按压指纹没有反应。</p>
-</blockquote>
-<br>
-
-<p>昨天晚上发版，有一个配置没有提交，导致今天早上☀️生产部署失败⚠️了，七点不到⏰就去公司🏙处理。想趁着今天刚好周末有时间，去售后看看。可是售后人🚶太多了，笔记本💻的号都排完了，只能预约下周六。</p>
-<p>回来之后无意之间搜了一下这个问题，其实之前就有搜过很多帖子，但是没找到有用的信息。第一个搜索结果很熟悉：<a href="https://discussionschinese.apple.com/thread/251698511">Macbook Pro 2020 指纹识别失灵 无法使用</a> ，因为以前就看过，不抱希望的点进去看了一下，结果发现之前没仔细看描述：<strong>插上电源 大部分时候就是不灵敏 开屏解锁，填充密码等都是，不插电源正常。</strong> 回想了一下，好像我确实一直插着电在用，我把电源拔掉一试，竟然可以正常使用。</p>
-<p>但是每次用指纹都要拔掉电源很麻烦，往下看到一个有用答案⭐️：</p>
-<blockquote>
-<p>我也有同样的问题 研究了半天 感觉是电源没有接地的原因 我在楼上插着充电器就不能用指纹 楼下就能 好无语😓 然后我偶然间发现插着电源用指纹的时候手掌手臂尽量接触电脑的金属表面 指纹也能重新识别😂</p>
-</blockquote>
-<p><strong>只要用指纹的时候手掌接触机身就可以正常识别。</strong></p>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
@@ -3905,6 +3905,36 @@
       </tags>
   </entry>
   <entry>
+    <title>mabtis-generator的使用</title>
+    <url>/2021/04/27/mabtis-generator%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>MyBatisGenerator的配置和使用</p>
+<br>
+
+<span id="more"></span>
+
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- mybatis-generator自动生成代码插件 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.generator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-generator-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>更新pom文件导入依赖后在idea侧边栏能看到mybatisGenerator插件。</p>
+<p><img src="https://images2.imgbox.com/ee/a0/h1JH6RCQ_o.png" alt="image-20210427004620531"></p>
+<p>配置完成后可以直接双击运行。</p>
+<br>
+
+<h2 id="配置generatorConfig-xml"><a href="#配置generatorConfig-xml" class="headerlink" title="配置generatorConfig.xml"></a>配置generatorConfig.xml</h2><p>在项目resources目录下新建generatorConfig.xml文件，文件内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">generatorConfiguration</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--mysql 连接数据库jar 这里选择自己本地位置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classPathEntry</span></span></span><br><span class="line"><span class="tag">            <span class="attr">location</span>=<span class="string">&quot;/Users/jingh527/.m2/try-ask-repo/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22.jar&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">&quot;testTables&quot;</span> <span class="attr">targetRuntime</span>=<span class="string">&quot;MyBatis3&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 是否去除自动生成的注释 true：是 ： false:否 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suppressAllComments&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--数据库连接的信息：驱动类、连接地址、用户名、密码 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">connectionURL</span>=<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">userId</span>=<span class="string">&quot;admin&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">password</span>=<span class="string">&quot;admin&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和</span></span><br><span class="line"><span class="comment">           NUMERIC 类型解析为java.math.BigDecimal --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;forceBigDecimals&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- targetProject:生成PO类的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.po&quot;</span></span></span><br><span class="line"><span class="tag">                            <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 从数据库返回的值被清理前后的空格 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;trimStrings&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- targetProject:mapper映射文件生成的位置</span></span><br><span class="line"><span class="comment">           如果maven工程只是单独的一个工程，targetProject=&quot;src/main/java&quot;</span></span><br><span class="line"><span class="comment">           若果maven工程是分模块的工程，targetProject=&quot;所属模块的名称&quot;，例如：</span></span><br><span class="line"><span class="comment">           targetProject=&quot;ecps-manager-mapper&quot;，下同--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.dao&quot;</span></span></span><br><span class="line"><span class="tag">                         <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sqlMapGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- targetPackage：mapper接口生成的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">type</span>=<span class="string">&quot;XMLMAPPER&quot;</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.dao&quot;</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaClientGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 指定数据库表 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">schema</span>=<span class="string">&quot;&quot;</span> <span class="attr">tableName</span>=<span class="string">&quot;table1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">schema</span>=<span class="string">&quot;&quot;</span> <span class="attr">tableName</span>=<span class="string">&quot;table2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>需要注意数据连接信息，以及驱动jar包，可以复制maven本地仓库里的jar包地址。</p>
+<br>
+
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>双击图一中的mybatis-generator:generate，自动下载完插件依赖后，代码就生成完了。</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>dubbo学习笔记</title>
     <url>/2018/12/02/dubbo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>dubbo学习笔记</p>
@@ -3960,36 +3990,6 @@
       </tags>
   </entry>
   <entry>
-    <title>mabtis-generator的使用</title>
-    <url>/2021/04/27/mabtis-generator%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>MyBatisGenerator的配置和使用</p>
-<br>
-
-<span id="more"></span>
-
-<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- mybatis-generator自动生成代码插件 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.generator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-generator-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>更新pom文件导入依赖后在idea侧边栏能看到mybatisGenerator插件。</p>
-<p><img src="https://images2.imgbox.com/ee/a0/h1JH6RCQ_o.png" alt="image-20210427004620531"></p>
-<p>配置完成后可以直接双击运行。</p>
-<br>
-
-<h2 id="配置generatorConfig-xml"><a href="#配置generatorConfig-xml" class="headerlink" title="配置generatorConfig.xml"></a>配置generatorConfig.xml</h2><p>在项目resources目录下新建generatorConfig.xml文件，文件内容如下：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">generatorConfiguration</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--mysql 连接数据库jar 这里选择自己本地位置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classPathEntry</span></span></span><br><span class="line"><span class="tag">            <span class="attr">location</span>=<span class="string">&quot;/Users/jingh527/.m2/try-ask-repo/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22.jar&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">&quot;testTables&quot;</span> <span class="attr">targetRuntime</span>=<span class="string">&quot;MyBatis3&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 是否去除自动生成的注释 true：是 ： false:否 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suppressAllComments&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--数据库连接的信息：驱动类、连接地址、用户名、密码 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">connectionURL</span>=<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">userId</span>=<span class="string">&quot;admin&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">password</span>=<span class="string">&quot;admin&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和</span></span><br><span class="line"><span class="comment">           NUMERIC 类型解析为java.math.BigDecimal --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;forceBigDecimals&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- targetProject:生成PO类的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.po&quot;</span></span></span><br><span class="line"><span class="tag">                            <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 从数据库返回的值被清理前后的空格 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;trimStrings&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- targetProject:mapper映射文件生成的位置</span></span><br><span class="line"><span class="comment">           如果maven工程只是单独的一个工程，targetProject=&quot;src/main/java&quot;</span></span><br><span class="line"><span class="comment">           若果maven工程是分模块的工程，targetProject=&quot;所属模块的名称&quot;，例如：</span></span><br><span class="line"><span class="comment">           targetProject=&quot;ecps-manager-mapper&quot;，下同--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.dao&quot;</span></span></span><br><span class="line"><span class="tag">                         <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sqlMapGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- targetPackage：mapper接口生成的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">type</span>=<span class="string">&quot;XMLMAPPER&quot;</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.dao&quot;</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaClientGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 指定数据库表 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">schema</span>=<span class="string">&quot;&quot;</span> <span class="attr">tableName</span>=<span class="string">&quot;table1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">schema</span>=<span class="string">&quot;&quot;</span> <span class="attr">tableName</span>=<span class="string">&quot;table2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>需要注意数据连接信息，以及驱动jar包，可以复制maven本地仓库里的jar包地址。</p>
-<br>
-
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>双击图一中的mybatis-generator:generate，自动下载完插件依赖后，代码就生成完了。</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>scp-Linux文件复制命令</title>
     <url>/2019/11/03/scp-Linux%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<p>scp — Linux文件复制命令</p>
@@ -4029,42 +4029,6 @@
       </categories>
       <tags>
         <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>thymeleaf传值给bootstrap的modal</title>
-    <url>/2020/10/24/thymeleaf%E4%BC%A0%E5%80%BC%E7%BB%99bootstrap%E7%9A%84modal/</url>
-    <content><![CDATA[<p>给模态框传值是一个很常见的需求，尤其是在操作表格的时候，添加、编辑数据都需要给模态框传值。一般如果是html的话很好处理，在Thymeleaf里因为值是动态的所以遇到点问题。</p>
-<span id="more"></span>
-
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>这是模态框的定义：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 修改数据 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal fade&quot;</span> <span class="attr">id</span>=<span class="string">&quot;edit_bill&quot;</span> <span class="attr">role</span>=<span class="string">&quot;dialog&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-dialog&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-content&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-header&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">p</span>&gt;</span>新增数据<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-body&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">form</span> <span class="attr">th:action</span>=<span class="string">&quot;@&#123;/bill/edit&#125;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;billId1&quot;</span>&gt;</span>id<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;billId&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">id</span>=<span class="string">&quot;billId&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default&quot;</span>&gt;</span>提交表单<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-footer&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default&quot;</span> <span class="attr">data-dismiss</span>=<span class="string">&quot;modal&quot;</span>&gt;</span>关闭</span><br><span class="line">                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这是按钮的定义：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">th:if</span>=<span class="string">&quot;$&#123;not #lists.isEmpty(result.getData().getDataList())&#125;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">th:each</span>=<span class="string">&quot;bill, stat: $&#123;result.getData().getDataList()&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">style</span>=<span class="string">&quot;display: none&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;bill.billId&#125;&quot;</span>&gt;</span>Test001<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;btn-group&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;edit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-info&quot;</span> <span class="attr">data-toggle</span>=<span class="string">&quot;modal&quot;</span> <span class="attr">data-target</span>=<span class="string">&quot;#edit_bill&quot;</span> <span class="attr">th:attr</span>=<span class="string">&quot;data-bill-id=$&#123;bill.billId&#125;&quot;</span>&gt;</span>修改<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>想在点击修改按钮的时候将 <code>billId</code> 这个值传到弹出框里。</p>
-<p>值得注意的是Thymeleaf中data-*的写法： </p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 不是 --&gt;</span></span><br><span class="line">data-bill-id=&quot;$&#123;bill.billId&#125;&quot;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 而是 --&gt;</span></span><br><span class="line">th:attr=&quot;data-bill-id=$&#123;bill.billId&#125;&quot;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>点击按钮的时候执行通过事件取值，但是我没成功，甚至连log都没输出，应该是没有执行，不知道是不是和Thymeleaf有关。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    <span class="title">$</span>(<span class="params"><span class="string">&#x27;#edit_bill&#x27;</span></span>).<span class="title">on</span>(<span class="params"><span class="string">&#x27;show.bs.modal&#x27;</span>, <span class="keyword">function</span> (event) &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">var</span> billId = $(event.relatedTarget.data(<span class="string">&#x27;bill-id&#x27;</span>);</span></span></span><br><span class="line"><span class="params"><span class="function">        $(event.currentTarget).find(<span class="string">&#x27;input[name=&quot;billId&quot;]&#x27;</span>).val(billId);</span></span></span><br><span class="line"><span class="params"><span class="function">    &#125;</span>)</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>这种写法能成功取到值，对js不是很了解，看不出两者有什么差别。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$(document).on(<span class="string">&quot;click&quot;</span>, <span class="string">&quot;#edit&quot;</span>, function() &#123;</span><br><span class="line">    <span class="keyword">var</span> billId = $(<span class="keyword">this</span>).data(<span class="string">&quot;bill-id&quot;</span>);</span><br><span class="line">    $(<span class="string">&quot;#billId&quot;</span>).val(billId);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>Thymeleaf</category>
-      </categories>
-      <tags>
-        <tag>Thymeleaf</tag>
       </tags>
   </entry>
   <entry>
@@ -4129,6 +4093,42 @@
       </categories>
       <tags>
         <tag>日语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>thymeleaf传值给bootstrap的modal</title>
+    <url>/2020/10/24/thymeleaf%E4%BC%A0%E5%80%BC%E7%BB%99bootstrap%E7%9A%84modal/</url>
+    <content><![CDATA[<p>给模态框传值是一个很常见的需求，尤其是在操作表格的时候，添加、编辑数据都需要给模态框传值。一般如果是html的话很好处理，在Thymeleaf里因为值是动态的所以遇到点问题。</p>
+<span id="more"></span>
+
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>这是模态框的定义：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 修改数据 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal fade&quot;</span> <span class="attr">id</span>=<span class="string">&quot;edit_bill&quot;</span> <span class="attr">role</span>=<span class="string">&quot;dialog&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-dialog&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-content&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-header&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">p</span>&gt;</span>新增数据<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-body&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">form</span> <span class="attr">th:action</span>=<span class="string">&quot;@&#123;/bill/edit&#125;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;billId1&quot;</span>&gt;</span>id<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;billId&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">id</span>=<span class="string">&quot;billId&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default&quot;</span>&gt;</span>提交表单<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-footer&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default&quot;</span> <span class="attr">data-dismiss</span>=<span class="string">&quot;modal&quot;</span>&gt;</span>关闭</span><br><span class="line">                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这是按钮的定义：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">th:if</span>=<span class="string">&quot;$&#123;not #lists.isEmpty(result.getData().getDataList())&#125;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">th:each</span>=<span class="string">&quot;bill, stat: $&#123;result.getData().getDataList()&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">style</span>=<span class="string">&quot;display: none&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;bill.billId&#125;&quot;</span>&gt;</span>Test001<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;btn-group&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;edit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-info&quot;</span> <span class="attr">data-toggle</span>=<span class="string">&quot;modal&quot;</span> <span class="attr">data-target</span>=<span class="string">&quot;#edit_bill&quot;</span> <span class="attr">th:attr</span>=<span class="string">&quot;data-bill-id=$&#123;bill.billId&#125;&quot;</span>&gt;</span>修改<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>想在点击修改按钮的时候将 <code>billId</code> 这个值传到弹出框里。</p>
+<p>值得注意的是Thymeleaf中data-*的写法： </p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 不是 --&gt;</span></span><br><span class="line">data-bill-id=&quot;$&#123;bill.billId&#125;&quot;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 而是 --&gt;</span></span><br><span class="line">th:attr=&quot;data-bill-id=$&#123;bill.billId&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>点击按钮的时候执行通过事件取值，但是我没成功，甚至连log都没输出，应该是没有执行，不知道是不是和Thymeleaf有关。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    <span class="title">$</span>(<span class="params"><span class="string">&#x27;#edit_bill&#x27;</span></span>).<span class="title">on</span>(<span class="params"><span class="string">&#x27;show.bs.modal&#x27;</span>, <span class="keyword">function</span> (event) &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">var</span> billId = $(event.relatedTarget.data(<span class="string">&#x27;bill-id&#x27;</span>);</span></span></span><br><span class="line"><span class="params"><span class="function">        $(event.currentTarget).find(<span class="string">&#x27;input[name=&quot;billId&quot;]&#x27;</span>).val(billId);</span></span></span><br><span class="line"><span class="params"><span class="function">    &#125;</span>)</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>这种写法能成功取到值，对js不是很了解，看不出两者有什么差别。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$(document).on(<span class="string">&quot;click&quot;</span>, <span class="string">&quot;#edit&quot;</span>, function() &#123;</span><br><span class="line">    <span class="keyword">var</span> billId = $(<span class="keyword">this</span>).data(<span class="string">&quot;bill-id&quot;</span>);</span><br><span class="line">    $(<span class="string">&quot;#billId&quot;</span>).val(billId);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Thymeleaf</category>
+      </categories>
+      <tags>
+        <tag>Thymeleaf</tag>
       </tags>
   </entry>
   <entry>
