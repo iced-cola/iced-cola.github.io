@@ -41,7 +41,6 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
-
     header.intro-header {
         background-image: url('/images/th.jpeg')
     }
@@ -190,11 +189,11 @@
 <ul>
 <li><p><strong>初始化后切换分支</strong> &gt;&gt; <a target="_blank" rel="noopener" href="https://stackoverflow.com/a/42871621">https://stackoverflow.com/a/42871621</a></p>
 <p>As you noticed, there is no parameter for <code>git init</code> for the branch name, so two commands will have to do.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git checkout -b trunk</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">git checkout -b trunk</span><br></pre></td></tr></table></figure>
 
 <p>This creates a new repository with <code>trunk</code> as the current branch instead of <code>master</code>. The branch <code>master</code> does not actually exist–the branches don’t get created until they have at least one commit. Until the branch gets created, the branch only exists in <code>.git/HEAD</code>, which explains why the <code>master</code> branch will disappear when you switch to <code>trunk</code>.</p>
 <p>If you’ve already committed, you can run <code>git branch -m</code> instead:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">touch file.txt</span><br><span class="line">git add file.txt</span><br><span class="line">git commit -m &#x27;commit 1&#x27;</span><br><span class="line">git branch -m trunk</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">touch file.txt</span><br><span class="line">git add file.txt</span><br><span class="line">git commit -m &#x27;commit 1&#x27;</span><br><span class="line">git branch -m trunk</span><br></pre></td></tr></table></figure>
 
 <p>This renames the branch from <code>master</code> to <code>trunk</code> once it’s created.</p>
 <p>This does seem a bit clunky since the mechanism is different depending on whether the repository is empty, but it works.</p>
@@ -203,7 +202,7 @@
 <p>Since <strong>Git 2.28</strong> (released July 27, 2020) a new configuration option, <code>init.defaultBranch</code> is being introduced to replace the hard-coded term <code>master</code>.</p>
 <p>Default remains to <code>master</code>!</p>
 <p>The user can override the default value of the configuration variable with:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global init.defaultBranch main</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git config --global init.defaultBranch main</span><br></pre></td></tr></table></figure>
 
 <p>Read the git doc chapter for further details <a target="_blank" rel="noopener" href="https://github.blog/2020-07-27-highlights-from-git-2-28/#introducing-init-defaultbranch">Introducing init.defaultBranch</a></p>
 <p>升级 git 还要配置 zsh，太麻烦了，没试。</p>
@@ -242,9 +241,10 @@
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
-                         
+                        <!--  
                             设置git初始化默认分支为ma..
-                          
+                           -->
+                        设置git初始化默认分支为..
                     </h3>
                     
                 </div>

@@ -41,7 +41,6 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
-
     header.intro-header {
         background-image: url('/images/th.jpeg')
     }
@@ -199,7 +198,7 @@
 <li><p>设置git代理：</p>
 </li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> http和https协议代理：</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sock5的情况</span></span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消代理</span></span><br><span class="line">git config --global unset http.proxy</span><br><span class="line">git config --global unset https.proxy</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh协议代理：在用户目录下建立如下文件 ~/.ssh/config，对 GitHub 的域名做单独的处理</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里必须是 github.com，因为这个跟我们 <span class="built_in">clone</span> 代码时的链接有关</span></span><br><span class="line">Host github.com</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果用默认端口，这里是 github.com，如果想用443端口，这里就是 ssh.github.com 详见 https://help.github.com/articles/using-ssh-over-the-https-port/</span></span><br><span class="line">   HostName github.com</span><br><span class="line">   User git</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 HTTP 代理，把下面这行取消注释，并把 proxyport 改成自己的 http 代理的端口</span></span><br><span class="line">     ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=6667</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 socks5 代理，则把下面这行取消注释，并把 6666 改成自己 socks5 代理的端口</span></span><br><span class="line">     ProxyCommand nc -v -x 127.0.0.1:6666 %h %p</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> http和https协议代理：</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sock5的情况</span></span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消代理</span></span><br><span class="line">git config --global unset http.proxy</span><br><span class="line">git config --global unset https.proxy</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh协议代理：在用户目录下建立如下文件 ~/.ssh/config，对 GitHub 的域名做单独的处理</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里必须是 github.com，因为这个跟我们 <span class="built_in">clone</span> 代码时的链接有关</span></span><br><span class="line">Host github.com</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果用默认端口，这里是 github.com，如果想用443端口，这里就是 ssh.github.com 详见 https://help.github.com/articles/using-ssh-over-the-https-port/</span></span><br><span class="line">   HostName github.com</span><br><span class="line">   User git</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 HTTP 代理，把下面这行取消注释，并把 proxyport 改成自己的 http 代理的端口</span></span><br><span class="line">     ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=6667</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 socks5 代理，则把下面这行取消注释，并把 6666 改成自己 socks5 代理的端口</span></span><br><span class="line">     ProxyCommand nc -v -x 127.0.0.1:6666 %h %p</span><br></pre></td></tr></table></figure>
 
 <p>==&gt;&gt; <a target="_blank" rel="noopener" href="https://imciel.com/2016/06/28/git-proxy/">设置 git 代理</a> </p>
 <p>在Ubuntu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
@@ -236,9 +235,10 @@
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
-                         
+                        <!--  
                             Git配置代理 
-                          
+                           -->
+                        Git配置代理
                     </h3>
                     
                 </div>

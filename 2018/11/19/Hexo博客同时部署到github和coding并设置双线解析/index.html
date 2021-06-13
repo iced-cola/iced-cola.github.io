@@ -41,7 +41,6 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
-
     header.intro-header {
         background-image: url('/images/th.jpeg')
     }
@@ -191,13 +190,13 @@
 <li><p>在coding上创建一个名为 <strong>用户名</strong> (不是昵称)的项目，并开启pages服务；</p>
 </li>
 <li><p>将本地ssh公钥文件添加到coding的SSH公钥中并测试是否能访问：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T -p 443 git@git-ssh.coding.net</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -T -p 443 git@git-ssh.coding.net</span><br></pre></td></tr></table></figure></li>
 <li><p>在站点配置文件中添加上coding仓库地址：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:Kotobuki-Tsumugi/Kotobuki-Tsumugi.github.io.git</span></span><br><span class="line">    <span class="attr">coding:</span> <span class="string">git@git.dev.tencent.com:Kobobuki-Tsumugi/Kobobuki-Tsumugi.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:Kotobuki-Tsumugi/Kotobuki-Tsumugi.github.io.git</span></span><br><span class="line">    <span class="attr">coding:</span> <span class="string">git@git.dev.tencent.com:Kobobuki-Tsumugi/Kobobuki-Tsumugi.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
 <li><p>在站点目录/source下创建一个名为Staticfile的空文件；</p>
 </li>
 <li><p>生成并上传静态文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
 <li><p>在域名解析中新增两条CNAME记录，指向username.coding.me，注意区分境外线路和默认线路，指向coding的必须为默认线路，如果不能正常访问，可以先暂停github的解析，待coding的解析成功后再开启github的解析，解析反应不及时。</p>
 </li>
 <li><p>向百度提交站点sitemap文件地址。</p>
@@ -239,9 +238,10 @@
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
-                         
+                        <!--  
                             Hexo博客同时部署到gith..
-                          
+                           -->
+                        Hexo博客同时部署到gi..
                     </h3>
                     <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5"><span class="toc-text">实践</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">遇到的问题</span></a></li></ol>
                 </div>

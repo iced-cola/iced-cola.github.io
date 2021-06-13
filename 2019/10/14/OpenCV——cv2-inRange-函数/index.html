@@ -41,7 +41,6 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
-
     header.intro-header {
         background-image: url('/images/th.jpeg')
     }
@@ -195,12 +194,12 @@
 
 <p>颜色值在此范围内的全部设置为255，然后利用得到背景和原图片进行位操作，即可得到原图中目标。</p>
 <p>常用方式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(img_path, <span class="number">0</span>)</span><br><span class="line">img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)</span><br><span class="line">lower = [<span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>]</span><br><span class="line">uppper = [<span class="number">200</span>, <span class="number">255</span>, <span class="number">255</span>]</span><br><span class="line"><span class="comment"># 利用上下阈值去除背景部分</span></span><br><span class="line">mask = cv2.inRange(img_hsv, lower, upper)</span><br><span class="line"><span class="comment"># 利用位运算得到目标物体</span></span><br><span class="line">target = cv2.bitwise_and(img, img, mask=mask)</span><br><span class="line">cv2.imshow(<span class="string">&quot;mask&quot;</span>, mask)</span><br><span class="line">cv2.imshow(<span class="string">&quot;target&quot;</span>, target)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = cv2.imread(img_path, <span class="number">0</span>)</span><br><span class="line">img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)</span><br><span class="line">lower = [<span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>]</span><br><span class="line">uppper = [<span class="number">200</span>, <span class="number">255</span>, <span class="number">255</span>]</span><br><span class="line"><span class="comment"># 利用上下阈值去除背景部分</span></span><br><span class="line">mask = cv2.inRange(img_hsv, lower, upper)</span><br><span class="line"><span class="comment"># 利用位运算得到目标物体</span></span><br><span class="line">target = cv2.bitwise_and(img, img, mask=mask)</span><br><span class="line">cv2.imshow(<span class="string">&quot;mask&quot;</span>, mask)</span><br><span class="line">cv2.imshow(<span class="string">&quot;target&quot;</span>, target)</span><br></pre></td></tr></table></figure>
 
 
 
 <p>上下阈值的获取：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">color = np.array([[[xxx, xxx, xxx]]])</span><br><span class="line">hsv_color = cv2.cvtColor(color, cv2.COLOR_RGB2HSV)</span><br><span class="line"><span class="built_in">print</span>(hsv_color)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">color = np.array([[[xxx, xxx, xxx]]])</span><br><span class="line">hsv_color = cv2.cvtColor(color, cv2.COLOR_RGB2HSV)</span><br><span class="line"><span class="built_in">print</span>(hsv_color)</span><br></pre></td></tr></table></figure>
 
 
                 <hr>
@@ -235,9 +234,10 @@
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
-                         
+                        <!--  
                             OpenCV——cv2.inR..
-                          
+                           -->
+                        OpenCV——cv2.i..
                     </h3>
                     
                 </div>

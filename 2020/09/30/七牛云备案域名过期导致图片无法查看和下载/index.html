@@ -41,7 +41,6 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
-
     header.intro-header {
         background-image: url('/images/th.jpeg')
     }
@@ -190,7 +189,7 @@
 <p>官方开发了工具来管理存储的文件，其中一个命令行工具叫“qrsctl”。可以通过命令行来做一些上传下载、移动复制和空间管理等操作。</p>
 <p>安装及使用方法 &gt;&gt;  <a target="_blank" rel="noopener" href="https://developer.qiniu.com/kodo/tools/1300/qrsctl">命令行辅助工具(qrsctl)</a></p>
 <p>使用下面的shell脚本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将存储空间名称换为自己的空间名称</span></span><br><span class="line">imgs=`./qrsctl listprefix youyou-2608 &#x27;&#x27;`</span><br><span class="line"></span><br><span class="line">i=0 </span><br><span class="line">echo $imgs | tr &quot; &quot; &quot;\n&quot; | while read line</span><br><span class="line">do</span><br><span class="line">    if(($i&gt;0))</span><br><span class="line">    then</span><br><span class="line">        echo $line</span><br><span class="line">        ./qrsctl get youyou-2608 $line ./$line</span><br><span class="line">    fi</span><br><span class="line">    i=$(($i+1))</span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将存储空间名称换为自己的空间名称</span></span><br><span class="line">imgs=`./qrsctl listprefix youyou-2608 &#x27;&#x27;`</span><br><span class="line"></span><br><span class="line">i=0 </span><br><span class="line">echo $imgs | tr &quot; &quot; &quot;\n&quot; | while read line</span><br><span class="line">do</span><br><span class="line">    if(($i&gt;0))</span><br><span class="line">    then</span><br><span class="line">        echo $line</span><br><span class="line">        ./qrsctl get youyou-2608 $line ./$line</span><br><span class="line">    fi</span><br><span class="line">    i=$(($i+1))</span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>给脚本添加执行权限，然后运行即可。</p>
 <p>但是用脚本下载图片时遇到一个问题：名称中带有“/”这种在Linux系统被用作目录分隔符的图片无法下载，会报“找不到该文件”的错误，因为它把“/”前的部分当作目录、而把后半部分当作文件名，当然找不到文件了。</p>
@@ -229,9 +228,10 @@
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
-                         
+                        <!--  
                             七牛云备案域名过期导致图片无法..
-                          
+                           -->
+                        七牛云备案域名过期导致图片..
                     </h3>
                     
                 </div>

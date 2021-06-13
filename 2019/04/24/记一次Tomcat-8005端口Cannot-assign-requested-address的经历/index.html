@@ -41,7 +41,6 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
-
     header.intro-header {
         background-image: url('/images/th.jpeg')
     }
@@ -189,7 +188,7 @@
 <p>三. 打开任务管理器，确认javaw.exe未在运行，问题依然存在；</p>
 <p>四. 重启机器，问题依然存在；</p>
 <p>五. 参照：[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/heshan664754022/p/3807672.html">Tomcat启动报错:严重: StandardServer.await: create[8005] java.net.BindException: Cannot assign requested address](https://www.cnblogs.com/heshan664754022/p/3807672.html)</a> ， ping了localhost，发现收到的响应来自ipp[47.89.54.215]，打开C:/windows/system32/drivers/etc/hosts，发现以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">47.89.54.215       localhost</span><br><span class="line">47.89.54.215	hao.360.cn</span><br><span class="line">47.89.54.215	www.hao123.com</span><br><span class="line">47.89.54.215	www.3600.com</span><br><span class="line">47.89.54.215	www.114la.com</span><br><span class="line">47.89.54.215	www.duba.com</span><br><span class="line">47.89.54.215	www.hao360.cn</span><br><span class="line">47.89.54.215	123.sogou.com</span><br><span class="line">47.89.54.215	web.sogou.com</span><br><span class="line">47.89.54.215	www.hao123.cn</span><br><span class="line">47.89.54.215	hao.qq.com</span><br><span class="line">47.89.54.215	www.1616.net</span><br><span class="line">47.89.54.215	hao.rising.cn</span><br><span class="line">47.89.54.215	daohang.qq.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">47.89.54.215       localhost</span><br><span class="line">47.89.54.215	hao.360.cn</span><br><span class="line">47.89.54.215	www.hao123.com</span><br><span class="line">47.89.54.215	www.3600.com</span><br><span class="line">47.89.54.215	www.114la.com</span><br><span class="line">47.89.54.215	www.duba.com</span><br><span class="line">47.89.54.215	www.hao360.cn</span><br><span class="line">47.89.54.215	123.sogou.com</span><br><span class="line">47.89.54.215	web.sogou.com</span><br><span class="line">47.89.54.215	www.hao123.cn</span><br><span class="line">47.89.54.215	hao.qq.com</span><br><span class="line">47.89.54.215	www.1616.net</span><br><span class="line">47.89.54.215	hao.rising.cn</span><br><span class="line">47.89.54.215	daohang.qq.com</span><br></pre></td></tr></table></figure>
 
 <p>看到daohang.qq，hao123，duba，hao360，123.sougou之类的字眼，国内流氓软件那么多？”的问题又浮现在脑海。</p>
 
@@ -225,9 +224,10 @@
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
-                         
+                        <!--  
                             记一次Tomcat 8005端..
-                          
+                           -->
+                        记一次Tomcat 800..
                     </h3>
                     
                 </div>

@@ -41,7 +41,6 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
-
     header.intro-header {
         background-image: url('/images/th.jpeg')
     }
@@ -193,7 +192,7 @@
 <p><em>上面的图中电调的输入电压应该是12V，可以用4节5号电池串联。</em></p>
 <h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><p>连接好之后，给树莓派通电，接通电调连接的电源，然后用RPi.GPIO.PWM()控制电机的转速。</p>
 <p>测试代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pin = <span class="number">18</span></span><br><span class="line"></span><br><span class="line">GPIO.setmode(GPIO.BCM)</span><br><span class="line">GPIO.setup(pin, GPIO.OUT)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 频率400Hz</span></span><br><span class="line">p = GPIO.PWM(pin, <span class="number">400</span>)</span><br><span class="line">p.start(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">dc = <span class="number">10</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">40</span>):</span><br><span class="line">        dc += <span class="number">2</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;dc:&#x27;</span>, dc</span><br><span class="line">        p.ChangeDutyCycle(dc)</span><br><span class="line">        time.sleep(<span class="number">0.3</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    p.stop()</span><br><span class="line">    GPIO.cleanup()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pin = <span class="number">18</span></span><br><span class="line"></span><br><span class="line">GPIO.setmode(GPIO.BCM)</span><br><span class="line">GPIO.setup(pin, GPIO.OUT)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 频率400Hz</span></span><br><span class="line">p = GPIO.PWM(pin, <span class="number">400</span>)</span><br><span class="line">p.start(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">dc = <span class="number">10</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">40</span>):</span><br><span class="line">        dc += <span class="number">2</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;dc:&#x27;</span>, dc</span><br><span class="line">        p.ChangeDutyCycle(dc)</span><br><span class="line">        time.sleep(<span class="number">0.3</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    p.stop()</span><br><span class="line">    GPIO.cleanup()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
                 <hr>
@@ -228,9 +227,10 @@
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
-                         
+                        <!--  
                             树莓派通过无刷电调驱动无刷电机 
-                          
+                           -->
+                        树莓派通过无刷电调驱动无刷..
                     </h3>
                     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E7%BA%BF"><span class="toc-text">连线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81"><span class="toc-text">测试代码</span></a></li></ol>
                 </div>

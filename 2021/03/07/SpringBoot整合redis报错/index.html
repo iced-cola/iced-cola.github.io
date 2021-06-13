@@ -41,7 +41,6 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
-
     header.intro-header {
         background-image: url('/images/th.jpeg')
     }
@@ -183,17 +182,17 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>在SpringBoot中整合Redis进行Token登录，测试方法中一直报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalStateException: Failed to load ApplicationContext</span><br><span class="line"></span><br><span class="line">Caused by: org.springframework.beans.factory.BeanNotOfRequiredTypeException: Bean named &#x27;redisTemplate&#x27; is expected to be of type &#x27;org.springframework.data.redis.core.StringRedisTemplate&#x27; but was actually of type &#x27;org.springframework.data.redis.core.RedisTemplate&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalStateException: Failed to load ApplicationContext</span><br><span class="line"></span><br><span class="line">Caused by: org.springframework.beans.factory.BeanNotOfRequiredTypeException: Bean named &#x27;redisTemplate&#x27; is expected to be of type &#x27;org.springframework.data.redis.core.StringRedisTemplate&#x27; but was actually of type &#x27;org.springframework.data.redis.core.RedisTemplate&#x27;</span><br></pre></td></tr></table></figure>
 
 <br>
 
 <p>代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">set</span><span class="params">(String key, String value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        redisTemplate.opsForValue().set(key, value);</span><br><span class="line">        result = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试方法</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    redisClient.set(<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;value1&quot;</span>);</span><br><span class="line">    String value = redisClient.get(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">    assertNotNull(value);</span><br><span class="line">    log.info(<span class="string">&quot;value: &#123;&#125;&quot;</span>, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">set</span><span class="params">(String key, String value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        redisTemplate.opsForValue().set(key, value);</span><br><span class="line">        result = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试方法</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    redisClient.set(<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;value1&quot;</span>);</span><br><span class="line">    String value = redisClient.get(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">    assertNotNull(value);</span><br><span class="line">    log.info(<span class="string">&quot;value: &#123;&#125;&quot;</span>, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <br>
 
 <p>原来是注入的时候变量名有问题：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> StringRedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> StringRedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
 
 <p>不是 redisTemplate ，而是 stringRedisTemplate。</p>
 <p><strong>@Resource和@Autowired的区别。</strong></p>
@@ -230,9 +229,10 @@
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
-                         
+                        <!--  
                             SpringBoot整合red..
-                          
+                           -->
+                        SpringBoot整合r..
                     </h3>
                     
                 </div>

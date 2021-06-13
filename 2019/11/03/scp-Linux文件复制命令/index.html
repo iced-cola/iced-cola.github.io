@@ -41,7 +41,6 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
-
     header.intro-header {
         background-image: url('/images/th.jpeg')
     }
@@ -196,15 +195,15 @@
 </ul>
 <br>
 
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上传文件</span></span><br><span class="line">scp -r -P xxxx /home/local_user/file_path remote_user@remote_host_addr:/home/remote_user/file_path</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载文件时将 source 和 target 调换一下</span></span><br><span class="line">scp -r -P xxxx remote_user@remote_host_addr:/home/remote_user/file_path /home/local_user/file_path</span><br></pre></td></tr></table></figure>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 上传文件</span></span><br><span class="line">scp -r -P xxxx /home/local_user/file_path remote_user@remote_host_addr:/home/remote_user/file_path</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载文件时将 source 和 target 调换一下</span></span><br><span class="line">scp -r -P xxxx remote_user@remote_host_addr:/home/remote_user/file_path /home/local_user/file_path</span><br></pre></td></tr></table></figure>
 
 <br>
 
 <h2 id="Permission-denied-问题"><a href="#Permission-denied-问题" class="headerlink" title="Permission denied 问题"></a>Permission denied 问题</h2><p>今天下午上传文件到服务器的时候一直报这个错：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scp -P xxxx file.torrent <span class="built_in">test</span>@<span class="built_in">test</span>:/home</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="built_in">test</span>@test.com<span class="string">&#x27;s password: </span></span><br><span class="line"><span class="string">scp: /home/25316538e6498c7645e3da963253977d.torrent: Permission deniedv</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp -P xxxx file.torrent <span class="built_in">test</span>@<span class="built_in">test</span>:/home</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="built_in">test</span>@test.com<span class="string">&#x27;s password: </span></span><br><span class="line"><span class="string">scp: /home/25316538e6498c7645e3da963253977d.torrent: Permission deniedv</span></span><br></pre></td></tr></table></figure>
 
 <p>保证密码输入正确并且重试了好几次都报同样的错，才想起来以前遇到这个问题，是因为当前用户对目标目录没有操作权限导致的，只要把目标路径改到当前用户目录下就好了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P xxxx file.torrent <span class="built_in">test</span>@<span class="built_in">test</span>:/home/<span class="built_in">test</span>/Downloads</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp -P xxxx file.torrent <span class="built_in">test</span>@<span class="built_in">test</span>:/home/<span class="built_in">test</span>/Downloads</span><br></pre></td></tr></table></figure>
 
 
 
@@ -246,9 +245,10 @@
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
-                         
+                        <!--  
                             scp-Linux文件复制命令 
-                          
+                           -->
+                        scp-Linux文件复制..
                     </h3>
                     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="toc-text">常用参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-text">用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Permission-denied-%E9%97%AE%E9%A2%98"><span class="toc-text">Permission denied 问题</span></a></li></ol>
                 </div>

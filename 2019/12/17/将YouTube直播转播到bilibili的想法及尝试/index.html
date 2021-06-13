@@ -41,7 +41,6 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
-
     header.intro-header {
         background-image: url('/images/th.jpeg')
     }
@@ -200,11 +199,11 @@
 <li>bilibili直播地址</li>
 </ul>
 <p>用youtube-dl获取直播m3u8文件，然后用ffmpeg不断读取流数据，然后推流到bilibili直播：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i <span class="string">&quot;<span class="subst">$(youtube-dl -f 95 -g <span class="string">&quot;https://www.youtube.com/watch?v=pV2RaaoxyF8&quot;</span>)</span>&quot;</span> -c:v copy -c:a aac -b:v 5000k -ar 44100 -ab 320k -ac 2 -strict -2 -flags +global_header -bsf:a aac_adtstoasc -bufsize 3000k -f flv <span class="string">&quot;rtmp://txy.live-send.acg.tv/live-txy/?streamname=xxxx&amp;key=yyyy&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ffmpeg -re -i <span class="string">&quot;<span class="subst">$(youtube-dl -f 95 -g <span class="string">&quot;https://www.youtube.com/watch?v=pV2RaaoxyF8&quot;</span>)</span>&quot;</span> -c:v copy -c:a aac -b:v 5000k -ar 44100 -ab 320k -ac 2 -strict -2 -flags +global_header -bsf:a aac_adtstoasc -bufsize 3000k -f flv <span class="string">&quot;rtmp://txy.live-send.acg.tv/live-txy/?streamname=xxxx&amp;key=yyyy&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>用这个命令就可以实现上面的功能。</p>
 <p>但是在实际使用操作过程中，总是在发送了100帧数据左右开始报错：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[tls @ 0x5566d890ffe0] The TLS connection was non-properly terminated.</span><br><span class="line">[tls @ 0x5566d8fd25a0] The TLS connection was non-properly terminated.</span><br><span class="line">[tls @ 0x5566d8fd25a0] The specified session has been invalidated <span class="keyword">for</span> some reason.</span><br><span class="line"></span><br><span class="line">av_interleaved_write_frame(): Broken pipe</span><br><span class="line">Error writing trailer of rtmp://txy.live-send.acg.tv/live-txy/?streamname=xxxx</span><br><span class="line">[aac @ 0x5566d8cf45e0] Qavg: 65536.000</span><br><span class="line">Conversion failed!</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[tls @ 0x5566d890ffe0] The TLS connection was non-properly terminated.</span><br><span class="line">[tls @ 0x5566d8fd25a0] The TLS connection was non-properly terminated.</span><br><span class="line">[tls @ 0x5566d8fd25a0] The specified session has been invalidated <span class="keyword">for</span> some reason.</span><br><span class="line"></span><br><span class="line">av_interleaved_write_frame(): Broken pipe</span><br><span class="line">Error writing trailer of rtmp://txy.live-send.acg.tv/live-txy/?streamname=xxxx</span><br><span class="line">[aac @ 0x5566d8cf45e0] Qavg: 65536.000</span><br><span class="line">Conversion failed!</span><br></pre></td></tr></table></figure>
 
 
 
@@ -257,9 +256,10 @@
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
-                         
+                        <!--  
                             将YouTube直播转播到bi..
-                          
+                           -->
+                        将YouTube直播转播到..
                     </h3>
                     
                 </div>

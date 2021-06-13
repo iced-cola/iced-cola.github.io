@@ -41,7 +41,6 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
-
     header.intro-header {
         background-image: url('/images/th.jpeg')
     }
@@ -184,16 +183,16 @@
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>详解webpack的proxyTable无效的解决方案</p>
 <h2 id="webpack下配置proxyTable的问题"><a href="#webpack下配置proxyTable的问题" class="headerlink" title="webpack下配置proxyTable的问题"></a>webpack下配置proxyTable的问题</h2><p>Vue-cli@2创建的项目，用的webpack，配置了 config/index.js ：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  dev: &#123;</span><br><span class="line">    <span class="comment">// Paths</span></span><br><span class="line">    assetsSubDirectory: &#x27;static&#x27;,</span><br><span class="line">    assetsPublicPath: &#x27;/&#x27;,</span><br><span class="line">    proxyTable: &#123;</span><br><span class="line">      &#x27;/api&#x27;: &#123;</span><br><span class="line">        target: &#x27;http:<span class="comment">//localhost:9003/&#x27;,</span></span><br><span class="line">        ws: <span class="literal">true</span>,</span><br><span class="line">        changOrigin: <span class="literal">true</span>,</span><br><span class="line">        pathRewrite: &#123;</span><br><span class="line">          &#x27;^/api&#x27;: &#x27;&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"> ...</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  dev: &#123;</span><br><span class="line">    <span class="comment">// Paths</span></span><br><span class="line">    assetsSubDirectory: &#x27;static&#x27;,</span><br><span class="line">    assetsPublicPath: &#x27;/&#x27;,</span><br><span class="line">    proxyTable: &#123;</span><br><span class="line">      &#x27;/api&#x27;: &#123;</span><br><span class="line">        target: &#x27;http:<span class="comment">//localhost:9003/&#x27;,</span></span><br><span class="line">        ws: <span class="literal">true</span>,</span><br><span class="line">        changOrigin: <span class="literal">true</span>,</span><br><span class="line">        pathRewrite: &#123;</span><br><span class="line">          &#x27;^/api&#x27;: &#x27;&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"> ...</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
 <p>导入了axios：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line">Vue.prototype.axios = axios</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line">Vue.prototype.axios = axios</span><br></pre></td></tr></table></figure>
 
 <p>请求的代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">login</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">this</span>.form.userId === <span class="string">&#x27;&#x27;</span> || <span class="built_in">this</span>.form.password === <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">		<span class="built_in">this</span>.openMessageWarning(<span class="string">&#x27;用户名和密码不能为空&#x27;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">this</span>.axios.post(<span class="string">&#x27;/test/param1&#x27;</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&quot;res: &quot;</span>, res)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">login</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">this</span>.form.userId === <span class="string">&#x27;&#x27;</span> || <span class="built_in">this</span>.form.password === <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">		<span class="built_in">this</span>.openMessageWarning(<span class="string">&#x27;用户名和密码不能为空&#x27;</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">this</span>.axios.post(<span class="string">&#x27;/test/param1&#x27;</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&quot;res: &quot;</span>, res)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>改完之后重启了项目，但是控制台显示请求的ip还是本地：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST http://localhost:8080/test/param1 404 (Not Found)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST http://localhost:8080/test/param1 404 (Not Found)</span><br></pre></td></tr></table></figure>
 
 <br>
 
@@ -208,7 +207,7 @@
 <br>
 
 <h2 id="最终解决（理解错误）"><a href="#最终解决（理解错误）" class="headerlink" title="最终解决（理解错误）"></a>最终解决（理解错误）</h2><p>看了 <a target="_blank" rel="noopener" href="https://www.jb51.net/article/142086.htm">详解webpack的proxyTable无效的解决方案</a> ，说可能是缓存的问题，我每次都有清理浏览器的缓存，不知道webpack还有缓存的，然后我尝试着将proxyTable中的端口换了一下，结果…就请求成功了！</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST http://localhost:9004/test/param1 404 (Not Found)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST http://localhost:9004/test/param1 404 (Not Found)</span><br></pre></td></tr></table></figure>
 
 <p>没想到这层原因，在这个问题上卡了一下午，心态崩溃。</p>
 <br>
@@ -216,7 +215,7 @@
 <h2 id="正确的解决方案"><a href="#正确的解决方案" class="headerlink" title="正确的解决方案"></a>正确的解决方案</h2><p>其实是配置中target配置有问题：</p>
 <p>例如后台地址：<a target="_blank" rel="noopener" href="http://baidu.com/api/user/%7BuserId%7D">http://baidu.com/api/user/{userId}</a></p>
 <p>本地项目地址为：<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//方式一，留空，不写</span><br><span class="line">&#x27;/^api&#x27;: &#x27;&#x27;, //代表你在axios里的请求&#x27;/api/info&#x27; = http://localhost:54321/info</span><br><span class="line"></span><br><span class="line">//方式二，重写</span><br><span class="line">&#x27;/^api&#x27;: &#x27;api/&#x27;, //代表你在axios里的请求&#x27;/api/info&#x27; = http://localhost:54321/api/info</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//方式一，留空，不写</span><br><span class="line">&#x27;/^api&#x27;: &#x27;&#x27;, //代表你在axios里的请求&#x27;/api/info&#x27; = http://localhost:54321/info</span><br><span class="line"></span><br><span class="line">//方式二，重写</span><br><span class="line">&#x27;/^api&#x27;: &#x27;api/&#x27;, //代表你在axios里的请求&#x27;/api/info&#x27; = http://localhost:54321/api/info</span><br></pre></td></tr></table></figure>
 
 
 
@@ -253,9 +252,10 @@
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
-                         
+                        <!--  
                             Vue-cli项目配置代理不生..
-                          
+                           -->
+                        Vue-cli项目配置代理..
                     </h3>
                     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack%E4%B8%8B%E9%85%8D%E7%BD%AEproxyTable%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">webpack下配置proxyTable的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E8%A7%A3%E5%86%B3%EF%BC%88%E7%90%86%E8%A7%A3%E9%94%99%E8%AF%AF%EF%BC%89"><span class="toc-text">最终解决（理解错误）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E7%A1%AE%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">正确的解决方案</span></a></li></ol>
                 </div>
