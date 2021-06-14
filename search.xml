@@ -126,35 +126,26 @@
       </tags>
   </entry>
   <entry>
-    <title>Git配置代理</title>
-    <url>/2019/04/06/Git%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<p>git的代理配置</p>
-<p>给sublime安装插件的时候又碰到git clone速度过慢的问题，记录一哈！</p>
+    <title>25岁的最后一天</title>
+    <url>/2020/09/30/25%E5%B2%81%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/</url>
+    <content><![CDATA[<p>刚才把之前写的内容都整理了一遍，挂的图片能换的都换了，还有些现在看起来很尴尬的内容直接删掉了，折腾一次真累。歇了一下打开日历才发现今天已经是9月30号了。今年很巧的是中秋节和国庆节碰在了一起，在贴吧里看到很多学生还因为假期的问题耿耿于怀，但是对于像我一样的待业青年，好像每一天都是假期，只不过心里不是那么放松。</p>
+<br>
+
 <span id="more"></span>
 
+<p>昨天下午回到空无一人的家里，虽然什么吃的也没有，但是家里的干净舒服的大床倒是让我好好睡了一觉，很久没有睡得这么舒服了。以前总是觉得买房的人很傻，买完房子就要一直住在一个地方，而且还要背负繁重的房贷。但是最近我突然有了很强烈的想买房的愿望，自己的房子才是真正能落脚的地方。现在就想好好工作努力攒钱，希望能在一两年之内有一套自己的房子，不管是在哪个城市，偏远一点也无所谓。</p>
+<br>
 
+<p>昨天晚上联系上了一个住得不远的初中同学，刚好放假她也在家，聊了一会儿通过她介绍了一个房东，希望能找到一个地方安静的待一段时间。</p>
+<br>
 
-<ol>
-<li><p>打开ss全局代理；</p>
-</li>
-<li><p>到 <a href="https://www.ipaddress.com/">IPAddress.com</a> 根据 github.global.ssl.fastly.net 获取github服务器地址；</p>
-</li>
-<li><p>在 /etc/hosts 或者C:/windows/system32/driver/etc/hosts 文件中添加对应的记录：</p>
-<p>ip github.global.ssl.fastly.net</p>
-</li>
-<li><p>设置git代理：</p>
-</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> http和https协议代理：</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sock5的情况</span></span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消代理</span></span><br><span class="line">git config --global unset http.proxy</span><br><span class="line">git config --global unset https.proxy</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh协议代理：在用户目录下建立如下文件 ~/.ssh/config，对 GitHub 的域名做单独的处理</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里必须是 github.com，因为这个跟我们 <span class="built_in">clone</span> 代码时的链接有关</span></span><br><span class="line">Host github.com</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果用默认端口，这里是 github.com，如果想用443端口，这里就是 ssh.github.com 详见 https://help.github.com/articles/using-ssh-over-the-https-port/</span></span><br><span class="line">   HostName github.com</span><br><span class="line">   User git</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 HTTP 代理，把下面这行取消注释，并把 proxyport 改成自己的 http 代理的端口</span></span><br><span class="line">     ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=6667</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 socks5 代理，则把下面这行取消注释，并把 6666 改成自己 socks5 代理的端口</span></span><br><span class="line">     ProxyCommand nc -v -x 127.0.0.1:6666 %h %p</span><br></pre></td></tr></table></figure>
-
-<p>==&gt;&gt; <a href="https://imciel.com/2016/06/28/git-proxy/">设置 git 代理</a> </p>
-<p>在Ubuntu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
+<p>25岁今天就要画上句号了，希望26岁能交上好运吧。</p>
 ]]></content>
       <categories>
-        <category>git</category>
+        <category>生活</category>
       </categories>
       <tags>
-        <tag>git</tag>
+        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
@@ -192,26 +183,70 @@
       </tags>
   </entry>
   <entry>
-    <title>25岁的最后一天</title>
-    <url>/2020/09/30/25%E5%B2%81%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/</url>
-    <content><![CDATA[<p>刚才把之前写的内容都整理了一遍，挂的图片能换的都换了，还有些现在看起来很尴尬的内容直接删掉了，折腾一次真累。歇了一下打开日历才发现今天已经是9月30号了。今年很巧的是中秋节和国庆节碰在了一起，在贴吧里看到很多学生还因为假期的问题耿耿于怀，但是对于像我一样的待业青年，好像每一天都是假期，只不过心里不是那么放松。</p>
-<br>
-
+    <title>Git配置代理</title>
+    <url>/2019/04/06/Git%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<p>git的代理配置</p>
+<p>给sublime安装插件的时候又碰到git clone速度过慢的问题，记录一哈！</p>
 <span id="more"></span>
 
-<p>昨天下午回到空无一人的家里，虽然什么吃的也没有，但是家里的干净舒服的大床倒是让我好好睡了一觉，很久没有睡得这么舒服了。以前总是觉得买房的人很傻，买完房子就要一直住在一个地方，而且还要背负繁重的房贷。但是最近我突然有了很强烈的想买房的愿望，自己的房子才是真正能落脚的地方。现在就想好好工作努力攒钱，希望能在一两年之内有一套自己的房子，不管是在哪个城市，偏远一点也无所谓。</p>
-<br>
 
-<p>昨天晚上联系上了一个住得不远的初中同学，刚好放假她也在家，聊了一会儿通过她介绍了一个房东，希望能找到一个地方安静的待一段时间。</p>
-<br>
 
-<p>25岁今天就要画上句号了，希望26岁能交上好运吧。</p>
+<ol>
+<li><p>打开ss全局代理；</p>
+</li>
+<li><p>到 <a href="https://www.ipaddress.com/">IPAddress.com</a> 根据 github.global.ssl.fastly.net 获取github服务器地址；</p>
+</li>
+<li><p>在 /etc/hosts 或者C:/windows/system32/driver/etc/hosts 文件中添加对应的记录：</p>
+<p>ip github.global.ssl.fastly.net</p>
+</li>
+<li><p>设置git代理：</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> http和https协议代理：</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sock5的情况</span></span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消代理</span></span><br><span class="line">git config --global unset http.proxy</span><br><span class="line">git config --global unset https.proxy</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh协议代理：在用户目录下建立如下文件 ~/.ssh/config，对 GitHub 的域名做单独的处理</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里必须是 github.com，因为这个跟我们 <span class="built_in">clone</span> 代码时的链接有关</span></span><br><span class="line">Host github.com</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果用默认端口，这里是 github.com，如果想用443端口，这里就是 ssh.github.com 详见 https://help.github.com/articles/using-ssh-over-the-https-port/</span></span><br><span class="line">   HostName github.com</span><br><span class="line">   User git</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 HTTP 代理，把下面这行取消注释，并把 proxyport 改成自己的 http 代理的端口</span></span><br><span class="line">     ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=6667</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 socks5 代理，则把下面这行取消注释，并把 6666 改成自己 socks5 代理的端口</span></span><br><span class="line">     ProxyCommand nc -v -x 127.0.0.1:6666 %h %p</span><br></pre></td></tr></table></figure>
+
+<p>==&gt;&gt; <a href="https://imciel.com/2016/06/28/git-proxy/">设置 git 代理</a> </p>
+<p>在Ubuntu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
 ]]></content>
       <categories>
-        <category>生活</category>
+        <category>git</category>
       </categories>
       <tags>
-        <tag>生活</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo博客同时部署到github和coding并设置双线解析</title>
+    <url>/2018/11/19/Hexo%E5%8D%9A%E5%AE%A2%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%88%B0github%E5%92%8Ccoding%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%8F%8C%E7%BA%BF%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>因为github服务器禁止了百度爬虫，所以不能百度收录不了站点，导致访问量很低，本来不想折腾的，想了一下还是将博客也部署到了coding上，方便百度的收录。</p>
+<span id="more"></span>
+
+
+
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><ol>
+<li><p>在coding上创建一个名为 <strong>用户名</strong> (不是昵称)的项目，并开启pages服务；</p>
+</li>
+<li><p>将本地ssh公钥文件添加到coding的SSH公钥中并测试是否能访问：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -T -p 443 git@git-ssh.coding.net</span><br></pre></td></tr></table></figure></li>
+<li><p>在站点配置文件中添加上coding仓库地址：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:Kotobuki-Tsumugi/Kotobuki-Tsumugi.github.io.git</span></span><br><span class="line">    <span class="attr">coding:</span> <span class="string">git@git.dev.tencent.com:Kobobuki-Tsumugi/Kobobuki-Tsumugi.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在站点目录/source下创建一个名为Staticfile的空文件；</p>
+</li>
+<li><p>生成并上传静态文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+<li><p>在域名解析中新增两条CNAME记录，指向username.coding.me，注意区分境外线路和默认线路，指向coding的必须为默认线路，如果不能正常访问，可以先暂停github的解析，待coding的解析成功后再开启github的解析，解析反应不及时。</p>
+</li>
+<li><p>向百度提交站点sitemap文件地址。</p>
+</li>
+</ol>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>其中也遇到一些玄学的问题：</p>
+<p><img src="https://images2.imgbox.com/0e/48/c6Y1zWYh_o.png" alt="coding提示域名绑定异常"></p>
+<p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com/">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com/">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
+]]></content>
+      <categories>
+        <category>博客维护</category>
+      </categories>
+      <tags>
+        <tag>博客维护</tag>
       </tags>
   </entry>
   <entry>
@@ -248,41 +283,6 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!user/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">source_path = <span class="string">&quot;/Users/youyou2608/Kotobuki&quot;</span></span><br><span class="line">target_path = <span class="string">&quot;/Users/youyou2608/BlogBack&quot;</span></span><br><span class="line">filter_files = [<span class="string">&quot;db.json&quot;</span>, <span class="string">&quot;public&quot;</span>, <span class="string">&quot;package-lock.json&quot;</span>, <span class="string">&quot;node_modules&quot;</span>, <span class="string">&quot;.deploy_git&quot;</span>]</span><br><span class="line">file_updated = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">copy_files</span>(<span class="params">source_dir, target_dir</span>):</span></span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> os.listdir(source_dir):</span><br><span class="line">        <span class="keyword">if</span> f <span class="keyword">in</span> filter_files:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        source_file = os.path.join(source_dir, f)</span><br><span class="line">        target_file = os.path.join(target_dir, f)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(source_file):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_dir):</span><br><span class="line">                os.makedirs(target_dir)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_file) <span class="keyword">or</span> (</span><br><span class="line">                    os.path.exists(target_file) <span class="keyword">and</span> os.path.getsize(target_file) != os.path.getsize(source_file)):</span><br><span class="line">                <span class="built_in">open</span>(target_file, <span class="string">&quot;wb&quot;</span>).write(<span class="built_in">open</span>(source_file, <span class="string">&quot;rb&quot;</span>).read())</span><br><span class="line">                file_updated.append(source_file)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(source_file):</span><br><span class="line">            copy_files(source_file, target_file)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;开始Hexo站点源文件复制..&quot;</span>)</span><br><span class="line">    copy_files(source_path, target_path)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;站点源文件复制完毕..&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>在 /etc/profile 中添加一行：alias ‘copy_hexo_source’=’python copy_hexo_source.py’ ，这样终端运行 copy_hexo_source 就可以复制文件了。</p>
-]]></content>
-      <categories>
-        <category>博客维护</category>
-      </categories>
-      <tags>
-        <tag>博客维护</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo博客同时部署到github和coding并设置双线解析</title>
-    <url>/2018/11/19/Hexo%E5%8D%9A%E5%AE%A2%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%88%B0github%E5%92%8Ccoding%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%8F%8C%E7%BA%BF%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>因为github服务器禁止了百度爬虫，所以不能百度收录不了站点，导致访问量很低，本来不想折腾的，想了一下还是将博客也部署到了coding上，方便百度的收录。</p>
-<span id="more"></span>
-
-
-
-<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><ol>
-<li><p>在coding上创建一个名为 <strong>用户名</strong> (不是昵称)的项目，并开启pages服务；</p>
-</li>
-<li><p>将本地ssh公钥文件添加到coding的SSH公钥中并测试是否能访问：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -T -p 443 git@git-ssh.coding.net</span><br></pre></td></tr></table></figure></li>
-<li><p>在站点配置文件中添加上coding仓库地址：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:Kotobuki-Tsumugi/Kotobuki-Tsumugi.github.io.git</span></span><br><span class="line">    <span class="attr">coding:</span> <span class="string">git@git.dev.tencent.com:Kobobuki-Tsumugi/Kobobuki-Tsumugi.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在站点目录/source下创建一个名为Staticfile的空文件；</p>
-</li>
-<li><p>生成并上传静态文件：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
-<li><p>在域名解析中新增两条CNAME记录，指向username.coding.me，注意区分境外线路和默认线路，指向coding的必须为默认线路，如果不能正常访问，可以先暂停github的解析，待coding的解析成功后再开启github的解析，解析反应不及时。</p>
-</li>
-<li><p>向百度提交站点sitemap文件地址。</p>
-</li>
-</ol>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>其中也遇到一些玄学的问题：</p>
-<p><img src="https://images2.imgbox.com/0e/48/c6Y1zWYh_o.png" alt="coding提示域名绑定异常"></p>
-<p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com/">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com/">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
 ]]></content>
       <categories>
         <category>博客维护</category>
@@ -438,6 +438,162 @@
 <li>notify()唤醒在相同对象上第一个调用wait()的线程。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ThreadB b = <span class="keyword">new</span> ThreadB();</span><br><span class="line">        b.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">synchronized</span> (b) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Waiting for b to complete...&quot;</span>);</span><br><span class="line">                b.wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;Total is: &quot;</span> + b.total);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadB</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> total;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">                total += i;</span><br><span class="line">            &#125;</span><br><span class="line">            notify();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java字节码解析</title>
+    <url>/2020/11/18/Java%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a href="https://www.jianshu.com/p/252f381a6bc4">一文让你明白Java字节码</a></p>
+<span id="more"></span>
+
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>从一个简单类 Math.java 开始：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用 <code>javac Math.java</code> 得到字节码文件 Math.class，文件内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cafe babe 0000 0034 0013 0a00 0400 0f09</span><br><span class="line">0003 0010 0700 1107 0012 0100 016d 0100</span><br><span class="line">0149 0100 063c 696e 6974 3e01 0003 2829</span><br><span class="line">5601 0004 436f 6465 0100 0f4c 696e 654e</span><br><span class="line">756d 6265 7254 6162 6c65 0100 0369 6e63</span><br><span class="line">0100 0328 2949 0100 0a53 6f75 7263 6546</span><br><span class="line">696c 6501 0009 4d61 7468 2e6a 6176 610c</span><br><span class="line">0007 0008 0c00 0500 0601 0004 4d61 7468</span><br><span class="line">0100 106a 6176 612f 6c61 6e67 2f4f 626a</span><br><span class="line">6563 7400 2100 0300 0400 0000 0100 0200</span><br><span class="line">0500 0600 0000 0200 0100 0700 0800 0100</span><br><span class="line">0900 0000 1d00 0100 0100 0000 052a b700</span><br><span class="line">01b1 0000 0001 000a 0000 0006 0001 0000</span><br><span class="line">0001 0001 000b 000c 0001 0009 0000 001f</span><br><span class="line">0002 0001 0000 0007 2ab4 0002 0460 ac00</span><br><span class="line">0000 0100 0a00 0000 0600 0100 0000 0600</span><br><span class="line">0100 0d00 0000 0200 0e</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="内容解读"><a href="#内容解读" class="headerlink" title="内容解读"></a>内容解读</h2><p>参照图例：</p>
+<p><img src="https://images2.imgbox.com/08/79/8kGgoJqq_o.jpeg"></p>
+<p><img src="https://images2.imgbox.com/61/17/vm6prCvK_o.png"></p>
+<h3 id="魔数"><a href="#魔数" class="headerlink" title="魔数"></a>魔数</h3><p>cafe babe：魔数，文件后缀标识，被java虚拟机接受。</p>
+<br>
+
+<h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>0000：次版本号</p>
+<p>0034：主版本号=52，java 1.8</p>
+<br>
+
+<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>0013：常量池入口，2+n，十进制=19，表明有18个常量，从1开始</p>
+<p>0a：十进制=10，对应CONSTANT_Methodref_info，指向声明方法</p>
+<p>0004：常量索引#4</p>
+<p>000f：常量索引#15</p>
+<p>09：十进制=9，对应CONSTANT_Fieldref_info，指向字段的类或接口描述</p>
+<p>0003：常量索引#3</p>
+<p>0010：常量索引#16</p>
+<p>07：十进制=7，对应CONSTANT_Class_info，指向全限定名常量项的索引</p>
+<p>0011：常量索引#17</p>
+<p>07：同上</p>
+<p>0012：常量索引#18</p>
+<p>01：十进制=1，对应表中的CONSTANT_Utf8_info，utf8编码的字符串长度</p>
+<p>0001：字符串长度为1</p>
+<p>6d：109=”m”</p>
+<p>01：同上</p>
+<p>0001：同上</p>
+<p>49：49=”1”</p>
+<p>01：同上</p>
+<p>0006：同上</p>
+<p>3c 696e 6974 3e：字符串=<init></p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>2829 56：()V</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>436f 6465：C_de</p>
+<p>01：同上</p>
+<p>000f：同上</p>
+<p>4c 696e 654e 756d 6265 7254 6162 6c65：LineNumberTable</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>69 6e63：inc</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>28 2949：()I</p>
+<p>01：同上</p>
+<p>000a：长度为10的字符串</p>
+<p>53 6f75 7263 6546 696c 65：SourceFile</p>
+<p>01：同上</p>
+<p>0009：同上</p>
+<p>4d61 7468 2e6a 6176 61：Math.java</p>
+<p>0c：十进制=12，CONSTANT_NameAndType_info，指向该字段或方法名称常量项的索引</p>
+<p>0007：字段或者名字名称常量项索引#7</p>
+<p>0008：字段或者名字名称常量项索引#8</p>
+<p>0c：同上</p>
+<p>0005：字段或者名字名称常量项索引#5</p>
+<p>0006：字段或者名字名称常量项索引#6</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>4d61 7468：Math</p>
+<p>01：同上</p>
+<p>0010：同上</p>
+<p>6a 6176 612f 6c61 6e67 2f4f 626a 6563 74：java/lang/Object</p>
+<p>==== 常量解析完毕，共18个常量</p>
+<br>
+
+<h2 id="Access-Flag-访问标志部分"><a href="#Access-Flag-访问标志部分" class="headerlink" title="Access_Flag 访问标志部分"></a>Access_Flag 访问标志部分</h2><blockquote>
+<p>0x0021：是 0x0020 和 0x0001 的并集。</p>
+</blockquote>
+<p>0021：ACC_PUBLIC，访问修饰符为Public。</p>
+<br>
+
+<h2 id="类索引"><a href="#类索引" class="headerlink" title="类索引"></a>类索引</h2><p>类索引用于确定类的全限定名。</p>
+<p>0003：引用第3个常量，第3个常量引用第17个常量，为 Math。</p>
+<br>
+
+<h2 id="父类索引"><a href="#父类索引" class="headerlink" title="父类索引"></a>父类索引</h2><p>0004：引用第18个常量，为 java/lang/Object。</p>
+<br>
+
+<h2 id="接口索引"><a href="#接口索引" class="headerlink" title="接口索引"></a>接口索引</h2><p>0000：没有接口。</p>
+<br>
+
+<h2 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h2><p>字段表用于描述类和接口中声明的变量。这里的字段包含了类级别变量以及实例变量，但是不包括方法内部声明的局部变量。</p>
+<p><img src="https://images2.imgbox.com/46/18/b007hXKr_o.png"></p>
+<p>0001：字段属性。</p>
+<p>0002：Private访问。</p>
+<p>0005：常量索引#5，为”m”。</p>
+<p>0006：常量索引#6，为”1”。</p>
+<p>0000：属性表数量为0。</p>
+<br>
+
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://images2.imgbox.com/b5/62/ZKPXcYOv_o.png"></p>
+<p>to be continued…</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java注解简单例子</title>
+    <url>/2019/05/15/Java%E6%B3%A8%E8%A7%A3%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90/</url>
+    <content><![CDATA[<p>了解Java注解（@Annotation）</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
+</blockquote>
+<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
+<span id="more"></span>
+
+
+
+<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
+<p>四个元注解：</p>
+<ul>
+<li>@Target</li>
+<li>@Retention</li>
+<li>@Document</li>
+<li>Inherited</li>
+</ul>
+<p>注解主要是用户按自己的需求来实现。</p>
+<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>先创建两个注解，@Digits和@NotEmpty，用来注解属性是否满足给定条件。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段只能为数字，且最大长度为maxLength，最大小数位为fraction</span></span><br><span class="line"><span class="comment"> * 默认没有小数位</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Digits &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxLength</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fraction</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段不能为空</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotEmpty &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>定义一个处理类处理自定义注解：（主要利用反射机制）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 处理自定义注解</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationProcesser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Table table)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Class clazz = table.getClass();</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(<span class="string">&quot;class not found!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        String fieldName;</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------------------------&quot;</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Annotation[] annotations = field.getDeclaredAnnotations();</span><br><span class="line">            fieldName = field.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot;--&gt; info: into &quot;</span> + fieldName);</span><br><span class="line">            <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + annotation.annotationType());</span><br><span class="line">                <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Digits) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @Digits annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">int</span> maxLength = ((Digits) annotation).maxLength();</span><br><span class="line">                    <span class="keyword">int</span> annotatedFraction = ((Digits) annotation).fraction();</span><br><span class="line">                    String[] fraction = String.valueOf(table.getCount()).split(<span class="string">&quot;\\.&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (String.valueOf(table.getCount()).length() &gt; maxLength) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: maxLength exceed!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (fraction.length &gt; <span class="number">1</span> &amp;&amp; fraction[<span class="number">1</span>].length() &gt; annotatedFraction) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error：fraction length exceed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> NotEmpty) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @NotEmpty annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">if</span> (table.getDescription() == <span class="keyword">null</span> || <span class="string">&quot;&quot;</span>.equals(table.getDescription())) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: empty is not allowed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>主测试类：（<strong>省略getter和setter</strong>）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits(maxLength = 6, fraction = 2)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">&quot;description1&quot;</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">&quot;description2&quot;</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description3&quot;</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -658,47 +814,6 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.typeinfo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018-06-08 11:51</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnonymousImplementation</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException,</span></span><br><span class="line"><span class="function">            InvocationTargetException </span>&#123;</span><br><span class="line">        A a = AnonymousA.makeA();</span><br><span class="line">        a.f();</span><br><span class="line">        System.out.println(a.getClass().getName());</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;g&quot;</span>);</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;u&quot;</span>);</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;v&quot;</span>);</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnonymousA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> A <span class="title">makeA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> A() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;public c.f()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;public c.g()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">void</span> <span class="title">u</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;package u()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">v</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;protected v()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">w</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;private w()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>output:</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> c.f()</span><br><span class="line">com.typeinfo.AnonymousA$<span class="number">1</span></span><br><span class="line"><span class="keyword">public</span> c.g()</span><br><span class="line"><span class="function"><span class="keyword">package</span> <span class="title">u</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="title">v</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">w</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java注解简单例子</title>
-    <url>/2019/05/15/Java%E6%B3%A8%E8%A7%A3%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90/</url>
-    <content><![CDATA[<p>了解Java注解（@Annotation）</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
-</blockquote>
-<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
-<span id="more"></span>
-
-
-
-<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
-<p>四个元注解：</p>
-<ul>
-<li>@Target</li>
-<li>@Retention</li>
-<li>@Document</li>
-<li>Inherited</li>
-</ul>
-<p>注解主要是用户按自己的需求来实现。</p>
-<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>先创建两个注解，@Digits和@NotEmpty，用来注解属性是否满足给定条件。</p>
-<p>代码如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段只能为数字，且最大长度为maxLength，最大小数位为fraction</span></span><br><span class="line"><span class="comment"> * 默认没有小数位</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Digits &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxLength</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fraction</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段不能为空</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotEmpty &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>定义一个处理类处理自定义注解：（主要利用反射机制）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 处理自定义注解</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationProcesser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Table table)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Class clazz = table.getClass();</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(<span class="string">&quot;class not found!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        String fieldName;</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------------------------&quot;</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Annotation[] annotations = field.getDeclaredAnnotations();</span><br><span class="line">            fieldName = field.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot;--&gt; info: into &quot;</span> + fieldName);</span><br><span class="line">            <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + annotation.annotationType());</span><br><span class="line">                <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Digits) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @Digits annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">int</span> maxLength = ((Digits) annotation).maxLength();</span><br><span class="line">                    <span class="keyword">int</span> annotatedFraction = ((Digits) annotation).fraction();</span><br><span class="line">                    String[] fraction = String.valueOf(table.getCount()).split(<span class="string">&quot;\\.&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (String.valueOf(table.getCount()).length() &gt; maxLength) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: maxLength exceed!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (fraction.length &gt; <span class="number">1</span> &amp;&amp; fraction[<span class="number">1</span>].length() &gt; annotatedFraction) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error：fraction length exceed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> NotEmpty) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @NotEmpty annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">if</span> (table.getDescription() == <span class="keyword">null</span> || <span class="string">&quot;&quot;</span>.equals(table.getDescription())) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: empty is not allowed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>主测试类：（<strong>省略getter和setter</strong>）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits(maxLength = 6, fraction = 2)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">&quot;description1&quot;</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">&quot;description2&quot;</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description3&quot;</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -1000,118 +1115,72 @@
       </tags>
   </entry>
   <entry>
-    <title>Java字节码解析</title>
-    <url>/2020/11/18/Java%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a href="https://www.jianshu.com/p/252f381a6bc4">一文让你明白Java字节码</a></p>
+    <title>Jenkinsfile cd命令不生效的问题</title>
+    <url>/2021/06/05/Jenkinsfile-cd%E5%91%BD%E4%BB%A4%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>今天晚上给前端项目配置Jenkins流水线的时候遇到一个问题：cd 命令不生效，<code>sh 'cd ask_front'</code> 这个语句执行前后 <code>pwd</code> 的输出是一样的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ pwd</span><br><span class="line">/home/jingh527/.jenkins/workspace/try-ask_master</span><br></pre></td></tr></table></figure>
+
+<p>去Jenkins机器上看了上面这个目录结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">try-ask_master</span><br><span class="line">-- ask</span><br><span class="line">-- ask_front</span><br></pre></td></tr></table></figure>
+
 <span id="more"></span>
 
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>从一个简单类 Math.java 开始：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Jenkinsfile的定义：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm uninstall *&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf node_modules&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf package-lock.json&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm cache clean --force&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>用 <code>javac Math.java</code> 得到字节码文件 Math.class，文件内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cafe babe 0000 0034 0013 0a00 0400 0f09</span><br><span class="line">0003 0010 0700 1107 0012 0100 016d 0100</span><br><span class="line">0149 0100 063c 696e 6974 3e01 0003 2829</span><br><span class="line">5601 0004 436f 6465 0100 0f4c 696e 654e</span><br><span class="line">756d 6265 7254 6162 6c65 0100 0369 6e63</span><br><span class="line">0100 0328 2949 0100 0a53 6f75 7263 6546</span><br><span class="line">696c 6501 0009 4d61 7468 2e6a 6176 610c</span><br><span class="line">0007 0008 0c00 0500 0601 0004 4d61 7468</span><br><span class="line">0100 106a 6176 612f 6c61 6e67 2f4f 626a</span><br><span class="line">6563 7400 2100 0300 0400 0000 0100 0200</span><br><span class="line">0500 0600 0000 0200 0100 0700 0800 0100</span><br><span class="line">0900 0000 1d00 0100 0100 0000 052a b700</span><br><span class="line">01b1 0000 0001 000a 0000 0006 0001 0000</span><br><span class="line">0001 0001 000b 000c 0001 0009 0000 001f</span><br><span class="line">0002 0001 0000 0007 2ab4 0002 0460 ac00</span><br><span class="line">0000 0100 0a00 0000 0600 0100 0000 0600</span><br><span class="line">0100 0d00 0000 0200 0e</span><br></pre></td></tr></table></figure>
+<p>在执行到 npm 命令相关的地方就开始报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ npm run dev</span><br><span class="line">npm ERR! code ENOENT</span><br><span class="line">npm ERR! syscall open</span><br><span class="line">npm ERR! path /home/jingh527/.jenkins/workspace/try-ask_master/package.json</span><br><span class="line">npm ERR! errno -2</span><br><span class="line">npm ERR! enoent ENOENT: no such file or directory, open &#x27;/home/jingh527/.jenkins/workspace/try-ask_master/package.json&#x27;</span><br><span class="line">npm ERR! enoent This is related to npm not being able to find a file.</span><br><span class="line">npm ERR! enoent </span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /home/node/.npm/_logs/2021-06-04T17_20_39_229Z-debug.log</span><br><span class="line">script returned exit code 254</span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h2 id="内容解读"><a href="#内容解读" class="headerlink" title="内容解读"></a>内容解读</h2><p>参照图例：</p>
-<p><img src="https://images2.imgbox.com/08/79/8kGgoJqq_o.jpeg"></p>
-<p><img src="https://images2.imgbox.com/61/17/vm6prCvK_o.png"></p>
-<h3 id="魔数"><a href="#魔数" class="headerlink" title="魔数"></a>魔数</h3><p>cafe babe：魔数，文件后缀标识，被java虚拟机接受。</p>
-<br>
-
-<h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>0000：次版本号</p>
-<p>0034：主版本号=52，java 1.8</p>
-<br>
-
-<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>0013：常量池入口，2+n，十进制=19，表明有18个常量，从1开始</p>
-<p>0a：十进制=10，对应CONSTANT_Methodref_info，指向声明方法</p>
-<p>0004：常量索引#4</p>
-<p>000f：常量索引#15</p>
-<p>09：十进制=9，对应CONSTANT_Fieldref_info，指向字段的类或接口描述</p>
-<p>0003：常量索引#3</p>
-<p>0010：常量索引#16</p>
-<p>07：十进制=7，对应CONSTANT_Class_info，指向全限定名常量项的索引</p>
-<p>0011：常量索引#17</p>
-<p>07：同上</p>
-<p>0012：常量索引#18</p>
-<p>01：十进制=1，对应表中的CONSTANT_Utf8_info，utf8编码的字符串长度</p>
-<p>0001：字符串长度为1</p>
-<p>6d：109=”m”</p>
-<p>01：同上</p>
-<p>0001：同上</p>
-<p>49：49=”1”</p>
-<p>01：同上</p>
-<p>0006：同上</p>
-<p>3c 696e 6974 3e：字符串=<init></p>
-<p>01：同上</p>
-<p>0003：同上</p>
-<p>2829 56：()V</p>
-<p>01：同上</p>
-<p>0004：同上</p>
-<p>436f 6465：C_de</p>
-<p>01：同上</p>
-<p>000f：同上</p>
-<p>4c 696e 654e 756d 6265 7254 6162 6c65：LineNumberTable</p>
-<p>01：同上</p>
-<p>0003：同上</p>
-<p>69 6e63：inc</p>
-<p>01：同上</p>
-<p>0003：同上</p>
-<p>28 2949：()I</p>
-<p>01：同上</p>
-<p>000a：长度为10的字符串</p>
-<p>53 6f75 7263 6546 696c 65：SourceFile</p>
-<p>01：同上</p>
-<p>0009：同上</p>
-<p>4d61 7468 2e6a 6176 61：Math.java</p>
-<p>0c：十进制=12，CONSTANT_NameAndType_info，指向该字段或方法名称常量项的索引</p>
-<p>0007：字段或者名字名称常量项索引#7</p>
-<p>0008：字段或者名字名称常量项索引#8</p>
-<p>0c：同上</p>
-<p>0005：字段或者名字名称常量项索引#5</p>
-<p>0006：字段或者名字名称常量项索引#6</p>
-<p>01：同上</p>
-<p>0004：同上</p>
-<p>4d61 7468：Math</p>
-<p>01：同上</p>
-<p>0010：同上</p>
-<p>6a 6176 612f 6c61 6e67 2f4f 626a 6563 74：java/lang/Object</p>
-<p>==== 常量解析完毕，共18个常量</p>
-<br>
-
-<h2 id="Access-Flag-访问标志部分"><a href="#Access-Flag-访问标志部分" class="headerlink" title="Access_Flag 访问标志部分"></a>Access_Flag 访问标志部分</h2><blockquote>
-<p>0x0021：是 0x0020 和 0x0001 的并集。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在网上找了一会儿资料，看到一个帖子：<a href="https://blog.csdn.net/liumiaocn/article/details/102632742">Jenkins基础：Jenkinsfile注意事项：条件跳转与当前路径</a></p>
+<blockquote>
+<p>cd demo、npm install、npm run build这本是三条命令，强硬地使用&amp;&amp;写在了一起，为什么不能分开使用三个sh ‘’的原因是因为，在具体的实现的时候，显然执行完返回当前目录会恢复为原始状态。这是一个非常容易被忘记的问题。</p>
 </blockquote>
-<p>0021：ACC_PUBLIC，访问修饰符为Public。</p>
-<br>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">stage(&#x27;Build Angular Project&#x27;) &#123; // build angular demo app</span><br><span class="line">    sh &#x27;cd demo &amp;&amp; npm install &amp;&amp; npm run build&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="类索引"><a href="#类索引" class="headerlink" title="类索引"></a>类索引</h2><p>类索引用于确定类的全限定名。</p>
-<p>0003：引用第3个常量，第3个常量引用第17个常量，为 Math。</p>
-<br>
+<p>才反应过来脚本写得有问题，于是改了一下，将多个操作用 &amp;&amp; 连接起来，就部署成功了。</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm uninstall * &amp;&amp; rm -rf node_modules &amp;&amp; rm -rf package-lock.json &amp;&amp; npm cache clean --force &amp;&amp; npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="父类索引"><a href="#父类索引" class="headerlink" title="父类索引"></a>父类索引</h2><p>0004：引用第18个常量，为 java/lang/Object。</p>
-<br>
-
-<h2 id="接口索引"><a href="#接口索引" class="headerlink" title="接口索引"></a>接口索引</h2><p>0000：没有接口。</p>
-<br>
-
-<h2 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h2><p>字段表用于描述类和接口中声明的变量。这里的字段包含了类级别变量以及实例变量，但是不包括方法内部声明的局部变量。</p>
-<p><img src="https://images2.imgbox.com/46/18/b007hXKr_o.png"></p>
-<p>0001：字段属性。</p>
-<p>0002：Private访问。</p>
-<p>0005：常量索引#5，为”m”。</p>
-<p>0006：常量索引#6，为”1”。</p>
-<p>0000：属性表数量为0。</p>
-<br>
-
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://images2.imgbox.com/b5/62/ZKPXcYOv_o.png"></p>
-<p>to be continued…</p>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>Jenkins</category>
       </categories>
       <tags>
-        <tag>Java</tag>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode之3Sum</title>
+    <url>/2019/01/03/LeetCode%E4%B9%8B3Sum/</url>
+    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p>输入一个数组，例如{-1 0 1 2 -1 -4}，从数组中找三个数（a,b,c），使得其和0，输出所有的（a,b,c）组合。</p>
+<p>要求abc不能重复，并且a&lt;=b&lt;=c。</p>
+<p>例：</p>
+<p>S = {-1, 0, 1, 2, -1, -4}；</p>
+<p>输出：</p>
+<p>(-1, 0 ,1)</p>
+<p>(-1, -1, 2)</p>
+<span id="more"></span>
+
+
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>一看到题目，不问代码行数，不问时间复杂度，便排出三个循环。。但是循环非常耗时，显然不是题目的本意。想了好长时间没有什么进展。</p>
+<p>先将给定数组排序，然后指定一个数，在数组中找出两个数并且这两个数的和是目标数值的相反数：<a href="http://www.cnblogs.com/xcr1234/p/5285727.html">【LeetCode】3Sum 解题报告</a></p>
+<p>在网上找到了篇比较有新意的文章：[<a href="https://www.cnblogs.com/xcr1234/p/5285727.html">3Sum algorithm - 非常容易理解的实现 （java)</a>] 。</p>
+<hr>
+<p>最后发现维基百科中就有收录：<a href="https://zh.wikipedia.org/zh-hans/3SUM">维基百科—3SUM</a> ，还有更一般的情形 N SUM。</p>
+<figure class="highlight pascal"><table><tr><td class="code"><pre><span class="line">sort(S);</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">0</span> <span class="keyword">to</span> n-<span class="number">3</span> <span class="keyword">do</span></span><br><span class="line">   a = S[i];</span><br><span class="line">   start = i+<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">end</span> = n-<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">while</span> (start &lt; <span class="keyword">end</span>) <span class="keyword">do</span></span><br><span class="line">      b = S[start]</span><br><span class="line">      c = S[<span class="keyword">end</span>];</span><br><span class="line">      <span class="keyword">if</span> (a+b+c == <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         output a, b, c;</span><br><span class="line">         <span class="comment">// Continue search for all triplet combinations summing to zero.</span></span><br><span class="line">          <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (a+b+c &gt; <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         start = start + <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>伪代码还挺容易理解的。</p>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><p>因为知乎上有人宣称证明了哥德巴赫猜想的原因，这两天还特意了解了下猜想证明的历史，“1+2”、“1+3”之类的证明，虽然一点也没看懂。感觉数学真的很有魅力，严谨清晰的逻辑，精妙完美的结论，自然界中的一切每时每刻都在遵循着其中的规律运行，更加感慨于人类的智慧，都找不到合适的赞美的词了。</p>
+<p>“超越数”、“黄金分割”、“哥德巴赫猜想”、“黎曼猜想”…</p>
+<p>停下思绪，回到现实：<strong>当你理解它的时候你觉得进入了天堂，当你不理解它的时候你仿佛进入了地狱</strong>，看哭了…</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
       </tags>
   </entry>
   <entry>
@@ -1197,75 +1266,6 @@
       </categories>
       <tags>
         <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jenkinsfile cd命令不生效的问题</title>
-    <url>/2021/06/05/Jenkinsfile-cd%E5%91%BD%E4%BB%A4%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>今天晚上给前端项目配置Jenkins流水线的时候遇到一个问题：cd 命令不生效，<code>sh 'cd ask_front'</code> 这个语句执行前后 <code>pwd</code> 的输出是一样的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ pwd</span><br><span class="line">/home/jingh527/.jenkins/workspace/try-ask_master</span><br></pre></td></tr></table></figure>
-
-<p>去Jenkins机器上看了上面这个目录结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">try-ask_master</span><br><span class="line">-- ask</span><br><span class="line">-- ask_front</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>Jenkinsfile的定义：</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm uninstall *&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf node_modules&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf package-lock.json&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm cache clean --force&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在执行到 npm 命令相关的地方就开始报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ npm run dev</span><br><span class="line">npm ERR! code ENOENT</span><br><span class="line">npm ERR! syscall open</span><br><span class="line">npm ERR! path /home/jingh527/.jenkins/workspace/try-ask_master/package.json</span><br><span class="line">npm ERR! errno -2</span><br><span class="line">npm ERR! enoent ENOENT: no such file or directory, open &#x27;/home/jingh527/.jenkins/workspace/try-ask_master/package.json&#x27;</span><br><span class="line">npm ERR! enoent This is related to npm not being able to find a file.</span><br><span class="line">npm ERR! enoent </span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /home/node/.npm/_logs/2021-06-04T17_20_39_229Z-debug.log</span><br><span class="line">script returned exit code 254</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在网上找了一会儿资料，看到一个帖子：<a href="https://blog.csdn.net/liumiaocn/article/details/102632742">Jenkins基础：Jenkinsfile注意事项：条件跳转与当前路径</a></p>
-<blockquote>
-<p>cd demo、npm install、npm run build这本是三条命令，强硬地使用&amp;&amp;写在了一起，为什么不能分开使用三个sh ‘’的原因是因为，在具体的实现的时候，显然执行完返回当前目录会恢复为原始状态。这是一个非常容易被忘记的问题。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">stage(&#x27;Build Angular Project&#x27;) &#123; // build angular demo app</span><br><span class="line">    sh &#x27;cd demo &amp;&amp; npm install &amp;&amp; npm run build&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>才反应过来脚本写得有问题，于是改了一下，将多个操作用 &amp;&amp; 连接起来，就部署成功了。</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm uninstall * &amp;&amp; rm -rf node_modules &amp;&amp; rm -rf package-lock.json &amp;&amp; npm cache clean --force &amp;&amp; npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Jenkins</category>
-      </categories>
-      <tags>
-        <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode之3Sum</title>
-    <url>/2019/01/03/LeetCode%E4%B9%8B3Sum/</url>
-    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p>输入一个数组，例如{-1 0 1 2 -1 -4}，从数组中找三个数（a,b,c），使得其和0，输出所有的（a,b,c）组合。</p>
-<p>要求abc不能重复，并且a&lt;=b&lt;=c。</p>
-<p>例：</p>
-<p>S = {-1, 0, 1, 2, -1, -4}；</p>
-<p>输出：</p>
-<p>(-1, 0 ,1)</p>
-<p>(-1, -1, 2)</p>
-<span id="more"></span>
-
-
-
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>一看到题目，不问代码行数，不问时间复杂度，便排出三个循环。。但是循环非常耗时，显然不是题目的本意。想了好长时间没有什么进展。</p>
-<p>先将给定数组排序，然后指定一个数，在数组中找出两个数并且这两个数的和是目标数值的相反数：<a href="http://www.cnblogs.com/xcr1234/p/5285727.html">【LeetCode】3Sum 解题报告</a></p>
-<p>在网上找到了篇比较有新意的文章：[<a href="https://www.cnblogs.com/xcr1234/p/5285727.html">3Sum algorithm - 非常容易理解的实现 （java)</a>] 。</p>
-<hr>
-<p>最后发现维基百科中就有收录：<a href="https://zh.wikipedia.org/zh-hans/3SUM">维基百科—3SUM</a> ，还有更一般的情形 N SUM。</p>
-<figure class="highlight pascal"><table><tr><td class="code"><pre><span class="line">sort(S);</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">0</span> <span class="keyword">to</span> n-<span class="number">3</span> <span class="keyword">do</span></span><br><span class="line">   a = S[i];</span><br><span class="line">   start = i+<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">end</span> = n-<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">while</span> (start &lt; <span class="keyword">end</span>) <span class="keyword">do</span></span><br><span class="line">      b = S[start]</span><br><span class="line">      c = S[<span class="keyword">end</span>];</span><br><span class="line">      <span class="keyword">if</span> (a+b+c == <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         output a, b, c;</span><br><span class="line">         <span class="comment">// Continue search for all triplet combinations summing to zero.</span></span><br><span class="line">          <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (a+b+c &gt; <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         start = start + <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
-<p>伪代码还挺容易理解的。</p>
-<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><p>因为知乎上有人宣称证明了哥德巴赫猜想的原因，这两天还特意了解了下猜想证明的历史，“1+2”、“1+3”之类的证明，虽然一点也没看懂。感觉数学真的很有魅力，严谨清晰的逻辑，精妙完美的结论，自然界中的一切每时每刻都在遵循着其中的规律运行，更加感慨于人类的智慧，都找不到合适的赞美的词了。</p>
-<p>“超越数”、“黄金分割”、“哥德巴赫猜想”、“黎曼猜想”…</p>
-<p>停下思绪，回到现实：<strong>当你理解它的时候你觉得进入了天堂，当你不理解它的时候你仿佛进入了地狱</strong>，看哭了…</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
       </tags>
   </entry>
   <entry>
@@ -4011,6 +4011,25 @@
       </tags>
   </entry>
   <entry>
+    <title>ajax返回error可能原因分析</title>
+    <url>/2019/05/12/ajax%E8%BF%94%E5%9B%9Eerror%E5%8F%AF%E8%83%BD%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<p>ajax总是进入error的可能原因</p>
+<p>后台返回：</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">Successfully completed request</span><br></pre></td></tr></table></figure>
+
+<p>前端ajax总是执行error部分的代码。</p>
+<p>原因：</p>
+<p>后台只返回了 “success” 字符串，不是规范的json格式，所以没有执行预期逻辑。</p>
+<p>最好在后台返回 <strong>严格规范</strong> 的json防止此类错误。</p>
+]]></content>
+      <categories>
+        <category>ajax</category>
+      </categories>
+      <tags>
+        <tag>ajax</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>dubbo学习笔记</title>
     <url>/2018/12/02/dubbo%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>dubbo学习笔记</p>
@@ -4063,25 +4082,6 @@
       </categories>
       <tags>
         <tag>dubbo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ajax返回error可能原因分析</title>
-    <url>/2019/05/12/ajax%E8%BF%94%E5%9B%9Eerror%E5%8F%AF%E8%83%BD%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<p>ajax总是进入error的可能原因</p>
-<p>后台返回：</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">Successfully completed request</span><br></pre></td></tr></table></figure>
-
-<p>前端ajax总是执行error部分的代码。</p>
-<p>原因：</p>
-<p>后台只返回了 “success” 字符串，不是规范的json格式，所以没有执行预期逻辑。</p>
-<p>最好在后台返回 <strong>严格规范</strong> 的json防止此类错误。</p>
-]]></content>
-      <categories>
-        <category>ajax</category>
-      </categories>
-      <tags>
-        <tag>ajax</tag>
       </tags>
   </entry>
   <entry>
@@ -4248,33 +4248,6 @@
 <br>
 
 <p>路人：三宅さん、こっち！<br>日向：はい！</p>
-]]></content>
-      <categories>
-        <category>日语</category>
-      </categories>
-      <tags>
-        <tag>日语</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《宇宙よりも遠い場所》台词-第二话</title>
-    <url>/2020/09/22/%E3%80%8A%E5%AE%87%E5%AE%99%E3%82%88%E3%82%8A%E3%82%82%E9%81%A0%E3%81%84%E5%A0%B4%E6%89%80%E3%80%8B%E5%8F%B0%E8%AF%8D-%E7%AC%AC%E4%BA%8C%E8%AF%9D/</url>
-    <content><![CDATA[<p>第二話：歌舞伎町のフリマントル</p>
-<p>我终于踏出这一步了，去往没有你的世界。</p>
-<span id="more"></span>
-
-
-<p>報せ：白瀬は十一月中旬に日本を出航、南極に向けて海を南下、途中フリーマントルに寄港。<br>決まり：オーストラリアだ。<br>報せ：ここで補給と観測隊員の乗り込みを行って、十二月の上旬、南極大陸に向けて出航するの。<br>決まり：日本から乗って行くんじゃなんだ。<br>報せ：それは昔の話、今はフリーマントルから乗船、帰るにはシドニーから飛行機って言うのが普通。<br>決まり：え〜<br>報せ：そこで、私たちは白瀬がフリーマントルに寄港する時期に合わせて日本を立ち、フリーマントルに向かう。<br>決まり：うんうん。<br>報せ：そして、ここで白瀬に乗り込み、南極へ。<br>決まり：乗れるの？<br>報せ：基本的に南極観測は国家事業、成員は自衛隊員が務め、観測隊員は厳しい審査と訓練に合格した人間だけ、高校生は絶対に無理。ただ、今年は特別。<br>決まり：今年は？民間南極観測隊、三年ぶりに発遣決まる。（その笑顔を見た時に、なんか心がブカブカした、あ、生しゃぶる言って、多分これだと思った。私は今、人生で一番途方もなくて、とんでもない大きい計画を立ってている。）<br>決まり：あれ、もしかして、 せいすいかん？<br>報せ：うん。<br>決まり：あは〜</p>
-<p>決まり：あ〜これも十八歳以上か。<br>恵：なに？バイト？<br>決まり：おはよう、うん、昨日話したでしょう、飛行機代。報せちゃんが用意しとけって。<br>恵：南極か。<br>決まり：うん、行ってる間、学校を休むことになるから、出席数を稼いでおけって。あっ、なにこれ？超いい！<br>恵：なに？<br>決まり：高校生女子募集、接客業、男性とお喋りしたり、お散歩したりする仕事ですって、内容によっては、月100万以上も夢じゃないかも、お〜<br>恵：見るかったら終わりだぞ。<br>決まり：大丈夫だよ、バイトするって学校には届け出すから。<br>恵：なにも分かってないな、お金はともかくとして、行けるのか本当に？<br>決まり：うん！報せちゃん言ってた、その今年でる民間の南極観測隊っていうに知り合いがあるからって、あ。<br>恵：調べて見たけど、ヤバそうだぞ。<br>決まり：4年前、新基地完成と新型砕氷艦就航に伴い、民間に払い下げれた二代目白瀬と昭和基地だが、その維持費と活動費調達に苦慮し、三年ぶりに発遣した今回の観測隊も、前回スポンサーだった企業は次々と撤退を表明して終わり、このままでは、隊員の安全が確保されないので、計画をそのまま対する批判の声も相次いているって。<br>先生：玉木さん、玉木さん、、<br>決まり：はっはい！<br>先生：つづけを読んでいただけますまいか？<br>決まり：はっはい、資金面の問題と合わせて今後も、はわ〜<br>先生：はわ、の先を聞かせていただきます。</p>
-<p>決まり：あ、まだこんなにある、書き取りなんて小学校以来だよ。<br>恵：授業中に読んでるからだろう。<br>決まり：だって、我慢できなかっただもん、それで？<br>恵：それでもなにもない、一応、今のところ計画が中止になったとは書いてないけど。<br>決まり：じゃ、大丈夫だね。<br>恵：そうか？仮に中止にならなかったとしても、そう簡単に乗れるか？いくら民間だからって。<br>決まり：ほら、報せちゃん観測隊員の娘だし。<br>恵：コンサートの間席者席じゃないんだから、そんなホイホイ乗せてくれるわけないと思うけどな。<br>決まり：そうか、だよね。<br>恵：この後、会うんだろう？一度ちゃんと聞いて見た方が良いぞ。<br>決まり：うん、分かった、はわ！</p>
-<p>決まり：ごめん。<br>報せ：時間は厳守！南極いくなら尚更よ、数分の遅れが生死に関わるだから。<br>決まり：だから、先生に怒られたって送ったじゃん。<br>報せ：バイトは？<br>決まり：え？<br>報せ：今日までに決めるって。<br>決まり：そうだけど、とりあえず、オーストラリアまでの飛行機代でょう？夏休みに纏めてやればなんとか。<br>報せ：いざという時のために、お金が多い方がいい、私調べて置いたから。<br>決まり：ほんど？<br>報せ：高校生女子、接客業で、男性とおしゃべりしたり、お散歩したりするバイトなんだって、かなりの時給でしょう？<br>決まり：うん、そうだけど。<br>報せ：そ、そうなの？<br>決まり：や、私も恵ちゃんに襲わたんだけど、報せちゃんもちょっと抜きてるとこあるよね。<br>報せ：抜きてない、ただ知らなかっただけで。なに？それ。<br>決まり：友達、南極ほんとに行けるのかって心配してて。<br>報せ：疑うの？<br>決まり：疑うってじゃないけど、ただ、確証がないっていうか。ね、心配になるでしょう、それに仮に中止にならなかったとしても、乗れるのかって。<br>報せ：乗れる！だって、私は小渕沢貴子の娘だから。<br>決まり：本当に？それだけで？<br>報せ：絶対大丈夫！<br>決まり：そうかな、でも。<br>報せ：嫌になったらなったって、素直に言えばいいじゃない。<br>決まり：え？<br>報せ：それ私のせいにしようとして。<br>決まり：嫌になったんじゃないよ、ただ失敗したくない、やっぱりやめとけだって思たくない、「行って良かった」、「報せちゃんの計画に乗ってよかった」って思いたい、うん、、<br>報せ：ちゃんと状況は全部わかってる、作戦も考えてある。<br>決まり：ほんとに？<br>報せ：うん、今度ちゃんと説明するから、決まりは準備進めて。<br>決まり：うん、わかった！おっ</p>
-<p>決まり：いっらしゃいませ、温めはいかがなされますか？<br>店員：まあ、いろいろこれから覚えてもらえば良いから、まず補充お願い、そこ三宅さんいるから、聞いて。<br>決まり：はい！<br>決まり：あのう、、<br>日向：うわ！<br>決まり：あの、今日から入ったことになった玉木です、よろしくお願いします！<br>日向：玉木？<br>決まり：玉木マリです。<br>日向：あ、それで決まり、はは、三宅日向です、何歳？<br>決まり：十六歳、高二です。<br>日向：一緒だ、よろしく！<br>決まり：よ、よろしく。<br>日向：だったら、西校だよね。<br>決まり：うん、多西。<br>日向：なんで急にバイト？<br>決まり：はうん、ちょっと必要っていうか、行きたいところがあって。<br>日向：うんん〜それってさ、もしかして、南極？<br>決まり：え？</p>
-<p>報せ：行きたい？<br>決まり：うん、なんか前から私たちの話聞いてたみたいで。<br>日向：あ、そういう風にいったら、盗み聞きみたいだろう、違うからね、二人で大声で話てだから。<br>報せ：大声？<br>日向：嫌になってったら言えば良いじゃない？嫌になったんじゃないよ、、<br>決まり：良いよ、やりなくて！<br>日向：それで、気になっててさ、そして決まりがバイトで入って来たでしょう、これは運命だって思ったね私は。<br>報せ：言っておくけど、遊びじゃないから。<br>日向：分かってる。<br>報せ：命の危険だってあるし、旅費だってちゃんと払ってもらうるし、出発は十二月だから、学校を休むことにもなる。<br>日向：I’am OK!平気だよ、バイトでお金があるし、高校を行ってないし。<br>決まり：え！そうなの？<br>日向：そんなに驚くことないだろう、中にはいるんだよ、高校行ってない十六歳だって。<br>決まり：おう。<br>日向：あ、でも、間違えるなよ、勉強は絶対負けないから、高認も通るし、この前の模試は合格判定Aだし。<br>決まり：え！まだ高二なのに！<br>報せ：じゃ、大学は行くってこと？<br>日向：そう、合格しまくて、高校で怠けて落ちたやつらにザマミロって言うのが今のとこの夢。<br>決まり：あ〜<br>報せ：でも、だったら南極行って暇なんてないじゃない。<br>日向：そうだけど、まだ受験まで2年近くあるし、来年は本気で受験勉強だって考えると、一個ぐらいになかしときたいなって。<br>決まり：分かる、だよね、今年しなかったら、もうできないもんね。<br>日向：そう！お、良いのか？このままくまんとおでん作り終わって良いのか？俺の十六歳！<br>決まり：そうそう！<br>日向：お前とはうまいお酒飲めそうだ、飲んだことないけど。<br>決まり：私も！<br>報せ：うるさい！この計画を立ってたのは私なんだから、私の指示に従って。<br>決まり：別に下がろうって言ってないけど。<br>日向：なに？めんどくさいタイプ？<br>決まり：ちょっと、、<br>報せ：作戦の概要、今度の日曜日、決行するから。じゃ、日曜。<br>三人：うん！</p>
-<p>決まり、日向：バイバイ！<br>決まり：どう思う、この作戦？<br>日向：さあ、なかなか難しそうと思うけどね。<br>決まり：だよね。<br>日向：でも、あの子私らよりは南極のこと知ってるだろうし、やるしかないじゃない？引き返せるうちは、旅ではない！引き返せなくなった時に、初めてそれは旅になるのだって言うし。<br>決まり：うわ〜なにそれ？名言っぽい、誰の言葉？<br>日向：私〜<br>決まり：なんだ、、<br>日向：でも、よかったよ。<br>決まり：え？<br>日向：私あなたたち二人のこと嫌いじゃなかったんだよね、ほら、あのコンビニ、多西近いから、生徒いっぱいくるじゃん。<br>決まり：うん。<br>日向：でも、二人だけはなんか別だなって、空気が違うって言うか。<br>決まり：そんなこと言われたの初めて。<br>日向：私さあ、集団の中でグチャグチャみたいなのは苦手ててさ、だから高校無理だたんだけど、二人はいいなあって。<br>決まり：良いって、なにが？<br>日向：うん、なんだろう、嘘ついてない感じ？って言われたら、良い気する？<br>決まり：そりゃ、、<br>日向：こうして日向ちゃんは人の心にとりるだよ、じゃね〜<br>決まり：うん、、</p>
-<p>決まり：新宿だ！<br>日向：ギャラギャラするな！群馬だってバレる！<br>決まり：だって、なんかキラキラしてて、どこ見ていいのわかんない！<br>日向：落ち着け！<br>報せ：決まり、まって、おいで行かないで。<br>日向：おい、間違えてる！<br>決まり：か、歌舞伎町。<br>報せ：き、来たことないの？<br>決まり：夜来るのは初めてかも、一応恵ちゃん自留めるか持って言ってたけど。<br>日向：補導されたりしないか？私は良いけど、二人は学校にバレたらまずいだろう。<br>決まり：歩いてだけでも？<br>日向：場所が場所だからな。<br>報せ：平気、大学生って顔してれば。<br>路人：なに？遊びに来たの？ちょっとちょっとだけ、、<br>決まり：どうしよう？<br>日向：面白いから、ほっとこうか。<br>日向：あった、観測隊員親睦会合意一行さま。<br>決まり：ほんと？<br>報せ：よし！後は作戦通りに。<br>決まり：でも、これ一人を誘い出すってしか書いてないけど。<br>日向：どうするの？<br>報せ：それは、普通男子隊員が多いから、女子高生がこう、、<br>日向：まさか、誘惑しろって言うんじゃないだろうな。<br>決まり：まあ、報せちゃん美人だからな。<br>報せ：私？私はないない。<br>日向：待って、私たちのどっちが行かせるつもりだったのかよ！<br>決まり：無理だよ！<br>日向：来たぞ、そうする？<br>報せ：決まり、お願い！<br>決まり：そんな！<br>日向：決まり！<br>決まり：え？！<br>日向：昭和か？！<br>決まり：じゃ日向ちゃんやってよ！<br>日向：ほら、モタモタしていると行っちゃう！足だ、なまし！<br>決まり：パンツだもん。<br>日向：じゃ、胸だ、胸を挙上せよ、いい〜か！<br>決まり：だいたい胸なら、、<br>報せ：嫌だ、嫌だ、、<br>日向：行けよ、南極行かんだら。<br>決まり：そうだよ、ずるいよ、作戦考えた報せなんだから。<br>報せ：や、で、私はだめなの。<br>日向：なにがダメなんだよ。<br>決まり：そうだよ。<br>弓子：うん、あっ。<br>佳苗：お？報せちゃん？<br>弓子：しつこいね、あの子も。<br>ゆず：誰ですか？<br>日向：お辞儀してどんするんだよ？ここ学校か？優等生か？！<br>報せ：だから私はダメだって言ってるでしょう？<br>決まり：どうして？<br>報せ：顔がバレてるの、だから、見つかったらすぐに捕まって、、<br>弓子：うわ、三人もいる！<br>報せ：逃げて、<br>日向、決まり：え？<br>報せ：逃げて！<br>決まり：日向ちゃん、早い！<br>日向：一応短距離だったらな、別れた方が良いじゃないのか？<br>報せ：そうね。<br>日向：おじ会う場所は？<br>報せ：携帯で！<br>日向：おらい〜<br>決まり：まだ追って来る。<br>報せ：観測隊員だから、体力すごいし。<br>決まり：私たちも別れる？ あ、痛い。<br>報せ：あ、ごめん。<br>決まり：うん。<br>報せ：なに？<br>決まり：うん、ただ、楽しいなあって。<br>報せ：楽しい？<br>決まり：うん、なんかね、動いてる！<br>報せ：え？<br>決まり：私の青春動いてる気がする！そう、こう言うのだ！なにかが起きそうで、なにか起こせそうで、毎日見ている景色が、目も苦しく変わっていって。<br>路人A：やっぱ外飲み最高だね、美味しいね。<br>路人B：今日朝まで飲んで、、<br>日向：え？！<br>路人A、B：バイバイ！<br>報せ、日向、決まり：あっ！！</p>
-<p>佳苗：そんなに息切らすまで走らなくても、別に命奪おうわけじゃないのに、奪いそうだけど。<br>決まり：だって、報せちゃんが。<br>日向：そうだよ、捕まったら撃ちこびこもんって。<br>報せ：そんなこと言ってない。<br>弓子：しかし、よくその作戦思いつくよね。<br>佳苗：つまり、男性隊員誑かして、協力させて見っこしよってこどでしょう？悪い女ね、誰が思いついたの？<br>佳苗：まっ、そうよね、あのね、報せちゃん、何度も話した通り、あなたを連れて行くことはできないの、たとえ民間でもね、隊員が厳しい条件があって。<br>報せ：分かってます！無理を言ってるのは分かってます！でも、どうしても行きたい、だって、お母さんが待ってる。<br>決まり：報せちゃん。<br>佳苗：なに、これ？<br>報せ：見た通りです、資金困ってるですよね、私たちをそのお金でスボサーにしてください、連れて行ってくれったら、そのお金あげますから。<br>弓子：よく考えるわね。<br>佳苗：分かった、十二月一日、フリーマントりきて。<br>報せ：ほんとですか？！<br>佳苗：なんって言うと思う？そんな心配してもらわなくても、私たちは行くわ、必ずね。<br>佳苗：貴子、、、</p>
-<p>弓子：まあ、気持ちは分かるけどね。<br>佳苗：あれから3年。<br>弓子：で、ほんとに資金は大丈夫なの？<br>佳苗：さっき言ってたでしょう？まあ、大変だけど、いろいろ考えてるわ。<br>弓子：白石さん、、<br>佳苗：もう、その一環！</p>
-<p>決まり：お母さん、か。<br>日向：まあ、落ち込むなよ、これでダメと決まってわけじゃない。<br>報せ：後一息で、もう少しこのお金を受けたりそうだった、後少しで絶対にうまく行って、、<br>日向：こいつ、ポッじてうちゃんだ。<br>決まり：だね〜<br>日向：まあ、そうじゃなきゃこんなことできないか。<br>決まり：だね！<br>日向：ただし、緊急動議、小淵沢報せのリーダー担任を解任を要求しまーす、賛成の人？<br>決まり：はい！<br>日向：賛成多数！よってた今よりリーダーを解任します！<br>報せ：え？！<br>日向：と言うわけで、南極いくぞ！<br>日向、決まり：おぉ！<br>報せ：え？！！</p>
 ]]></content>
       <categories>
         <category>日语</category>
@@ -4526,6 +4499,33 @@
 <p>結月：聞いてことあります。</p>
 <p>決まり：じゃ、もし本当に見ること出来たら、南極でオオロラを見た世界で唯一の高校生になれるかも。</p>
 <p>結月：そうか、そうなったら、軽く死ねますね。</p>
+]]></content>
+      <categories>
+        <category>日语</category>
+      </categories>
+      <tags>
+        <tag>日语</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《宇宙よりも遠い場所》台词-第二话</title>
+    <url>/2020/09/22/%E3%80%8A%E5%AE%87%E5%AE%99%E3%82%88%E3%82%8A%E3%82%82%E9%81%A0%E3%81%84%E5%A0%B4%E6%89%80%E3%80%8B%E5%8F%B0%E8%AF%8D-%E7%AC%AC%E4%BA%8C%E8%AF%9D/</url>
+    <content><![CDATA[<p>第二話：歌舞伎町のフリマントル</p>
+<p>我终于踏出这一步了，去往没有你的世界。</p>
+<span id="more"></span>
+
+
+<p>報せ：白瀬は十一月中旬に日本を出航、南極に向けて海を南下、途中フリーマントルに寄港。<br>決まり：オーストラリアだ。<br>報せ：ここで補給と観測隊員の乗り込みを行って、十二月の上旬、南極大陸に向けて出航するの。<br>決まり：日本から乗って行くんじゃなんだ。<br>報せ：それは昔の話、今はフリーマントルから乗船、帰るにはシドニーから飛行機って言うのが普通。<br>決まり：え〜<br>報せ：そこで、私たちは白瀬がフリーマントルに寄港する時期に合わせて日本を立ち、フリーマントルに向かう。<br>決まり：うんうん。<br>報せ：そして、ここで白瀬に乗り込み、南極へ。<br>決まり：乗れるの？<br>報せ：基本的に南極観測は国家事業、成員は自衛隊員が務め、観測隊員は厳しい審査と訓練に合格した人間だけ、高校生は絶対に無理。ただ、今年は特別。<br>決まり：今年は？民間南極観測隊、三年ぶりに発遣決まる。（その笑顔を見た時に、なんか心がブカブカした、あ、生しゃぶる言って、多分これだと思った。私は今、人生で一番途方もなくて、とんでもない大きい計画を立ってている。）<br>決まり：あれ、もしかして、 せいすいかん？<br>報せ：うん。<br>決まり：あは〜</p>
+<p>決まり：あ〜これも十八歳以上か。<br>恵：なに？バイト？<br>決まり：おはよう、うん、昨日話したでしょう、飛行機代。報せちゃんが用意しとけって。<br>恵：南極か。<br>決まり：うん、行ってる間、学校を休むことになるから、出席数を稼いでおけって。あっ、なにこれ？超いい！<br>恵：なに？<br>決まり：高校生女子募集、接客業、男性とお喋りしたり、お散歩したりする仕事ですって、内容によっては、月100万以上も夢じゃないかも、お〜<br>恵：見るかったら終わりだぞ。<br>決まり：大丈夫だよ、バイトするって学校には届け出すから。<br>恵：なにも分かってないな、お金はともかくとして、行けるのか本当に？<br>決まり：うん！報せちゃん言ってた、その今年でる民間の南極観測隊っていうに知り合いがあるからって、あ。<br>恵：調べて見たけど、ヤバそうだぞ。<br>決まり：4年前、新基地完成と新型砕氷艦就航に伴い、民間に払い下げれた二代目白瀬と昭和基地だが、その維持費と活動費調達に苦慮し、三年ぶりに発遣した今回の観測隊も、前回スポンサーだった企業は次々と撤退を表明して終わり、このままでは、隊員の安全が確保されないので、計画をそのまま対する批判の声も相次いているって。<br>先生：玉木さん、玉木さん、、<br>決まり：はっはい！<br>先生：つづけを読んでいただけますまいか？<br>決まり：はっはい、資金面の問題と合わせて今後も、はわ〜<br>先生：はわ、の先を聞かせていただきます。</p>
+<p>決まり：あ、まだこんなにある、書き取りなんて小学校以来だよ。<br>恵：授業中に読んでるからだろう。<br>決まり：だって、我慢できなかっただもん、それで？<br>恵：それでもなにもない、一応、今のところ計画が中止になったとは書いてないけど。<br>決まり：じゃ、大丈夫だね。<br>恵：そうか？仮に中止にならなかったとしても、そう簡単に乗れるか？いくら民間だからって。<br>決まり：ほら、報せちゃん観測隊員の娘だし。<br>恵：コンサートの間席者席じゃないんだから、そんなホイホイ乗せてくれるわけないと思うけどな。<br>決まり：そうか、だよね。<br>恵：この後、会うんだろう？一度ちゃんと聞いて見た方が良いぞ。<br>決まり：うん、分かった、はわ！</p>
+<p>決まり：ごめん。<br>報せ：時間は厳守！南極いくなら尚更よ、数分の遅れが生死に関わるだから。<br>決まり：だから、先生に怒られたって送ったじゃん。<br>報せ：バイトは？<br>決まり：え？<br>報せ：今日までに決めるって。<br>決まり：そうだけど、とりあえず、オーストラリアまでの飛行機代でょう？夏休みに纏めてやればなんとか。<br>報せ：いざという時のために、お金が多い方がいい、私調べて置いたから。<br>決まり：ほんど？<br>報せ：高校生女子、接客業で、男性とおしゃべりしたり、お散歩したりするバイトなんだって、かなりの時給でしょう？<br>決まり：うん、そうだけど。<br>報せ：そ、そうなの？<br>決まり：や、私も恵ちゃんに襲わたんだけど、報せちゃんもちょっと抜きてるとこあるよね。<br>報せ：抜きてない、ただ知らなかっただけで。なに？それ。<br>決まり：友達、南極ほんとに行けるのかって心配してて。<br>報せ：疑うの？<br>決まり：疑うってじゃないけど、ただ、確証がないっていうか。ね、心配になるでしょう、それに仮に中止にならなかったとしても、乗れるのかって。<br>報せ：乗れる！だって、私は小渕沢貴子の娘だから。<br>決まり：本当に？それだけで？<br>報せ：絶対大丈夫！<br>決まり：そうかな、でも。<br>報せ：嫌になったらなったって、素直に言えばいいじゃない。<br>決まり：え？<br>報せ：それ私のせいにしようとして。<br>決まり：嫌になったんじゃないよ、ただ失敗したくない、やっぱりやめとけだって思たくない、「行って良かった」、「報せちゃんの計画に乗ってよかった」って思いたい、うん、、<br>報せ：ちゃんと状況は全部わかってる、作戦も考えてある。<br>決まり：ほんとに？<br>報せ：うん、今度ちゃんと説明するから、決まりは準備進めて。<br>決まり：うん、わかった！おっ</p>
+<p>決まり：いっらしゃいませ、温めはいかがなされますか？<br>店員：まあ、いろいろこれから覚えてもらえば良いから、まず補充お願い、そこ三宅さんいるから、聞いて。<br>決まり：はい！<br>決まり：あのう、、<br>日向：うわ！<br>決まり：あの、今日から入ったことになった玉木です、よろしくお願いします！<br>日向：玉木？<br>決まり：玉木マリです。<br>日向：あ、それで決まり、はは、三宅日向です、何歳？<br>決まり：十六歳、高二です。<br>日向：一緒だ、よろしく！<br>決まり：よ、よろしく。<br>日向：だったら、西校だよね。<br>決まり：うん、多西。<br>日向：なんで急にバイト？<br>決まり：はうん、ちょっと必要っていうか、行きたいところがあって。<br>日向：うんん〜それってさ、もしかして、南極？<br>決まり：え？</p>
+<p>報せ：行きたい？<br>決まり：うん、なんか前から私たちの話聞いてたみたいで。<br>日向：あ、そういう風にいったら、盗み聞きみたいだろう、違うからね、二人で大声で話てだから。<br>報せ：大声？<br>日向：嫌になってったら言えば良いじゃない？嫌になったんじゃないよ、、<br>決まり：良いよ、やりなくて！<br>日向：それで、気になっててさ、そして決まりがバイトで入って来たでしょう、これは運命だって思ったね私は。<br>報せ：言っておくけど、遊びじゃないから。<br>日向：分かってる。<br>報せ：命の危険だってあるし、旅費だってちゃんと払ってもらうるし、出発は十二月だから、学校を休むことにもなる。<br>日向：I’am OK!平気だよ、バイトでお金があるし、高校を行ってないし。<br>決まり：え！そうなの？<br>日向：そんなに驚くことないだろう、中にはいるんだよ、高校行ってない十六歳だって。<br>決まり：おう。<br>日向：あ、でも、間違えるなよ、勉強は絶対負けないから、高認も通るし、この前の模試は合格判定Aだし。<br>決まり：え！まだ高二なのに！<br>報せ：じゃ、大学は行くってこと？<br>日向：そう、合格しまくて、高校で怠けて落ちたやつらにザマミロって言うのが今のとこの夢。<br>決まり：あ〜<br>報せ：でも、だったら南極行って暇なんてないじゃない。<br>日向：そうだけど、まだ受験まで2年近くあるし、来年は本気で受験勉強だって考えると、一個ぐらいになかしときたいなって。<br>決まり：分かる、だよね、今年しなかったら、もうできないもんね。<br>日向：そう！お、良いのか？このままくまんとおでん作り終わって良いのか？俺の十六歳！<br>決まり：そうそう！<br>日向：お前とはうまいお酒飲めそうだ、飲んだことないけど。<br>決まり：私も！<br>報せ：うるさい！この計画を立ってたのは私なんだから、私の指示に従って。<br>決まり：別に下がろうって言ってないけど。<br>日向：なに？めんどくさいタイプ？<br>決まり：ちょっと、、<br>報せ：作戦の概要、今度の日曜日、決行するから。じゃ、日曜。<br>三人：うん！</p>
+<p>決まり、日向：バイバイ！<br>決まり：どう思う、この作戦？<br>日向：さあ、なかなか難しそうと思うけどね。<br>決まり：だよね。<br>日向：でも、あの子私らよりは南極のこと知ってるだろうし、やるしかないじゃない？引き返せるうちは、旅ではない！引き返せなくなった時に、初めてそれは旅になるのだって言うし。<br>決まり：うわ〜なにそれ？名言っぽい、誰の言葉？<br>日向：私〜<br>決まり：なんだ、、<br>日向：でも、よかったよ。<br>決まり：え？<br>日向：私あなたたち二人のこと嫌いじゃなかったんだよね、ほら、あのコンビニ、多西近いから、生徒いっぱいくるじゃん。<br>決まり：うん。<br>日向：でも、二人だけはなんか別だなって、空気が違うって言うか。<br>決まり：そんなこと言われたの初めて。<br>日向：私さあ、集団の中でグチャグチャみたいなのは苦手ててさ、だから高校無理だたんだけど、二人はいいなあって。<br>決まり：良いって、なにが？<br>日向：うん、なんだろう、嘘ついてない感じ？って言われたら、良い気する？<br>決まり：そりゃ、、<br>日向：こうして日向ちゃんは人の心にとりるだよ、じゃね〜<br>決まり：うん、、</p>
+<p>決まり：新宿だ！<br>日向：ギャラギャラするな！群馬だってバレる！<br>決まり：だって、なんかキラキラしてて、どこ見ていいのわかんない！<br>日向：落ち着け！<br>報せ：決まり、まって、おいで行かないで。<br>日向：おい、間違えてる！<br>決まり：か、歌舞伎町。<br>報せ：き、来たことないの？<br>決まり：夜来るのは初めてかも、一応恵ちゃん自留めるか持って言ってたけど。<br>日向：補導されたりしないか？私は良いけど、二人は学校にバレたらまずいだろう。<br>決まり：歩いてだけでも？<br>日向：場所が場所だからな。<br>報せ：平気、大学生って顔してれば。<br>路人：なに？遊びに来たの？ちょっとちょっとだけ、、<br>決まり：どうしよう？<br>日向：面白いから、ほっとこうか。<br>日向：あった、観測隊員親睦会合意一行さま。<br>決まり：ほんと？<br>報せ：よし！後は作戦通りに。<br>決まり：でも、これ一人を誘い出すってしか書いてないけど。<br>日向：どうするの？<br>報せ：それは、普通男子隊員が多いから、女子高生がこう、、<br>日向：まさか、誘惑しろって言うんじゃないだろうな。<br>決まり：まあ、報せちゃん美人だからな。<br>報せ：私？私はないない。<br>日向：待って、私たちのどっちが行かせるつもりだったのかよ！<br>決まり：無理だよ！<br>日向：来たぞ、そうする？<br>報せ：決まり、お願い！<br>決まり：そんな！<br>日向：決まり！<br>決まり：え？！<br>日向：昭和か？！<br>決まり：じゃ日向ちゃんやってよ！<br>日向：ほら、モタモタしていると行っちゃう！足だ、なまし！<br>決まり：パンツだもん。<br>日向：じゃ、胸だ、胸を挙上せよ、いい〜か！<br>決まり：だいたい胸なら、、<br>報せ：嫌だ、嫌だ、、<br>日向：行けよ、南極行かんだら。<br>決まり：そうだよ、ずるいよ、作戦考えた報せなんだから。<br>報せ：や、で、私はだめなの。<br>日向：なにがダメなんだよ。<br>決まり：そうだよ。<br>弓子：うん、あっ。<br>佳苗：お？報せちゃん？<br>弓子：しつこいね、あの子も。<br>ゆず：誰ですか？<br>日向：お辞儀してどんするんだよ？ここ学校か？優等生か？！<br>報せ：だから私はダメだって言ってるでしょう？<br>決まり：どうして？<br>報せ：顔がバレてるの、だから、見つかったらすぐに捕まって、、<br>弓子：うわ、三人もいる！<br>報せ：逃げて、<br>日向、決まり：え？<br>報せ：逃げて！<br>決まり：日向ちゃん、早い！<br>日向：一応短距離だったらな、別れた方が良いじゃないのか？<br>報せ：そうね。<br>日向：おじ会う場所は？<br>報せ：携帯で！<br>日向：おらい〜<br>決まり：まだ追って来る。<br>報せ：観測隊員だから、体力すごいし。<br>決まり：私たちも別れる？ あ、痛い。<br>報せ：あ、ごめん。<br>決まり：うん。<br>報せ：なに？<br>決まり：うん、ただ、楽しいなあって。<br>報せ：楽しい？<br>決まり：うん、なんかね、動いてる！<br>報せ：え？<br>決まり：私の青春動いてる気がする！そう、こう言うのだ！なにかが起きそうで、なにか起こせそうで、毎日見ている景色が、目も苦しく変わっていって。<br>路人A：やっぱ外飲み最高だね、美味しいね。<br>路人B：今日朝まで飲んで、、<br>日向：え？！<br>路人A、B：バイバイ！<br>報せ、日向、決まり：あっ！！</p>
+<p>佳苗：そんなに息切らすまで走らなくても、別に命奪おうわけじゃないのに、奪いそうだけど。<br>決まり：だって、報せちゃんが。<br>日向：そうだよ、捕まったら撃ちこびこもんって。<br>報せ：そんなこと言ってない。<br>弓子：しかし、よくその作戦思いつくよね。<br>佳苗：つまり、男性隊員誑かして、協力させて見っこしよってこどでしょう？悪い女ね、誰が思いついたの？<br>佳苗：まっ、そうよね、あのね、報せちゃん、何度も話した通り、あなたを連れて行くことはできないの、たとえ民間でもね、隊員が厳しい条件があって。<br>報せ：分かってます！無理を言ってるのは分かってます！でも、どうしても行きたい、だって、お母さんが待ってる。<br>決まり：報せちゃん。<br>佳苗：なに、これ？<br>報せ：見た通りです、資金困ってるですよね、私たちをそのお金でスボサーにしてください、連れて行ってくれったら、そのお金あげますから。<br>弓子：よく考えるわね。<br>佳苗：分かった、十二月一日、フリーマントりきて。<br>報せ：ほんとですか？！<br>佳苗：なんって言うと思う？そんな心配してもらわなくても、私たちは行くわ、必ずね。<br>佳苗：貴子、、、</p>
+<p>弓子：まあ、気持ちは分かるけどね。<br>佳苗：あれから3年。<br>弓子：で、ほんとに資金は大丈夫なの？<br>佳苗：さっき言ってたでしょう？まあ、大変だけど、いろいろ考えてるわ。<br>弓子：白石さん、、<br>佳苗：もう、その一環！</p>
+<p>決まり：お母さん、か。<br>日向：まあ、落ち込むなよ、これでダメと決まってわけじゃない。<br>報せ：後一息で、もう少しこのお金を受けたりそうだった、後少しで絶対にうまく行って、、<br>日向：こいつ、ポッじてうちゃんだ。<br>決まり：だね〜<br>日向：まあ、そうじゃなきゃこんなことできないか。<br>決まり：だね！<br>日向：ただし、緊急動議、小淵沢報せのリーダー担任を解任を要求しまーす、賛成の人？<br>決まり：はい！<br>日向：賛成多数！よってた今よりリーダーを解任します！<br>報せ：え？！<br>日向：と言うわけで、南極いくぞ！<br>日向、決まり：おぉ！<br>報せ：え？！！</p>
 ]]></content>
       <categories>
         <category>日语</category>
@@ -4831,27 +4831,6 @@
       </tags>
   </entry>
   <entry>
-    <title>再记Hexo博客恢复</title>
-    <url>/2019/06/09/%E5%86%8D%E8%AE%B0Hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D/</url>
-    <content><![CDATA[<p>Hexo博客恢复</p>
-<p>从官网下载 Nodejs <strong>二进制</strong> 文件（.tar.xz），解压到 /opt 目录下，添加连接：</p>
-<p><code>sudo tar -xvf xxxx.tar.xz</code></p>
-<p><code>sudo ln -s /opt/node-linux-x64xxxx/bin/node /usr/local/bin/node</code></p>
-<p><code>sudo ln -s /opt/node..../bin/npm /usr/local/bin/npm</code></p>
-<p>然后进入博客文件夹，执行</p>
-<p><code>sudo npm install</code></p>
-<p>即可完成恢复。</p>
-<hr>
-<p>折腾了半天一直各种报错，没想到这么简单。。</p>
-]]></content>
-      <categories>
-        <category>博客维护</category>
-      </categories>
-      <tags>
-        <tag>博客维护</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Let’s Encrypt给网站加密</title>
     <url>/2020/11/07/%E4%BD%BF%E7%94%A8Let%E2%80%99s-Encrypt%E7%BB%99%E7%BD%91%E7%AB%99%E5%8A%A0%E5%AF%86/</url>
     <content><![CDATA[<p>使用 <strong>Let’s Encrypt</strong> 给网站加密</p>
@@ -4883,6 +4862,27 @@
       </categories>
       <tags>
         <tag>SSL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>再记Hexo博客恢复</title>
+    <url>/2019/06/09/%E5%86%8D%E8%AE%B0Hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D/</url>
+    <content><![CDATA[<p>Hexo博客恢复</p>
+<p>从官网下载 Nodejs <strong>二进制</strong> 文件（.tar.xz），解压到 /opt 目录下，添加连接：</p>
+<p><code>sudo tar -xvf xxxx.tar.xz</code></p>
+<p><code>sudo ln -s /opt/node-linux-x64xxxx/bin/node /usr/local/bin/node</code></p>
+<p><code>sudo ln -s /opt/node..../bin/npm /usr/local/bin/npm</code></p>
+<p>然后进入博客文件夹，执行</p>
+<p><code>sudo npm install</code></p>
+<p>即可完成恢复。</p>
+<hr>
+<p>折腾了半天一直各种报错，没想到这么简单。。</p>
+]]></content>
+      <categories>
+        <category>博客维护</category>
+      </categories>
+      <tags>
+        <tag>博客维护</tag>
       </tags>
   </entry>
   <entry>
