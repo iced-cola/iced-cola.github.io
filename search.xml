@@ -24,6 +24,73 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo博客同时部署到github和coding并设置双线解析</title>
+    <url>/2018/11/19/Hexo%E5%8D%9A%E5%AE%A2%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%88%B0github%E5%92%8Ccoding%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%8F%8C%E7%BA%BF%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>因为github服务器禁止了百度爬虫，所以不能百度收录不了站点，导致访问量很低，本来不想折腾的，想了一下还是将博客也部署到了coding上，方便百度的收录。</p>
+<span id="more"></span>
+
+
+
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><ol>
+<li><p>在coding上创建一个名为 <strong>用户名</strong> (不是昵称)的项目，并开启pages服务；</p>
+</li>
+<li><p>将本地ssh公钥文件添加到coding的SSH公钥中并测试是否能访问：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -T -p 443 git@git-ssh.coding.net</span><br></pre></td></tr></table></figure></li>
+<li><p>在站点配置文件中添加上coding仓库地址：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:Kotobuki-Tsumugi/Kotobuki-Tsumugi.github.io.git</span></span><br><span class="line">    <span class="attr">coding:</span> <span class="string">git@git.dev.tencent.com:Kobobuki-Tsumugi/Kobobuki-Tsumugi.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在站点目录/source下创建一个名为Staticfile的空文件；</p>
+</li>
+<li><p>生成并上传静态文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+<li><p>在域名解析中新增两条CNAME记录，指向username.coding.me，注意区分境外线路和默认线路，指向coding的必须为默认线路，如果不能正常访问，可以先暂停github的解析，待coding的解析成功后再开启github的解析，解析反应不及时。</p>
+</li>
+<li><p>向百度提交站点sitemap文件地址。</p>
+</li>
+</ol>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>其中也遇到一些玄学的问题：</p>
+<p><img src="https://images2.imgbox.com/0e/48/c6Y1zWYh_o.png" alt="coding提示域名绑定异常"></p>
+<p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com/">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com/">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
+]]></content>
+      <categories>
+        <category>博客维护</category>
+      </categories>
+      <tags>
+        <tag>博客维护</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git配置代理</title>
+    <url>/2019/04/06/Git%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<p>git的代理配置</p>
+<p>给sublime安装插件的时候又碰到git clone速度过慢的问题，记录一哈！</p>
+<span id="more"></span>
+
+
+
+<ol>
+<li><p>打开ss全局代理；</p>
+</li>
+<li><p>到 <a href="https://www.ipaddress.com/">IPAddress.com</a> 根据 github.global.ssl.fastly.net 获取github服务器地址；</p>
+</li>
+<li><p>在 /etc/hosts 或者C:/windows/system32/driver/etc/hosts 文件中添加对应的记录：</p>
+<p>ip github.global.ssl.fastly.net</p>
+</li>
+<li><p>设置git代理：</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> http和https协议代理：</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sock5的情况</span></span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消代理</span></span><br><span class="line">git config --global unset http.proxy</span><br><span class="line">git config --global unset https.proxy</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh协议代理：在用户目录下建立如下文件 ~/.ssh/config，对 GitHub 的域名做单独的处理</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里必须是 github.com，因为这个跟我们 <span class="built_in">clone</span> 代码时的链接有关</span></span><br><span class="line">Host github.com</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果用默认端口，这里是 github.com，如果想用443端口，这里就是 ssh.github.com 详见 https://help.github.com/articles/using-ssh-over-the-https-port/</span></span><br><span class="line">   HostName github.com</span><br><span class="line">   User git</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 HTTP 代理，把下面这行取消注释，并把 proxyport 改成自己的 http 代理的端口</span></span><br><span class="line">     ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=6667</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 socks5 代理，则把下面这行取消注释，并把 6666 改成自己 socks5 代理的端口</span></span><br><span class="line">     ProxyCommand nc -v -x 127.0.0.1:6666 %h %p</span><br></pre></td></tr></table></figure>
+
+<p>==&gt;&gt; <a href="https://imciel.com/2016/06/28/git-proxy/">设置 git 代理</a> </p>
+<p>在Ubuntu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Gitlab+Jenkins+Docker自动部署SpringBoot微服务</title>
     <url>/2021/06/13/Docker-Jenkins-Gitlab%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1/</url>
     <content><![CDATA[<blockquote>
@@ -31,7 +98,7 @@
 </blockquote>
 <!--more--->
 
-<h2 id="搭建测试项目"><a href="#搭建测试项目" class="headerlink" title="搭建测试项目"></a>搭建测试项目</h2><ul>
+<h2 id="搭建测试项目"><a href="#搭建测试项目" class="headerlink" title="搭建测试项目"></a>搭建测试项目</h2><h3 id="请求接口"><a href="#请求接口" class="headerlink" title="请求接口"></a>请求接口</h3><ul>
 <li><p>搭建一个简单的SpringBoot项目，创建一个接口用来测试。</p>
 <p>  <a href="https://github.com/chenxii81">chenxii81</a>/<strong><a href="https://github.com/chenxii81/springboot-demo">springboot-demo</a></strong></p>
 </li>
@@ -41,6 +108,16 @@
 
 <p>返回数据格式：</p>
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;code&quot;</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;请求成功&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;no&quot;</span>: <span class="string">&quot;U00-0&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;U-name0&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;level&quot;</span>: <span class="string">&quot;高级用户&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;point&quot;</span>: <span class="number">245</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;no&quot;</span>: <span class="string">&quot;U00-1&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;U-name1&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;level&quot;</span>: <span class="string">&quot;初级用户&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;point&quot;</span>: <span class="number">238</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;no&quot;</span>: <span class="string">&quot;U00-2&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;U-name2&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;level&quot;</span>: <span class="string">&quot;初级用户&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;point&quot;</span>: <span class="number">240</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FROM openjdk:8-jdk-alpine</span><br><span class="line">VOLUME /tmp</span><br><span class="line">COPY springboot-demo.jar app.jar</span><br><span class="line">ENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;/app.jar&quot;]</span><br><span class="line">EXPOSE 8080</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="Jenkinsfile"><a href="#Jenkinsfile" class="headerlink" title="Jenkinsfile"></a>Jenkinsfile</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&#x27;Build&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &#x27;Building..&#x27;</span><br><span class="line">                sh &#x27;mvn clean &amp;&amp; mvn package&#x27;</span><br><span class="line">                sh &#x27;cp target/springboot-demo.jar src/main/docker/springboot-demo.jar&#x27;</span><br><span class="line">                echo &#x27;Build completed.&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&quot;Image&quot;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &#x27;Imaging..&#x27;</span><br><span class="line">                sh &#x27;cd src/main/docker &amp;&amp; docker build --rm -t springboot-demo:v1 .&#x27;</span><br><span class="line">                echo &#x27;Image completed.&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&#x27;Deploy&#x27;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &#x27;Deploying....&#x27;</span><br><span class="line">                sh &#x27;docker run -d -p 8082:8001 --name springboot-demo springboot-demo:v1&#x27;</span><br><span class="line">                echo &#x27;Deploy completed.&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 
 <br>
 
@@ -173,73 +250,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo博客同时部署到github和coding并设置双线解析</title>
-    <url>/2018/11/19/Hexo%E5%8D%9A%E5%AE%A2%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%88%B0github%E5%92%8Ccoding%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%8F%8C%E7%BA%BF%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>因为github服务器禁止了百度爬虫，所以不能百度收录不了站点，导致访问量很低，本来不想折腾的，想了一下还是将博客也部署到了coding上，方便百度的收录。</p>
-<span id="more"></span>
-
-
-
-<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><ol>
-<li><p>在coding上创建一个名为 <strong>用户名</strong> (不是昵称)的项目，并开启pages服务；</p>
-</li>
-<li><p>将本地ssh公钥文件添加到coding的SSH公钥中并测试是否能访问：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -T -p 443 git@git-ssh.coding.net</span><br></pre></td></tr></table></figure></li>
-<li><p>在站点配置文件中添加上coding仓库地址：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:Kotobuki-Tsumugi/Kotobuki-Tsumugi.github.io.git</span></span><br><span class="line">    <span class="attr">coding:</span> <span class="string">git@git.dev.tencent.com:Kobobuki-Tsumugi/Kobobuki-Tsumugi.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在站点目录/source下创建一个名为Staticfile的空文件；</p>
-</li>
-<li><p>生成并上传静态文件：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
-<li><p>在域名解析中新增两条CNAME记录，指向username.coding.me，注意区分境外线路和默认线路，指向coding的必须为默认线路，如果不能正常访问，可以先暂停github的解析，待coding的解析成功后再开启github的解析，解析反应不及时。</p>
-</li>
-<li><p>向百度提交站点sitemap文件地址。</p>
-</li>
-</ol>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>其中也遇到一些玄学的问题：</p>
-<p><img src="https://images2.imgbox.com/0e/48/c6Y1zWYh_o.png" alt="coding提示域名绑定异常"></p>
-<p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com/">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com/">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
-]]></content>
-      <categories>
-        <category>博客维护</category>
-      </categories>
-      <tags>
-        <tag>博客维护</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git配置代理</title>
-    <url>/2019/04/06/Git%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<p>git的代理配置</p>
-<p>给sublime安装插件的时候又碰到git clone速度过慢的问题，记录一哈！</p>
-<span id="more"></span>
-
-
-
-<ol>
-<li><p>打开ss全局代理；</p>
-</li>
-<li><p>到 <a href="https://www.ipaddress.com/">IPAddress.com</a> 根据 github.global.ssl.fastly.net 获取github服务器地址；</p>
-</li>
-<li><p>在 /etc/hosts 或者C:/windows/system32/driver/etc/hosts 文件中添加对应的记录：</p>
-<p>ip github.global.ssl.fastly.net</p>
-</li>
-<li><p>设置git代理：</p>
-</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> http和https协议代理：</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sock5的情况</span></span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消代理</span></span><br><span class="line">git config --global unset http.proxy</span><br><span class="line">git config --global unset https.proxy</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh协议代理：在用户目录下建立如下文件 ~/.ssh/config，对 GitHub 的域名做单独的处理</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里必须是 github.com，因为这个跟我们 <span class="built_in">clone</span> 代码时的链接有关</span></span><br><span class="line">Host github.com</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果用默认端口，这里是 github.com，如果想用443端口，这里就是 ssh.github.com 详见 https://help.github.com/articles/using-ssh-over-the-https-port/</span></span><br><span class="line">   HostName github.com</span><br><span class="line">   User git</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 HTTP 代理，把下面这行取消注释，并把 proxyport 改成自己的 http 代理的端口</span></span><br><span class="line">     ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=6667</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 socks5 代理，则把下面这行取消注释，并把 6666 改成自己 socks5 代理的端口</span></span><br><span class="line">     ProxyCommand nc -v -x 127.0.0.1:6666 %h %p</span><br></pre></td></tr></table></figure>
-
-<p>==&gt;&gt; <a href="https://imciel.com/2016/06/28/git-proxy/">设置 git 代理</a> </p>
-<p>在Ubuntu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo博客备份</title>
     <url>/2018/11/18/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD/</url>
     <content><![CDATA[<h3 id="养成备份的好习惯"><a href="#养成备份的好习惯" class="headerlink" title="养成备份的好习惯"></a>养成备份的好习惯</h3><p>花了好长时间总算是把博客搭建起来了，之前自己买的服务器用Wordpress搭建博客，但是因为服务器经常需要使用，安装一些其他软件什么的，导致Wordpress运行不是很稳定，还很容易被墙。</p>
@@ -298,6 +308,299 @@
       </categories>
       <tags>
         <tag>IDEA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java多线程</title>
+    <url>/2020/10/08/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<p>创建线程的两种方式：</p>
+<ul>
+<li>继承Thread类；</li>
+<li>实现Runnable接口。</li>
+</ul>
+<span id="more"></span>
+
+<ol>
+<li>继承Thread类：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;My thread.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyThread myThread = <span class="keyword">new</span> MyThread();</span><br><span class="line">        myThread.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>当一个类已经继承了其他类时，就只能实现Runnable接口：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">OtherClass</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;my thread&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 先创建一个Thread实例，再传入自己的MyThread实例</span></span><br><span class="line">        MyThread myThread = <span class="keyword">new</span> MyThread();</span><br><span class="line">        <span class="keyword">new</span> Thread(myThread).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>Thread类实现了Runnable接口。</em></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> priority;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当线程有返回值时，必须实现Callable接口，执行Callable任务后返回Future对象，调用Future对象的get()方法获取返回值：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread2</span> <span class="keyword">implements</span> <span class="title">Callable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">    MyThread2(<span class="keyword">int</span> i) &#123;</span><br><span class="line">        <span class="keyword">this</span>.i = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> i * i * i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> taskSize = <span class="number">10</span>;</span><br><span class="line">        ExecutorService pool = Executors.newFixedThreadPool(taskSize);</span><br><span class="line">        List&lt;Future&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; taskSize; i++) &#123;</span><br><span class="line">            Callable callable = <span class="keyword">new</span> MyThread2(i);</span><br><span class="line">            Future future = pool.submit(callable);</span><br><span class="line">            list.add(future);</span><br><span class="line">        &#125;</span><br><span class="line">        pool.shutdown();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Future future : list) &#123;</span><br><span class="line">            System.out.println(future.get().toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>new Thread的弊端如下：</strong></p>
+<p>a. 每次new Thread新建对象性能差。<br>b. 线程缺乏统一管理，可能无限制新建线程，相互之间竞争，及可能占用过多系统资源导致死机或oom。<br>c. 缺乏更多功能，如定时执行、定期执行、线程中断。</p>
+<p><strong>相比new Thread，Java提供的四种线程池的好处在于：</strong></p>
+<p>a. 重用存在的线程，减少对象创建、消亡的开销，性能佳。<br>b. 可有效控制最大并发线程数，提高系统资源的使用率，同时避免过多资源竞争，避免堵塞。<br>c. 提供定时执行、定期执行、单线程、并发数控制等功能。</p>
+<p>参见 &gt;&gt; <a href="https://blog.csdn.net/u011974987/article/details/51027795">Java 四种线程池的用法分析</a></p>
+<p>Java提供的4种线程池：</p>
+<ul>
+<li>newCachedThreadPool：创建一个可缓存线程池，如果线程池长度超过处理需要，<strong>可灵活回收空闲线程</strong>，若无可回收，则新建线程。</li>
+<li>newFixedThreadPool：创建一个定长线程池，<strong>可控制线程最大并发数</strong>，超出的线程会在队列中等待。</li>
+<li>newSchuduledThreadPool：创建一个定长线程池，<strong>支持定时及周期性任务执行</strong>。</li>
+<li>newSingleThreadPool：创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，<strong>保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行</strong>。</li>
+</ul>
+<p>newCachedThreadPool</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ExecutorService pool = Executors.newCachedThreadPool();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> index = i;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(i * <span class="number">500</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            pool.execute(() -&gt; System.out.println(Thread.currentThread().getName() + <span class="string">&quot; &quot;</span> + index));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>线程池为无限大，当执行第二个任务时第一个任务已经完成，会复用执行第一个任务的线程，而不用每次新建线程。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pool-1-thread-1 0</span><br><span class="line">pool-1-thread-1 1</span><br><span class="line">pool-1-thread-1 2</span><br><span class="line">pool-1-thread-1 3</span><br><span class="line">pool-1-thread-1 4</span><br><span class="line">pool-1-thread-1 5</span><br><span class="line">pool-1-thread-1 6</span><br><span class="line">pool-1-thread-1 7</span><br><span class="line">pool-1-thread-1 8</span><br><span class="line">pool-1-thread-1 9</span><br></pre></td></tr></table></figure>
+
+
+
+<p>newFixedThreadPool</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ExecutorService pool = Executors.newFixedThreadPool(<span class="number">3</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> x = i;</span><br><span class="line">    pool.execute(() -&gt; &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">&quot;  &quot;</span> + x);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>任务数超出最大线程数，超出的线程会等待：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pool-1-thread-2  1</span><br><span class="line">pool-1-thread-3  2</span><br><span class="line">pool-1-thread-1  0</span><br><span class="line">pool-1-thread-2  3</span><br><span class="line">pool-1-thread-1  5</span><br><span class="line">pool-1-thread-3  4</span><br><span class="line">pool-1-thread-2  6</span><br><span class="line">pool-1-thread-1  7</span><br><span class="line">pool-1-thread-3  8</span><br><span class="line">pool-1-thread-2  9</span><br></pre></td></tr></table></figure>
+
+
+
+<p>newSchuduledThreadPool</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ScheduledExecutorService pool = Executors.newScheduledThreadPool(<span class="number">3</span>);</span><br><span class="line"><span class="comment">// 延迟 1 秒后每 3 秒执行一次</span></span><br><span class="line">pool.scheduleAtFixedRate(() -&gt; System.out.println(Thread.currentThread().getName()), <span class="number">1</span>, <span class="number">3</span>, TimeUnit.SECONDS);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>newSingleThreadPool</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ExecutorService pool = Executors.newSingleThreadExecutor();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> index = i;</span><br><span class="line">    pool.execute(() -&gt; System.out.println(Thread.currentThread().getName() + <span class="string">&quot; &quot;</span> + index));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pool-1-thread-1 0</span><br><span class="line">pool-1-thread-1 1</span><br><span class="line">pool-1-thread-1 2</span><br><span class="line">pool-1-thread-1 3</span><br><span class="line">pool-1-thread-1 4</span><br><span class="line">pool-1-thread-1 5</span><br><span class="line">pool-1-thread-1 6</span><br><span class="line">pool-1-thread-1 7</span><br><span class="line">pool-1-thread-1 8</span><br><span class="line">pool-1-thread-1 9</span><br></pre></td></tr></table></figure>
+
+
+
+<p>线程的生命周期：</p>
+<p>新建New：JVM分配内存，并初始化成员变量的值；</p>
+<p>就绪Runnable：创建方法调用栈和程序计数器；</p>
+<p>运行 Running：获得CPU，执行run()方法；</p>
+<p>阻塞 Blocked：让出CPU时间片，停止运行；</p>
+<p>死亡 Dead：正常结束，异常结束或调用stop()方法。</p>
+<blockquote>
+<p>wait()和sleep()的关键的区别在于，sleep()方法属于Thread类，wait()方法属于Object类，wait()是用于线程间通信的，而sleep()是用于短时间暂停当前线程。更加明显的一个区别在于，<strong>当一个线程调用wait()方法的时候，会释放它锁持有的对象的管程和锁，但是调用sleep()方法的时候，不会释放他所持有的管程。</strong></p>
+<p>而当调用 wait()方法的时候，线程会放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象调用 notify()方法后本线程才进入对象锁定池准备获取对象锁进入运行状态。</p>
+</blockquote>
+<p>终止线程的3种方式 &gt; <a href="https://blog.csdn.net/Smile_Miracle/article/details/71550548">Java中如何优雅正确的终止线程</a></p>
+<ol>
+<li><p>使用stop()方法</p>
+<p>thread.stop()调用之后，创建子线程的线程就会抛出 ThreadDeatherror 的错误，并且会释放子线程所持有的所有锁。一般任何进行加锁的代码块，都是为了保护数据的一致性，如果在调用thread.stop()后导致了该线程所持有的所有锁的突然释放(不可控制)，那么被保护数据就有可能呈现不一致性，其他线程在使用这些被破坏的数据时，有可能导致一些很奇怪的应用程序错误。因此，并不推荐使用 stop 方法来终止线程。</p>
+</li>
+<li><p>使用volatile标志位：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">&quot;创建&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (flag) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">&quot;终止&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        MyRunnable myRunnable = <span class="keyword">new</span> MyRunnable();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">            Thread thread = <span class="keyword">new</span> Thread(myRunnable, i + <span class="string">&quot; &quot;</span>);</span><br><span class="line">            thread.start();</span><br><span class="line">        &#125;</span><br><span class="line">        Thread.sleep(<span class="number">2000L</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;-------&quot;</span>);</span><br><span class="line">        myRunnable.flag = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>output</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0 创建</span><br><span class="line">2 创建</span><br><span class="line">1 创建</span><br><span class="line">-------</span><br><span class="line">2 终止</span><br><span class="line">0 终止</span><br><span class="line">1 终止</span><br></pre></td></tr></table></figure></li>
+<li><p>使用interrupt方式</p>
+<ol>
+<li><p>线程处于阻塞状态时：</p>
+<p>如使用了 sleep,同步锁的 wait,socket 中的 receiver,accept 等方法时，会使线程处于阻塞状态。当调用线程的 interrupt()方法时，会抛出 InterruptException 异常。阻塞中的那个方法抛出这个异常，通过代码捕获该异常，然后 break 跳出循环状态，从而让我们有机会结束这个线程的执行。通常很多人认为只要调用 interrupt 方法线程就会结束，实际上是错的， 一定要先捕获 InterruptedException 异常之后通过break 来跳出循环，才能正常结束 run 方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread5</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">3000L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyThread5 thread5 = <span class="keyword">new</span> MyThread5();</span><br><span class="line">        thread5.start();</span><br><span class="line">        <span class="keyword">boolean</span> interrupted = thread5.isInterrupted();</span><br><span class="line">        <span class="keyword">if</span> (!interrupted) &#123;</span><br><span class="line">            thread5.interrupt();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output</span><br><span class="line">java.lang.InterruptedException: sleep interrupted</span><br><span class="line">	at java.base/java.lang.Thread.sleep(Native Method)</span><br><span class="line">	at ch4.MyThread5.run(MyThread5.java:<span class="number">12</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>线程未处于阻塞状态：</p>
+<p>使用 isInterrupted()判断线程的中断标志来退出循环。当使用<br>interrupt()方法时，中断标志就会置 true，和使用自定义的标志来控制循环是一样的道理。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread5</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.run();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;线程开始。。。&quot;</span>);</span><br><span class="line">            Thread.sleep(<span class="number">200000</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;线程结束。&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;在沉睡中被停止, 进入catch， 调用isInterrupted()方法的结果是：&quot;</span> + <span class="keyword">this</span>.isInterrupted());</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyThread5 thread5 = <span class="keyword">new</span> MyThread5();</span><br><span class="line">        thread5.start();</span><br><span class="line">        thread5.interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output</span><br><span class="line">线程开始。。。</span><br><span class="line">在沉睡中被停止, 进入<span class="keyword">catch</span>， 调用isInterrupted()方法的结果是：<span class="keyword">false</span></span><br><span class="line">java.lang.InterruptedException: sleep interrupted</span><br><span class="line">	at java.base/java.lang.Thread.sleep(Native Method)</span><br><span class="line">	at ch4.MyThread5.run(MyThread5.java:<span class="number">13</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<p>线程基本方法：</p>
+<p>yield：线程的礼让指的是先将线程的资源让出去，让别的线程先执行。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadMethod</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (x % <span class="number">3</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                    Thread.yield(); <span class="comment">//线程礼让</span></span><br><span class="line">                    System.out.println(<span class="string">&quot;玩耍线程礼让执行 ***********************&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">&quot;、 x = &quot;</span> + x);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;玩耍的线程&quot;</span>);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;【霸道的main主线程】 x = &quot;</span> + x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>output</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">玩耍线程礼让执行 ***********************</span><br><span class="line">【霸道的main主线程】 x = 0</span><br><span class="line">【霸道的main主线程】 x = 1</span><br><span class="line">【霸道的main主线程】 x = 2</span><br><span class="line">【霸道的main主线程】 x = 3</span><br><span class="line">【霸道的main主线程】 x = 4</span><br><span class="line">【霸道的main主线程】 x = 5</span><br><span class="line">【霸道的main主线程】 x = 6</span><br><span class="line">【霸道的main主线程】 x = 7</span><br><span class="line">【霸道的main主线程】 x = 8</span><br><span class="line">【霸道的main主线程】 x = 9</span><br><span class="line">玩耍的线程、 x = 0</span><br><span class="line">玩耍的线程、 x = 1</span><br><span class="line">玩耍的线程、 x = 2</span><br><span class="line">玩耍线程礼让执行 ***********************</span><br><span class="line">玩耍的线程、 x = 3</span><br><span class="line">玩耍的线程、 x = 4</span><br><span class="line">玩耍的线程、 x = 5</span><br><span class="line">玩耍线程礼让执行 ***********************</span><br><span class="line">玩耍的线程、 x = 6</span><br><span class="line">玩耍的线程、 x = 7</span><br><span class="line">玩耍的线程、 x = 8</span><br><span class="line">玩耍线程礼让执行 ***********************</span><br><span class="line">玩耍的线程、 x = 9</span><br></pre></td></tr></table></figure>
+
+
+
+<p>join: 线程强制执行，指的当满足某些条件之后，某一个线程对象将一直可以独占资源，一直到该线程的程序执行结束。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadMethod</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        Thread mainThread = Thread.currentThread(); <span class="comment">//获得主线程</span></span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (x == <span class="number">3</span>) &#123;  <span class="comment">//如果x == 3，就强制执行主线程</span></span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        mainThread.join();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">&quot;、 x = &quot;</span> + x);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;玩耍的线程&quot;</span>);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++) &#123;</span><br><span class="line">            Thread.sleep(<span class="number">100L</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;【霸道的main主线程】 x = &quot;</span> + x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>output</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">玩耍的线程、 x = 0</span><br><span class="line">玩耍的线程、 x = 1</span><br><span class="line">玩耍的线程、 x = 2</span><br><span class="line">【霸道的main主线程】 x = 0</span><br><span class="line">【霸道的main主线程】 x = 1</span><br><span class="line">【霸道的main主线程】 x = 2</span><br><span class="line">【霸道的main主线程】 x = 3</span><br><span class="line">【霸道的main主线程】 x = 4</span><br><span class="line">【霸道的main主线程】 x = 5</span><br><span class="line">【霸道的main主线程】 x = 6</span><br><span class="line">【霸道的main主线程】 x = 7</span><br><span class="line">【霸道的main主线程】 x = 8</span><br><span class="line">【霸道的main主线程】 x = 9</span><br><span class="line">玩耍的线程、 x = 3</span><br><span class="line">玩耍的线程、 x = 4</span><br><span class="line">玩耍的线程、 x = 5</span><br><span class="line">玩耍的线程、 x = 6</span><br><span class="line">玩耍的线程、 x = 7</span><br><span class="line">玩耍的线程、 x = 8</span><br><span class="line">玩耍的线程、 x = 9</span><br></pre></td></tr></table></figure>
+
+
+
+<p>sleep： 休眠的主要特点是可以自动实现线程的唤醒，以继续进行后续的处理。但是需要注意的是，如果现在有多个线程对象，休眠也是有多个先后顺序的。</p>
+<p>wait和notify：</p>
+<ul>
+<li>synchronized关键词用于互斥访问。</li>
+<li>为了让一个方法是同步的，简单的添加synchronized关键词到它们的声明上。那么同一个对象上没有两个同步方法的调用可以相互交错。</li>
+<li>同步语句必须指定提供内在锁的对象。当使用synchronized(this)时候，必须避免使用同步其他对象方法的调用。</li>
+<li>wait()告诉调用的线程放弃监视器和进入休眠状态，直到其他线程进入相同的监视器和调用notify()。</li>
+<li>notify()唤醒在相同对象上第一个调用wait()的线程。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ThreadB b = <span class="keyword">new</span> ThreadB();</span><br><span class="line">        b.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">synchronized</span> (b) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Waiting for b to complete...&quot;</span>);</span><br><span class="line">                b.wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;Total is: &quot;</span> + b.total);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadB</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> total;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">                total += i;</span><br><span class="line">            &#125;</span><br><span class="line">            notify();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java字节码解析</title>
+    <url>/2020/11/18/Java%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a href="https://www.jianshu.com/p/252f381a6bc4">一文让你明白Java字节码</a></p>
+<span id="more"></span>
+
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>从一个简单类 Math.java 开始：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用 <code>javac Math.java</code> 得到字节码文件 Math.class，文件内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cafe babe 0000 0034 0013 0a00 0400 0f09</span><br><span class="line">0003 0010 0700 1107 0012 0100 016d 0100</span><br><span class="line">0149 0100 063c 696e 6974 3e01 0003 2829</span><br><span class="line">5601 0004 436f 6465 0100 0f4c 696e 654e</span><br><span class="line">756d 6265 7254 6162 6c65 0100 0369 6e63</span><br><span class="line">0100 0328 2949 0100 0a53 6f75 7263 6546</span><br><span class="line">696c 6501 0009 4d61 7468 2e6a 6176 610c</span><br><span class="line">0007 0008 0c00 0500 0601 0004 4d61 7468</span><br><span class="line">0100 106a 6176 612f 6c61 6e67 2f4f 626a</span><br><span class="line">6563 7400 2100 0300 0400 0000 0100 0200</span><br><span class="line">0500 0600 0000 0200 0100 0700 0800 0100</span><br><span class="line">0900 0000 1d00 0100 0100 0000 052a b700</span><br><span class="line">01b1 0000 0001 000a 0000 0006 0001 0000</span><br><span class="line">0001 0001 000b 000c 0001 0009 0000 001f</span><br><span class="line">0002 0001 0000 0007 2ab4 0002 0460 ac00</span><br><span class="line">0000 0100 0a00 0000 0600 0100 0000 0600</span><br><span class="line">0100 0d00 0000 0200 0e</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="内容解读"><a href="#内容解读" class="headerlink" title="内容解读"></a>内容解读</h2><p>参照图例：</p>
+<p><img src="https://images2.imgbox.com/08/79/8kGgoJqq_o.jpeg"></p>
+<p><img src="https://images2.imgbox.com/61/17/vm6prCvK_o.png"></p>
+<h3 id="魔数"><a href="#魔数" class="headerlink" title="魔数"></a>魔数</h3><p>cafe babe：魔数，文件后缀标识，被java虚拟机接受。</p>
+<br>
+
+<h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>0000：次版本号</p>
+<p>0034：主版本号=52，java 1.8</p>
+<br>
+
+<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>0013：常量池入口，2+n，十进制=19，表明有18个常量，从1开始</p>
+<p>0a：十进制=10，对应CONSTANT_Methodref_info，指向声明方法</p>
+<p>0004：常量索引#4</p>
+<p>000f：常量索引#15</p>
+<p>09：十进制=9，对应CONSTANT_Fieldref_info，指向字段的类或接口描述</p>
+<p>0003：常量索引#3</p>
+<p>0010：常量索引#16</p>
+<p>07：十进制=7，对应CONSTANT_Class_info，指向全限定名常量项的索引</p>
+<p>0011：常量索引#17</p>
+<p>07：同上</p>
+<p>0012：常量索引#18</p>
+<p>01：十进制=1，对应表中的CONSTANT_Utf8_info，utf8编码的字符串长度</p>
+<p>0001：字符串长度为1</p>
+<p>6d：109=”m”</p>
+<p>01：同上</p>
+<p>0001：同上</p>
+<p>49：49=”1”</p>
+<p>01：同上</p>
+<p>0006：同上</p>
+<p>3c 696e 6974 3e：字符串=<init></p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>2829 56：()V</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>436f 6465：C_de</p>
+<p>01：同上</p>
+<p>000f：同上</p>
+<p>4c 696e 654e 756d 6265 7254 6162 6c65：LineNumberTable</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>69 6e63：inc</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>28 2949：()I</p>
+<p>01：同上</p>
+<p>000a：长度为10的字符串</p>
+<p>53 6f75 7263 6546 696c 65：SourceFile</p>
+<p>01：同上</p>
+<p>0009：同上</p>
+<p>4d61 7468 2e6a 6176 61：Math.java</p>
+<p>0c：十进制=12，CONSTANT_NameAndType_info，指向该字段或方法名称常量项的索引</p>
+<p>0007：字段或者名字名称常量项索引#7</p>
+<p>0008：字段或者名字名称常量项索引#8</p>
+<p>0c：同上</p>
+<p>0005：字段或者名字名称常量项索引#5</p>
+<p>0006：字段或者名字名称常量项索引#6</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>4d61 7468：Math</p>
+<p>01：同上</p>
+<p>0010：同上</p>
+<p>6a 6176 612f 6c61 6e67 2f4f 626a 6563 74：java/lang/Object</p>
+<p>==== 常量解析完毕，共18个常量</p>
+<br>
+
+<h2 id="Access-Flag-访问标志部分"><a href="#Access-Flag-访问标志部分" class="headerlink" title="Access_Flag 访问标志部分"></a>Access_Flag 访问标志部分</h2><blockquote>
+<p>0x0021：是 0x0020 和 0x0001 的并集。</p>
+</blockquote>
+<p>0021：ACC_PUBLIC，访问修饰符为Public。</p>
+<br>
+
+<h2 id="类索引"><a href="#类索引" class="headerlink" title="类索引"></a>类索引</h2><p>类索引用于确定类的全限定名。</p>
+<p>0003：引用第3个常量，第3个常量引用第17个常量，为 Math。</p>
+<br>
+
+<h2 id="父类索引"><a href="#父类索引" class="headerlink" title="父类索引"></a>父类索引</h2><p>0004：引用第18个常量，为 java/lang/Object。</p>
+<br>
+
+<h2 id="接口索引"><a href="#接口索引" class="headerlink" title="接口索引"></a>接口索引</h2><p>0000：没有接口。</p>
+<br>
+
+<h2 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h2><p>字段表用于描述类和接口中声明的变量。这里的字段包含了类级别变量以及实例变量，但是不包括方法内部声明的局部变量。</p>
+<p><img src="https://images2.imgbox.com/46/18/b007hXKr_o.png"></p>
+<p>0001：字段属性。</p>
+<p>0002：Private访问。</p>
+<p>0005：常量索引#5，为”m”。</p>
+<p>0006：常量索引#6，为”1”。</p>
+<p>0000：属性表数量为0。</p>
+<br>
+
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://images2.imgbox.com/b5/62/ZKPXcYOv_o.png"></p>
+<p>to be continued…</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java注解简单例子</title>
+    <url>/2019/05/15/Java%E6%B3%A8%E8%A7%A3%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90/</url>
+    <content><![CDATA[<p>了解Java注解（@Annotation）</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
+</blockquote>
+<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
+<span id="more"></span>
+
+
+
+<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
+<p>四个元注解：</p>
+<ul>
+<li>@Target</li>
+<li>@Retention</li>
+<li>@Document</li>
+<li>Inherited</li>
+</ul>
+<p>注解主要是用户按自己的需求来实现。</p>
+<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>先创建两个注解，@Digits和@NotEmpty，用来注解属性是否满足给定条件。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段只能为数字，且最大长度为maxLength，最大小数位为fraction</span></span><br><span class="line"><span class="comment"> * 默认没有小数位</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Digits &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxLength</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fraction</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段不能为空</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotEmpty &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>定义一个处理类处理自定义注解：（主要利用反射机制）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 处理自定义注解</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationProcesser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Table table)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Class clazz = table.getClass();</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(<span class="string">&quot;class not found!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        String fieldName;</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------------------------&quot;</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Annotation[] annotations = field.getDeclaredAnnotations();</span><br><span class="line">            fieldName = field.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot;--&gt; info: into &quot;</span> + fieldName);</span><br><span class="line">            <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + annotation.annotationType());</span><br><span class="line">                <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Digits) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @Digits annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">int</span> maxLength = ((Digits) annotation).maxLength();</span><br><span class="line">                    <span class="keyword">int</span> annotatedFraction = ((Digits) annotation).fraction();</span><br><span class="line">                    String[] fraction = String.valueOf(table.getCount()).split(<span class="string">&quot;\\.&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (String.valueOf(table.getCount()).length() &gt; maxLength) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: maxLength exceed!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (fraction.length &gt; <span class="number">1</span> &amp;&amp; fraction[<span class="number">1</span>].length() &gt; annotatedFraction) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error：fraction length exceed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> NotEmpty) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @NotEmpty annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">if</span> (table.getDescription() == <span class="keyword">null</span> || <span class="string">&quot;&quot;</span>.equals(table.getDescription())) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: empty is not allowed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>主测试类：（<strong>省略getter和setter</strong>）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits(maxLength = 6, fraction = 2)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">&quot;description1&quot;</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">&quot;description2&quot;</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description3&quot;</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -812,299 +1115,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java多线程</title>
-    <url>/2020/10/08/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<p>创建线程的两种方式：</p>
-<ul>
-<li>继承Thread类；</li>
-<li>实现Runnable接口。</li>
-</ul>
-<span id="more"></span>
-
-<ol>
-<li>继承Thread类：</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;My thread.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyThread myThread = <span class="keyword">new</span> MyThread();</span><br><span class="line">        myThread.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>当一个类已经继承了其他类时，就只能实现Runnable接口：</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">OtherClass</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;my thread&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 先创建一个Thread实例，再传入自己的MyThread实例</span></span><br><span class="line">        MyThread myThread = <span class="keyword">new</span> MyThread();</span><br><span class="line">        <span class="keyword">new</span> Thread(myThread).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em>Thread类实现了Runnable接口。</em></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> priority;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>当线程有返回值时，必须实现Callable接口，执行Callable任务后返回Future对象，调用Future对象的get()方法获取返回值：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread2</span> <span class="keyword">implements</span> <span class="title">Callable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">    MyThread2(<span class="keyword">int</span> i) &#123;</span><br><span class="line">        <span class="keyword">this</span>.i = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> i * i * i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> taskSize = <span class="number">10</span>;</span><br><span class="line">        ExecutorService pool = Executors.newFixedThreadPool(taskSize);</span><br><span class="line">        List&lt;Future&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; taskSize; i++) &#123;</span><br><span class="line">            Callable callable = <span class="keyword">new</span> MyThread2(i);</span><br><span class="line">            Future future = pool.submit(callable);</span><br><span class="line">            list.add(future);</span><br><span class="line">        &#125;</span><br><span class="line">        pool.shutdown();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Future future : list) &#123;</span><br><span class="line">            System.out.println(future.get().toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>new Thread的弊端如下：</strong></p>
-<p>a. 每次new Thread新建对象性能差。<br>b. 线程缺乏统一管理，可能无限制新建线程，相互之间竞争，及可能占用过多系统资源导致死机或oom。<br>c. 缺乏更多功能，如定时执行、定期执行、线程中断。</p>
-<p><strong>相比new Thread，Java提供的四种线程池的好处在于：</strong></p>
-<p>a. 重用存在的线程，减少对象创建、消亡的开销，性能佳。<br>b. 可有效控制最大并发线程数，提高系统资源的使用率，同时避免过多资源竞争，避免堵塞。<br>c. 提供定时执行、定期执行、单线程、并发数控制等功能。</p>
-<p>参见 &gt;&gt; <a href="https://blog.csdn.net/u011974987/article/details/51027795">Java 四种线程池的用法分析</a></p>
-<p>Java提供的4种线程池：</p>
-<ul>
-<li>newCachedThreadPool：创建一个可缓存线程池，如果线程池长度超过处理需要，<strong>可灵活回收空闲线程</strong>，若无可回收，则新建线程。</li>
-<li>newFixedThreadPool：创建一个定长线程池，<strong>可控制线程最大并发数</strong>，超出的线程会在队列中等待。</li>
-<li>newSchuduledThreadPool：创建一个定长线程池，<strong>支持定时及周期性任务执行</strong>。</li>
-<li>newSingleThreadPool：创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，<strong>保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行</strong>。</li>
-</ul>
-<p>newCachedThreadPool</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread4</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ExecutorService pool = Executors.newCachedThreadPool();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> index = i;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(i * <span class="number">500</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            pool.execute(() -&gt; System.out.println(Thread.currentThread().getName() + <span class="string">&quot; &quot;</span> + index));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>线程池为无限大，当执行第二个任务时第一个任务已经完成，会复用执行第一个任务的线程，而不用每次新建线程。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pool-1-thread-1 0</span><br><span class="line">pool-1-thread-1 1</span><br><span class="line">pool-1-thread-1 2</span><br><span class="line">pool-1-thread-1 3</span><br><span class="line">pool-1-thread-1 4</span><br><span class="line">pool-1-thread-1 5</span><br><span class="line">pool-1-thread-1 6</span><br><span class="line">pool-1-thread-1 7</span><br><span class="line">pool-1-thread-1 8</span><br><span class="line">pool-1-thread-1 9</span><br></pre></td></tr></table></figure>
-
-
-
-<p>newFixedThreadPool</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ExecutorService pool = Executors.newFixedThreadPool(<span class="number">3</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> x = i;</span><br><span class="line">    pool.execute(() -&gt; &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">&quot;  &quot;</span> + x);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>任务数超出最大线程数，超出的线程会等待：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pool-1-thread-2  1</span><br><span class="line">pool-1-thread-3  2</span><br><span class="line">pool-1-thread-1  0</span><br><span class="line">pool-1-thread-2  3</span><br><span class="line">pool-1-thread-1  5</span><br><span class="line">pool-1-thread-3  4</span><br><span class="line">pool-1-thread-2  6</span><br><span class="line">pool-1-thread-1  7</span><br><span class="line">pool-1-thread-3  8</span><br><span class="line">pool-1-thread-2  9</span><br></pre></td></tr></table></figure>
-
-
-
-<p>newSchuduledThreadPool</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ScheduledExecutorService pool = Executors.newScheduledThreadPool(<span class="number">3</span>);</span><br><span class="line"><span class="comment">// 延迟 1 秒后每 3 秒执行一次</span></span><br><span class="line">pool.scheduleAtFixedRate(() -&gt; System.out.println(Thread.currentThread().getName()), <span class="number">1</span>, <span class="number">3</span>, TimeUnit.SECONDS);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>newSingleThreadPool</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ExecutorService pool = Executors.newSingleThreadExecutor();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> index = i;</span><br><span class="line">    pool.execute(() -&gt; System.out.println(Thread.currentThread().getName() + <span class="string">&quot; &quot;</span> + index));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pool-1-thread-1 0</span><br><span class="line">pool-1-thread-1 1</span><br><span class="line">pool-1-thread-1 2</span><br><span class="line">pool-1-thread-1 3</span><br><span class="line">pool-1-thread-1 4</span><br><span class="line">pool-1-thread-1 5</span><br><span class="line">pool-1-thread-1 6</span><br><span class="line">pool-1-thread-1 7</span><br><span class="line">pool-1-thread-1 8</span><br><span class="line">pool-1-thread-1 9</span><br></pre></td></tr></table></figure>
-
-
-
-<p>线程的生命周期：</p>
-<p>新建New：JVM分配内存，并初始化成员变量的值；</p>
-<p>就绪Runnable：创建方法调用栈和程序计数器；</p>
-<p>运行 Running：获得CPU，执行run()方法；</p>
-<p>阻塞 Blocked：让出CPU时间片，停止运行；</p>
-<p>死亡 Dead：正常结束，异常结束或调用stop()方法。</p>
-<blockquote>
-<p>wait()和sleep()的关键的区别在于，sleep()方法属于Thread类，wait()方法属于Object类，wait()是用于线程间通信的，而sleep()是用于短时间暂停当前线程。更加明显的一个区别在于，<strong>当一个线程调用wait()方法的时候，会释放它锁持有的对象的管程和锁，但是调用sleep()方法的时候，不会释放他所持有的管程。</strong></p>
-<p>而当调用 wait()方法的时候，线程会放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象调用 notify()方法后本线程才进入对象锁定池准备获取对象锁进入运行状态。</p>
-</blockquote>
-<p>终止线程的3种方式 &gt; <a href="https://blog.csdn.net/Smile_Miracle/article/details/71550548">Java中如何优雅正确的终止线程</a></p>
-<ol>
-<li><p>使用stop()方法</p>
-<p>thread.stop()调用之后，创建子线程的线程就会抛出 ThreadDeatherror 的错误，并且会释放子线程所持有的所有锁。一般任何进行加锁的代码块，都是为了保护数据的一致性，如果在调用thread.stop()后导致了该线程所持有的所有锁的突然释放(不可控制)，那么被保护数据就有可能呈现不一致性，其他线程在使用这些被破坏的数据时，有可能导致一些很奇怪的应用程序错误。因此，并不推荐使用 stop 方法来终止线程。</p>
-</li>
-<li><p>使用volatile标志位：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">&quot;创建&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (flag) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">&quot;终止&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        MyRunnable myRunnable = <span class="keyword">new</span> MyRunnable();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">            Thread thread = <span class="keyword">new</span> Thread(myRunnable, i + <span class="string">&quot; &quot;</span>);</span><br><span class="line">            thread.start();</span><br><span class="line">        &#125;</span><br><span class="line">        Thread.sleep(<span class="number">2000L</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;-------&quot;</span>);</span><br><span class="line">        myRunnable.flag = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>output</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0 创建</span><br><span class="line">2 创建</span><br><span class="line">1 创建</span><br><span class="line">-------</span><br><span class="line">2 终止</span><br><span class="line">0 终止</span><br><span class="line">1 终止</span><br></pre></td></tr></table></figure></li>
-<li><p>使用interrupt方式</p>
-<ol>
-<li><p>线程处于阻塞状态时：</p>
-<p>如使用了 sleep,同步锁的 wait,socket 中的 receiver,accept 等方法时，会使线程处于阻塞状态。当调用线程的 interrupt()方法时，会抛出 InterruptException 异常。阻塞中的那个方法抛出这个异常，通过代码捕获该异常，然后 break 跳出循环状态，从而让我们有机会结束这个线程的执行。通常很多人认为只要调用 interrupt 方法线程就会结束，实际上是错的， 一定要先捕获 InterruptedException 异常之后通过break 来跳出循环，才能正常结束 run 方法。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread5</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">3000L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyThread5 thread5 = <span class="keyword">new</span> MyThread5();</span><br><span class="line">        thread5.start();</span><br><span class="line">        <span class="keyword">boolean</span> interrupted = thread5.isInterrupted();</span><br><span class="line">        <span class="keyword">if</span> (!interrupted) &#123;</span><br><span class="line">            thread5.interrupt();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output</span><br><span class="line">java.lang.InterruptedException: sleep interrupted</span><br><span class="line">	at java.base/java.lang.Thread.sleep(Native Method)</span><br><span class="line">	at ch4.MyThread5.run(MyThread5.java:<span class="number">12</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p>线程未处于阻塞状态：</p>
-<p>使用 isInterrupted()判断线程的中断标志来退出循环。当使用<br>interrupt()方法时，中断标志就会置 true，和使用自定义的标志来控制循环是一样的道理。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread5</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.run();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;线程开始。。。&quot;</span>);</span><br><span class="line">            Thread.sleep(<span class="number">200000</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;线程结束。&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;在沉睡中被停止, 进入catch， 调用isInterrupted()方法的结果是：&quot;</span> + <span class="keyword">this</span>.isInterrupted());</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyThread5 thread5 = <span class="keyword">new</span> MyThread5();</span><br><span class="line">        thread5.start();</span><br><span class="line">        thread5.interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output</span><br><span class="line">线程开始。。。</span><br><span class="line">在沉睡中被停止, 进入<span class="keyword">catch</span>， 调用isInterrupted()方法的结果是：<span class="keyword">false</span></span><br><span class="line">java.lang.InterruptedException: sleep interrupted</span><br><span class="line">	at java.base/java.lang.Thread.sleep(Native Method)</span><br><span class="line">	at ch4.MyThread5.run(MyThread5.java:<span class="number">13</span>)</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-</ol>
-<p>线程基本方法：</p>
-<p>yield：线程的礼让指的是先将线程的资源让出去，让别的线程先执行。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadMethod</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (x % <span class="number">3</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                    Thread.yield(); <span class="comment">//线程礼让</span></span><br><span class="line">                    System.out.println(<span class="string">&quot;玩耍线程礼让执行 ***********************&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">&quot;、 x = &quot;</span> + x);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;玩耍的线程&quot;</span>);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;【霸道的main主线程】 x = &quot;</span> + x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>output</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">玩耍线程礼让执行 ***********************</span><br><span class="line">【霸道的main主线程】 x = 0</span><br><span class="line">【霸道的main主线程】 x = 1</span><br><span class="line">【霸道的main主线程】 x = 2</span><br><span class="line">【霸道的main主线程】 x = 3</span><br><span class="line">【霸道的main主线程】 x = 4</span><br><span class="line">【霸道的main主线程】 x = 5</span><br><span class="line">【霸道的main主线程】 x = 6</span><br><span class="line">【霸道的main主线程】 x = 7</span><br><span class="line">【霸道的main主线程】 x = 8</span><br><span class="line">【霸道的main主线程】 x = 9</span><br><span class="line">玩耍的线程、 x = 0</span><br><span class="line">玩耍的线程、 x = 1</span><br><span class="line">玩耍的线程、 x = 2</span><br><span class="line">玩耍线程礼让执行 ***********************</span><br><span class="line">玩耍的线程、 x = 3</span><br><span class="line">玩耍的线程、 x = 4</span><br><span class="line">玩耍的线程、 x = 5</span><br><span class="line">玩耍线程礼让执行 ***********************</span><br><span class="line">玩耍的线程、 x = 6</span><br><span class="line">玩耍的线程、 x = 7</span><br><span class="line">玩耍的线程、 x = 8</span><br><span class="line">玩耍线程礼让执行 ***********************</span><br><span class="line">玩耍的线程、 x = 9</span><br></pre></td></tr></table></figure>
-
-
-
-<p>join: 线程强制执行，指的当满足某些条件之后，某一个线程对象将一直可以独占资源，一直到该线程的程序执行结束。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadMethod</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        Thread mainThread = Thread.currentThread(); <span class="comment">//获得主线程</span></span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (x == <span class="number">3</span>) &#123;  <span class="comment">//如果x == 3，就强制执行主线程</span></span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        mainThread.join();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">&quot;、 x = &quot;</span> + x);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;玩耍的线程&quot;</span>);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++) &#123;</span><br><span class="line">            Thread.sleep(<span class="number">100L</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;【霸道的main主线程】 x = &quot;</span> + x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>output</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">玩耍的线程、 x = 0</span><br><span class="line">玩耍的线程、 x = 1</span><br><span class="line">玩耍的线程、 x = 2</span><br><span class="line">【霸道的main主线程】 x = 0</span><br><span class="line">【霸道的main主线程】 x = 1</span><br><span class="line">【霸道的main主线程】 x = 2</span><br><span class="line">【霸道的main主线程】 x = 3</span><br><span class="line">【霸道的main主线程】 x = 4</span><br><span class="line">【霸道的main主线程】 x = 5</span><br><span class="line">【霸道的main主线程】 x = 6</span><br><span class="line">【霸道的main主线程】 x = 7</span><br><span class="line">【霸道的main主线程】 x = 8</span><br><span class="line">【霸道的main主线程】 x = 9</span><br><span class="line">玩耍的线程、 x = 3</span><br><span class="line">玩耍的线程、 x = 4</span><br><span class="line">玩耍的线程、 x = 5</span><br><span class="line">玩耍的线程、 x = 6</span><br><span class="line">玩耍的线程、 x = 7</span><br><span class="line">玩耍的线程、 x = 8</span><br><span class="line">玩耍的线程、 x = 9</span><br></pre></td></tr></table></figure>
-
-
-
-<p>sleep： 休眠的主要特点是可以自动实现线程的唤醒，以继续进行后续的处理。但是需要注意的是，如果现在有多个线程对象，休眠也是有多个先后顺序的。</p>
-<p>wait和notify：</p>
-<ul>
-<li>synchronized关键词用于互斥访问。</li>
-<li>为了让一个方法是同步的，简单的添加synchronized关键词到它们的声明上。那么同一个对象上没有两个同步方法的调用可以相互交错。</li>
-<li>同步语句必须指定提供内在锁的对象。当使用synchronized(this)时候，必须避免使用同步其他对象方法的调用。</li>
-<li>wait()告诉调用的线程放弃监视器和进入休眠状态，直到其他线程进入相同的监视器和调用notify()。</li>
-<li>notify()唤醒在相同对象上第一个调用wait()的线程。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ThreadB b = <span class="keyword">new</span> ThreadB();</span><br><span class="line">        b.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">synchronized</span> (b) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Waiting for b to complete...&quot;</span>);</span><br><span class="line">                b.wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;Total is: &quot;</span> + b.total);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadB</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> total;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">                total += i;</span><br><span class="line">            &#125;</span><br><span class="line">            notify();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java注解简单例子</title>
-    <url>/2019/05/15/Java%E6%B3%A8%E8%A7%A3%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90/</url>
-    <content><![CDATA[<p>了解Java注解（@Annotation）</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
-</blockquote>
-<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
-<span id="more"></span>
-
-
-
-<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
-<p>四个元注解：</p>
-<ul>
-<li>@Target</li>
-<li>@Retention</li>
-<li>@Document</li>
-<li>Inherited</li>
-</ul>
-<p>注解主要是用户按自己的需求来实现。</p>
-<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>先创建两个注解，@Digits和@NotEmpty，用来注解属性是否满足给定条件。</p>
-<p>代码如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段只能为数字，且最大长度为maxLength，最大小数位为fraction</span></span><br><span class="line"><span class="comment"> * 默认没有小数位</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Digits &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxLength</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fraction</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段不能为空</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotEmpty &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>定义一个处理类处理自定义注解：（主要利用反射机制）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 处理自定义注解</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationProcesser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Table table)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Class clazz = table.getClass();</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(<span class="string">&quot;class not found!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        String fieldName;</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------------------------&quot;</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Annotation[] annotations = field.getDeclaredAnnotations();</span><br><span class="line">            fieldName = field.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot;--&gt; info: into &quot;</span> + fieldName);</span><br><span class="line">            <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + annotation.annotationType());</span><br><span class="line">                <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Digits) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @Digits annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">int</span> maxLength = ((Digits) annotation).maxLength();</span><br><span class="line">                    <span class="keyword">int</span> annotatedFraction = ((Digits) annotation).fraction();</span><br><span class="line">                    String[] fraction = String.valueOf(table.getCount()).split(<span class="string">&quot;\\.&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (String.valueOf(table.getCount()).length() &gt; maxLength) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: maxLength exceed!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (fraction.length &gt; <span class="number">1</span> &amp;&amp; fraction[<span class="number">1</span>].length() &gt; annotatedFraction) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error：fraction length exceed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> NotEmpty) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @NotEmpty annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">if</span> (table.getDescription() == <span class="keyword">null</span> || <span class="string">&quot;&quot;</span>.equals(table.getDescription())) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: empty is not allowed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>主测试类：（<strong>省略getter和setter</strong>）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits(maxLength = 6, fraction = 2)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">&quot;description1&quot;</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">&quot;description2&quot;</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description3&quot;</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java字节码解析</title>
-    <url>/2020/11/18/Java%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a href="https://www.jianshu.com/p/252f381a6bc4">一文让你明白Java字节码</a></p>
-<span id="more"></span>
-
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>从一个简单类 Math.java 开始：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>用 <code>javac Math.java</code> 得到字节码文件 Math.class，文件内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cafe babe 0000 0034 0013 0a00 0400 0f09</span><br><span class="line">0003 0010 0700 1107 0012 0100 016d 0100</span><br><span class="line">0149 0100 063c 696e 6974 3e01 0003 2829</span><br><span class="line">5601 0004 436f 6465 0100 0f4c 696e 654e</span><br><span class="line">756d 6265 7254 6162 6c65 0100 0369 6e63</span><br><span class="line">0100 0328 2949 0100 0a53 6f75 7263 6546</span><br><span class="line">696c 6501 0009 4d61 7468 2e6a 6176 610c</span><br><span class="line">0007 0008 0c00 0500 0601 0004 4d61 7468</span><br><span class="line">0100 106a 6176 612f 6c61 6e67 2f4f 626a</span><br><span class="line">6563 7400 2100 0300 0400 0000 0100 0200</span><br><span class="line">0500 0600 0000 0200 0100 0700 0800 0100</span><br><span class="line">0900 0000 1d00 0100 0100 0000 052a b700</span><br><span class="line">01b1 0000 0001 000a 0000 0006 0001 0000</span><br><span class="line">0001 0001 000b 000c 0001 0009 0000 001f</span><br><span class="line">0002 0001 0000 0007 2ab4 0002 0460 ac00</span><br><span class="line">0000 0100 0a00 0000 0600 0100 0000 0600</span><br><span class="line">0100 0d00 0000 0200 0e</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="内容解读"><a href="#内容解读" class="headerlink" title="内容解读"></a>内容解读</h2><p>参照图例：</p>
-<p><img src="https://images2.imgbox.com/08/79/8kGgoJqq_o.jpeg"></p>
-<p><img src="https://images2.imgbox.com/61/17/vm6prCvK_o.png"></p>
-<h3 id="魔数"><a href="#魔数" class="headerlink" title="魔数"></a>魔数</h3><p>cafe babe：魔数，文件后缀标识，被java虚拟机接受。</p>
-<br>
-
-<h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>0000：次版本号</p>
-<p>0034：主版本号=52，java 1.8</p>
-<br>
-
-<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>0013：常量池入口，2+n，十进制=19，表明有18个常量，从1开始</p>
-<p>0a：十进制=10，对应CONSTANT_Methodref_info，指向声明方法</p>
-<p>0004：常量索引#4</p>
-<p>000f：常量索引#15</p>
-<p>09：十进制=9，对应CONSTANT_Fieldref_info，指向字段的类或接口描述</p>
-<p>0003：常量索引#3</p>
-<p>0010：常量索引#16</p>
-<p>07：十进制=7，对应CONSTANT_Class_info，指向全限定名常量项的索引</p>
-<p>0011：常量索引#17</p>
-<p>07：同上</p>
-<p>0012：常量索引#18</p>
-<p>01：十进制=1，对应表中的CONSTANT_Utf8_info，utf8编码的字符串长度</p>
-<p>0001：字符串长度为1</p>
-<p>6d：109=”m”</p>
-<p>01：同上</p>
-<p>0001：同上</p>
-<p>49：49=”1”</p>
-<p>01：同上</p>
-<p>0006：同上</p>
-<p>3c 696e 6974 3e：字符串=<init></p>
-<p>01：同上</p>
-<p>0003：同上</p>
-<p>2829 56：()V</p>
-<p>01：同上</p>
-<p>0004：同上</p>
-<p>436f 6465：C_de</p>
-<p>01：同上</p>
-<p>000f：同上</p>
-<p>4c 696e 654e 756d 6265 7254 6162 6c65：LineNumberTable</p>
-<p>01：同上</p>
-<p>0003：同上</p>
-<p>69 6e63：inc</p>
-<p>01：同上</p>
-<p>0003：同上</p>
-<p>28 2949：()I</p>
-<p>01：同上</p>
-<p>000a：长度为10的字符串</p>
-<p>53 6f75 7263 6546 696c 65：SourceFile</p>
-<p>01：同上</p>
-<p>0009：同上</p>
-<p>4d61 7468 2e6a 6176 61：Math.java</p>
-<p>0c：十进制=12，CONSTANT_NameAndType_info，指向该字段或方法名称常量项的索引</p>
-<p>0007：字段或者名字名称常量项索引#7</p>
-<p>0008：字段或者名字名称常量项索引#8</p>
-<p>0c：同上</p>
-<p>0005：字段或者名字名称常量项索引#5</p>
-<p>0006：字段或者名字名称常量项索引#6</p>
-<p>01：同上</p>
-<p>0004：同上</p>
-<p>4d61 7468：Math</p>
-<p>01：同上</p>
-<p>0010：同上</p>
-<p>6a 6176 612f 6c61 6e67 2f4f 626a 6563 74：java/lang/Object</p>
-<p>==== 常量解析完毕，共18个常量</p>
-<br>
-
-<h2 id="Access-Flag-访问标志部分"><a href="#Access-Flag-访问标志部分" class="headerlink" title="Access_Flag 访问标志部分"></a>Access_Flag 访问标志部分</h2><blockquote>
-<p>0x0021：是 0x0020 和 0x0001 的并集。</p>
-</blockquote>
-<p>0021：ACC_PUBLIC，访问修饰符为Public。</p>
-<br>
-
-<h2 id="类索引"><a href="#类索引" class="headerlink" title="类索引"></a>类索引</h2><p>类索引用于确定类的全限定名。</p>
-<p>0003：引用第3个常量，第3个常量引用第17个常量，为 Math。</p>
-<br>
-
-<h2 id="父类索引"><a href="#父类索引" class="headerlink" title="父类索引"></a>父类索引</h2><p>0004：引用第18个常量，为 java/lang/Object。</p>
-<br>
-
-<h2 id="接口索引"><a href="#接口索引" class="headerlink" title="接口索引"></a>接口索引</h2><p>0000：没有接口。</p>
-<br>
-
-<h2 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h2><p>字段表用于描述类和接口中声明的变量。这里的字段包含了类级别变量以及实例变量，但是不包括方法内部声明的局部变量。</p>
-<p><img src="https://images2.imgbox.com/46/18/b007hXKr_o.png"></p>
-<p>0001：字段属性。</p>
-<p>0002：Private访问。</p>
-<p>0005：常量索引#5，为”m”。</p>
-<p>0006：常量索引#6，为”1”。</p>
-<p>0000：属性表数量为0。</p>
-<br>
-
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://images2.imgbox.com/b5/62/ZKPXcYOv_o.png"></p>
-<p>to be continued…</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java面试题</title>
     <url>/2020/10/29/Java%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
     <content><![CDATA[<p>最近在面试中遇到的一些问题，虽然很多都是最最基础的问题，但是很多问题要么是没回答出来要么是说的丢三落四。作为工作两年的我来说，感觉很丢人啊。顺便记下来，给后来人做个参考，最近自己也多花点时间打打基础。题目顺序不分类型和先后。</p>
@@ -1371,30 +1381,34 @@
       </tags>
   </entry>
   <entry>
-    <title>Mac OS下RIME输入法的配置</title>
-    <url>/2019/11/09/Mac-OS%E4%B8%8BRIME%E8%BE%93%E5%85%A5%E6%B3%95%E7%9A%84%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>Mac OS下RIME输入法配置</p>
-<p>之前一直用的搜狗输入法，不得不说，搜狗输入法确实做得很不错，精准快速。但是毕竟是国产软件，联网之后隐私方面存在安全隐患，还没发布到网络的文本已经有人提前知道了💦。本想直接设置成单机版以避免输入法上传输入记录，但是貌似防火墙和改hosts文件对搜狗都不管用。于是在网上查了一下，知道了 <strong>RIME输入法</strong> 。</p>
+    <title>LeetCode之二叉树非递归前序遍历</title>
+    <url>/2018/11/17/LeetCode%E5%AD%90%E4%BA%8C%E5%8F%89%E6%A0%91%E9%9D%9E%E9%80%92%E5%BD%92%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/</url>
+    <content><![CDATA[<h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p>Given a binary tree, return the <em>preorder</em> traversal of its nodes’ values.</p>
+<p>For example:<br>Given binary tree{1,#,2,3},</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line"> /</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+
+
+<p>return[1,2,3].</p>
+<p><strong>Note:</strong> Recursive solution is trivial, could you do it iteratively?</p>
+<p><strong>使用非递归的方法前序遍历二叉树。</strong></p>
 <span id="more"></span>
 
-<p>看到配置比较复杂，我也是犹豫了半天才下定决心搞一下的。还差 emoji表情的输入 没搞定，只弄好了基础的中文输入以及词库的扩展，以后真正有需要了再配置吧。</p>
-<p>比较好的参考资料：</p>
-<ul>
-<li><p><a href="https://github.com/rime/squirrel">GitHub主页</a></p>
-</li>
-<li><p><a href="http://ju.outofmemory.cn/entry/178796">给 Rime 添加第三方词库</a></p>
-</li>
-<li><p><a href="https://lonelygo.github.io/2015-01-28-Rime_Input/">Rime输入法—Squirrel词库添加及配置</a> （虽然有点旧了，但是很详细，推荐）</p>
-</li>
-</ul>
-<p>安装完体验了两个小时，输入体验很不错，没遇到什么问题，以后应该会一直用下去。</p>
-<p>各种软件还是去国产化吧，对待国产软件，有替代则替代，能不用则不用。</p>
+
+
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>前序遍历就是按照中、左、右的顺序对二叉树进行遍历。</p>
+<p>思路很简单，如果当前节点不为空，不断遍历当前节点的左子树，如果当前节点有右子树的话，将其放入栈中以便后期遍历其右子树，如果当前节点为空，则取出栈顶元素按照同样的方式遍历其右子树。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.postorder.raversal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午3:16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PreOrderSolution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        TreeNode pointer = root;</span><br><span class="line">        <span class="keyword">while</span> (pointer != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                list.add(pointer.val);</span><br><span class="line">                <span class="keyword">if</span> (pointer.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    stack.push(pointer);</span><br><span class="line">                &#125;</span><br><span class="line">                pointer = pointer.left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (stack.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            pointer = stack.pop();</span><br><span class="line">            pointer = pointer.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>牛客网做得还不错，就是现在还是只支持C++和Java。</p>
 ]]></content>
       <categories>
-        <category>其他</category>
+        <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>其他</tag>
+        <tag>LeetCode</tag>
       </tags>
   </entry>
   <entry>
@@ -1446,34 +1460,30 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode之二叉树非递归前序遍历</title>
-    <url>/2018/11/17/LeetCode%E5%AD%90%E4%BA%8C%E5%8F%89%E6%A0%91%E9%9D%9E%E9%80%92%E5%BD%92%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/</url>
-    <content><![CDATA[<h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p>Given a binary tree, return the <em>preorder</em> traversal of its nodes’ values.</p>
-<p>For example:<br>Given binary tree{1,#,2,3},</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line"> /</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
-
-
-<p>return[1,2,3].</p>
-<p><strong>Note:</strong> Recursive solution is trivial, could you do it iteratively?</p>
-<p><strong>使用非递归的方法前序遍历二叉树。</strong></p>
+    <title>Mac OS下RIME输入法的配置</title>
+    <url>/2019/11/09/Mac-OS%E4%B8%8BRIME%E8%BE%93%E5%85%A5%E6%B3%95%E7%9A%84%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>Mac OS下RIME输入法配置</p>
+<p>之前一直用的搜狗输入法，不得不说，搜狗输入法确实做得很不错，精准快速。但是毕竟是国产软件，联网之后隐私方面存在安全隐患，还没发布到网络的文本已经有人提前知道了💦。本想直接设置成单机版以避免输入法上传输入记录，但是貌似防火墙和改hosts文件对搜狗都不管用。于是在网上查了一下，知道了 <strong>RIME输入法</strong> 。</p>
 <span id="more"></span>
 
-
-
-<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>前序遍历就是按照中、左、右的顺序对二叉树进行遍历。</p>
-<p>思路很简单，如果当前节点不为空，不断遍历当前节点的左子树，如果当前节点有右子树的话，将其放入栈中以便后期遍历其右子树，如果当前节点为空，则取出栈顶元素按照同样的方式遍历其右子树。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.postorder.raversal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午3:16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PreOrderSolution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        TreeNode pointer = root;</span><br><span class="line">        <span class="keyword">while</span> (pointer != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                list.add(pointer.val);</span><br><span class="line">                <span class="keyword">if</span> (pointer.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    stack.push(pointer);</span><br><span class="line">                &#125;</span><br><span class="line">                pointer = pointer.left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (stack.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            pointer = stack.pop();</span><br><span class="line">            pointer = pointer.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>牛客网做得还不错，就是现在还是只支持C++和Java。</p>
+<p>看到配置比较复杂，我也是犹豫了半天才下定决心搞一下的。还差 emoji表情的输入 没搞定，只弄好了基础的中文输入以及词库的扩展，以后真正有需要了再配置吧。</p>
+<p>比较好的参考资料：</p>
+<ul>
+<li><p><a href="https://github.com/rime/squirrel">GitHub主页</a></p>
+</li>
+<li><p><a href="http://ju.outofmemory.cn/entry/178796">给 Rime 添加第三方词库</a></p>
+</li>
+<li><p><a href="https://lonelygo.github.io/2015-01-28-Rime_Input/">Rime输入法—Squirrel词库添加及配置</a> （虽然有点旧了，但是很详细，推荐）</p>
+</li>
+</ul>
+<p>安装完体验了两个小时，输入体验很不错，没遇到什么问题，以后应该会一直用下去。</p>
+<p>各种软件还是去国产化吧，对待国产软件，有替代则替代，能不用则不用。</p>
 ]]></content>
       <categories>
-        <category>LeetCode</category>
+        <category>其他</category>
       </categories>
       <tags>
-        <tag>LeetCode</tag>
+        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
@@ -2201,6 +2211,153 @@
       </categories>
       <tags>
         <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringBoot整合redis报错</title>
+    <url>/2021/03/07/SpringBoot%E6%95%B4%E5%90%88redis%E6%8A%A5%E9%94%99/</url>
+    <content><![CDATA[<p>在SpringBoot中整合Redis进行Token登录，测试方法中一直报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalStateException: Failed to load ApplicationContext</span><br><span class="line"></span><br><span class="line">Caused by: org.springframework.beans.factory.BeanNotOfRequiredTypeException: Bean named &#x27;redisTemplate&#x27; is expected to be of type &#x27;org.springframework.data.redis.core.StringRedisTemplate&#x27; but was actually of type &#x27;org.springframework.data.redis.core.RedisTemplate&#x27;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">set</span><span class="params">(String key, String value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        redisTemplate.opsForValue().set(key, value);</span><br><span class="line">        result = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试方法</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    redisClient.set(<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;value1&quot;</span>);</span><br><span class="line">    String value = redisClient.get(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">    assertNotNull(value);</span><br><span class="line">    log.info(<span class="string">&quot;value: &#123;&#125;&quot;</span>, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>原来是注入的时候变量名有问题：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> StringRedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
+
+<p>不是 redisTemplate ，而是 stringRedisTemplate。</p>
+<p><strong>@Resource和@Autowired的区别。</strong></p>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring学习笔记-第一章-Spring之旅</title>
+    <url>/2018/11/14/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%80%E7%AB%A0-Spring%E4%B9%8B%E6%97%85/</url>
+    <content><![CDATA[<p>第一部分：Spring的核心</p>
+<ul>
+<li><p>第一章：Spring之旅</p>
+<p>介绍Spring框架，包括Spring DI和AOP。</p>
+</li>
+<li><p>第二章：装配Bean</p>
+<p>Spring的自动配置、基于Java的配置和XML配置。</p>
+</li>
+<li><p>第三章：高级装配</p>
+<p>Spring的条件化配置，处理自动装配时的歧义性，作用域以及Spring表达式语言。</p>
+</li>
+<li><p>第四章：面向切面的Spring</p>
+<p>展示如何使用Spring的AOP特性把系统级服务从它们所服务的对象中解耦出来。</p>
+</li>
+</ul>
+<span id="more"></span>
+
+
+
+
+
+<hr>
+<p>第一章 Spring之旅</p>
+<p>本章内容：</p>
+<ul>
+<li>Spring的Bean容器</li>
+<li>介绍Spring的核心模块</li>
+<li>更为强大的Spring生态系统</li>
+<li>Spring的新功能</li>
+</ul>
+<p><strong>创建Spring的主要目的是用来替代更加重量级的企业级Java技术，尤其是EJB。</strong>相当于EJB来说，Spring提供了更加轻量级和更加简单的编程模型。</p>
+<hr>
+<h3 id="1-1-简化Java开发"><a href="#1-1-简化Java开发" class="headerlink" title="1.1 简化Java开发"></a>1.1 简化Java开发</h3><h4 id="1-1-1-Spring的非侵入式编程"><a href="#1-1-1-Spring的非侵入式编程" class="headerlink" title="1.1.1 Spring的非侵入式编程"></a>1.1.1 Spring的非侵入式编程</h4><p>在基于Spring构建的应用中，一般不会有任何痕迹表明你使用了Spring，最坏的场景是在一个类上使用了Spring注解，但是这个类依旧是一个Pojo类。</p>
+<p>Spring的非侵入式编程模型意味着这个类在Spring应用还是在非Spring应用中都能发挥同样的作用。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/14 下午9:18</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello world&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-1-2-依赖注入"><a href="#1-1-2-依赖注入" class="headerlink" title="1.1.2 依赖注入"></a>1.1.2 依赖注入</h4><p>在一个应用中通常会涉及到很多类，这些类需要相互协作来完成特定的功能，如果让每个类管理与自己协作的类，则会导致应用高度耦合。</p>
+<blockquote>
+<p> 依赖注入带来的最大好处就是松耦合。如果一个对象只通过借口来表明依赖关系，那么这种依赖就能够在对象毫不知情的情况下用不同的实现替换。</p>
+<p>可以让对其他的类有依赖的类自动获得已经准备好的依赖。</p>
+</blockquote>
+<p>一个送外卖的过程：当不是用DI的时候送餐员需要自己准备外卖，然后再配送。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.clerk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.com.food.Dinner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/15 下午8:31</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeliveryWithoutDI</span> <span class="keyword">implements</span> <span class="title">Delivery</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Dinner dinner;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DeliveryWithoutDI</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dinner = <span class="keyword">new</span> Dinner(<span class="string">&quot;rice&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delivery</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;delivery it on time.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>当使用DI之后，当有外卖需要配送的时候，分配送餐员，送餐员会自动获得需要配送的外卖，需要做的只是负责配送，而不用关心其他事情。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.clerk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.com.food.Dinner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/15 下午8:24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeliveryClerk</span> <span class="keyword">implements</span> <span class="title">Delivery</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Dinner dinner;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DeliveryClerk</span><span class="params">(Dinner dinner)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dinner = dinner;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delivery</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;delivery on time.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-1-3-应用切面"><a href="#1-1-3-应用切面" class="headerlink" title="1.1.3 应用切面"></a>1.1.3 应用切面</h4><blockquote>
+<p>面向切面编程允许你把遍布应用各处的功能分离出来形成可重用的组件。</p>
+</blockquote>
+<p>一个系统或应用由许多不同的组件构成，但是每一个组件在负责自己的功能之外，通常还要承担额外的责任。一些与核心业务无关的代码会融入到核心业务逻辑中。比如转账，除了发生金钱的转移之外，还要验证身份、记录账单以及给用户发送通知。这些会跨越系统的组件成为横切关注点。它们会使核心业务代码变得复杂。</p>
+<p><img src="https://image.youyou-2608.com/blog/AOP1.png" alt="Spring AOP"></p>
+<p>通过AOP，可以将与核心业务无关的代码分离出来。</p>
+<h4 id="1-1-4-使用模板消除样板式代码"><a href="#1-1-4-使用模板消除样板式代码" class="headerlink" title="1.1.4 使用模板消除样板式代码"></a>1.1.4 使用模板消除样板式代码</h4><p>使用JDBC访问数据库，会产生大量与查询语句无关的代码，还必须要捕捉异常，虽然无济于事。</p>
+<p>Spring旨在通过模板封装来消除样板式代码。</p>
+<p><a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/data-access.html#spring-data-tier">Data Access with JDBC</a></p>
+<h3 id="1-2-容纳你的bean"><a href="#1-2-容纳你的bean" class="headerlink" title="1.2 容纳你的bean"></a>1.2 容纳你的bean</h3><blockquote>
+<p>在Spring应用中，你的应用对象生存于Spring容器中，Spring容器负责创建对象，装配并管理它们的整个生命周期。</p>
+</blockquote>
+<p>使用应用上下文：</p>
+<ul>
+<li>AnnotationConfigApplicationContext：从一个或多个基于Java的配置类中加载Spring应用上下文。</li>
+<li>AnnotationConfigWebApplicationContext：从一个或多个基于Java的配置类中加载Spring Web应用上下文。</li>
+<li>ClassPathXmlApplicationContext：从类路径下的一个或多个XML配置文件中加载上下文定义。</li>
+<li>FileSystemXmlApplicationContext：从文件系统下的一个或多个XML配置文件中加载上下文定义。</li>
+<li>XmlWebApplicationContext：从Web应用下的一个或多个XML配置文件中还在上下文定义。</li>
+</ul>
+<p>bean的生命周期：</p>
+<p><img src="https://image.youyou-2608.com/bean-lifecycle.png" alt="bean的生命周期"></p>
+<p><img src="https://image.youyou-2608.com/bean2.png" alt="Bean的生命周期"></p>
+<h3 id="1-3-俯瞰Spring风景线"><a href="#1-3-俯瞰Spring风景线" class="headerlink" title="1.3 俯瞰Spring风景线"></a>1.3 俯瞰Spring风景线</h3><p>Spring的模块：</p>
+<p><img src="https://image.youyou-2608.com/springmodel" alt="Spring模块"></p>
+<table>
+<thead>
+<tr>
+<th><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/core.html#spring-core">Core</a></th>
+<th>IoC container, Events, Resources, i18n, Validation, Data Binding, Type Conversion, SpEL, AOP.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/testing.html#testing">Testing</a></td>
+<td>Mock objects, TestContext framework, Spring MVC Test, WebTestClient.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/data-access.html#spring-data-tier">Data Access</a></td>
+<td>Transactions, DAO support, JDBC, ORM, Marshalling XML.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/web.html#spring-web">Web Servlet</a></td>
+<td>Spring MVC, WebSocket, SockJS, STOMP messaging.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/web-reactive.html#spring-webflux">Web Reactive</a></td>
+<td>Spring WebFlux, WebClient, WebSocket.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/integration.html#spring-integration">Integration</a></td>
+<td>Remoting, JMS, JCA, JMX, Email, Tasks, Scheduling, Cache.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/languages.html#languages">Languages</a></td>
+<td>Kotlin, Groovy, Dynamic languages.</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
@@ -3327,153 +3484,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SpringBoot整合redis报错</title>
-    <url>/2021/03/07/SpringBoot%E6%95%B4%E5%90%88redis%E6%8A%A5%E9%94%99/</url>
-    <content><![CDATA[<p>在SpringBoot中整合Redis进行Token登录，测试方法中一直报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalStateException: Failed to load ApplicationContext</span><br><span class="line"></span><br><span class="line">Caused by: org.springframework.beans.factory.BeanNotOfRequiredTypeException: Bean named &#x27;redisTemplate&#x27; is expected to be of type &#x27;org.springframework.data.redis.core.StringRedisTemplate&#x27; but was actually of type &#x27;org.springframework.data.redis.core.RedisTemplate&#x27;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">set</span><span class="params">(String key, String value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        redisTemplate.opsForValue().set(key, value);</span><br><span class="line">        result = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试方法</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    redisClient.set(<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;value1&quot;</span>);</span><br><span class="line">    String value = redisClient.get(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">    assertNotNull(value);</span><br><span class="line">    log.info(<span class="string">&quot;value: &#123;&#125;&quot;</span>, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>原来是注入的时候变量名有问题：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> StringRedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
-
-<p>不是 redisTemplate ，而是 stringRedisTemplate。</p>
-<p><strong>@Resource和@Autowired的区别。</strong></p>
-]]></content>
-      <categories>
-        <category>SpringBoot</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Spring学习笔记-第一章-Spring之旅</title>
-    <url>/2018/11/14/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%80%E7%AB%A0-Spring%E4%B9%8B%E6%97%85/</url>
-    <content><![CDATA[<p>第一部分：Spring的核心</p>
-<ul>
-<li><p>第一章：Spring之旅</p>
-<p>介绍Spring框架，包括Spring DI和AOP。</p>
-</li>
-<li><p>第二章：装配Bean</p>
-<p>Spring的自动配置、基于Java的配置和XML配置。</p>
-</li>
-<li><p>第三章：高级装配</p>
-<p>Spring的条件化配置，处理自动装配时的歧义性，作用域以及Spring表达式语言。</p>
-</li>
-<li><p>第四章：面向切面的Spring</p>
-<p>展示如何使用Spring的AOP特性把系统级服务从它们所服务的对象中解耦出来。</p>
-</li>
-</ul>
-<span id="more"></span>
-
-
-
-
-
-<hr>
-<p>第一章 Spring之旅</p>
-<p>本章内容：</p>
-<ul>
-<li>Spring的Bean容器</li>
-<li>介绍Spring的核心模块</li>
-<li>更为强大的Spring生态系统</li>
-<li>Spring的新功能</li>
-</ul>
-<p><strong>创建Spring的主要目的是用来替代更加重量级的企业级Java技术，尤其是EJB。</strong>相当于EJB来说，Spring提供了更加轻量级和更加简单的编程模型。</p>
-<hr>
-<h3 id="1-1-简化Java开发"><a href="#1-1-简化Java开发" class="headerlink" title="1.1 简化Java开发"></a>1.1 简化Java开发</h3><h4 id="1-1-1-Spring的非侵入式编程"><a href="#1-1-1-Spring的非侵入式编程" class="headerlink" title="1.1.1 Spring的非侵入式编程"></a>1.1.1 Spring的非侵入式编程</h4><p>在基于Spring构建的应用中，一般不会有任何痕迹表明你使用了Spring，最坏的场景是在一个类上使用了Spring注解，但是这个类依旧是一个Pojo类。</p>
-<p>Spring的非侵入式编程模型意味着这个类在Spring应用还是在非Spring应用中都能发挥同样的作用。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/14 下午9:18</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello world&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-1-2-依赖注入"><a href="#1-1-2-依赖注入" class="headerlink" title="1.1.2 依赖注入"></a>1.1.2 依赖注入</h4><p>在一个应用中通常会涉及到很多类，这些类需要相互协作来完成特定的功能，如果让每个类管理与自己协作的类，则会导致应用高度耦合。</p>
-<blockquote>
-<p> 依赖注入带来的最大好处就是松耦合。如果一个对象只通过借口来表明依赖关系，那么这种依赖就能够在对象毫不知情的情况下用不同的实现替换。</p>
-<p>可以让对其他的类有依赖的类自动获得已经准备好的依赖。</p>
-</blockquote>
-<p>一个送外卖的过程：当不是用DI的时候送餐员需要自己准备外卖，然后再配送。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.clerk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.com.food.Dinner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/15 下午8:31</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeliveryWithoutDI</span> <span class="keyword">implements</span> <span class="title">Delivery</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Dinner dinner;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DeliveryWithoutDI</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dinner = <span class="keyword">new</span> Dinner(<span class="string">&quot;rice&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delivery</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;delivery it on time.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>当使用DI之后，当有外卖需要配送的时候，分配送餐员，送餐员会自动获得需要配送的外卖，需要做的只是负责配送，而不用关心其他事情。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.clerk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.com.food.Dinner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/15 下午8:24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeliveryClerk</span> <span class="keyword">implements</span> <span class="title">Delivery</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Dinner dinner;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DeliveryClerk</span><span class="params">(Dinner dinner)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dinner = dinner;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delivery</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;delivery on time.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-1-3-应用切面"><a href="#1-1-3-应用切面" class="headerlink" title="1.1.3 应用切面"></a>1.1.3 应用切面</h4><blockquote>
-<p>面向切面编程允许你把遍布应用各处的功能分离出来形成可重用的组件。</p>
-</blockquote>
-<p>一个系统或应用由许多不同的组件构成，但是每一个组件在负责自己的功能之外，通常还要承担额外的责任。一些与核心业务无关的代码会融入到核心业务逻辑中。比如转账，除了发生金钱的转移之外，还要验证身份、记录账单以及给用户发送通知。这些会跨越系统的组件成为横切关注点。它们会使核心业务代码变得复杂。</p>
-<p><img src="https://image.youyou-2608.com/blog/AOP1.png" alt="Spring AOP"></p>
-<p>通过AOP，可以将与核心业务无关的代码分离出来。</p>
-<h4 id="1-1-4-使用模板消除样板式代码"><a href="#1-1-4-使用模板消除样板式代码" class="headerlink" title="1.1.4 使用模板消除样板式代码"></a>1.1.4 使用模板消除样板式代码</h4><p>使用JDBC访问数据库，会产生大量与查询语句无关的代码，还必须要捕捉异常，虽然无济于事。</p>
-<p>Spring旨在通过模板封装来消除样板式代码。</p>
-<p><a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/data-access.html#spring-data-tier">Data Access with JDBC</a></p>
-<h3 id="1-2-容纳你的bean"><a href="#1-2-容纳你的bean" class="headerlink" title="1.2 容纳你的bean"></a>1.2 容纳你的bean</h3><blockquote>
-<p>在Spring应用中，你的应用对象生存于Spring容器中，Spring容器负责创建对象，装配并管理它们的整个生命周期。</p>
-</blockquote>
-<p>使用应用上下文：</p>
-<ul>
-<li>AnnotationConfigApplicationContext：从一个或多个基于Java的配置类中加载Spring应用上下文。</li>
-<li>AnnotationConfigWebApplicationContext：从一个或多个基于Java的配置类中加载Spring Web应用上下文。</li>
-<li>ClassPathXmlApplicationContext：从类路径下的一个或多个XML配置文件中加载上下文定义。</li>
-<li>FileSystemXmlApplicationContext：从文件系统下的一个或多个XML配置文件中加载上下文定义。</li>
-<li>XmlWebApplicationContext：从Web应用下的一个或多个XML配置文件中还在上下文定义。</li>
-</ul>
-<p>bean的生命周期：</p>
-<p><img src="https://image.youyou-2608.com/bean-lifecycle.png" alt="bean的生命周期"></p>
-<p><img src="https://image.youyou-2608.com/bean2.png" alt="Bean的生命周期"></p>
-<h3 id="1-3-俯瞰Spring风景线"><a href="#1-3-俯瞰Spring风景线" class="headerlink" title="1.3 俯瞰Spring风景线"></a>1.3 俯瞰Spring风景线</h3><p>Spring的模块：</p>
-<p><img src="https://image.youyou-2608.com/springmodel" alt="Spring模块"></p>
-<table>
-<thead>
-<tr>
-<th><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/core.html#spring-core">Core</a></th>
-<th>IoC container, Events, Resources, i18n, Validation, Data Binding, Type Conversion, SpEL, AOP.</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/testing.html#testing">Testing</a></td>
-<td>Mock objects, TestContext framework, Spring MVC Test, WebTestClient.</td>
-</tr>
-<tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/data-access.html#spring-data-tier">Data Access</a></td>
-<td>Transactions, DAO support, JDBC, ORM, Marshalling XML.</td>
-</tr>
-<tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/web.html#spring-web">Web Servlet</a></td>
-<td>Spring MVC, WebSocket, SockJS, STOMP messaging.</td>
-</tr>
-<tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/web-reactive.html#spring-webflux">Web Reactive</a></td>
-<td>Spring WebFlux, WebClient, WebSocket.</td>
-</tr>
-<tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/integration.html#spring-integration">Integration</a></td>
-<td>Remoting, JMS, JCA, JMX, Email, Tasks, Scheduling, Cache.</td>
-</tr>
-<tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/languages.html#languages">Languages</a></td>
-<td>Kotlin, Groovy, Dynamic languages.</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>Spring</category>
-      </categories>
-      <tags>
-        <tag>Spring</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Spring学习笔记-第三章-高级装配</title>
     <url>/2018/11/24/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E9%AB%98%E7%BA%A7%E8%A3%85%E9%85%8D/</url>
     <content><![CDATA[<p>第三章：高级装配</p>
@@ -4525,26 +4535,6 @@
       </tags>
   </entry>
   <entry>
-    <title>一小时学会Swagger</title>
-    <url>/2020/10/18/%E4%B8%80%E5%B0%8F%E6%97%B6%E5%AD%A6%E4%BC%9ASwagger/</url>
-    <content><![CDATA[<p>网上无意间看到的Swagger教程，一口气全部看完了，讲得很不错。</p>
-<blockquote>
-<p>秦疆老师SpringBoot课程扩展之Swagger学习； 这可能是全网最详细的Swagger视频了 从生活到代码，从简单到深入。风趣幽默,通俗易懂。</p>
-</blockquote>
-<iframe src="//player.bilibili.com/player.html?aid=64841843&bvid=BV1Y441197Lw&cid=112543089&page=3" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="height:500px;width=600px"> </iframe>
-
-<span id="more"></span>
-
-<p>讲 new Docket().enable(true|false) 和dev | prod | test等环境下的使用的时候因为环境变化所以配置的端口号改变却还用8080端口访问项目导致 swagger 报错导致进不去项目。</p>
-]]></content>
-      <categories>
-        <category>Swagger</category>
-      </categories>
-      <tags>
-        <tag>Swagger</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《宇宙よりも遠い場所》台词-第四话</title>
     <url>/2020/10/24/%E3%80%8A%E5%AE%87%E5%AE%99%E3%82%88%E3%82%8A%E3%82%82%E9%81%A0%E3%81%84%E5%A0%B4%E6%89%80%E3%80%8B%E5%8F%B0%E8%AF%8D-%E7%AC%AC%E5%9B%9B%E8%AF%9D/</url>
     <content><![CDATA[<blockquote>
@@ -4796,6 +4786,26 @@
       </tags>
   </entry>
   <entry>
+    <title>一小时学会Swagger</title>
+    <url>/2020/10/18/%E4%B8%80%E5%B0%8F%E6%97%B6%E5%AD%A6%E4%BC%9ASwagger/</url>
+    <content><![CDATA[<p>网上无意间看到的Swagger教程，一口气全部看完了，讲得很不错。</p>
+<blockquote>
+<p>秦疆老师SpringBoot课程扩展之Swagger学习； 这可能是全网最详细的Swagger视频了 从生活到代码，从简单到深入。风趣幽默,通俗易懂。</p>
+</blockquote>
+<iframe src="//player.bilibili.com/player.html?aid=64841843&bvid=BV1Y441197Lw&cid=112543089&page=3" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="height:500px;width=600px"> </iframe>
+
+<span id="more"></span>
+
+<p>讲 new Docket().enable(true|false) 和dev | prod | test等环境下的使用的时候因为环境变化所以配置的端口号改变却还用8080端口访问项目导致 swagger 报错导致进不去项目。</p>
+]]></content>
+      <categories>
+        <category>Swagger</category>
+      </categories>
+      <tags>
+        <tag>Swagger</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>七牛云备案域名过期导致图片无法查看和下载</title>
     <url>/2020/09/30/%E4%B8%83%E7%89%9B%E4%BA%91%E5%A4%87%E6%A1%88%E5%9F%9F%E5%90%8D%E8%BF%87%E6%9C%9F%E5%AF%BC%E8%87%B4%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%9F%A5%E7%9C%8B%E5%92%8C%E4%B8%8B%E8%BD%BD/</url>
     <content><![CDATA[<p>之前一直用七牛云做博客图床，七牛云做得还是挺不错的，速度快、稳定并且还有免费空间和流量。但是前段时间备案的域名除了点问题，导致域名被七牛云删除了。</p>
@@ -4876,35 +4886,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在新机器中恢复Hexo博客</title>
-    <url>/2019/03/03/%E5%9C%A8%E6%96%B0%E6%9C%BA%E5%99%A8%E4%B8%AD%E6%81%A2%E5%A4%8DHexo%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h2 id="在新机器上恢复Hexo博客"><a href="#在新机器上恢复Hexo博客" class="headerlink" title="在新机器上恢复Hexo博客"></a>在新机器上恢复Hexo博客</h2><h3 id="准备源文件"><a href="#准备源文件" class="headerlink" title="准备源文件"></a>准备源文件</h3><p>可以备份到github或者coding，或者使用云盘同步（例如坚果云）。</p>
-<span id="more"></span>
-
-
-
-<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装npm</span></span></span><br><span class="line">sudo apt install npm</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装hexo</span></span></span><br><span class="line">sudo apt install -g hexo-cli</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#克隆源文件</span></span></span><br><span class="line">git clone user@github.com/repo/</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#在仓库中添加SSH key</span></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装部署插件</span></span></span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#RSS订阅插件</span></span></span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#站点地图插件</span></span></span><br><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装本地服务器</span></span></span><br><span class="line">npm install hexo-server --save</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#生成index.html插件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-archive --save</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#搜索功能插件</span></span></span><br><span class="line">npm install hexo-generator-searchdb --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#预览</span></span></span><br><span class="line">hexo s</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h3><p>遇到一个问题：生成后访问 <a href="http://localhost:4000/">http://localhost:4000</a> 出现白版和”Cannot GET /“，”/“是因为在public 目录下少了index.html文件，再次生成还是无效后，确认是少了组件：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-index</span><br></pre></td></tr></table></figure>
-
-<p>参见：<a href="https://www.jianshu.com/p/af83fc73e525">【完美解决】Hexo博客出现“Cannot GET/xxx”错误</a></p>
-<p>吐槽一下coding和腾讯云之间的账号互通问题，一阵瞎引导，竟然创建了一个新账号，以前的项目找不回来，两个网站之间来回绕了几遍，无意间又用邮箱登录上去了，之前都是能自动跳转登录的，现在还和CSDN一样开始恰烂钱，强制绑定微信和手机号，无语。</p>
-]]></content>
-      <categories>
-        <category>博客维护</category>
-      </categories>
-      <tags>
-        <tag>博客维护</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>利用Python爬取B站数据</title>
     <url>/2018/11/22/%E5%88%A9%E7%94%A8Python%E7%88%AC%E5%8F%96B%E7%AB%99%E6%95%B0%E6%8D%AE/</url>
     <content><![CDATA[<h3 id="最初的想法"><a href="#最初的想法" class="headerlink" title="最初的想法"></a>最初的想法</h3><p>最近在想起能不能爬一下B站的用户信息，看看能不能统计一下B站的年龄信息。但是很遗憾，在个人主页里只能看到注册日期和生日，而不能看到完整的生日信息。</p>
@@ -4938,6 +4919,84 @@
       </categories>
       <tags>
         <tag>折腾</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在新机器中恢复Hexo博客</title>
+    <url>/2019/03/03/%E5%9C%A8%E6%96%B0%E6%9C%BA%E5%99%A8%E4%B8%AD%E6%81%A2%E5%A4%8DHexo%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="在新机器上恢复Hexo博客"><a href="#在新机器上恢复Hexo博客" class="headerlink" title="在新机器上恢复Hexo博客"></a>在新机器上恢复Hexo博客</h2><h3 id="准备源文件"><a href="#准备源文件" class="headerlink" title="准备源文件"></a>准备源文件</h3><p>可以备份到github或者coding，或者使用云盘同步（例如坚果云）。</p>
+<span id="more"></span>
+
+
+
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装npm</span></span></span><br><span class="line">sudo apt install npm</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装hexo</span></span></span><br><span class="line">sudo apt install -g hexo-cli</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#克隆源文件</span></span></span><br><span class="line">git clone user@github.com/repo/</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#在仓库中添加SSH key</span></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装部署插件</span></span></span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#RSS订阅插件</span></span></span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#站点地图插件</span></span></span><br><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装本地服务器</span></span></span><br><span class="line">npm install hexo-server --save</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#生成index.html插件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-archive --save</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#搜索功能插件</span></span></span><br><span class="line">npm install hexo-generator-searchdb --save</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#预览</span></span></span><br><span class="line">hexo s</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h3><p>遇到一个问题：生成后访问 <a href="http://localhost:4000/">http://localhost:4000</a> 出现白版和”Cannot GET /“，”/“是因为在public 目录下少了index.html文件，再次生成还是无效后，确认是少了组件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-index</span><br></pre></td></tr></table></figure>
+
+<p>参见：<a href="https://www.jianshu.com/p/af83fc73e525">【完美解决】Hexo博客出现“Cannot GET/xxx”错误</a></p>
+<p>吐槽一下coding和腾讯云之间的账号互通问题，一阵瞎引导，竟然创建了一个新账号，以前的项目找不回来，两个网站之间来回绕了几遍，无意间又用邮箱登录上去了，之前都是能自动跳转登录的，现在还和CSDN一样开始恰烂钱，强制绑定微信和手机号，无语。</p>
+]]></content>
+      <categories>
+        <category>博客维护</category>
+      </categories>
+      <tags>
+        <tag>博客维护</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>大数据入门</title>
+    <url>/2021/05/30/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="Hadoop的安装和配置"><a href="#Hadoop的安装和配置" class="headerlink" title="Hadoop的安装和配置"></a>Hadoop的安装和配置</h2><h3 id="Hadoop下载"><a href="#Hadoop下载" class="headerlink" title="Hadoop下载"></a>Hadoop下载</h3><h3 id="Hadoop环境变量"><a href="#Hadoop环境变量" class="headerlink" title="Hadoop环境变量"></a>Hadoop环境变量</h3><h3 id="Hadoop启动和停止"><a href="#Hadoop启动和停止" class="headerlink" title="Hadoop启动和停止"></a>Hadoop启动和停止</h3><span id="more"></span>
+
+<h2 id="Hive的安装和配置"><a href="#Hive的安装和配置" class="headerlink" title="Hive的安装和配置"></a>Hive的安装和配置</h2><p>Hive-3.1.2版本下载地址：<a href="https://mirrors.bfsu.edu.cn/apache/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz">apache-hive-3.1.2-bin.tar.gz</a></p>
+<p>下载之后解压并复制到 /opt 目录下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf apache-hive-3.1.2-bin.tar.gz</span><br><span class="line">cp -r apache-hive-3.1.2-bin /opt/hive-3.1.2</span><br><span class="line">sudo chown -R currUser:currUserGroup hive3.1.2</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>配置hive路径：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> HIVE_HOME=/opt/hive-3.1.2</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HIVE_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>启动Hive时先启动Hadoop：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$HADOOP_HOME</span>/bin</span><br><span class="line">start-all.sh</span><br><span class="line"></span><br><span class="line">hive</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>遇到的问题：</p>
+<blockquote>
+<p>Hive启动报错：java.lang.NoSuchMethodError: com.google.common.base.Preconditions.checkArgument</p>
+</blockquote>
+<p>因为 HIVE_HOME/lib下的 guava jar 包的版本个HADOOP_HOME/share/hadoop/common/lib下的 guava 包版本不一致导致的，先删除其中一个版本比较低的，然后将另一个目录下的 guava 包复制过去就可以了。</p>
+<br>
+
+<blockquote>
+<p>Hive启动报错： Unable to instantiate org.apache.hadoop.hive.ql.metadata.SessionHiveMetaStoreClient异常</p>
+</blockquote>
+<p>在 HIVE_HOME/conf 目录下配置 hive-site.xml 文件，去 hive-site.xml 设置Derby数据库的位置：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.warehouse.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/opt/hive-3.1.2/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.local<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		        <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:derby:/opt/hive-3.1.2/metastore_db;databaseName=metastore_db;create=true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>/data 是自己建立的数据仓库目录。</p>
+<p>然后删除原来的metadb schema，再重新初始化：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm -rf <span class="variable">$HIVE_HOME</span>/metastore_db</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$HIVE_HOME</span></span><br><span class="line">schematool -initSchema -dbType derby</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">Initialization script completed</span><br><span class="line">schemaTool completed</span><br></pre></td></tr></table></figure>
+
+<p>然后再进入hive，执行show databases; 已经可以正常工作了。</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> employee <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">&#x27;name1&#x27;</span> <span class="keyword">and</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>大数据</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
       </tags>
   </entry>
   <entry>
@@ -4995,55 +5054,6 @@
       </categories>
       <tags>
         <tag>树莓派</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>大数据入门</title>
-    <url>/2021/05/30/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%85%A5%E9%97%A8/</url>
-    <content><![CDATA[<h2 id="Hadoop的安装和配置"><a href="#Hadoop的安装和配置" class="headerlink" title="Hadoop的安装和配置"></a>Hadoop的安装和配置</h2><h3 id="Hadoop下载"><a href="#Hadoop下载" class="headerlink" title="Hadoop下载"></a>Hadoop下载</h3><h3 id="Hadoop环境变量"><a href="#Hadoop环境变量" class="headerlink" title="Hadoop环境变量"></a>Hadoop环境变量</h3><h3 id="Hadoop启动和停止"><a href="#Hadoop启动和停止" class="headerlink" title="Hadoop启动和停止"></a>Hadoop启动和停止</h3><span id="more"></span>
-
-<h2 id="Hive的安装和配置"><a href="#Hive的安装和配置" class="headerlink" title="Hive的安装和配置"></a>Hive的安装和配置</h2><p>Hive-3.1.2版本下载地址：<a href="https://mirrors.bfsu.edu.cn/apache/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz">apache-hive-3.1.2-bin.tar.gz</a></p>
-<p>下载之后解压并复制到 /opt 目录下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -zxvf apache-hive-3.1.2-bin.tar.gz</span><br><span class="line">cp -r apache-hive-3.1.2-bin /opt/hive-3.1.2</span><br><span class="line">sudo chown -R currUser:currUserGroup hive3.1.2</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>配置hive路径：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> HIVE_HOME=/opt/hive-3.1.2</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HIVE_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>启动Hive时先启动Hadoop：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$HADOOP_HOME</span>/bin</span><br><span class="line">start-all.sh</span><br><span class="line"></span><br><span class="line">hive</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>遇到的问题：</p>
-<blockquote>
-<p>Hive启动报错：java.lang.NoSuchMethodError: com.google.common.base.Preconditions.checkArgument</p>
-</blockquote>
-<p>因为 HIVE_HOME/lib下的 guava jar 包的版本个HADOOP_HOME/share/hadoop/common/lib下的 guava 包版本不一致导致的，先删除其中一个版本比较低的，然后将另一个目录下的 guava 包复制过去就可以了。</p>
-<br>
-
-<blockquote>
-<p>Hive启动报错： Unable to instantiate org.apache.hadoop.hive.ql.metadata.SessionHiveMetaStoreClient异常</p>
-</blockquote>
-<p>在 HIVE_HOME/conf 目录下配置 hive-site.xml 文件，去 hive-site.xml 设置Derby数据库的位置：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.warehouse.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/opt/hive-3.1.2/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.local<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		        <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:derby:/opt/hive-3.1.2/metastore_db;databaseName=metastore_db;create=true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>/data 是自己建立的数据仓库目录。</p>
-<p>然后删除原来的metadb schema，再重新初始化：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm -rf <span class="variable">$HIVE_HOME</span>/metastore_db</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$HIVE_HOME</span></span><br><span class="line">schematool -initSchema -dbType derby</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">Initialization script completed</span><br><span class="line">schemaTool completed</span><br></pre></td></tr></table></figure>
-
-<p>然后再进入hive，执行show databases; 已经可以正常工作了。</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> employee <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">&#x27;name1&#x27;</span> <span class="keyword">and</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>大数据</category>
-      </categories>
-      <tags>
-        <tag>大数据</tag>
       </tags>
   </entry>
   <entry>
@@ -5195,30 +5205,6 @@
       </tags>
   </entry>
   <entry>
-    <title>更换七牛云过期SSL证书</title>
-    <url>/2019/11/10/%E6%9B%B4%E6%8D%A2%E4%B8%83%E7%89%9B%E4%BA%91%E8%BF%87%E6%9C%9FSSL%E8%AF%81%E4%B9%A6/</url>
-    <content><![CDATA[<p>更换七牛云过期SSL证书</p>
-<p>转眼博客已经跑了一年了，最近又是域名到期、又是SSL证书到期。</p>
-<p>刚给域名续了5年的费，存储在七牛云的图片因为SSL证书到期加载不出来了。提示“存在隐私安全隐患”，通过图片外链访问也无法加载图片，Chrome直接拒绝连接。</p>
-<p>一年前配置的，流程有些忘了，今天晚上又摸索了一遍。</p>
-<span id="more"></span>
-
-
-
-<h2 id="七牛云申请证书"><a href="#七牛云申请证书" class="headerlink" title="七牛云申请证书"></a>七牛云申请证书</h2><p>据说七牛云不支持阿里云申请的证书，所以没在阿里云申请，直接在七牛云申请了TrustAisa的一年免费证书。</p>
-<p>具体流程：</p>
-<p>登录七牛云 &gt; SSL证书服务 &gt; 购买证书 &gt; 填写必要信息购买指向目标域名的证书（选择TrustAsia免费证书，验证方式选择DNS验证，个人信息可以随便填，貌似不需要验证）</p>
-<h2 id="添加域名验证"><a href="#添加域名验证" class="headerlink" title="添加域名验证"></a>添加域名验证</h2><p>到域名解析里添加对应的TEXT类型的记录，记录值为申请证书时指定的值。我直接将以前的值变更成了新的值。</p>
-<h2 id="应用SSL证书"><a href="#应用SSL证书" class="headerlink" title="应用SSL证书"></a>应用SSL证书</h2><p>大概十分钟左右证书签发成功后，到 对象存储 &gt; 域名管理 &gt; 配置 &gt; HTTPS 配置 &gt; 强制 HTTPS &gt; 可更换证书列表里选择刚才申请的证书，然后应用。等待几分钟之后，便能通过HTTPS访问存储内容了。</p>
-]]></content>
-      <categories>
-        <category>博客维护</category>
-      </categories>
-      <tags>
-        <tag>博客维护</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>更改DNS为8.8.8.8访问cn.bing.com</title>
     <url>/2019/01/24/%E6%9B%B4%E6%94%B9DNS%E4%B8%BA8-8-8-8%E8%AE%BF%E9%97%AEcn-bing-com/</url>
     <content><![CDATA[<p>昨天早上开始 <a href="https://cn.bing.com/">https://cn.bing.com</a> 就无法访问：</p>
@@ -5240,6 +5226,30 @@
       </categories>
       <tags>
         <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>更换七牛云过期SSL证书</title>
+    <url>/2019/11/10/%E6%9B%B4%E6%8D%A2%E4%B8%83%E7%89%9B%E4%BA%91%E8%BF%87%E6%9C%9FSSL%E8%AF%81%E4%B9%A6/</url>
+    <content><![CDATA[<p>更换七牛云过期SSL证书</p>
+<p>转眼博客已经跑了一年了，最近又是域名到期、又是SSL证书到期。</p>
+<p>刚给域名续了5年的费，存储在七牛云的图片因为SSL证书到期加载不出来了。提示“存在隐私安全隐患”，通过图片外链访问也无法加载图片，Chrome直接拒绝连接。</p>
+<p>一年前配置的，流程有些忘了，今天晚上又摸索了一遍。</p>
+<span id="more"></span>
+
+
+
+<h2 id="七牛云申请证书"><a href="#七牛云申请证书" class="headerlink" title="七牛云申请证书"></a>七牛云申请证书</h2><p>据说七牛云不支持阿里云申请的证书，所以没在阿里云申请，直接在七牛云申请了TrustAisa的一年免费证书。</p>
+<p>具体流程：</p>
+<p>登录七牛云 &gt; SSL证书服务 &gt; 购买证书 &gt; 填写必要信息购买指向目标域名的证书（选择TrustAsia免费证书，验证方式选择DNS验证，个人信息可以随便填，貌似不需要验证）</p>
+<h2 id="添加域名验证"><a href="#添加域名验证" class="headerlink" title="添加域名验证"></a>添加域名验证</h2><p>到域名解析里添加对应的TEXT类型的记录，记录值为申请证书时指定的值。我直接将以前的值变更成了新的值。</p>
+<h2 id="应用SSL证书"><a href="#应用SSL证书" class="headerlink" title="应用SSL证书"></a>应用SSL证书</h2><p>大概十分钟左右证书签发成功后，到 对象存储 &gt; 域名管理 &gt; 配置 &gt; HTTPS 配置 &gt; 强制 HTTPS &gt; 可更换证书列表里选择刚才申请的证书，然后应用。等待几分钟之后，便能通过HTTPS访问存储内容了。</p>
+]]></content>
+      <categories>
+        <category>博客维护</category>
+      </categories>
+      <tags>
+        <tag>博客维护</tag>
       </tags>
   </entry>
   <entry>
@@ -5368,30 +5378,6 @@
       </tags>
   </entry>
   <entry>
-    <title>树莓派通过无刷电调驱动无刷电机</title>
-    <url>/2020/01/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%80%9A%E8%BF%87%E6%97%A0%E5%88%B7%E7%94%B5%E8%B0%83%E9%A9%B1%E5%8A%A8%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BA/</url>
-    <content><![CDATA[<p>今天尝试了使用无刷电调来驱动无刷电机，但是刚开始遇到点问题，没理解网上的博文，还好板子没被烧掉💦</p>
-<p><a href="https://blog.csdn.net/qf0129/article/details/70769054">树莓派pwm控制无刷电机</a></p>
-<span id="more"></span>
-
-<h2 id="连线"><a href="#连线" class="headerlink" title="连线"></a>连线</h2><p>刚开始了卡在了连线这里，电调有两根电源线，连接12V电源，其中三根线连接树莓派，<strong>如果树莓派独立供电的话，电调只需要将信号控制线和地线连接到树莓派的GPIO口和GND口</strong>。</p>
-<p>我刚开始连错了，树莓派独立供电的同时，将电调的5V输出端和GND线都连接到了树莓派上，板子突然自己开机了，才意识到接错了。后来想着不需要电调输出的电压，所以只接了信号控制线，5V输出和GND都没接，程序跑了但是电机没转动，也没信号声音。看了 <a href="https://www.cnblogs.com/raffeale/p/5585757.html">折腾了2个晚上无刷电调(ESC)，电机终于转起来了，特此记录一下</a> 才意识到电调的GND线是一定要接到树莓派的GND口的，然后电机就动了。</p>
-<p>连接图：</p>
-<p><img src="https://images2.imgbox.com/ae/6d/bJjjdFRf_o.png" alt="连接图"></p>
-<p><em>上面的图中电调的输入电压应该是12V，可以用4节5号电池串联。</em></p>
-<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><p>连接好之后，给树莓派通电，接通电调连接的电源，然后用RPi.GPIO.PWM()控制电机的转速。</p>
-<p>测试代码：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pin = <span class="number">18</span></span><br><span class="line"></span><br><span class="line">GPIO.setmode(GPIO.BCM)</span><br><span class="line">GPIO.setup(pin, GPIO.OUT)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 频率400Hz</span></span><br><span class="line">p = GPIO.PWM(pin, <span class="number">400</span>)</span><br><span class="line">p.start(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">dc = <span class="number">10</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">40</span>):</span><br><span class="line">        dc += <span class="number">2</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;dc:&#x27;</span>, dc</span><br><span class="line">        p.ChangeDutyCycle(dc)</span><br><span class="line">        time.sleep(<span class="number">0.3</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    p.stop()</span><br><span class="line">    GPIO.cleanup()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>树莓派</category>
-      </categories>
-      <tags>
-        <tag>树莓派</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>树莓派驱动4位数码管</title>
     <url>/2020/01/04/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%A9%B1%E5%8A%A84%E4%BD%8D%E6%95%B0%E7%A0%81%E7%AE%A1/</url>
     <content><![CDATA[<p>听歌：<a href="http://url.cn/5vzNt1p">宇宙を見上げて</a> （动画《比宇宙更远的地方》插入曲）</p>
@@ -5482,6 +5468,30 @@
 <h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><p>效果如下：</p>
 <p><img src="https://images2.imgbox.com/d8/19/mHf8LGzs_o.png"></p>
 <p>可能是二极管余辉的原因？每个数字显示得都很不纯净，暂时先这样吧。</p>
+]]></content>
+      <categories>
+        <category>树莓派</category>
+      </categories>
+      <tags>
+        <tag>树莓派</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>树莓派通过无刷电调驱动无刷电机</title>
+    <url>/2020/01/05/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%80%9A%E8%BF%87%E6%97%A0%E5%88%B7%E7%94%B5%E8%B0%83%E9%A9%B1%E5%8A%A8%E6%97%A0%E5%88%B7%E7%94%B5%E6%9C%BA/</url>
+    <content><![CDATA[<p>今天尝试了使用无刷电调来驱动无刷电机，但是刚开始遇到点问题，没理解网上的博文，还好板子没被烧掉💦</p>
+<p><a href="https://blog.csdn.net/qf0129/article/details/70769054">树莓派pwm控制无刷电机</a></p>
+<span id="more"></span>
+
+<h2 id="连线"><a href="#连线" class="headerlink" title="连线"></a>连线</h2><p>刚开始了卡在了连线这里，电调有两根电源线，连接12V电源，其中三根线连接树莓派，<strong>如果树莓派独立供电的话，电调只需要将信号控制线和地线连接到树莓派的GPIO口和GND口</strong>。</p>
+<p>我刚开始连错了，树莓派独立供电的同时，将电调的5V输出端和GND线都连接到了树莓派上，板子突然自己开机了，才意识到接错了。后来想着不需要电调输出的电压，所以只接了信号控制线，5V输出和GND都没接，程序跑了但是电机没转动，也没信号声音。看了 <a href="https://www.cnblogs.com/raffeale/p/5585757.html">折腾了2个晚上无刷电调(ESC)，电机终于转起来了，特此记录一下</a> 才意识到电调的GND线是一定要接到树莓派的GND口的，然后电机就动了。</p>
+<p>连接图：</p>
+<p><img src="https://images2.imgbox.com/ae/6d/bJjjdFRf_o.png" alt="连接图"></p>
+<p><em>上面的图中电调的输入电压应该是12V，可以用4节5号电池串联。</em></p>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><p>连接好之后，给树莓派通电，接通电调连接的电源，然后用RPi.GPIO.PWM()控制电机的转速。</p>
+<p>测试代码：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pin = <span class="number">18</span></span><br><span class="line"></span><br><span class="line">GPIO.setmode(GPIO.BCM)</span><br><span class="line">GPIO.setup(pin, GPIO.OUT)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 频率400Hz</span></span><br><span class="line">p = GPIO.PWM(pin, <span class="number">400</span>)</span><br><span class="line">p.start(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">dc = <span class="number">10</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">40</span>):</span><br><span class="line">        dc += <span class="number">2</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">&#x27;dc:&#x27;</span>, dc</span><br><span class="line">        p.ChangeDutyCycle(dc)</span><br><span class="line">        time.sleep(<span class="number">0.3</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    p.stop()</span><br><span class="line">    GPIO.cleanup()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>树莓派</category>
