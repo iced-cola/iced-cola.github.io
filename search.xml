@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>25岁的最后一天</title>
-    <url>/2020/09/30/25%E5%B2%81%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/</url>
-    <content><![CDATA[<p>刚才把之前写的内容都整理了一遍，挂的图片能换的都换了，还有些现在看起来很尴尬的内容直接删掉了，折腾一次真累。歇了一下打开日历才发现今天已经是9月30号了。今年很巧的是中秋节和国庆节碰在了一起，在贴吧里看到很多学生还因为假期的问题耿耿于怀，但是对于像我一样的待业青年，好像每一天都是假期，只不过心里不是那么放松。</p>
-<br>
-
-<span id="more"></span>
-
-<p>昨天下午回到空无一人的家里，虽然什么吃的也没有，但是家里的干净舒服的大床倒是让我好好睡了一觉，很久没有睡得这么舒服了。以前总是觉得买房的人很傻，买完房子就要一直住在一个地方，而且还要背负繁重的房贷。但是最近我突然有了很强烈的想买房的愿望，自己的房子才是真正能落脚的地方。现在就想好好工作努力攒钱，希望能在一两年之内有一套自己的房子，不管是在哪个城市，偏远一点也无所谓。</p>
-<br>
-
-<p>昨天晚上联系上了一个住得不远的初中同学，刚好放假她也在家，聊了一会儿通过她介绍了一个房东，希望能找到一个地方安静的待一段时间。</p>
-<br>
-
-<p>25岁今天就要画上句号了，希望26岁能交上好运吧。</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Gitlab+Jenkins+Docker自动部署SpringBoot微服务</title>
     <url>/2021/06/13/Docker-Jenkins-Gitlab%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1/</url>
     <content><![CDATA[<blockquote>
@@ -149,6 +126,38 @@
       </tags>
   </entry>
   <entry>
+    <title>Git配置代理</title>
+    <url>/2019/04/06/Git%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<p>git的代理配置</p>
+<p>给sublime安装插件的时候又碰到git clone速度过慢的问题，记录一哈！</p>
+<span id="more"></span>
+
+
+
+<ol>
+<li><p>打开ss全局代理；</p>
+</li>
+<li><p>到 <a href="https://www.ipaddress.com/">IPAddress.com</a> 根据 github.global.ssl.fastly.net 获取github服务器地址；</p>
+</li>
+<li><p>在 /etc/hosts 或者C:/windows/system32/driver/etc/hosts 文件中添加对应的记录：</p>
+<p>ip github.global.ssl.fastly.net</p>
+</li>
+<li><p>设置git代理：</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> http和https协议代理：</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sock5的情况</span></span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消代理</span></span><br><span class="line">git config --global unset http.proxy</span><br><span class="line">git config --global unset https.proxy</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh协议代理：在用户目录下建立如下文件 ~/.ssh/config，对 GitHub 的域名做单独的处理</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里必须是 github.com，因为这个跟我们 <span class="built_in">clone</span> 代码时的链接有关</span></span><br><span class="line">Host github.com</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果用默认端口，这里是 github.com，如果想用443端口，这里就是 ssh.github.com 详见 https://help.github.com/articles/using-ssh-over-the-https-port/</span></span><br><span class="line">   HostName github.com</span><br><span class="line">   User git</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 HTTP 代理，把下面这行取消注释，并把 proxyport 改成自己的 http 代理的端口</span></span><br><span class="line">     ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=6667</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 socks5 代理，则把下面这行取消注释，并把 6666 改成自己 socks5 代理的端口</span></span><br><span class="line">     ProxyCommand nc -v -x 127.0.0.1:6666 %h %p</span><br></pre></td></tr></table></figure>
+
+<p>==&gt;&gt; <a href="https://imciel.com/2016/06/28/git-proxy/">设置 git 代理</a> </p>
+<p>在Ubuntu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Element的Nav导航高亮</title>
     <url>/2021/05/13/Element%E7%9A%84Nav%E5%AF%BC%E8%88%AA%E9%AB%98%E4%BA%AE/</url>
     <content><![CDATA[<p>这两天遇到一个问题：element的Nav菜单点击之后，跳转到相应页面，然后点击之后的菜单要高亮显示。菜单写成了组件。</p>
@@ -183,35 +192,26 @@
       </tags>
   </entry>
   <entry>
-    <title>Git配置代理</title>
-    <url>/2019/04/06/Git%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<p>git的代理配置</p>
-<p>给sublime安装插件的时候又碰到git clone速度过慢的问题，记录一哈！</p>
+    <title>25岁的最后一天</title>
+    <url>/2020/09/30/25%E5%B2%81%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/</url>
+    <content><![CDATA[<p>刚才把之前写的内容都整理了一遍，挂的图片能换的都换了，还有些现在看起来很尴尬的内容直接删掉了，折腾一次真累。歇了一下打开日历才发现今天已经是9月30号了。今年很巧的是中秋节和国庆节碰在了一起，在贴吧里看到很多学生还因为假期的问题耿耿于怀，但是对于像我一样的待业青年，好像每一天都是假期，只不过心里不是那么放松。</p>
+<br>
+
 <span id="more"></span>
 
+<p>昨天下午回到空无一人的家里，虽然什么吃的也没有，但是家里的干净舒服的大床倒是让我好好睡了一觉，很久没有睡得这么舒服了。以前总是觉得买房的人很傻，买完房子就要一直住在一个地方，而且还要背负繁重的房贷。但是最近我突然有了很强烈的想买房的愿望，自己的房子才是真正能落脚的地方。现在就想好好工作努力攒钱，希望能在一两年之内有一套自己的房子，不管是在哪个城市，偏远一点也无所谓。</p>
+<br>
 
+<p>昨天晚上联系上了一个住得不远的初中同学，刚好放假她也在家，聊了一会儿通过她介绍了一个房东，希望能找到一个地方安静的待一段时间。</p>
+<br>
 
-<ol>
-<li><p>打开ss全局代理；</p>
-</li>
-<li><p>到 <a href="https://www.ipaddress.com/">IPAddress.com</a> 根据 github.global.ssl.fastly.net 获取github服务器地址；</p>
-</li>
-<li><p>在 /etc/hosts 或者C:/windows/system32/driver/etc/hosts 文件中添加对应的记录：</p>
-<p>ip github.global.ssl.fastly.net</p>
-</li>
-<li><p>设置git代理：</p>
-</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> http和https协议代理：</span></span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sock5的情况</span></span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消代理</span></span><br><span class="line">git config --global unset http.proxy</span><br><span class="line">git config --global unset https.proxy</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh协议代理：在用户目录下建立如下文件 ~/.ssh/config，对 GitHub 的域名做单独的处理</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里必须是 github.com，因为这个跟我们 <span class="built_in">clone</span> 代码时的链接有关</span></span><br><span class="line">Host github.com</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果用默认端口，这里是 github.com，如果想用443端口，这里就是 ssh.github.com 详见 https://help.github.com/articles/using-ssh-over-the-https-port/</span></span><br><span class="line">   HostName github.com</span><br><span class="line">   User git</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 HTTP 代理，把下面这行取消注释，并把 proxyport 改成自己的 http 代理的端口</span></span><br><span class="line">     ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=6667</span><br><span class="line"><span class="meta">   #</span><span class="bash"> 如果是 socks5 代理，则把下面这行取消注释，并把 6666 改成自己 socks5 代理的端口</span></span><br><span class="line">     ProxyCommand nc -v -x 127.0.0.1:6666 %h %p</span><br></pre></td></tr></table></figure>
-
-<p>==&gt;&gt; <a href="https://imciel.com/2016/06/28/git-proxy/">设置 git 代理</a> </p>
-<p>在Ubuntu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
+<p>25岁今天就要画上句号了，希望26岁能交上好运吧。</p>
 ]]></content>
       <categories>
-        <category>git</category>
+        <category>生活</category>
       </categories>
       <tags>
-        <tag>git</tag>
+        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
@@ -448,162 +448,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java字节码解析</title>
-    <url>/2020/11/18/Java%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a href="https://www.jianshu.com/p/252f381a6bc4">一文让你明白Java字节码</a></p>
-<span id="more"></span>
-
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>从一个简单类 Math.java 开始：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>用 <code>javac Math.java</code> 得到字节码文件 Math.class，文件内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cafe babe 0000 0034 0013 0a00 0400 0f09</span><br><span class="line">0003 0010 0700 1107 0012 0100 016d 0100</span><br><span class="line">0149 0100 063c 696e 6974 3e01 0003 2829</span><br><span class="line">5601 0004 436f 6465 0100 0f4c 696e 654e</span><br><span class="line">756d 6265 7254 6162 6c65 0100 0369 6e63</span><br><span class="line">0100 0328 2949 0100 0a53 6f75 7263 6546</span><br><span class="line">696c 6501 0009 4d61 7468 2e6a 6176 610c</span><br><span class="line">0007 0008 0c00 0500 0601 0004 4d61 7468</span><br><span class="line">0100 106a 6176 612f 6c61 6e67 2f4f 626a</span><br><span class="line">6563 7400 2100 0300 0400 0000 0100 0200</span><br><span class="line">0500 0600 0000 0200 0100 0700 0800 0100</span><br><span class="line">0900 0000 1d00 0100 0100 0000 052a b700</span><br><span class="line">01b1 0000 0001 000a 0000 0006 0001 0000</span><br><span class="line">0001 0001 000b 000c 0001 0009 0000 001f</span><br><span class="line">0002 0001 0000 0007 2ab4 0002 0460 ac00</span><br><span class="line">0000 0100 0a00 0000 0600 0100 0000 0600</span><br><span class="line">0100 0d00 0000 0200 0e</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="内容解读"><a href="#内容解读" class="headerlink" title="内容解读"></a>内容解读</h2><p>参照图例：</p>
-<p><img src="https://images2.imgbox.com/08/79/8kGgoJqq_o.jpeg"></p>
-<p><img src="https://images2.imgbox.com/61/17/vm6prCvK_o.png"></p>
-<h3 id="魔数"><a href="#魔数" class="headerlink" title="魔数"></a>魔数</h3><p>cafe babe：魔数，文件后缀标识，被java虚拟机接受。</p>
-<br>
-
-<h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>0000：次版本号</p>
-<p>0034：主版本号=52，java 1.8</p>
-<br>
-
-<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>0013：常量池入口，2+n，十进制=19，表明有18个常量，从1开始</p>
-<p>0a：十进制=10，对应CONSTANT_Methodref_info，指向声明方法</p>
-<p>0004：常量索引#4</p>
-<p>000f：常量索引#15</p>
-<p>09：十进制=9，对应CONSTANT_Fieldref_info，指向字段的类或接口描述</p>
-<p>0003：常量索引#3</p>
-<p>0010：常量索引#16</p>
-<p>07：十进制=7，对应CONSTANT_Class_info，指向全限定名常量项的索引</p>
-<p>0011：常量索引#17</p>
-<p>07：同上</p>
-<p>0012：常量索引#18</p>
-<p>01：十进制=1，对应表中的CONSTANT_Utf8_info，utf8编码的字符串长度</p>
-<p>0001：字符串长度为1</p>
-<p>6d：109=”m”</p>
-<p>01：同上</p>
-<p>0001：同上</p>
-<p>49：49=”1”</p>
-<p>01：同上</p>
-<p>0006：同上</p>
-<p>3c 696e 6974 3e：字符串=<init></p>
-<p>01：同上</p>
-<p>0003：同上</p>
-<p>2829 56：()V</p>
-<p>01：同上</p>
-<p>0004：同上</p>
-<p>436f 6465：C_de</p>
-<p>01：同上</p>
-<p>000f：同上</p>
-<p>4c 696e 654e 756d 6265 7254 6162 6c65：LineNumberTable</p>
-<p>01：同上</p>
-<p>0003：同上</p>
-<p>69 6e63：inc</p>
-<p>01：同上</p>
-<p>0003：同上</p>
-<p>28 2949：()I</p>
-<p>01：同上</p>
-<p>000a：长度为10的字符串</p>
-<p>53 6f75 7263 6546 696c 65：SourceFile</p>
-<p>01：同上</p>
-<p>0009：同上</p>
-<p>4d61 7468 2e6a 6176 61：Math.java</p>
-<p>0c：十进制=12，CONSTANT_NameAndType_info，指向该字段或方法名称常量项的索引</p>
-<p>0007：字段或者名字名称常量项索引#7</p>
-<p>0008：字段或者名字名称常量项索引#8</p>
-<p>0c：同上</p>
-<p>0005：字段或者名字名称常量项索引#5</p>
-<p>0006：字段或者名字名称常量项索引#6</p>
-<p>01：同上</p>
-<p>0004：同上</p>
-<p>4d61 7468：Math</p>
-<p>01：同上</p>
-<p>0010：同上</p>
-<p>6a 6176 612f 6c61 6e67 2f4f 626a 6563 74：java/lang/Object</p>
-<p>==== 常量解析完毕，共18个常量</p>
-<br>
-
-<h2 id="Access-Flag-访问标志部分"><a href="#Access-Flag-访问标志部分" class="headerlink" title="Access_Flag 访问标志部分"></a>Access_Flag 访问标志部分</h2><blockquote>
-<p>0x0021：是 0x0020 和 0x0001 的并集。</p>
-</blockquote>
-<p>0021：ACC_PUBLIC，访问修饰符为Public。</p>
-<br>
-
-<h2 id="类索引"><a href="#类索引" class="headerlink" title="类索引"></a>类索引</h2><p>类索引用于确定类的全限定名。</p>
-<p>0003：引用第3个常量，第3个常量引用第17个常量，为 Math。</p>
-<br>
-
-<h2 id="父类索引"><a href="#父类索引" class="headerlink" title="父类索引"></a>父类索引</h2><p>0004：引用第18个常量，为 java/lang/Object。</p>
-<br>
-
-<h2 id="接口索引"><a href="#接口索引" class="headerlink" title="接口索引"></a>接口索引</h2><p>0000：没有接口。</p>
-<br>
-
-<h2 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h2><p>字段表用于描述类和接口中声明的变量。这里的字段包含了类级别变量以及实例变量，但是不包括方法内部声明的局部变量。</p>
-<p><img src="https://images2.imgbox.com/46/18/b007hXKr_o.png"></p>
-<p>0001：字段属性。</p>
-<p>0002：Private访问。</p>
-<p>0005：常量索引#5，为”m”。</p>
-<p>0006：常量索引#6，为”1”。</p>
-<p>0000：属性表数量为0。</p>
-<br>
-
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://images2.imgbox.com/b5/62/ZKPXcYOv_o.png"></p>
-<p>to be continued…</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java注解简单例子</title>
-    <url>/2019/05/15/Java%E6%B3%A8%E8%A7%A3%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90/</url>
-    <content><![CDATA[<p>了解Java注解（@Annotation）</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
-</blockquote>
-<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
-<span id="more"></span>
-
-
-
-<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
-<p>四个元注解：</p>
-<ul>
-<li>@Target</li>
-<li>@Retention</li>
-<li>@Document</li>
-<li>Inherited</li>
-</ul>
-<p>注解主要是用户按自己的需求来实现。</p>
-<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>先创建两个注解，@Digits和@NotEmpty，用来注解属性是否满足给定条件。</p>
-<p>代码如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段只能为数字，且最大长度为maxLength，最大小数位为fraction</span></span><br><span class="line"><span class="comment"> * 默认没有小数位</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Digits &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxLength</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fraction</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段不能为空</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotEmpty &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>定义一个处理类处理自定义注解：（主要利用反射机制）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 处理自定义注解</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationProcesser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Table table)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Class clazz = table.getClass();</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(<span class="string">&quot;class not found!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        String fieldName;</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------------------------&quot;</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Annotation[] annotations = field.getDeclaredAnnotations();</span><br><span class="line">            fieldName = field.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot;--&gt; info: into &quot;</span> + fieldName);</span><br><span class="line">            <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + annotation.annotationType());</span><br><span class="line">                <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Digits) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @Digits annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">int</span> maxLength = ((Digits) annotation).maxLength();</span><br><span class="line">                    <span class="keyword">int</span> annotatedFraction = ((Digits) annotation).fraction();</span><br><span class="line">                    String[] fraction = String.valueOf(table.getCount()).split(<span class="string">&quot;\\.&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (String.valueOf(table.getCount()).length() &gt; maxLength) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: maxLength exceed!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (fraction.length &gt; <span class="number">1</span> &amp;&amp; fraction[<span class="number">1</span>].length() &gt; annotatedFraction) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error：fraction length exceed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> NotEmpty) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @NotEmpty annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">if</span> (table.getDescription() == <span class="keyword">null</span> || <span class="string">&quot;&quot;</span>.equals(table.getDescription())) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: empty is not allowed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>主测试类：（<strong>省略getter和setter</strong>）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits(maxLength = 6, fraction = 2)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">&quot;description1&quot;</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">&quot;description2&quot;</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description3&quot;</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java编程思想——第十四章——类型信息</title>
     <url>/2019/02/01/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%E2%80%94%E2%80%94%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/</url>
     <content><![CDATA[<h1 id="第十四章-类型信息"><a href="#第十四章-类型信息" class="headerlink" title="第十四章 类型信息"></a>第十四章 类型信息</h1><hr>
@@ -814,6 +658,47 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.typeinfo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018-06-08 11:51</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnonymousImplementation</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException,</span></span><br><span class="line"><span class="function">            InvocationTargetException </span>&#123;</span><br><span class="line">        A a = AnonymousA.makeA();</span><br><span class="line">        a.f();</span><br><span class="line">        System.out.println(a.getClass().getName());</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;g&quot;</span>);</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;u&quot;</span>);</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;v&quot;</span>);</span><br><span class="line">        HiddenImplementation.callHiddenMethod(a, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnonymousA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> A <span class="title">makeA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> A() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;public c.f()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;public c.g()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">void</span> <span class="title">u</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;package u()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">v</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;protected v()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">w</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;private w()&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>output:</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> c.f()</span><br><span class="line">com.typeinfo.AnonymousA$<span class="number">1</span></span><br><span class="line"><span class="keyword">public</span> c.g()</span><br><span class="line"><span class="function"><span class="keyword">package</span> <span class="title">u</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="title">v</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">w</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java注解简单例子</title>
+    <url>/2019/05/15/Java%E6%B3%A8%E8%A7%A3%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90/</url>
+    <content><![CDATA[<p>了解Java注解（@Annotation）</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
+</blockquote>
+<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
+<span id="more"></span>
+
+
+
+<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
+<p>四个元注解：</p>
+<ul>
+<li>@Target</li>
+<li>@Retention</li>
+<li>@Document</li>
+<li>Inherited</li>
+</ul>
+<p>注解主要是用户按自己的需求来实现。</p>
+<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>先创建两个注解，@Digits和@NotEmpty，用来注解属性是否满足给定条件。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段只能为数字，且最大长度为maxLength，最大小数位为fraction</span></span><br><span class="line"><span class="comment"> * 默认没有小数位</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Digits &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxLength</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fraction</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段不能为空</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotEmpty &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>定义一个处理类处理自定义注解：（主要利用反射机制）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 处理自定义注解</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationProcesser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Table table)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Class clazz = table.getClass();</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(<span class="string">&quot;class not found!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        String fieldName;</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------------------------&quot;</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Annotation[] annotations = field.getDeclaredAnnotations();</span><br><span class="line">            fieldName = field.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot;--&gt; info: into &quot;</span> + fieldName);</span><br><span class="line">            <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + annotation.annotationType());</span><br><span class="line">                <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Digits) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @Digits annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">int</span> maxLength = ((Digits) annotation).maxLength();</span><br><span class="line">                    <span class="keyword">int</span> annotatedFraction = ((Digits) annotation).fraction();</span><br><span class="line">                    String[] fraction = String.valueOf(table.getCount()).split(<span class="string">&quot;\\.&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (String.valueOf(table.getCount()).length() &gt; maxLength) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: maxLength exceed!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (fraction.length &gt; <span class="number">1</span> &amp;&amp; fraction[<span class="number">1</span>].length() &gt; annotatedFraction) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error：fraction length exceed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> NotEmpty) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @NotEmpty annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">if</span> (table.getDescription() == <span class="keyword">null</span> || <span class="string">&quot;&quot;</span>.equals(table.getDescription())) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: empty is not allowed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>主测试类：（<strong>省略getter和setter</strong>）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits(maxLength = 6, fraction = 2)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">&quot;description1&quot;</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">&quot;description2&quot;</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description3&quot;</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
         <category>Java</category>
       </categories>
@@ -1115,39 +1000,118 @@
       </tags>
   </entry>
   <entry>
-    <title>Jenkinsfile cd命令不生效的问题</title>
-    <url>/2021/06/05/Jenkinsfile-cd%E5%91%BD%E4%BB%A4%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>今天晚上给前端项目配置Jenkins流水线的时候遇到一个问题：cd 命令不生效，<code>sh 'cd ask_front'</code> 这个语句执行前后 <code>pwd</code> 的输出是一样的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ pwd</span><br><span class="line">/home/jingh527/.jenkins/workspace/try-ask_master</span><br></pre></td></tr></table></figure>
-
-<p>去Jenkins机器上看了上面这个目录结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">try-ask_master</span><br><span class="line">-- ask</span><br><span class="line">-- ask_front</span><br></pre></td></tr></table></figure>
-
+    <title>Java字节码解析</title>
+    <url>/2020/11/18/Java%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a href="https://www.jianshu.com/p/252f381a6bc4">一文让你明白Java字节码</a></p>
 <span id="more"></span>
 
-<p>Jenkinsfile的定义：</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm uninstall *&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf node_modules&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf package-lock.json&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm cache clean --force&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>从一个简单类 Math.java 开始：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在执行到 npm 命令相关的地方就开始报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ npm run dev</span><br><span class="line">npm ERR! code ENOENT</span><br><span class="line">npm ERR! syscall open</span><br><span class="line">npm ERR! path /home/jingh527/.jenkins/workspace/try-ask_master/package.json</span><br><span class="line">npm ERR! errno -2</span><br><span class="line">npm ERR! enoent ENOENT: no such file or directory, open &#x27;/home/jingh527/.jenkins/workspace/try-ask_master/package.json&#x27;</span><br><span class="line">npm ERR! enoent This is related to npm not being able to find a file.</span><br><span class="line">npm ERR! enoent </span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /home/node/.npm/_logs/2021-06-04T17_20_39_229Z-debug.log</span><br><span class="line">script returned exit code 254</span><br></pre></td></tr></table></figure>
+<p>用 <code>javac Math.java</code> 得到字节码文件 Math.class，文件内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cafe babe 0000 0034 0013 0a00 0400 0f09</span><br><span class="line">0003 0010 0700 1107 0012 0100 016d 0100</span><br><span class="line">0149 0100 063c 696e 6974 3e01 0003 2829</span><br><span class="line">5601 0004 436f 6465 0100 0f4c 696e 654e</span><br><span class="line">756d 6265 7254 6162 6c65 0100 0369 6e63</span><br><span class="line">0100 0328 2949 0100 0a53 6f75 7263 6546</span><br><span class="line">696c 6501 0009 4d61 7468 2e6a 6176 610c</span><br><span class="line">0007 0008 0c00 0500 0601 0004 4d61 7468</span><br><span class="line">0100 106a 6176 612f 6c61 6e67 2f4f 626a</span><br><span class="line">6563 7400 2100 0300 0400 0000 0100 0200</span><br><span class="line">0500 0600 0000 0200 0100 0700 0800 0100</span><br><span class="line">0900 0000 1d00 0100 0100 0000 052a b700</span><br><span class="line">01b1 0000 0001 000a 0000 0006 0001 0000</span><br><span class="line">0001 0001 000b 000c 0001 0009 0000 001f</span><br><span class="line">0002 0001 0000 0007 2ab4 0002 0460 ac00</span><br><span class="line">0000 0100 0a00 0000 0600 0100 0000 0600</span><br><span class="line">0100 0d00 0000 0200 0e</span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在网上找了一会儿资料，看到一个帖子：<a href="https://blog.csdn.net/liumiaocn/article/details/102632742">Jenkins基础：Jenkinsfile注意事项：条件跳转与当前路径</a></p>
-<blockquote>
-<p>cd demo、npm install、npm run build这本是三条命令，强硬地使用&amp;&amp;写在了一起，为什么不能分开使用三个sh ‘’的原因是因为，在具体的实现的时候，显然执行完返回当前目录会恢复为原始状态。这是一个非常容易被忘记的问题。</p>
+<h2 id="内容解读"><a href="#内容解读" class="headerlink" title="内容解读"></a>内容解读</h2><p>参照图例：</p>
+<p><img src="https://images2.imgbox.com/08/79/8kGgoJqq_o.jpeg"></p>
+<p><img src="https://images2.imgbox.com/61/17/vm6prCvK_o.png"></p>
+<h3 id="魔数"><a href="#魔数" class="headerlink" title="魔数"></a>魔数</h3><p>cafe babe：魔数，文件后缀标识，被java虚拟机接受。</p>
+<br>
+
+<h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>0000：次版本号</p>
+<p>0034：主版本号=52，java 1.8</p>
+<br>
+
+<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>0013：常量池入口，2+n，十进制=19，表明有18个常量，从1开始</p>
+<p>0a：十进制=10，对应CONSTANT_Methodref_info，指向声明方法</p>
+<p>0004：常量索引#4</p>
+<p>000f：常量索引#15</p>
+<p>09：十进制=9，对应CONSTANT_Fieldref_info，指向字段的类或接口描述</p>
+<p>0003：常量索引#3</p>
+<p>0010：常量索引#16</p>
+<p>07：十进制=7，对应CONSTANT_Class_info，指向全限定名常量项的索引</p>
+<p>0011：常量索引#17</p>
+<p>07：同上</p>
+<p>0012：常量索引#18</p>
+<p>01：十进制=1，对应表中的CONSTANT_Utf8_info，utf8编码的字符串长度</p>
+<p>0001：字符串长度为1</p>
+<p>6d：109=”m”</p>
+<p>01：同上</p>
+<p>0001：同上</p>
+<p>49：49=”1”</p>
+<p>01：同上</p>
+<p>0006：同上</p>
+<p>3c 696e 6974 3e：字符串=<init></p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>2829 56：()V</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>436f 6465：C_de</p>
+<p>01：同上</p>
+<p>000f：同上</p>
+<p>4c 696e 654e 756d 6265 7254 6162 6c65：LineNumberTable</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>69 6e63：inc</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>28 2949：()I</p>
+<p>01：同上</p>
+<p>000a：长度为10的字符串</p>
+<p>53 6f75 7263 6546 696c 65：SourceFile</p>
+<p>01：同上</p>
+<p>0009：同上</p>
+<p>4d61 7468 2e6a 6176 61：Math.java</p>
+<p>0c：十进制=12，CONSTANT_NameAndType_info，指向该字段或方法名称常量项的索引</p>
+<p>0007：字段或者名字名称常量项索引#7</p>
+<p>0008：字段或者名字名称常量项索引#8</p>
+<p>0c：同上</p>
+<p>0005：字段或者名字名称常量项索引#5</p>
+<p>0006：字段或者名字名称常量项索引#6</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>4d61 7468：Math</p>
+<p>01：同上</p>
+<p>0010：同上</p>
+<p>6a 6176 612f 6c61 6e67 2f4f 626a 6563 74：java/lang/Object</p>
+<p>==== 常量解析完毕，共18个常量</p>
+<br>
+
+<h2 id="Access-Flag-访问标志部分"><a href="#Access-Flag-访问标志部分" class="headerlink" title="Access_Flag 访问标志部分"></a>Access_Flag 访问标志部分</h2><blockquote>
+<p>0x0021：是 0x0020 和 0x0001 的并集。</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">stage(&#x27;Build Angular Project&#x27;) &#123; // build angular demo app</span><br><span class="line">    sh &#x27;cd demo &amp;&amp; npm install &amp;&amp; npm run build&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>0021：ACC_PUBLIC，访问修饰符为Public。</p>
+<br>
 
-<p>才反应过来脚本写得有问题，于是改了一下，将多个操作用 &amp;&amp; 连接起来，就部署成功了。</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm uninstall * &amp;&amp; rm -rf node_modules &amp;&amp; rm -rf package-lock.json &amp;&amp; npm cache clean --force &amp;&amp; npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类索引"><a href="#类索引" class="headerlink" title="类索引"></a>类索引</h2><p>类索引用于确定类的全限定名。</p>
+<p>0003：引用第3个常量，第3个常量引用第17个常量，为 Math。</p>
+<br>
 
+<h2 id="父类索引"><a href="#父类索引" class="headerlink" title="父类索引"></a>父类索引</h2><p>0004：引用第18个常量，为 java/lang/Object。</p>
+<br>
+
+<h2 id="接口索引"><a href="#接口索引" class="headerlink" title="接口索引"></a>接口索引</h2><p>0000：没有接口。</p>
+<br>
+
+<h2 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h2><p>字段表用于描述类和接口中声明的变量。这里的字段包含了类级别变量以及实例变量，但是不包括方法内部声明的局部变量。</p>
+<p><img src="https://images2.imgbox.com/46/18/b007hXKr_o.png"></p>
+<p>0001：字段属性。</p>
+<p>0002：Private访问。</p>
+<p>0005：常量索引#5，为”m”。</p>
+<p>0006：常量索引#6，为”1”。</p>
+<p>0000：属性表数量为0。</p>
+<br>
+
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://images2.imgbox.com/b5/62/ZKPXcYOv_o.png"></p>
+<p>to be continued…</p>
 ]]></content>
       <categories>
-        <category>Jenkins</category>
+        <category>Java</category>
       </categories>
       <tags>
-        <tag>Jenkins</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -1233,6 +1197,42 @@
       </categories>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jenkinsfile cd命令不生效的问题</title>
+    <url>/2021/06/05/Jenkinsfile-cd%E5%91%BD%E4%BB%A4%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>今天晚上给前端项目配置Jenkins流水线的时候遇到一个问题：cd 命令不生效，<code>sh 'cd ask_front'</code> 这个语句执行前后 <code>pwd</code> 的输出是一样的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ pwd</span><br><span class="line">/home/jingh527/.jenkins/workspace/try-ask_master</span><br></pre></td></tr></table></figure>
+
+<p>去Jenkins机器上看了上面这个目录结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">try-ask_master</span><br><span class="line">-- ask</span><br><span class="line">-- ask_front</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>Jenkinsfile的定义：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm uninstall *&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf node_modules&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf package-lock.json&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm cache clean --force&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在执行到 npm 命令相关的地方就开始报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ npm run dev</span><br><span class="line">npm ERR! code ENOENT</span><br><span class="line">npm ERR! syscall open</span><br><span class="line">npm ERR! path /home/jingh527/.jenkins/workspace/try-ask_master/package.json</span><br><span class="line">npm ERR! errno -2</span><br><span class="line">npm ERR! enoent ENOENT: no such file or directory, open &#x27;/home/jingh527/.jenkins/workspace/try-ask_master/package.json&#x27;</span><br><span class="line">npm ERR! enoent This is related to npm not being able to find a file.</span><br><span class="line">npm ERR! enoent </span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /home/node/.npm/_logs/2021-06-04T17_20_39_229Z-debug.log</span><br><span class="line">script returned exit code 254</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在网上找了一会儿资料，看到一个帖子：<a href="https://blog.csdn.net/liumiaocn/article/details/102632742">Jenkins基础：Jenkinsfile注意事项：条件跳转与当前路径</a></p>
+<blockquote>
+<p>cd demo、npm install、npm run build这本是三条命令，强硬地使用&amp;&amp;写在了一起，为什么不能分开使用三个sh ‘’的原因是因为，在具体的实现的时候，显然执行完返回当前目录会恢复为原始状态。这是一个非常容易被忘记的问题。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">stage(&#x27;Build Angular Project&#x27;) &#123; // build angular demo app</span><br><span class="line">    sh &#x27;cd demo &amp;&amp; npm install &amp;&amp; npm run build&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>才反应过来脚本写得有问题，于是改了一下，将多个操作用 &amp;&amp; 连接起来，就部署成功了。</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm uninstall * &amp;&amp; rm -rf node_modules &amp;&amp; rm -rf package-lock.json &amp;&amp; npm cache clean --force &amp;&amp; npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -1460,29 +1460,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MacBook Pro 2020指纹无反应</title>
-    <url>/2021/05/09/MacBook-Pro-2020%E6%8C%87%E7%BA%B9%E6%97%A0%E5%8F%8D%E5%BA%94/</url>
-    <content><![CDATA[<blockquote>
-<p>记得上个月重装了一次系统，然后指纹都被清掉了，重装完系统之后发现无法录入指纹，按压指纹没有反应。</p>
-</blockquote>
-<br>
-
-<p>昨天晚上发版，有一个配置没有提交，导致今天早上☀️生产部署失败⚠️了，七点不到⏰就去公司🏙处理。想趁着今天刚好周末有时间，去售后看看。可是售后人🚶太多了，笔记本💻的号都排完了，只能预约下周六。</p>
-<p>回来之后无意之间搜了一下这个问题，其实之前就有搜过很多帖子，但是没找到有用的信息。第一个搜索结果很熟悉：<a href="https://discussionschinese.apple.com/thread/251698511">Macbook Pro 2020 指纹识别失灵 无法使用</a> ，因为以前就看过，不抱希望的点进去看了一下，结果发现之前没仔细看描述：<strong>插上电源 大部分时候就是不灵敏 开屏解锁，填充密码等都是，不插电源正常。</strong> 回想了一下，好像我确实一直插着电在用，我把电源拔掉一试，竟然可以正常使用。</p>
-<p>但是每次用指纹都要拔掉电源很麻烦，往下看到一个有用答案⭐️：</p>
-<blockquote>
-<p>我也有同样的问题 研究了半天 感觉是电源没有接地的原因 我在楼上插着充电器就不能用指纹 楼下就能 好无语😓 然后我偶然间发现插着电源用指纹的时候手掌手臂尽量接触电脑的金属表面 指纹也能重新识别😂</p>
-</blockquote>
-<p><strong>只要用指纹的时候手掌接触机身就可以正常识别。</strong></p>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mac OS下RIME输入法的配置</title>
     <url>/2019/11/09/Mac-OS%E4%B8%8BRIME%E8%BE%93%E5%85%A5%E6%B3%95%E7%9A%84%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>Mac OS下RIME输入法配置</p>
@@ -1501,6 +1478,29 @@
 </ul>
 <p>安装完体验了两个小时，输入体验很不错，没遇到什么问题，以后应该会一直用下去。</p>
 <p>各种软件还是去国产化吧，对待国产软件，有替代则替代，能不用则不用。</p>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MacBook Pro 2020指纹无反应</title>
+    <url>/2021/05/09/MacBook-Pro-2020%E6%8C%87%E7%BA%B9%E6%97%A0%E5%8F%8D%E5%BA%94/</url>
+    <content><![CDATA[<blockquote>
+<p>记得上个月重装了一次系统，然后指纹都被清掉了，重装完系统之后发现无法录入指纹，按压指纹没有反应。</p>
+</blockquote>
+<br>
+
+<p>昨天晚上发版，有一个配置没有提交，导致今天早上☀️生产部署失败⚠️了，七点不到⏰就去公司🏙处理。想趁着今天刚好周末有时间，去售后看看。可是售后人🚶太多了，笔记本💻的号都排完了，只能预约下周六。</p>
+<p>回来之后无意之间搜了一下这个问题，其实之前就有搜过很多帖子，但是没找到有用的信息。第一个搜索结果很熟悉：<a href="https://discussionschinese.apple.com/thread/251698511">Macbook Pro 2020 指纹识别失灵 无法使用</a> ，因为以前就看过，不抱希望的点进去看了一下，结果发现之前没仔细看描述：<strong>插上电源 大部分时候就是不灵敏 开屏解锁，填充密码等都是，不插电源正常。</strong> 回想了一下，好像我确实一直插着电在用，我把电源拔掉一试，竟然可以正常使用。</p>
+<p>但是每次用指纹都要拔掉电源很麻烦，往下看到一个有用答案⭐️：</p>
+<blockquote>
+<p>我也有同样的问题 研究了半天 感觉是电源没有接地的原因 我在楼上插着充电器就不能用指纹 楼下就能 好无语😓 然后我偶然间发现插着电源用指纹的时候手掌手臂尽量接触电脑的金属表面 指纹也能重新识别😂</p>
+</blockquote>
+<p><strong>只要用指纹的时候手掌接触机身就可以正常识别。</strong></p>
 ]]></content>
       <categories>
         <category>其他</category>
@@ -2163,124 +2163,80 @@
       </tags>
   </entry>
   <entry>
-    <title>Spring学习笔记-第一章-Spring之旅</title>
-    <url>/2018/11/14/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%80%E7%AB%A0-Spring%E4%B9%8B%E6%97%85/</url>
-    <content><![CDATA[<p>第一部分：Spring的核心</p>
-<ul>
-<li><p>第一章：Spring之旅</p>
-<p>介绍Spring框架，包括Spring DI和AOP。</p>
-</li>
-<li><p>第二章：装配Bean</p>
-<p>Spring的自动配置、基于Java的配置和XML配置。</p>
-</li>
-<li><p>第三章：高级装配</p>
-<p>Spring的条件化配置，处理自动装配时的歧义性，作用域以及Spring表达式语言。</p>
-</li>
-<li><p>第四章：面向切面的Spring</p>
-<p>展示如何使用Spring的AOP特性把系统级服务从它们所服务的对象中解耦出来。</p>
-</li>
-</ul>
+    <title>Spring Boot中使用Swagger2构建强大的RESTful API文档</title>
+    <url>/2019/04/29/Spring-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Swagger2%E6%9E%84%E5%BB%BA%E5%BC%BA%E5%A4%A7%E7%9A%84RESTful-API%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>Spring Boot中使用Swagger2构建强大的RESTful API文档</p>
+<p>由于Spring Boot能够快速开发、便捷部署等特性，相信有很大一部分Spring Boot的用户会用来构建RESTful API。而我们构建RESTful API的目的通常都是由于多终端的原因，这些终端会共用很多底层业务逻辑，因此我们会抽象出这样一层来同时服务于多个移动端或者Web前端。</p>
 <span id="more"></span>
 
-
-
-
-
-<hr>
-<p>第一章 Spring之旅</p>
-<p>本章内容：</p>
+<p>这样一来，我们的RESTful API就有可能要面对多个开发人员或多个开发团队：IOS开发、Android开发或是Web开发等。为了减少与其他团队平时开发期间的频繁沟通成本，传统做法我们会创建一份RESTful API文档来记录所有接口细节，然而这样的做法有以下几个问题：</p>
 <ul>
-<li>Spring的Bean容器</li>
-<li>介绍Spring的核心模块</li>
-<li>更为强大的Spring生态系统</li>
-<li>Spring的新功能</li>
+<li>由于接口众多，并且细节复杂（需要考虑不同的HTTP请求类型、HTTP头部信息、HTTP请求内容等），高质量地创建这份文档本身就是件非常吃力的事，下游的抱怨声不绝于耳。</li>
+<li>随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。</li>
 </ul>
-<p><strong>创建Spring的主要目的是用来替代更加重量级的企业级Java技术，尤其是EJB。</strong>相当于EJB来说，Spring提供了更加轻量级和更加简单的编程模型。</p>
-<hr>
-<h3 id="1-1-简化Java开发"><a href="#1-1-简化Java开发" class="headerlink" title="1.1 简化Java开发"></a>1.1 简化Java开发</h3><h4 id="1-1-1-Spring的非侵入式编程"><a href="#1-1-1-Spring的非侵入式编程" class="headerlink" title="1.1.1 Spring的非侵入式编程"></a>1.1.1 Spring的非侵入式编程</h4><p>在基于Spring构建的应用中，一般不会有任何痕迹表明你使用了Spring，最坏的场景是在一个类上使用了Spring注解，但是这个类依旧是一个Pojo类。</p>
-<p>Spring的非侵入式编程模型意味着这个类在Spring应用还是在非Spring应用中都能发挥同样的作用。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/14 下午9:18</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello world&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>为了解决上面这样的问题，本文将介绍RESTful API的重磅好伙伴Swagger2，它可以轻松的整合到Spring Boot中，并与Spring MVC程序配合组织出强大RESTful API文档。它既可以减少我们创建文档的工作量，同时说明内容又整合入实现代码中，让维护文档和修改代码整合为一体，可以让我们在修改代码逻辑的同时方便的修改文档说明。另外Swagger2也提供了强大的页面测试功能来调试每个RESTful API。具体效果如下图所示：</p>
+<p><img src="http://blog.didispace.com/content/images/2016/04/swagger2_1.png"></p>
+<p><img src="http://blog.didispace.com/content/images/2016/04/swagger2_1.png"></p>
+<p>下面来具体介绍，如果在Spring Boot中使用Swagger2。首先，我们需要一个Spring Boot实现的RESTful API工程，若您没有做过这类内容，建议先阅读<br><a href="http://blog.didispace.com/springbootrestfulapi/">Spring Boot构建一个较为复杂的RESTful APIs和单元测试</a>。</p>
+<p>下面的内容我们会以<a href="http://git.oschina.net/didispace/SpringBoot-Learning">教程样例</a>中的Chapter3-1-1进行下面的实验（Chpater3-1-5是我们的结果工程，亦可参考）。</p>
+<h4 id="添加Swagger2依赖"><a href="#添加Swagger2依赖" class="headerlink" title="添加Swagger2依赖"></a>添加Swagger2依赖</h4><p>在<code>pom.xml</code>中加入Swagger2的依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h4 id="创建Swagger2配置类"><a href="#创建Swagger2配置类" class="headerlink" title="创建Swagger2配置类"></a>创建Swagger2配置类</h4><p>在<code>Application.java</code>同级创建Swagger2的配置类<code>Swagger2</code>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swagger2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.didispace.web&quot;</span>))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">                .title(<span class="string">&quot;Spring Boot中使用Swagger2构建RESTful APIs&quot;</span>)</span><br><span class="line">                .description(<span class="string">&quot;更多Spring Boot相关文章请关注：http://blog.didispace.com/&quot;</span>)</span><br><span class="line">                .termsOfServiceUrl(<span class="string">&quot;http://blog.didispace.com/&quot;</span>)</span><br><span class="line">                .contact(<span class="string">&quot;程序猿DD&quot;</span>)</span><br><span class="line">                .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>如上代码所示，通过<code>@Configuration</code>注解，让Spring来加载该类配置。再通过<code>@EnableSwagger2</code>注解来启用Swagger2。</p>
+<p>再通过<code>createRestApi</code>函数创建<code>Docket</code>的Bean之后，<code>apiInfo()</code>用来创建该Api的基本信息（这些基本信息会展现在文档页面中）。<code>select()</code>函数返回一个<code>ApiSelectorBuilder</code>实例用来控制哪些接口暴露给Swagger来展现，本例采用指定扫描的包路径来定义，Swagger会扫描该包下所有Controller定义的API，并产生文档内容（除了被<code>@ApiIgnore</code>指定的请求）。</p>
+<h4 id="添加文档内容"><a href="#添加文档内容" class="headerlink" title="添加文档内容"></a>添加文档内容</h4><p>在完成了上述配置后，其实已经可以生产文档内容，但是这样的文档主要针对请求本身，而描述主要来源于函数等命名产生，对用户并不友好，我们通常需要自己增加一些说明来丰富文档内容。如下所示，我们通过<code>@ApiOperation</code>注解来给API增加说明、通过<code>@ApiImplicitParams</code>、<code>@ApiImplicitParam</code>注解来给参数增加说明。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(value=&quot;/users&quot;)</span>     <span class="comment">// 通过这里配置使下面的映射都在/users下，可去除</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> Map&lt;Long, User&gt; users = Collections.synchronizedMap(<span class="keyword">new</span> HashMap&lt;Long, User&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;获取用户列表&quot;, notes=&quot;&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&#123;&quot;&quot;&#125;, method=RequestMethod.GET)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getUserList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;User&gt; r = <span class="keyword">new</span> ArrayList&lt;User&gt;(users.values());</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;创建用户&quot;, notes=&quot;根据User对象创建用户&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户详细实体user&quot;, required = true, dataType = &quot;User&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;&quot;, method=RequestMethod.POST)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">postUser</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span> </span>&#123;</span><br><span class="line">        users.put(user.getId(), user);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;获取用户详细信息&quot;, notes=&quot;根据url的id来获取用户详细信息&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.GET)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> users.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;更新用户详细信息&quot;, notes=&quot;根据url的id来指定更新对象，并根据传过来的user信息来更新用户详细信息&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParams(&#123;</span></span><br><span class="line"><span class="meta">            @ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;),</span></span><br><span class="line"><span class="meta">            @ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户详细实体user&quot;, required = true, dataType = &quot;User&quot;)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.PUT)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">putUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id, <span class="meta">@RequestBody</span> User user)</span> </span>&#123;</span><br><span class="line">        User u = users.get(id);</span><br><span class="line">        u.setName(user.getName());</span><br><span class="line">        u.setAge(user.getAge());</span><br><span class="line">        users.put(id, u);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;删除用户&quot;, notes=&quot;根据url的id来指定删除对象&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.DELETE)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">deleteUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        users.remove(id);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="1-1-2-依赖注入"><a href="#1-1-2-依赖注入" class="headerlink" title="1.1.2 依赖注入"></a>1.1.2 依赖注入</h4><p>在一个应用中通常会涉及到很多类，这些类需要相互协作来完成特定的功能，如果让每个类管理与自己协作的类，则会导致应用高度耦合。</p>
-<blockquote>
-<p> 依赖注入带来的最大好处就是松耦合。如果一个对象只通过借口来表明依赖关系，那么这种依赖就能够在对象毫不知情的情况下用不同的实现替换。</p>
-<p>可以让对其他的类有依赖的类自动获得已经准备好的依赖。</p>
-</blockquote>
-<p>一个送外卖的过程：当不是用DI的时候送餐员需要自己准备外卖，然后再配送。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.clerk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.com.food.Dinner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/15 下午8:31</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeliveryWithoutDI</span> <span class="keyword">implements</span> <span class="title">Delivery</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Dinner dinner;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DeliveryWithoutDI</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dinner = <span class="keyword">new</span> Dinner(<span class="string">&quot;rice&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delivery</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;delivery it on time.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>当使用DI之后，当有外卖需要配送的时候，分配送餐员，送餐员会自动获得需要配送的外卖，需要做的只是负责配送，而不用关心其他事情。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.clerk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.com.food.Dinner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/15 下午8:24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeliveryClerk</span> <span class="keyword">implements</span> <span class="title">Delivery</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Dinner dinner;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DeliveryClerk</span><span class="params">(Dinner dinner)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dinner = dinner;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delivery</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;delivery on time.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="1-1-3-应用切面"><a href="#1-1-3-应用切面" class="headerlink" title="1.1.3 应用切面"></a>1.1.3 应用切面</h4><blockquote>
-<p>面向切面编程允许你把遍布应用各处的功能分离出来形成可重用的组件。</p>
-</blockquote>
-<p>一个系统或应用由许多不同的组件构成，但是每一个组件在负责自己的功能之外，通常还要承担额外的责任。一些与核心业务无关的代码会融入到核心业务逻辑中。比如转账，除了发生金钱的转移之外，还要验证身份、记录账单以及给用户发送通知。这些会跨越系统的组件成为横切关注点。它们会使核心业务代码变得复杂。</p>
-<p><img src="https://image.youyou-2608.com/blog/AOP1.png" alt="Spring AOP"></p>
-<p>通过AOP，可以将与核心业务无关的代码分离出来。</p>
-<h4 id="1-1-4-使用模板消除样板式代码"><a href="#1-1-4-使用模板消除样板式代码" class="headerlink" title="1.1.4 使用模板消除样板式代码"></a>1.1.4 使用模板消除样板式代码</h4><p>使用JDBC访问数据库，会产生大量与查询语句无关的代码，还必须要捕捉异常，虽然无济于事。</p>
-<p>Spring旨在通过模板封装来消除样板式代码。</p>
-<p><a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/data-access.html#spring-data-tier">Data Access with JDBC</a></p>
-<h3 id="1-2-容纳你的bean"><a href="#1-2-容纳你的bean" class="headerlink" title="1.2 容纳你的bean"></a>1.2 容纳你的bean</h3><blockquote>
-<p>在Spring应用中，你的应用对象生存于Spring容器中，Spring容器负责创建对象，装配并管理它们的整个生命周期。</p>
-</blockquote>
-<p>使用应用上下文：</p>
+<p>完成上述代码添加上，启动Spring Boot程序，访问：<a href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a><br>。就能看到前文所展示的RESTful API的页面。我们可以再点开具体的API请求，以POST类型的/users请求为例，可找到上述代码中我们配置的Notes信息以及参数user的描述信息，如下图所示。</p>
+<p>[<img src="http://blog.didispace.com/content/images/2016/04/swagger2_2.png" alt="alt"><img src="http://blog.didispace.com/content/images/2016/04/swagger2_2.png"></p>
+<h4 id="API文档访问与调试"><a href="#API文档访问与调试" class="headerlink" title="API文档访问与调试"></a>API文档访问与调试</h4><p>在上图请求的页面中，我们看到user的Value是个输入框？是的，Swagger除了查看接口功能外，还提供了调试测试功能，我们可以点击上图中右侧的Model Schema（黄色区域：它指明了User的数据结构），此时Value中就有了user对象的模板，我们只需要稍适修改，点击下方<code>“Try it out！”</code>按钮，即可完成了一次请求调用！</p>
+<p>此时，你也可以通过几个GET请求来验证之前的POST请求是否正确。</p>
+<p>相比为这些接口编写文档的工作，我们增加的配置内容是非常少而且精简的，对于原有代码的侵入也在忍受范围之内。因此，在构建RESTful API的同时，加入swagger来对API文档进行管理，是个不错的选择。</p>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><p>本文的相关例子可以查看下面仓库中的<code>chapter3-1-5</code>目录：</p>
 <ul>
-<li>AnnotationConfigApplicationContext：从一个或多个基于Java的配置类中加载Spring应用上下文。</li>
-<li>AnnotationConfigWebApplicationContext：从一个或多个基于Java的配置类中加载Spring Web应用上下文。</li>
-<li>ClassPathXmlApplicationContext：从类路径下的一个或多个XML配置文件中加载上下文定义。</li>
-<li>FileSystemXmlApplicationContext：从文件系统下的一个或多个XML配置文件中加载上下文定义。</li>
-<li>XmlWebApplicationContext：从Web应用下的一个或多个XML配置文件中还在上下文定义。</li>
+<li>Github：<a href="https://github.com/dyc87112/SpringBoot-Learning/tree/1.x">https://github.com/dyc87112/SpringBoot-Learning</a></li>
+<li>Gitee：<a href="https://gitee.com/didispace/SpringBoot-Learning/tree/1.x">https://gitee.com/didispace/SpringBoot-Learning</a></li>
 </ul>
-<p>bean的生命周期：</p>
-<p><img src="https://image.youyou-2608.com/bean-lifecycle.png" alt="bean的生命周期"></p>
-<p><img src="https://image.youyou-2608.com/bean2.png" alt="Bean的生命周期"></p>
-<h3 id="1-3-俯瞰Spring风景线"><a href="#1-3-俯瞰Spring风景线" class="headerlink" title="1.3 俯瞰Spring风景线"></a>1.3 俯瞰Spring风景线</h3><p>Spring的模块：</p>
-<p><img src="https://image.youyou-2608.com/springmodel" alt="Spring模块"></p>
-<table>
-<thead>
-<tr>
-<th><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/core.html#spring-core">Core</a></th>
-<th>IoC container, Events, Resources, i18n, Validation, Data Binding, Type Conversion, SpEL, AOP.</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/testing.html#testing">Testing</a></td>
-<td>Mock objects, TestContext framework, Spring MVC Test, WebTestClient.</td>
-</tr>
-<tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/data-access.html#spring-data-tier">Data Access</a></td>
-<td>Transactions, DAO support, JDBC, ORM, Marshalling XML.</td>
-</tr>
-<tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/web.html#spring-web">Web Servlet</a></td>
-<td>Spring MVC, WebSocket, SockJS, STOMP messaging.</td>
-</tr>
-<tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/web-reactive.html#spring-webflux">Web Reactive</a></td>
-<td>Spring WebFlux, WebClient, WebSocket.</td>
-</tr>
-<tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/integration.html#spring-integration">Integration</a></td>
-<td>Remoting, JMS, JCA, JMX, Email, Tasks, Scheduling, Cache.</td>
-</tr>
-<tr>
-<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/languages.html#languages">Languages</a></td>
-<td>Kotlin, Groovy, Dynamic languages.</td>
-</tr>
-</tbody></table>
+<p><strong>如果您觉得本文不错，欢迎Star支持，您的关注是我坚持的动力！</strong></p>
+<h4 id="参考信息"><a href="#参考信息" class="headerlink" title="参考信息"></a>参考信息</h4><ul>
+<li><a href="http://swagger.io/">Swagger官方网站</a></li>
+</ul>
+<p>无作者本人授权请勿转载。</p>
 ]]></content>
       <categories>
-        <category>Spring</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
-        <tag>Spring</tag>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringBoot整合redis报错</title>
+    <url>/2021/03/07/SpringBoot%E6%95%B4%E5%90%88redis%E6%8A%A5%E9%94%99/</url>
+    <content><![CDATA[<p>在SpringBoot中整合Redis进行Token登录，测试方法中一直报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalStateException: Failed to load ApplicationContext</span><br><span class="line"></span><br><span class="line">Caused by: org.springframework.beans.factory.BeanNotOfRequiredTypeException: Bean named &#x27;redisTemplate&#x27; is expected to be of type &#x27;org.springframework.data.redis.core.StringRedisTemplate&#x27; but was actually of type &#x27;org.springframework.data.redis.core.RedisTemplate&#x27;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">set</span><span class="params">(String key, String value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        redisTemplate.opsForValue().set(key, value);</span><br><span class="line">        result = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试方法</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    redisClient.set(<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;value1&quot;</span>);</span><br><span class="line">    String value = redisClient.get(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">    assertNotNull(value);</span><br><span class="line">    log.info(<span class="string">&quot;value: &#123;&#125;&quot;</span>, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>原来是注入的时候变量名有问题：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> StringRedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
+
+<p>不是 redisTemplate ，而是 stringRedisTemplate。</p>
+<p><strong>@Resource和@Autowired的区别。</strong></p>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
       </tags>
   </entry>
   <entry>
@@ -3407,80 +3363,124 @@
       </tags>
   </entry>
   <entry>
-    <title>Spring Boot中使用Swagger2构建强大的RESTful API文档</title>
-    <url>/2019/04/29/Spring-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Swagger2%E6%9E%84%E5%BB%BA%E5%BC%BA%E5%A4%A7%E7%9A%84RESTful-API%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>Spring Boot中使用Swagger2构建强大的RESTful API文档</p>
-<p>由于Spring Boot能够快速开发、便捷部署等特性，相信有很大一部分Spring Boot的用户会用来构建RESTful API。而我们构建RESTful API的目的通常都是由于多终端的原因，这些终端会共用很多底层业务逻辑，因此我们会抽象出这样一层来同时服务于多个移动端或者Web前端。</p>
+    <title>Spring学习笔记-第一章-Spring之旅</title>
+    <url>/2018/11/14/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%80%E7%AB%A0-Spring%E4%B9%8B%E6%97%85/</url>
+    <content><![CDATA[<p>第一部分：Spring的核心</p>
+<ul>
+<li><p>第一章：Spring之旅</p>
+<p>介绍Spring框架，包括Spring DI和AOP。</p>
+</li>
+<li><p>第二章：装配Bean</p>
+<p>Spring的自动配置、基于Java的配置和XML配置。</p>
+</li>
+<li><p>第三章：高级装配</p>
+<p>Spring的条件化配置，处理自动装配时的歧义性，作用域以及Spring表达式语言。</p>
+</li>
+<li><p>第四章：面向切面的Spring</p>
+<p>展示如何使用Spring的AOP特性把系统级服务从它们所服务的对象中解耦出来。</p>
+</li>
+</ul>
 <span id="more"></span>
 
-<p>这样一来，我们的RESTful API就有可能要面对多个开发人员或多个开发团队：IOS开发、Android开发或是Web开发等。为了减少与其他团队平时开发期间的频繁沟通成本，传统做法我们会创建一份RESTful API文档来记录所有接口细节，然而这样的做法有以下几个问题：</p>
+
+
+
+
+<hr>
+<p>第一章 Spring之旅</p>
+<p>本章内容：</p>
 <ul>
-<li>由于接口众多，并且细节复杂（需要考虑不同的HTTP请求类型、HTTP头部信息、HTTP请求内容等），高质量地创建这份文档本身就是件非常吃力的事，下游的抱怨声不绝于耳。</li>
-<li>随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。</li>
+<li>Spring的Bean容器</li>
+<li>介绍Spring的核心模块</li>
+<li>更为强大的Spring生态系统</li>
+<li>Spring的新功能</li>
 </ul>
-<p>为了解决上面这样的问题，本文将介绍RESTful API的重磅好伙伴Swagger2，它可以轻松的整合到Spring Boot中，并与Spring MVC程序配合组织出强大RESTful API文档。它既可以减少我们创建文档的工作量，同时说明内容又整合入实现代码中，让维护文档和修改代码整合为一体，可以让我们在修改代码逻辑的同时方便的修改文档说明。另外Swagger2也提供了强大的页面测试功能来调试每个RESTful API。具体效果如下图所示：</p>
-<p><img src="http://blog.didispace.com/content/images/2016/04/swagger2_1.png"></p>
-<p><img src="http://blog.didispace.com/content/images/2016/04/swagger2_1.png"></p>
-<p>下面来具体介绍，如果在Spring Boot中使用Swagger2。首先，我们需要一个Spring Boot实现的RESTful API工程，若您没有做过这类内容，建议先阅读<br><a href="http://blog.didispace.com/springbootrestfulapi/">Spring Boot构建一个较为复杂的RESTful APIs和单元测试</a>。</p>
-<p>下面的内容我们会以<a href="http://git.oschina.net/didispace/SpringBoot-Learning">教程样例</a>中的Chapter3-1-1进行下面的实验（Chpater3-1-5是我们的结果工程，亦可参考）。</p>
-<h4 id="添加Swagger2依赖"><a href="#添加Swagger2依赖" class="headerlink" title="添加Swagger2依赖"></a>添加Swagger2依赖</h4><p>在<code>pom.xml</code>中加入Swagger2的依赖</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>创建Spring的主要目的是用来替代更加重量级的企业级Java技术，尤其是EJB。</strong>相当于EJB来说，Spring提供了更加轻量级和更加简单的编程模型。</p>
+<hr>
+<h3 id="1-1-简化Java开发"><a href="#1-1-简化Java开发" class="headerlink" title="1.1 简化Java开发"></a>1.1 简化Java开发</h3><h4 id="1-1-1-Spring的非侵入式编程"><a href="#1-1-1-Spring的非侵入式编程" class="headerlink" title="1.1.1 Spring的非侵入式编程"></a>1.1.1 Spring的非侵入式编程</h4><p>在基于Spring构建的应用中，一般不会有任何痕迹表明你使用了Spring，最坏的场景是在一个类上使用了Spring注解，但是这个类依旧是一个Pojo类。</p>
+<p>Spring的非侵入式编程模型意味着这个类在Spring应用还是在非Spring应用中都能发挥同样的作用。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/14 下午9:18</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello world&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h4 id="创建Swagger2配置类"><a href="#创建Swagger2配置类" class="headerlink" title="创建Swagger2配置类"></a>创建Swagger2配置类</h4><p>在<code>Application.java</code>同级创建Swagger2的配置类<code>Swagger2</code>。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swagger2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.didispace.web&quot;</span>))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">                .title(<span class="string">&quot;Spring Boot中使用Swagger2构建RESTful APIs&quot;</span>)</span><br><span class="line">                .description(<span class="string">&quot;更多Spring Boot相关文章请关注：http://blog.didispace.com/&quot;</span>)</span><br><span class="line">                .termsOfServiceUrl(<span class="string">&quot;http://blog.didispace.com/&quot;</span>)</span><br><span class="line">                .contact(<span class="string">&quot;程序猿DD&quot;</span>)</span><br><span class="line">                .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>如上代码所示，通过<code>@Configuration</code>注解，让Spring来加载该类配置。再通过<code>@EnableSwagger2</code>注解来启用Swagger2。</p>
-<p>再通过<code>createRestApi</code>函数创建<code>Docket</code>的Bean之后，<code>apiInfo()</code>用来创建该Api的基本信息（这些基本信息会展现在文档页面中）。<code>select()</code>函数返回一个<code>ApiSelectorBuilder</code>实例用来控制哪些接口暴露给Swagger来展现，本例采用指定扫描的包路径来定义，Swagger会扫描该包下所有Controller定义的API，并产生文档内容（除了被<code>@ApiIgnore</code>指定的请求）。</p>
-<h4 id="添加文档内容"><a href="#添加文档内容" class="headerlink" title="添加文档内容"></a>添加文档内容</h4><p>在完成了上述配置后，其实已经可以生产文档内容，但是这样的文档主要针对请求本身，而描述主要来源于函数等命名产生，对用户并不友好，我们通常需要自己增加一些说明来丰富文档内容。如下所示，我们通过<code>@ApiOperation</code>注解来给API增加说明、通过<code>@ApiImplicitParams</code>、<code>@ApiImplicitParam</code>注解来给参数增加说明。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(value=&quot;/users&quot;)</span>     <span class="comment">// 通过这里配置使下面的映射都在/users下，可去除</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> Map&lt;Long, User&gt; users = Collections.synchronizedMap(<span class="keyword">new</span> HashMap&lt;Long, User&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;获取用户列表&quot;, notes=&quot;&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&#123;&quot;&quot;&#125;, method=RequestMethod.GET)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getUserList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;User&gt; r = <span class="keyword">new</span> ArrayList&lt;User&gt;(users.values());</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;创建用户&quot;, notes=&quot;根据User对象创建用户&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户详细实体user&quot;, required = true, dataType = &quot;User&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;&quot;, method=RequestMethod.POST)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">postUser</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span> </span>&#123;</span><br><span class="line">        users.put(user.getId(), user);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;获取用户详细信息&quot;, notes=&quot;根据url的id来获取用户详细信息&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.GET)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> users.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;更新用户详细信息&quot;, notes=&quot;根据url的id来指定更新对象，并根据传过来的user信息来更新用户详细信息&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParams(&#123;</span></span><br><span class="line"><span class="meta">            @ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;),</span></span><br><span class="line"><span class="meta">            @ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户详细实体user&quot;, required = true, dataType = &quot;User&quot;)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.PUT)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">putUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id, <span class="meta">@RequestBody</span> User user)</span> </span>&#123;</span><br><span class="line">        User u = users.get(id);</span><br><span class="line">        u.setName(user.getName());</span><br><span class="line">        u.setAge(user.getAge());</span><br><span class="line">        users.put(id, u);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;删除用户&quot;, notes=&quot;根据url的id来指定删除对象&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.DELETE)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">deleteUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        users.remove(id);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>完成上述代码添加上，启动Spring Boot程序，访问：<a href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a><br>。就能看到前文所展示的RESTful API的页面。我们可以再点开具体的API请求，以POST类型的/users请求为例，可找到上述代码中我们配置的Notes信息以及参数user的描述信息，如下图所示。</p>
-<p>[<img src="http://blog.didispace.com/content/images/2016/04/swagger2_2.png" alt="alt"><img src="http://blog.didispace.com/content/images/2016/04/swagger2_2.png"></p>
-<h4 id="API文档访问与调试"><a href="#API文档访问与调试" class="headerlink" title="API文档访问与调试"></a>API文档访问与调试</h4><p>在上图请求的页面中，我们看到user的Value是个输入框？是的，Swagger除了查看接口功能外，还提供了调试测试功能，我们可以点击上图中右侧的Model Schema（黄色区域：它指明了User的数据结构），此时Value中就有了user对象的模板，我们只需要稍适修改，点击下方<code>“Try it out！”</code>按钮，即可完成了一次请求调用！</p>
-<p>此时，你也可以通过几个GET请求来验证之前的POST请求是否正确。</p>
-<p>相比为这些接口编写文档的工作，我们增加的配置内容是非常少而且精简的，对于原有代码的侵入也在忍受范围之内。因此，在构建RESTful API的同时，加入swagger来对API文档进行管理，是个不错的选择。</p>
-<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><p>本文的相关例子可以查看下面仓库中的<code>chapter3-1-5</code>目录：</p>
+<h4 id="1-1-2-依赖注入"><a href="#1-1-2-依赖注入" class="headerlink" title="1.1.2 依赖注入"></a>1.1.2 依赖注入</h4><p>在一个应用中通常会涉及到很多类，这些类需要相互协作来完成特定的功能，如果让每个类管理与自己协作的类，则会导致应用高度耦合。</p>
+<blockquote>
+<p> 依赖注入带来的最大好处就是松耦合。如果一个对象只通过借口来表明依赖关系，那么这种依赖就能够在对象毫不知情的情况下用不同的实现替换。</p>
+<p>可以让对其他的类有依赖的类自动获得已经准备好的依赖。</p>
+</blockquote>
+<p>一个送外卖的过程：当不是用DI的时候送餐员需要自己准备外卖，然后再配送。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.clerk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.com.food.Dinner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/15 下午8:31</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeliveryWithoutDI</span> <span class="keyword">implements</span> <span class="title">Delivery</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Dinner dinner;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DeliveryWithoutDI</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dinner = <span class="keyword">new</span> Dinner(<span class="string">&quot;rice&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delivery</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;delivery it on time.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>当使用DI之后，当有外卖需要配送的时候，分配送餐员，送餐员会自动获得需要配送的外卖，需要做的只是负责配送，而不用关心其他事情。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.clerk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.com.food.Dinner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/15 下午8:24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeliveryClerk</span> <span class="keyword">implements</span> <span class="title">Delivery</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Dinner dinner;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DeliveryClerk</span><span class="params">(Dinner dinner)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dinner = dinner;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delivery</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;delivery on time.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-1-3-应用切面"><a href="#1-1-3-应用切面" class="headerlink" title="1.1.3 应用切面"></a>1.1.3 应用切面</h4><blockquote>
+<p>面向切面编程允许你把遍布应用各处的功能分离出来形成可重用的组件。</p>
+</blockquote>
+<p>一个系统或应用由许多不同的组件构成，但是每一个组件在负责自己的功能之外，通常还要承担额外的责任。一些与核心业务无关的代码会融入到核心业务逻辑中。比如转账，除了发生金钱的转移之外，还要验证身份、记录账单以及给用户发送通知。这些会跨越系统的组件成为横切关注点。它们会使核心业务代码变得复杂。</p>
+<p><img src="https://image.youyou-2608.com/blog/AOP1.png" alt="Spring AOP"></p>
+<p>通过AOP，可以将与核心业务无关的代码分离出来。</p>
+<h4 id="1-1-4-使用模板消除样板式代码"><a href="#1-1-4-使用模板消除样板式代码" class="headerlink" title="1.1.4 使用模板消除样板式代码"></a>1.1.4 使用模板消除样板式代码</h4><p>使用JDBC访问数据库，会产生大量与查询语句无关的代码，还必须要捕捉异常，虽然无济于事。</p>
+<p>Spring旨在通过模板封装来消除样板式代码。</p>
+<p><a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/data-access.html#spring-data-tier">Data Access with JDBC</a></p>
+<h3 id="1-2-容纳你的bean"><a href="#1-2-容纳你的bean" class="headerlink" title="1.2 容纳你的bean"></a>1.2 容纳你的bean</h3><blockquote>
+<p>在Spring应用中，你的应用对象生存于Spring容器中，Spring容器负责创建对象，装配并管理它们的整个生命周期。</p>
+</blockquote>
+<p>使用应用上下文：</p>
 <ul>
-<li>Github：<a href="https://github.com/dyc87112/SpringBoot-Learning/tree/1.x">https://github.com/dyc87112/SpringBoot-Learning</a></li>
-<li>Gitee：<a href="https://gitee.com/didispace/SpringBoot-Learning/tree/1.x">https://gitee.com/didispace/SpringBoot-Learning</a></li>
+<li>AnnotationConfigApplicationContext：从一个或多个基于Java的配置类中加载Spring应用上下文。</li>
+<li>AnnotationConfigWebApplicationContext：从一个或多个基于Java的配置类中加载Spring Web应用上下文。</li>
+<li>ClassPathXmlApplicationContext：从类路径下的一个或多个XML配置文件中加载上下文定义。</li>
+<li>FileSystemXmlApplicationContext：从文件系统下的一个或多个XML配置文件中加载上下文定义。</li>
+<li>XmlWebApplicationContext：从Web应用下的一个或多个XML配置文件中还在上下文定义。</li>
 </ul>
-<p><strong>如果您觉得本文不错，欢迎Star支持，您的关注是我坚持的动力！</strong></p>
-<h4 id="参考信息"><a href="#参考信息" class="headerlink" title="参考信息"></a>参考信息</h4><ul>
-<li><a href="http://swagger.io/">Swagger官方网站</a></li>
-</ul>
-<p>无作者本人授权请勿转载。</p>
+<p>bean的生命周期：</p>
+<p><img src="https://image.youyou-2608.com/bean-lifecycle.png" alt="bean的生命周期"></p>
+<p><img src="https://image.youyou-2608.com/bean2.png" alt="Bean的生命周期"></p>
+<h3 id="1-3-俯瞰Spring风景线"><a href="#1-3-俯瞰Spring风景线" class="headerlink" title="1.3 俯瞰Spring风景线"></a>1.3 俯瞰Spring风景线</h3><p>Spring的模块：</p>
+<p><img src="https://image.youyou-2608.com/springmodel" alt="Spring模块"></p>
+<table>
+<thead>
+<tr>
+<th><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/core.html#spring-core">Core</a></th>
+<th>IoC container, Events, Resources, i18n, Validation, Data Binding, Type Conversion, SpEL, AOP.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/testing.html#testing">Testing</a></td>
+<td>Mock objects, TestContext framework, Spring MVC Test, WebTestClient.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/data-access.html#spring-data-tier">Data Access</a></td>
+<td>Transactions, DAO support, JDBC, ORM, Marshalling XML.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/web.html#spring-web">Web Servlet</a></td>
+<td>Spring MVC, WebSocket, SockJS, STOMP messaging.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/web-reactive.html#spring-webflux">Web Reactive</a></td>
+<td>Spring WebFlux, WebClient, WebSocket.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/integration.html#spring-integration">Integration</a></td>
+<td>Remoting, JMS, JCA, JMX, Email, Tasks, Scheduling, Cache.</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/languages.html#languages">Languages</a></td>
+<td>Kotlin, Groovy, Dynamic languages.</td>
+</tr>
+</tbody></table>
 ]]></content>
       <categories>
-        <category>SpringBoot</category>
+        <category>Spring</category>
       </categories>
       <tags>
-        <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringBoot整合redis报错</title>
-    <url>/2021/03/07/SpringBoot%E6%95%B4%E5%90%88redis%E6%8A%A5%E9%94%99/</url>
-    <content><![CDATA[<p>在SpringBoot中整合Redis进行Token登录，测试方法中一直报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalStateException: Failed to load ApplicationContext</span><br><span class="line"></span><br><span class="line">Caused by: org.springframework.beans.factory.BeanNotOfRequiredTypeException: Bean named &#x27;redisTemplate&#x27; is expected to be of type &#x27;org.springframework.data.redis.core.StringRedisTemplate&#x27; but was actually of type &#x27;org.springframework.data.redis.core.RedisTemplate&#x27;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">set</span><span class="params">(String key, String value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        redisTemplate.opsForValue().set(key, value);</span><br><span class="line">        result = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试方法</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    redisClient.set(<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;value1&quot;</span>);</span><br><span class="line">    String value = redisClient.get(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">    assertNotNull(value);</span><br><span class="line">    log.info(<span class="string">&quot;value: &#123;&#125;&quot;</span>, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>原来是注入的时候变量名有问题：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> StringRedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
-
-<p>不是 redisTemplate ，而是 stringRedisTemplate。</p>
-<p><strong>@Resource和@Autowired的区别。</strong></p>
-]]></content>
-      <categories>
-        <category>SpringBoot</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
+        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
@@ -3902,6 +3902,30 @@
       </tags>
   </entry>
   <entry>
+    <title>Ubuntu 18.04安装Mariadb修改初始密码</title>
+    <url>/2020/10/22/Ubuntu-18-04%E5%AE%89%E8%A3%85Mariadb%E4%BF%AE%E6%94%B9%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81/</url>
+    <content><![CDATA[<p>Ubuntu 18.04安装Mariadb修改初始密码</p>
+<p>在Ubuntu环境下新安装Mariadb数据库之后，所有的配置文件里都没有默认密码，然后用root用户和空密码也登不进去，浪费了好长时间，将解决的过程记录一下。</p>
+<p>MySQL版本：<strong>10.1.47-MariaDB-0+deb9u1 Debian 9.13</strong></p>
+<p>在StackOverflow上找到的解决方法 &gt;&gt;&gt;  <a href="https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost">ERROR 1698 (28000): Access denied for user ‘root‘@’localhost</a>‘](<a href="https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost">https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost</a>)</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">zhulongkun20@v2ray:mysqld_safe --skip-grant-tables</span><br><span class="line"></span><br><span class="line">zhulongkun20@v2ray:sudo /etc/init.d/mysql restart</span><br><span class="line"></span><br><span class="line">zhulongkun20@v2ray:sudo mysql</span><br><span class="line"></span><br><span class="line">进入到 MySQL 后台</span><br><span class="line">MariaDB [(none)]&gt;</span><br><span class="line"></span><br><span class="line">执行SQL修改密码</span><br><span class="line">MariaDB [(none)]&gt; update mysql.user set password=PASSWORD(&quot;root&quot;) where user=&quot;root&quot;;</span><br><span class="line"></span><br><span class="line">刷新</span><br><span class="line">MariaDB [(none)]&gt; flush privileges;</span><br><span class="line">MariaDB [(none)]&gt; exit</span><br><span class="line">Bye</span><br><span class="line"></span><br><span class="line">重启</span><br><span class="line">zhulongkun20@v2ray:/etc$ sudo /etc/init.d/mysql restart</span><br><span class="line">[ ok ] Restarting mysql (via systemctl): mysql.service.</span><br><span class="line"></span><br><span class="line">登录然后还是报错</span><br><span class="line">zhulongkun20@v2ray:mysql -uroot -p</span><br><span class="line">ERROR 1698 (28000): Access denied for user &#x27;root&#x27;@&#x27;localhost&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>解决问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">zhulongkun20@v2ray:mysqld_safe --skip-grant-tables</span><br><span class="line"></span><br><span class="line">zhulongkun20@v2ray:sudo /etc/init.d/mysql restart</span><br><span class="line"></span><br><span class="line">zhulongkun20@v2ray:sudo mysql</span><br><span class="line"></span><br><span class="line">进入到 MySQL 后台</span><br><span class="line">MariaDB [(none)]&gt;</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; use mysql;</span><br><span class="line">MariaDB [mysql]&gt; SELECT User, Host, plugin FROM mysql.user;</span><br><span class="line">+------+-----------+-------------+</span><br><span class="line">| User | Host      | plugin      |</span><br><span class="line">+------+-----------+-------------+</span><br><span class="line">| root | localhost | unix_socket |</span><br><span class="line">+------+-----------+-------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [mysql]&gt; UPDATE user SET plugin=&#x27;mysql_native_password&#x27; WHERE User=&#x27;root&#x27;;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line">MariaDB [mysql]&gt; FLUSH PRIVILEGES;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line">然后退出</span><br><span class="line">MariaDB [mysql]&gt; exit</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">杀掉所有进程后重启登录即可：</span><br><span class="line">zhulongkun20@v2ray:~$ mysql -uroot -p</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue-cli项目配置代理不生效</title>
     <url>/2021/05/09/Vue-cli%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E4%B8%8D%E7%94%9F%E6%95%88/</url>
     <content><![CDATA[<p>详解webpack的proxyTable无效的解决方案</p>
@@ -3951,27 +3975,39 @@
       </tags>
   </entry>
   <entry>
-    <title>Ubuntu 18.04安装Mariadb修改初始密码</title>
-    <url>/2020/10/22/Ubuntu-18-04%E5%AE%89%E8%A3%85Mariadb%E4%BF%AE%E6%94%B9%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81/</url>
-    <content><![CDATA[<p>Ubuntu 18.04安装Mariadb修改初始密码</p>
-<p>在Ubuntu环境下新安装Mariadb数据库之后，所有的配置文件里都没有默认密码，然后用root用户和空密码也登不进去，浪费了好长时间，将解决的过程记录一下。</p>
-<p>MySQL版本：<strong>10.1.47-MariaDB-0+deb9u1 Debian 9.13</strong></p>
-<p>在StackOverflow上找到的解决方法 &gt;&gt;&gt;  <a href="https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost">ERROR 1698 (28000): Access denied for user ‘root‘@’localhost</a>‘](<a href="https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost">https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost</a>)</p>
+    <title>Vue前后端分离项目中的跨域问题</title>
+    <url>/2020/12/20/Vue%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>前后端分离项目的跨域问题</p>
+<br>
+
 <span id="more"></span>
 
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">zhulongkun20@v2ray:mysqld_safe --skip-grant-tables</span><br><span class="line"></span><br><span class="line">zhulongkun20@v2ray:sudo /etc/init.d/mysql restart</span><br><span class="line"></span><br><span class="line">zhulongkun20@v2ray:sudo mysql</span><br><span class="line"></span><br><span class="line">进入到 MySQL 后台</span><br><span class="line">MariaDB [(none)]&gt;</span><br><span class="line"></span><br><span class="line">执行SQL修改密码</span><br><span class="line">MariaDB [(none)]&gt; update mysql.user set password=PASSWORD(&quot;root&quot;) where user=&quot;root&quot;;</span><br><span class="line"></span><br><span class="line">刷新</span><br><span class="line">MariaDB [(none)]&gt; flush privileges;</span><br><span class="line">MariaDB [(none)]&gt; exit</span><br><span class="line">Bye</span><br><span class="line"></span><br><span class="line">重启</span><br><span class="line">zhulongkun20@v2ray:/etc$ sudo /etc/init.d/mysql restart</span><br><span class="line">[ ok ] Restarting mysql (via systemctl): mysql.service.</span><br><span class="line"></span><br><span class="line">登录然后还是报错</span><br><span class="line">zhulongkun20@v2ray:mysql -uroot -p</span><br><span class="line">ERROR 1698 (28000): Access denied for user &#x27;root&#x27;@&#x27;localhost&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p>请求跨域报错：</p>
+<p>Blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested……</p>
+<br>
 
+<h2 id="解决方案1"><a href="#解决方案1" class="headerlink" title="解决方案1"></a>解决方案1</h2><p>在Vue项目根目录下新建 <code>vue.config.js</code>文件，文件内容：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">devServer</span>: &#123;</span><br><span class="line">        <span class="attr">open</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">host</span>: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">        <span class="attr">port</span>: <span class="number">8091</span>,</span><br><span class="line">        <span class="attr">https</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="comment">//以上的ip和端口是我们本机的;下面为需要跨域的</span></span><br><span class="line">        <span class="attr">proxy</span>: &#123; <span class="comment">//配置跨域</span></span><br><span class="line">            <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">                <span class="attr">target</span>: <span class="string">&#x27;http://localhost:8092/&#x27;</span>, <span class="comment">//这里后台的地址模拟的;应该填写你们真实的后台接口</span></span><br><span class="line">                <span class="attr">ws</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">changOrigin</span>: <span class="literal">true</span>, <span class="comment">//允许跨域</span></span><br><span class="line">                <span class="attr">pathRewrite</span>: &#123;</span><br><span class="line">                    <span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;&#x27;</span> <span class="comment">//请求的时候使用这个api就可以</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>试了这种方式，但是在调试信息中看到输出的实际请求地址是<code>http://localhost:8091/api/</code>，返回404错误，不知道是不是哪里配置得不对。</p>
+<br>
 
-<p>解决问题：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">zhulongkun20@v2ray:mysqld_safe --skip-grant-tables</span><br><span class="line"></span><br><span class="line">zhulongkun20@v2ray:sudo /etc/init.d/mysql restart</span><br><span class="line"></span><br><span class="line">zhulongkun20@v2ray:sudo mysql</span><br><span class="line"></span><br><span class="line">进入到 MySQL 后台</span><br><span class="line">MariaDB [(none)]&gt;</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; use mysql;</span><br><span class="line">MariaDB [mysql]&gt; SELECT User, Host, plugin FROM mysql.user;</span><br><span class="line">+------+-----------+-------------+</span><br><span class="line">| User | Host      | plugin      |</span><br><span class="line">+------+-----------+-------------+</span><br><span class="line">| root | localhost | unix_socket |</span><br><span class="line">+------+-----------+-------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [mysql]&gt; UPDATE user SET plugin=&#x27;mysql_native_password&#x27; WHERE User=&#x27;root&#x27;;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line">MariaDB [mysql]&gt; FLUSH PRIVILEGES;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line">然后退出</span><br><span class="line">MariaDB [mysql]&gt; exit</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">杀掉所有进程后重启登录即可：</span><br><span class="line">zhulongkun20@v2ray:~$ mysql -uroot -p</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="解决方案2"><a href="#解决方案2" class="headerlink" title="解决方案2"></a>解决方案2</h2><p>在项目 config/index.js文件中的proxyTable中添加下面的内容，然后请求时的url拼接为：/api/xxx，这种方式能成功请求到后台。</p>
+<p>不要配置<code>axios.defaults.baseURL</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">    <span class="attr">target</span>: <span class="string">&#x27;http://localhost:8092/&#x27;</span>, <span class="comment">//这里后台的地址模拟的;应该填写你们真实的后台接口</span></span><br><span class="line">    <span class="attr">ws</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">changOrigin</span>: <span class="literal">true</span>, <span class="comment">//允许跨域</span></span><br><span class="line">    <span class="attr">pathRewrite</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;&#x27;</span> <span class="comment">//请求的时候使用这个api就可以</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<br>
+
+<p>改完配置之后记得重启项目！！</p>
+<br>
+
+<h2 id="解决方案3"><a href="#解决方案3" class="headerlink" title="解决方案3"></a>解决方案3</h2><p>可以使用Nginx代理实现跨域，照着网上的资料配置了server的listen项和proxy项，但是没有配置成功，有时间再试试。</p>
 ]]></content>
       <categories>
-        <category>MySQL</category>
+        <category>Vue</category>
       </categories>
       <tags>
-        <tag>MySQL</tag>
+        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -4027,6 +4063,25 @@
       </categories>
       <tags>
         <tag>dubbo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ajax返回error可能原因分析</title>
+    <url>/2019/05/12/ajax%E8%BF%94%E5%9B%9Eerror%E5%8F%AF%E8%83%BD%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<p>ajax总是进入error的可能原因</p>
+<p>后台返回：</p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">Successfully completed request</span><br></pre></td></tr></table></figure>
+
+<p>前端ajax总是执行error部分的代码。</p>
+<p>原因：</p>
+<p>后台只返回了 “success” 字符串，不是规范的json格式，所以没有执行预期逻辑。</p>
+<p>最好在后台返回 <strong>严格规范</strong> 的json防止此类错误。</p>
+]]></content>
+      <categories>
+        <category>ajax</category>
+      </categories>
+      <tags>
+        <tag>ajax</tag>
       </tags>
   </entry>
   <entry>
@@ -4138,25 +4193,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ajax返回error可能原因分析</title>
-    <url>/2019/05/12/ajax%E8%BF%94%E5%9B%9Eerror%E5%8F%AF%E8%83%BD%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<p>ajax总是进入error的可能原因</p>
-<p>后台返回：</p>
-<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">Successfully completed request</span><br></pre></td></tr></table></figure>
-
-<p>前端ajax总是执行error部分的代码。</p>
-<p>原因：</p>
-<p>后台只返回了 “success” 字符串，不是规范的json格式，所以没有执行预期逻辑。</p>
-<p>最好在后台返回 <strong>严格规范</strong> 的json防止此类错误。</p>
-]]></content>
-      <categories>
-        <category>ajax</category>
-      </categories>
-      <tags>
-        <tag>ajax</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《宇宙よりも遠い場所》台词-第一话</title>
     <url>/2020/01/05/%E3%80%8A%E5%AE%87%E5%AE%99%E3%82%88%E3%82%8A%E3%82%82%E9%81%A0%E3%81%84%E5%A0%B4%E6%89%80%E3%80%8B%E5%8F%B0%E8%AF%8D-%E7%AC%AC%E4%B8%80%E8%AF%9D/</url>
     <content><![CDATA[<p>第一話：青春しゃくまんえん</p>
@@ -4221,39 +4257,30 @@
       </tags>
   </entry>
   <entry>
-    <title>Vue前后端分离项目中的跨域问题</title>
-    <url>/2020/12/20/Vue%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>前后端分离项目的跨域问题</p>
-<br>
-
+    <title>《宇宙よりも遠い場所》台词-第二话</title>
+    <url>/2020/09/22/%E3%80%8A%E5%AE%87%E5%AE%99%E3%82%88%E3%82%8A%E3%82%82%E9%81%A0%E3%81%84%E5%A0%B4%E6%89%80%E3%80%8B%E5%8F%B0%E8%AF%8D-%E7%AC%AC%E4%BA%8C%E8%AF%9D/</url>
+    <content><![CDATA[<p>第二話：歌舞伎町のフリマントル</p>
+<p>我终于踏出这一步了，去往没有你的世界。</p>
 <span id="more"></span>
 
-<h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p>请求跨域报错：</p>
-<p>Blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested……</p>
-<br>
 
-<h2 id="解决方案1"><a href="#解决方案1" class="headerlink" title="解决方案1"></a>解决方案1</h2><p>在Vue项目根目录下新建 <code>vue.config.js</code>文件，文件内容：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">devServer</span>: &#123;</span><br><span class="line">        <span class="attr">open</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">host</span>: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">        <span class="attr">port</span>: <span class="number">8091</span>,</span><br><span class="line">        <span class="attr">https</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="comment">//以上的ip和端口是我们本机的;下面为需要跨域的</span></span><br><span class="line">        <span class="attr">proxy</span>: &#123; <span class="comment">//配置跨域</span></span><br><span class="line">            <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">                <span class="attr">target</span>: <span class="string">&#x27;http://localhost:8092/&#x27;</span>, <span class="comment">//这里后台的地址模拟的;应该填写你们真实的后台接口</span></span><br><span class="line">                <span class="attr">ws</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">changOrigin</span>: <span class="literal">true</span>, <span class="comment">//允许跨域</span></span><br><span class="line">                <span class="attr">pathRewrite</span>: &#123;</span><br><span class="line">                    <span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;&#x27;</span> <span class="comment">//请求的时候使用这个api就可以</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>试了这种方式，但是在调试信息中看到输出的实际请求地址是<code>http://localhost:8091/api/</code>，返回404错误，不知道是不是哪里配置得不对。</p>
-<br>
-
-<h2 id="解决方案2"><a href="#解决方案2" class="headerlink" title="解决方案2"></a>解决方案2</h2><p>在项目 config/index.js文件中的proxyTable中添加下面的内容，然后请求时的url拼接为：/api/xxx，这种方式能成功请求到后台。</p>
-<p>不要配置<code>axios.defaults.baseURL</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">    <span class="attr">target</span>: <span class="string">&#x27;http://localhost:8092/&#x27;</span>, <span class="comment">//这里后台的地址模拟的;应该填写你们真实的后台接口</span></span><br><span class="line">    <span class="attr">ws</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">changOrigin</span>: <span class="literal">true</span>, <span class="comment">//允许跨域</span></span><br><span class="line">    <span class="attr">pathRewrite</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;&#x27;</span> <span class="comment">//请求的时候使用这个api就可以</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>改完配置之后记得重启项目！！</p>
-<br>
-
-<h2 id="解决方案3"><a href="#解决方案3" class="headerlink" title="解决方案3"></a>解决方案3</h2><p>可以使用Nginx代理实现跨域，照着网上的资料配置了server的listen项和proxy项，但是没有配置成功，有时间再试试。</p>
+<p>報せ：白瀬は十一月中旬に日本を出航、南極に向けて海を南下、途中フリーマントルに寄港。<br>決まり：オーストラリアだ。<br>報せ：ここで補給と観測隊員の乗り込みを行って、十二月の上旬、南極大陸に向けて出航するの。<br>決まり：日本から乗って行くんじゃなんだ。<br>報せ：それは昔の話、今はフリーマントルから乗船、帰るにはシドニーから飛行機って言うのが普通。<br>決まり：え〜<br>報せ：そこで、私たちは白瀬がフリーマントルに寄港する時期に合わせて日本を立ち、フリーマントルに向かう。<br>決まり：うんうん。<br>報せ：そして、ここで白瀬に乗り込み、南極へ。<br>決まり：乗れるの？<br>報せ：基本的に南極観測は国家事業、成員は自衛隊員が務め、観測隊員は厳しい審査と訓練に合格した人間だけ、高校生は絶対に無理。ただ、今年は特別。<br>決まり：今年は？民間南極観測隊、三年ぶりに発遣決まる。（その笑顔を見た時に、なんか心がブカブカした、あ、生しゃぶる言って、多分これだと思った。私は今、人生で一番途方もなくて、とんでもない大きい計画を立ってている。）<br>決まり：あれ、もしかして、 せいすいかん？<br>報せ：うん。<br>決まり：あは〜</p>
+<p>決まり：あ〜これも十八歳以上か。<br>恵：なに？バイト？<br>決まり：おはよう、うん、昨日話したでしょう、飛行機代。報せちゃんが用意しとけって。<br>恵：南極か。<br>決まり：うん、行ってる間、学校を休むことになるから、出席数を稼いでおけって。あっ、なにこれ？超いい！<br>恵：なに？<br>決まり：高校生女子募集、接客業、男性とお喋りしたり、お散歩したりする仕事ですって、内容によっては、月100万以上も夢じゃないかも、お〜<br>恵：見るかったら終わりだぞ。<br>決まり：大丈夫だよ、バイトするって学校には届け出すから。<br>恵：なにも分かってないな、お金はともかくとして、行けるのか本当に？<br>決まり：うん！報せちゃん言ってた、その今年でる民間の南極観測隊っていうに知り合いがあるからって、あ。<br>恵：調べて見たけど、ヤバそうだぞ。<br>決まり：4年前、新基地完成と新型砕氷艦就航に伴い、民間に払い下げれた二代目白瀬と昭和基地だが、その維持費と活動費調達に苦慮し、三年ぶりに発遣した今回の観測隊も、前回スポンサーだった企業は次々と撤退を表明して終わり、このままでは、隊員の安全が確保されないので、計画をそのまま対する批判の声も相次いているって。<br>先生：玉木さん、玉木さん、、<br>決まり：はっはい！<br>先生：つづけを読んでいただけますまいか？<br>決まり：はっはい、資金面の問題と合わせて今後も、はわ〜<br>先生：はわ、の先を聞かせていただきます。</p>
+<p>決まり：あ、まだこんなにある、書き取りなんて小学校以来だよ。<br>恵：授業中に読んでるからだろう。<br>決まり：だって、我慢できなかっただもん、それで？<br>恵：それでもなにもない、一応、今のところ計画が中止になったとは書いてないけど。<br>決まり：じゃ、大丈夫だね。<br>恵：そうか？仮に中止にならなかったとしても、そう簡単に乗れるか？いくら民間だからって。<br>決まり：ほら、報せちゃん観測隊員の娘だし。<br>恵：コンサートの間席者席じゃないんだから、そんなホイホイ乗せてくれるわけないと思うけどな。<br>決まり：そうか、だよね。<br>恵：この後、会うんだろう？一度ちゃんと聞いて見た方が良いぞ。<br>決まり：うん、分かった、はわ！</p>
+<p>決まり：ごめん。<br>報せ：時間は厳守！南極いくなら尚更よ、数分の遅れが生死に関わるだから。<br>決まり：だから、先生に怒られたって送ったじゃん。<br>報せ：バイトは？<br>決まり：え？<br>報せ：今日までに決めるって。<br>決まり：そうだけど、とりあえず、オーストラリアまでの飛行機代でょう？夏休みに纏めてやればなんとか。<br>報せ：いざという時のために、お金が多い方がいい、私調べて置いたから。<br>決まり：ほんど？<br>報せ：高校生女子、接客業で、男性とおしゃべりしたり、お散歩したりするバイトなんだって、かなりの時給でしょう？<br>決まり：うん、そうだけど。<br>報せ：そ、そうなの？<br>決まり：や、私も恵ちゃんに襲わたんだけど、報せちゃんもちょっと抜きてるとこあるよね。<br>報せ：抜きてない、ただ知らなかっただけで。なに？それ。<br>決まり：友達、南極ほんとに行けるのかって心配してて。<br>報せ：疑うの？<br>決まり：疑うってじゃないけど、ただ、確証がないっていうか。ね、心配になるでしょう、それに仮に中止にならなかったとしても、乗れるのかって。<br>報せ：乗れる！だって、私は小渕沢貴子の娘だから。<br>決まり：本当に？それだけで？<br>報せ：絶対大丈夫！<br>決まり：そうかな、でも。<br>報せ：嫌になったらなったって、素直に言えばいいじゃない。<br>決まり：え？<br>報せ：それ私のせいにしようとして。<br>決まり：嫌になったんじゃないよ、ただ失敗したくない、やっぱりやめとけだって思たくない、「行って良かった」、「報せちゃんの計画に乗ってよかった」って思いたい、うん、、<br>報せ：ちゃんと状況は全部わかってる、作戦も考えてある。<br>決まり：ほんとに？<br>報せ：うん、今度ちゃんと説明するから、決まりは準備進めて。<br>決まり：うん、わかった！おっ</p>
+<p>決まり：いっらしゃいませ、温めはいかがなされますか？<br>店員：まあ、いろいろこれから覚えてもらえば良いから、まず補充お願い、そこ三宅さんいるから、聞いて。<br>決まり：はい！<br>決まり：あのう、、<br>日向：うわ！<br>決まり：あの、今日から入ったことになった玉木です、よろしくお願いします！<br>日向：玉木？<br>決まり：玉木マリです。<br>日向：あ、それで決まり、はは、三宅日向です、何歳？<br>決まり：十六歳、高二です。<br>日向：一緒だ、よろしく！<br>決まり：よ、よろしく。<br>日向：だったら、西校だよね。<br>決まり：うん、多西。<br>日向：なんで急にバイト？<br>決まり：はうん、ちょっと必要っていうか、行きたいところがあって。<br>日向：うんん〜それってさ、もしかして、南極？<br>決まり：え？</p>
+<p>報せ：行きたい？<br>決まり：うん、なんか前から私たちの話聞いてたみたいで。<br>日向：あ、そういう風にいったら、盗み聞きみたいだろう、違うからね、二人で大声で話てだから。<br>報せ：大声？<br>日向：嫌になってったら言えば良いじゃない？嫌になったんじゃないよ、、<br>決まり：良いよ、やりなくて！<br>日向：それで、気になっててさ、そして決まりがバイトで入って来たでしょう、これは運命だって思ったね私は。<br>報せ：言っておくけど、遊びじゃないから。<br>日向：分かってる。<br>報せ：命の危険だってあるし、旅費だってちゃんと払ってもらうるし、出発は十二月だから、学校を休むことにもなる。<br>日向：I’am OK!平気だよ、バイトでお金があるし、高校を行ってないし。<br>決まり：え！そうなの？<br>日向：そんなに驚くことないだろう、中にはいるんだよ、高校行ってない十六歳だって。<br>決まり：おう。<br>日向：あ、でも、間違えるなよ、勉強は絶対負けないから、高認も通るし、この前の模試は合格判定Aだし。<br>決まり：え！まだ高二なのに！<br>報せ：じゃ、大学は行くってこと？<br>日向：そう、合格しまくて、高校で怠けて落ちたやつらにザマミロって言うのが今のとこの夢。<br>決まり：あ〜<br>報せ：でも、だったら南極行って暇なんてないじゃない。<br>日向：そうだけど、まだ受験まで2年近くあるし、来年は本気で受験勉強だって考えると、一個ぐらいになかしときたいなって。<br>決まり：分かる、だよね、今年しなかったら、もうできないもんね。<br>日向：そう！お、良いのか？このままくまんとおでん作り終わって良いのか？俺の十六歳！<br>決まり：そうそう！<br>日向：お前とはうまいお酒飲めそうだ、飲んだことないけど。<br>決まり：私も！<br>報せ：うるさい！この計画を立ってたのは私なんだから、私の指示に従って。<br>決まり：別に下がろうって言ってないけど。<br>日向：なに？めんどくさいタイプ？<br>決まり：ちょっと、、<br>報せ：作戦の概要、今度の日曜日、決行するから。じゃ、日曜。<br>三人：うん！</p>
+<p>決まり、日向：バイバイ！<br>決まり：どう思う、この作戦？<br>日向：さあ、なかなか難しそうと思うけどね。<br>決まり：だよね。<br>日向：でも、あの子私らよりは南極のこと知ってるだろうし、やるしかないじゃない？引き返せるうちは、旅ではない！引き返せなくなった時に、初めてそれは旅になるのだって言うし。<br>決まり：うわ〜なにそれ？名言っぽい、誰の言葉？<br>日向：私〜<br>決まり：なんだ、、<br>日向：でも、よかったよ。<br>決まり：え？<br>日向：私あなたたち二人のこと嫌いじゃなかったんだよね、ほら、あのコンビニ、多西近いから、生徒いっぱいくるじゃん。<br>決まり：うん。<br>日向：でも、二人だけはなんか別だなって、空気が違うって言うか。<br>決まり：そんなこと言われたの初めて。<br>日向：私さあ、集団の中でグチャグチャみたいなのは苦手ててさ、だから高校無理だたんだけど、二人はいいなあって。<br>決まり：良いって、なにが？<br>日向：うん、なんだろう、嘘ついてない感じ？って言われたら、良い気する？<br>決まり：そりゃ、、<br>日向：こうして日向ちゃんは人の心にとりるだよ、じゃね〜<br>決まり：うん、、</p>
+<p>決まり：新宿だ！<br>日向：ギャラギャラするな！群馬だってバレる！<br>決まり：だって、なんかキラキラしてて、どこ見ていいのわかんない！<br>日向：落ち着け！<br>報せ：決まり、まって、おいで行かないで。<br>日向：おい、間違えてる！<br>決まり：か、歌舞伎町。<br>報せ：き、来たことないの？<br>決まり：夜来るのは初めてかも、一応恵ちゃん自留めるか持って言ってたけど。<br>日向：補導されたりしないか？私は良いけど、二人は学校にバレたらまずいだろう。<br>決まり：歩いてだけでも？<br>日向：場所が場所だからな。<br>報せ：平気、大学生って顔してれば。<br>路人：なに？遊びに来たの？ちょっとちょっとだけ、、<br>決まり：どうしよう？<br>日向：面白いから、ほっとこうか。<br>日向：あった、観測隊員親睦会合意一行さま。<br>決まり：ほんと？<br>報せ：よし！後は作戦通りに。<br>決まり：でも、これ一人を誘い出すってしか書いてないけど。<br>日向：どうするの？<br>報せ：それは、普通男子隊員が多いから、女子高生がこう、、<br>日向：まさか、誘惑しろって言うんじゃないだろうな。<br>決まり：まあ、報せちゃん美人だからな。<br>報せ：私？私はないない。<br>日向：待って、私たちのどっちが行かせるつもりだったのかよ！<br>決まり：無理だよ！<br>日向：来たぞ、そうする？<br>報せ：決まり、お願い！<br>決まり：そんな！<br>日向：決まり！<br>決まり：え？！<br>日向：昭和か？！<br>決まり：じゃ日向ちゃんやってよ！<br>日向：ほら、モタモタしていると行っちゃう！足だ、なまし！<br>決まり：パンツだもん。<br>日向：じゃ、胸だ、胸を挙上せよ、いい〜か！<br>決まり：だいたい胸なら、、<br>報せ：嫌だ、嫌だ、、<br>日向：行けよ、南極行かんだら。<br>決まり：そうだよ、ずるいよ、作戦考えた報せなんだから。<br>報せ：や、で、私はだめなの。<br>日向：なにがダメなんだよ。<br>決まり：そうだよ。<br>弓子：うん、あっ。<br>佳苗：お？報せちゃん？<br>弓子：しつこいね、あの子も。<br>ゆず：誰ですか？<br>日向：お辞儀してどんするんだよ？ここ学校か？優等生か？！<br>報せ：だから私はダメだって言ってるでしょう？<br>決まり：どうして？<br>報せ：顔がバレてるの、だから、見つかったらすぐに捕まって、、<br>弓子：うわ、三人もいる！<br>報せ：逃げて、<br>日向、決まり：え？<br>報せ：逃げて！<br>決まり：日向ちゃん、早い！<br>日向：一応短距離だったらな、別れた方が良いじゃないのか？<br>報せ：そうね。<br>日向：おじ会う場所は？<br>報せ：携帯で！<br>日向：おらい〜<br>決まり：まだ追って来る。<br>報せ：観測隊員だから、体力すごいし。<br>決まり：私たちも別れる？ あ、痛い。<br>報せ：あ、ごめん。<br>決まり：うん。<br>報せ：なに？<br>決まり：うん、ただ、楽しいなあって。<br>報せ：楽しい？<br>決まり：うん、なんかね、動いてる！<br>報せ：え？<br>決まり：私の青春動いてる気がする！そう、こう言うのだ！なにかが起きそうで、なにか起こせそうで、毎日見ている景色が、目も苦しく変わっていって。<br>路人A：やっぱ外飲み最高だね、美味しいね。<br>路人B：今日朝まで飲んで、、<br>日向：え？！<br>路人A、B：バイバイ！<br>報せ、日向、決まり：あっ！！</p>
+<p>佳苗：そんなに息切らすまで走らなくても、別に命奪おうわけじゃないのに、奪いそうだけど。<br>決まり：だって、報せちゃんが。<br>日向：そうだよ、捕まったら撃ちこびこもんって。<br>報せ：そんなこと言ってない。<br>弓子：しかし、よくその作戦思いつくよね。<br>佳苗：つまり、男性隊員誑かして、協力させて見っこしよってこどでしょう？悪い女ね、誰が思いついたの？<br>佳苗：まっ、そうよね、あのね、報せちゃん、何度も話した通り、あなたを連れて行くことはできないの、たとえ民間でもね、隊員が厳しい条件があって。<br>報せ：分かってます！無理を言ってるのは分かってます！でも、どうしても行きたい、だって、お母さんが待ってる。<br>決まり：報せちゃん。<br>佳苗：なに、これ？<br>報せ：見た通りです、資金困ってるですよね、私たちをそのお金でスボサーにしてください、連れて行ってくれったら、そのお金あげますから。<br>弓子：よく考えるわね。<br>佳苗：分かった、十二月一日、フリーマントりきて。<br>報せ：ほんとですか？！<br>佳苗：なんって言うと思う？そんな心配してもらわなくても、私たちは行くわ、必ずね。<br>佳苗：貴子、、、</p>
+<p>弓子：まあ、気持ちは分かるけどね。<br>佳苗：あれから3年。<br>弓子：で、ほんとに資金は大丈夫なの？<br>佳苗：さっき言ってたでしょう？まあ、大変だけど、いろいろ考えてるわ。<br>弓子：白石さん、、<br>佳苗：もう、その一環！</p>
+<p>決まり：お母さん、か。<br>日向：まあ、落ち込むなよ、これでダメと決まってわけじゃない。<br>報せ：後一息で、もう少しこのお金を受けたりそうだった、後少しで絶対にうまく行って、、<br>日向：こいつ、ポッじてうちゃんだ。<br>決まり：だね〜<br>日向：まあ、そうじゃなきゃこんなことできないか。<br>決まり：だね！<br>日向：ただし、緊急動議、小淵沢報せのリーダー担任を解任を要求しまーす、賛成の人？<br>決まり：はい！<br>日向：賛成多数！よってた今よりリーダーを解任します！<br>報せ：え？！<br>日向：と言うわけで、南極いくぞ！<br>日向、決まり：おぉ！<br>報せ：え？！！</p>
 ]]></content>
       <categories>
-        <category>Vue</category>
+        <category>日语</category>
       </categories>
       <tags>
-        <tag>Vue</tag>
+        <tag>日语</tag>
       </tags>
   </entry>
   <entry>
@@ -4499,33 +4526,6 @@
 <p>結月：聞いてことあります。</p>
 <p>決まり：じゃ、もし本当に見ること出来たら、南極でオオロラを見た世界で唯一の高校生になれるかも。</p>
 <p>結月：そうか、そうなったら、軽く死ねますね。</p>
-]]></content>
-      <categories>
-        <category>日语</category>
-      </categories>
-      <tags>
-        <tag>日语</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《宇宙よりも遠い場所》台词-第二话</title>
-    <url>/2020/09/22/%E3%80%8A%E5%AE%87%E5%AE%99%E3%82%88%E3%82%8A%E3%82%82%E9%81%A0%E3%81%84%E5%A0%B4%E6%89%80%E3%80%8B%E5%8F%B0%E8%AF%8D-%E7%AC%AC%E4%BA%8C%E8%AF%9D/</url>
-    <content><![CDATA[<p>第二話：歌舞伎町のフリマントル</p>
-<p>我终于踏出这一步了，去往没有你的世界。</p>
-<span id="more"></span>
-
-
-<p>報せ：白瀬は十一月中旬に日本を出航、南極に向けて海を南下、途中フリーマントルに寄港。<br>決まり：オーストラリアだ。<br>報せ：ここで補給と観測隊員の乗り込みを行って、十二月の上旬、南極大陸に向けて出航するの。<br>決まり：日本から乗って行くんじゃなんだ。<br>報せ：それは昔の話、今はフリーマントルから乗船、帰るにはシドニーから飛行機って言うのが普通。<br>決まり：え〜<br>報せ：そこで、私たちは白瀬がフリーマントルに寄港する時期に合わせて日本を立ち、フリーマントルに向かう。<br>決まり：うんうん。<br>報せ：そして、ここで白瀬に乗り込み、南極へ。<br>決まり：乗れるの？<br>報せ：基本的に南極観測は国家事業、成員は自衛隊員が務め、観測隊員は厳しい審査と訓練に合格した人間だけ、高校生は絶対に無理。ただ、今年は特別。<br>決まり：今年は？民間南極観測隊、三年ぶりに発遣決まる。（その笑顔を見た時に、なんか心がブカブカした、あ、生しゃぶる言って、多分これだと思った。私は今、人生で一番途方もなくて、とんでもない大きい計画を立ってている。）<br>決まり：あれ、もしかして、 せいすいかん？<br>報せ：うん。<br>決まり：あは〜</p>
-<p>決まり：あ〜これも十八歳以上か。<br>恵：なに？バイト？<br>決まり：おはよう、うん、昨日話したでしょう、飛行機代。報せちゃんが用意しとけって。<br>恵：南極か。<br>決まり：うん、行ってる間、学校を休むことになるから、出席数を稼いでおけって。あっ、なにこれ？超いい！<br>恵：なに？<br>決まり：高校生女子募集、接客業、男性とお喋りしたり、お散歩したりする仕事ですって、内容によっては、月100万以上も夢じゃないかも、お〜<br>恵：見るかったら終わりだぞ。<br>決まり：大丈夫だよ、バイトするって学校には届け出すから。<br>恵：なにも分かってないな、お金はともかくとして、行けるのか本当に？<br>決まり：うん！報せちゃん言ってた、その今年でる民間の南極観測隊っていうに知り合いがあるからって、あ。<br>恵：調べて見たけど、ヤバそうだぞ。<br>決まり：4年前、新基地完成と新型砕氷艦就航に伴い、民間に払い下げれた二代目白瀬と昭和基地だが、その維持費と活動費調達に苦慮し、三年ぶりに発遣した今回の観測隊も、前回スポンサーだった企業は次々と撤退を表明して終わり、このままでは、隊員の安全が確保されないので、計画をそのまま対する批判の声も相次いているって。<br>先生：玉木さん、玉木さん、、<br>決まり：はっはい！<br>先生：つづけを読んでいただけますまいか？<br>決まり：はっはい、資金面の問題と合わせて今後も、はわ〜<br>先生：はわ、の先を聞かせていただきます。</p>
-<p>決まり：あ、まだこんなにある、書き取りなんて小学校以来だよ。<br>恵：授業中に読んでるからだろう。<br>決まり：だって、我慢できなかっただもん、それで？<br>恵：それでもなにもない、一応、今のところ計画が中止になったとは書いてないけど。<br>決まり：じゃ、大丈夫だね。<br>恵：そうか？仮に中止にならなかったとしても、そう簡単に乗れるか？いくら民間だからって。<br>決まり：ほら、報せちゃん観測隊員の娘だし。<br>恵：コンサートの間席者席じゃないんだから、そんなホイホイ乗せてくれるわけないと思うけどな。<br>決まり：そうか、だよね。<br>恵：この後、会うんだろう？一度ちゃんと聞いて見た方が良いぞ。<br>決まり：うん、分かった、はわ！</p>
-<p>決まり：ごめん。<br>報せ：時間は厳守！南極いくなら尚更よ、数分の遅れが生死に関わるだから。<br>決まり：だから、先生に怒られたって送ったじゃん。<br>報せ：バイトは？<br>決まり：え？<br>報せ：今日までに決めるって。<br>決まり：そうだけど、とりあえず、オーストラリアまでの飛行機代でょう？夏休みに纏めてやればなんとか。<br>報せ：いざという時のために、お金が多い方がいい、私調べて置いたから。<br>決まり：ほんど？<br>報せ：高校生女子、接客業で、男性とおしゃべりしたり、お散歩したりするバイトなんだって、かなりの時給でしょう？<br>決まり：うん、そうだけど。<br>報せ：そ、そうなの？<br>決まり：や、私も恵ちゃんに襲わたんだけど、報せちゃんもちょっと抜きてるとこあるよね。<br>報せ：抜きてない、ただ知らなかっただけで。なに？それ。<br>決まり：友達、南極ほんとに行けるのかって心配してて。<br>報せ：疑うの？<br>決まり：疑うってじゃないけど、ただ、確証がないっていうか。ね、心配になるでしょう、それに仮に中止にならなかったとしても、乗れるのかって。<br>報せ：乗れる！だって、私は小渕沢貴子の娘だから。<br>決まり：本当に？それだけで？<br>報せ：絶対大丈夫！<br>決まり：そうかな、でも。<br>報せ：嫌になったらなったって、素直に言えばいいじゃない。<br>決まり：え？<br>報せ：それ私のせいにしようとして。<br>決まり：嫌になったんじゃないよ、ただ失敗したくない、やっぱりやめとけだって思たくない、「行って良かった」、「報せちゃんの計画に乗ってよかった」って思いたい、うん、、<br>報せ：ちゃんと状況は全部わかってる、作戦も考えてある。<br>決まり：ほんとに？<br>報せ：うん、今度ちゃんと説明するから、決まりは準備進めて。<br>決まり：うん、わかった！おっ</p>
-<p>決まり：いっらしゃいませ、温めはいかがなされますか？<br>店員：まあ、いろいろこれから覚えてもらえば良いから、まず補充お願い、そこ三宅さんいるから、聞いて。<br>決まり：はい！<br>決まり：あのう、、<br>日向：うわ！<br>決まり：あの、今日から入ったことになった玉木です、よろしくお願いします！<br>日向：玉木？<br>決まり：玉木マリです。<br>日向：あ、それで決まり、はは、三宅日向です、何歳？<br>決まり：十六歳、高二です。<br>日向：一緒だ、よろしく！<br>決まり：よ、よろしく。<br>日向：だったら、西校だよね。<br>決まり：うん、多西。<br>日向：なんで急にバイト？<br>決まり：はうん、ちょっと必要っていうか、行きたいところがあって。<br>日向：うんん〜それってさ、もしかして、南極？<br>決まり：え？</p>
-<p>報せ：行きたい？<br>決まり：うん、なんか前から私たちの話聞いてたみたいで。<br>日向：あ、そういう風にいったら、盗み聞きみたいだろう、違うからね、二人で大声で話てだから。<br>報せ：大声？<br>日向：嫌になってったら言えば良いじゃない？嫌になったんじゃないよ、、<br>決まり：良いよ、やりなくて！<br>日向：それで、気になっててさ、そして決まりがバイトで入って来たでしょう、これは運命だって思ったね私は。<br>報せ：言っておくけど、遊びじゃないから。<br>日向：分かってる。<br>報せ：命の危険だってあるし、旅費だってちゃんと払ってもらうるし、出発は十二月だから、学校を休むことにもなる。<br>日向：I’am OK!平気だよ、バイトでお金があるし、高校を行ってないし。<br>決まり：え！そうなの？<br>日向：そんなに驚くことないだろう、中にはいるんだよ、高校行ってない十六歳だって。<br>決まり：おう。<br>日向：あ、でも、間違えるなよ、勉強は絶対負けないから、高認も通るし、この前の模試は合格判定Aだし。<br>決まり：え！まだ高二なのに！<br>報せ：じゃ、大学は行くってこと？<br>日向：そう、合格しまくて、高校で怠けて落ちたやつらにザマミロって言うのが今のとこの夢。<br>決まり：あ〜<br>報せ：でも、だったら南極行って暇なんてないじゃない。<br>日向：そうだけど、まだ受験まで2年近くあるし、来年は本気で受験勉強だって考えると、一個ぐらいになかしときたいなって。<br>決まり：分かる、だよね、今年しなかったら、もうできないもんね。<br>日向：そう！お、良いのか？このままくまんとおでん作り終わって良いのか？俺の十六歳！<br>決まり：そうそう！<br>日向：お前とはうまいお酒飲めそうだ、飲んだことないけど。<br>決まり：私も！<br>報せ：うるさい！この計画を立ってたのは私なんだから、私の指示に従って。<br>決まり：別に下がろうって言ってないけど。<br>日向：なに？めんどくさいタイプ？<br>決まり：ちょっと、、<br>報せ：作戦の概要、今度の日曜日、決行するから。じゃ、日曜。<br>三人：うん！</p>
-<p>決まり、日向：バイバイ！<br>決まり：どう思う、この作戦？<br>日向：さあ、なかなか難しそうと思うけどね。<br>決まり：だよね。<br>日向：でも、あの子私らよりは南極のこと知ってるだろうし、やるしかないじゃない？引き返せるうちは、旅ではない！引き返せなくなった時に、初めてそれは旅になるのだって言うし。<br>決まり：うわ〜なにそれ？名言っぽい、誰の言葉？<br>日向：私〜<br>決まり：なんだ、、<br>日向：でも、よかったよ。<br>決まり：え？<br>日向：私あなたたち二人のこと嫌いじゃなかったんだよね、ほら、あのコンビニ、多西近いから、生徒いっぱいくるじゃん。<br>決まり：うん。<br>日向：でも、二人だけはなんか別だなって、空気が違うって言うか。<br>決まり：そんなこと言われたの初めて。<br>日向：私さあ、集団の中でグチャグチャみたいなのは苦手ててさ、だから高校無理だたんだけど、二人はいいなあって。<br>決まり：良いって、なにが？<br>日向：うん、なんだろう、嘘ついてない感じ？って言われたら、良い気する？<br>決まり：そりゃ、、<br>日向：こうして日向ちゃんは人の心にとりるだよ、じゃね〜<br>決まり：うん、、</p>
-<p>決まり：新宿だ！<br>日向：ギャラギャラするな！群馬だってバレる！<br>決まり：だって、なんかキラキラしてて、どこ見ていいのわかんない！<br>日向：落ち着け！<br>報せ：決まり、まって、おいで行かないで。<br>日向：おい、間違えてる！<br>決まり：か、歌舞伎町。<br>報せ：き、来たことないの？<br>決まり：夜来るのは初めてかも、一応恵ちゃん自留めるか持って言ってたけど。<br>日向：補導されたりしないか？私は良いけど、二人は学校にバレたらまずいだろう。<br>決まり：歩いてだけでも？<br>日向：場所が場所だからな。<br>報せ：平気、大学生って顔してれば。<br>路人：なに？遊びに来たの？ちょっとちょっとだけ、、<br>決まり：どうしよう？<br>日向：面白いから、ほっとこうか。<br>日向：あった、観測隊員親睦会合意一行さま。<br>決まり：ほんと？<br>報せ：よし！後は作戦通りに。<br>決まり：でも、これ一人を誘い出すってしか書いてないけど。<br>日向：どうするの？<br>報せ：それは、普通男子隊員が多いから、女子高生がこう、、<br>日向：まさか、誘惑しろって言うんじゃないだろうな。<br>決まり：まあ、報せちゃん美人だからな。<br>報せ：私？私はないない。<br>日向：待って、私たちのどっちが行かせるつもりだったのかよ！<br>決まり：無理だよ！<br>日向：来たぞ、そうする？<br>報せ：決まり、お願い！<br>決まり：そんな！<br>日向：決まり！<br>決まり：え？！<br>日向：昭和か？！<br>決まり：じゃ日向ちゃんやってよ！<br>日向：ほら、モタモタしていると行っちゃう！足だ、なまし！<br>決まり：パンツだもん。<br>日向：じゃ、胸だ、胸を挙上せよ、いい〜か！<br>決まり：だいたい胸なら、、<br>報せ：嫌だ、嫌だ、、<br>日向：行けよ、南極行かんだら。<br>決まり：そうだよ、ずるいよ、作戦考えた報せなんだから。<br>報せ：や、で、私はだめなの。<br>日向：なにがダメなんだよ。<br>決まり：そうだよ。<br>弓子：うん、あっ。<br>佳苗：お？報せちゃん？<br>弓子：しつこいね、あの子も。<br>ゆず：誰ですか？<br>日向：お辞儀してどんするんだよ？ここ学校か？優等生か？！<br>報せ：だから私はダメだって言ってるでしょう？<br>決まり：どうして？<br>報せ：顔がバレてるの、だから、見つかったらすぐに捕まって、、<br>弓子：うわ、三人もいる！<br>報せ：逃げて、<br>日向、決まり：え？<br>報せ：逃げて！<br>決まり：日向ちゃん、早い！<br>日向：一応短距離だったらな、別れた方が良いじゃないのか？<br>報せ：そうね。<br>日向：おじ会う場所は？<br>報せ：携帯で！<br>日向：おらい〜<br>決まり：まだ追って来る。<br>報せ：観測隊員だから、体力すごいし。<br>決まり：私たちも別れる？ あ、痛い。<br>報せ：あ、ごめん。<br>決まり：うん。<br>報せ：なに？<br>決まり：うん、ただ、楽しいなあって。<br>報せ：楽しい？<br>決まり：うん、なんかね、動いてる！<br>報せ：え？<br>決まり：私の青春動いてる気がする！そう、こう言うのだ！なにかが起きそうで、なにか起こせそうで、毎日見ている景色が、目も苦しく変わっていって。<br>路人A：やっぱ外飲み最高だね、美味しいね。<br>路人B：今日朝まで飲んで、、<br>日向：え？！<br>路人A、B：バイバイ！<br>報せ、日向、決まり：あっ！！</p>
-<p>佳苗：そんなに息切らすまで走らなくても、別に命奪おうわけじゃないのに、奪いそうだけど。<br>決まり：だって、報せちゃんが。<br>日向：そうだよ、捕まったら撃ちこびこもんって。<br>報せ：そんなこと言ってない。<br>弓子：しかし、よくその作戦思いつくよね。<br>佳苗：つまり、男性隊員誑かして、協力させて見っこしよってこどでしょう？悪い女ね、誰が思いついたの？<br>佳苗：まっ、そうよね、あのね、報せちゃん、何度も話した通り、あなたを連れて行くことはできないの、たとえ民間でもね、隊員が厳しい条件があって。<br>報せ：分かってます！無理を言ってるのは分かってます！でも、どうしても行きたい、だって、お母さんが待ってる。<br>決まり：報せちゃん。<br>佳苗：なに、これ？<br>報せ：見た通りです、資金困ってるですよね、私たちをそのお金でスボサーにしてください、連れて行ってくれったら、そのお金あげますから。<br>弓子：よく考えるわね。<br>佳苗：分かった、十二月一日、フリーマントりきて。<br>報せ：ほんとですか？！<br>佳苗：なんって言うと思う？そんな心配してもらわなくても、私たちは行くわ、必ずね。<br>佳苗：貴子、、、</p>
-<p>弓子：まあ、気持ちは分かるけどね。<br>佳苗：あれから3年。<br>弓子：で、ほんとに資金は大丈夫なの？<br>佳苗：さっき言ってたでしょう？まあ、大変だけど、いろいろ考えてるわ。<br>弓子：白石さん、、<br>佳苗：もう、その一環！</p>
-<p>決まり：お母さん、か。<br>日向：まあ、落ち込むなよ、これでダメと決まってわけじゃない。<br>報せ：後一息で、もう少しこのお金を受けたりそうだった、後少しで絶対にうまく行って、、<br>日向：こいつ、ポッじてうちゃんだ。<br>決まり：だね〜<br>日向：まあ、そうじゃなきゃこんなことできないか。<br>決まり：だね！<br>日向：ただし、緊急動議、小淵沢報せのリーダー担任を解任を要求しまーす、賛成の人？<br>決まり：はい！<br>日向：賛成多数！よってた今よりリーダーを解任します！<br>報せ：え？！<br>日向：と言うわけで、南極いくぞ！<br>日向、決まり：おぉ！<br>報せ：え？！！</p>
 ]]></content>
       <categories>
         <category>日语</category>
@@ -4831,6 +4831,27 @@
       </tags>
   </entry>
   <entry>
+    <title>再记Hexo博客恢复</title>
+    <url>/2019/06/09/%E5%86%8D%E8%AE%B0Hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D/</url>
+    <content><![CDATA[<p>Hexo博客恢复</p>
+<p>从官网下载 Nodejs <strong>二进制</strong> 文件（.tar.xz），解压到 /opt 目录下，添加连接：</p>
+<p><code>sudo tar -xvf xxxx.tar.xz</code></p>
+<p><code>sudo ln -s /opt/node-linux-x64xxxx/bin/node /usr/local/bin/node</code></p>
+<p><code>sudo ln -s /opt/node..../bin/npm /usr/local/bin/npm</code></p>
+<p>然后进入博客文件夹，执行</p>
+<p><code>sudo npm install</code></p>
+<p>即可完成恢复。</p>
+<hr>
+<p>折腾了半天一直各种报错，没想到这么简单。。</p>
+]]></content>
+      <categories>
+        <category>博客维护</category>
+      </categories>
+      <tags>
+        <tag>博客维护</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用Let’s Encrypt给网站加密</title>
     <url>/2020/11/07/%E4%BD%BF%E7%94%A8Let%E2%80%99s-Encrypt%E7%BB%99%E7%BD%91%E7%AB%99%E5%8A%A0%E5%AF%86/</url>
     <content><![CDATA[<p>使用 <strong>Let’s Encrypt</strong> 给网站加密</p>
@@ -4898,27 +4919,6 @@
       </categories>
       <tags>
         <tag>折腾</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>再记Hexo博客恢复</title>
-    <url>/2019/06/09/%E5%86%8D%E8%AE%B0Hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D/</url>
-    <content><![CDATA[<p>Hexo博客恢复</p>
-<p>从官网下载 Nodejs <strong>二进制</strong> 文件（.tar.xz），解压到 /opt 目录下，添加连接：</p>
-<p><code>sudo tar -xvf xxxx.tar.xz</code></p>
-<p><code>sudo ln -s /opt/node-linux-x64xxxx/bin/node /usr/local/bin/node</code></p>
-<p><code>sudo ln -s /opt/node..../bin/npm /usr/local/bin/npm</code></p>
-<p>然后进入博客文件夹，执行</p>
-<p><code>sudo npm install</code></p>
-<p>即可完成恢复。</p>
-<hr>
-<p>折腾了半天一直各种报错，没想到这么简单。。</p>
-]]></content>
-      <categories>
-        <category>博客维护</category>
-      </categories>
-      <tags>
-        <tag>博客维护</tag>
       </tags>
   </entry>
   <entry>
