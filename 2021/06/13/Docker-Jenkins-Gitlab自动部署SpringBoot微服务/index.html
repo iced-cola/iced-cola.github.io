@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Docker+Jenkins+Gitlab自动部署SpringBoot微服务｜Chenxii&#39;s blog
+        Gitlab+Jenkins+Docker自动部署SpringBoot微服务｜Chenxii&#39;s blog
         
     </title>
 
@@ -150,7 +150,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Docker+Jenkins+Gitlab自动部署SpringBoot微服务</h1>
+                    <h1>Gitlab+Jenkins+Docker自动部署SpringBoot微服务</h1>
                     
                     <span class="meta">
                          作者 Chenxii
@@ -160,8 +160,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#SpringBoot"
-                           title="SpringBoot">SpringBoot</a>
+                        <a class="tag" href="/tags/#持续集成"
+                           title="持续集成">持续集成</a>
                         
                     </div>
                 </div>
@@ -170,7 +170,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Docker+Jenkins+Gitlab自动部署SpringBoot微服务
+            Gitlab+Jenkins+Docker自动部署SpringBoot微服务
         </span>
     </div>
 </header>
@@ -182,9 +182,9 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <blockquote>
-<p>在公司用了半年的 SpringCloud + Docker + Jenkins 的技术框架，现在流行持续集成，还没有抽点时间自己实际走一下全流程开发环境的搭建，特此记录一下实践过程。</p>
+<p>在公司用了半年的 SpringCloud + Docker + Jenkins 的技术框架，现在流行持续集成，还没有抽点时间自己实际走一下全流程开发环境的搭建，正好赶上端午节，可以宅在出租屋里好好研究一下，特此记录一下实践过程中遇到的问题及解决方案。</p>
 </blockquote>
-<br>
+<!--more--->
 
 <h2 id="搭建测试项目"><a href="#搭建测试项目" class="headerlink" title="搭建测试项目"></a>搭建测试项目</h2><ul>
 <li><p>搭建一个简单的SpringBoot项目，创建一个接口用来测试。</p>
@@ -195,7 +195,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/users&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Response&lt;List&lt;UserPo&gt;&gt; listUsers(<span class="meta">@RequestParam</span> <span class="keyword">int</span> count) &#123;</span><br><span class="line">    Response&lt;List&lt;UserPo&gt;&gt; response = <span class="keyword">new</span> Response&lt;&gt;();</span><br><span class="line">    response.setCode(<span class="number">0</span>);</span><br><span class="line">    response.setMessage(<span class="string">&quot;请求成功&quot;</span>);</span><br><span class="line">    response.setData(userService.listUsers(count));</span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>返回数据格式：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;code&quot;</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;请求成功&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;no&quot;</span>: <span class="string">&quot;U00-0&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;U-name0&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;level&quot;</span>: <span class="string">&quot;高级用户&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;point&quot;</span>: <span class="number">245</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;no&quot;</span>: <span class="string">&quot;U00-1&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;U-name1&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;level&quot;</span>: <span class="string">&quot;初级用户&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;point&quot;</span>: <span class="number">238</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;no&quot;</span>: <span class="string">&quot;U00-2&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;U-name2&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;level&quot;</span>: <span class="string">&quot;初级用户&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;point&quot;</span>: <span class="number">240</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;no&quot;</span>: <span class="string">&quot;U00-3&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;U-name3&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;level&quot;</span>: <span class="string">&quot;初级用户&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;point&quot;</span>: <span class="number">111</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;no&quot;</span>: <span class="string">&quot;U00-4&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;U-name4&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;level&quot;</span>: <span class="string">&quot;初级用户&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;point&quot;</span>: <span class="number">713</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;code&quot;</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">&quot;message&quot;</span>: <span class="string">&quot;请求成功&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;data&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;no&quot;</span>: <span class="string">&quot;U00-0&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;U-name0&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;level&quot;</span>: <span class="string">&quot;高级用户&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;point&quot;</span>: <span class="number">245</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;no&quot;</span>: <span class="string">&quot;U00-1&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;U-name1&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;level&quot;</span>: <span class="string">&quot;初级用户&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;point&quot;</span>: <span class="number">238</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;no&quot;</span>: <span class="string">&quot;U00-2&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;U-name2&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;level&quot;</span>: <span class="string">&quot;初级用户&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;point&quot;</span>: <span class="number">240</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <br>
 
@@ -206,23 +206,85 @@
 
 <h2 id="Gitlab安装"><a href="#Gitlab安装" class="headerlink" title="Gitlab安装"></a>Gitlab安装</h2><p>本来想用VPS的，但是从docker启动gitlab之后总是几分钟就会Exit，应该是配置太低了，才512M内存，1核处理器。只能放到虚拟机弄了。</p>
 <p>为了配置方便，用 Docker 安装 Gitlab：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull gitlab/gitlab-ce:latest</span><br><span class="line"></span><br><span class="line">docker run -d  -p 443:443 -p 80:80 -p 222:22 --name gitlab gitlab/gitlab-ce:latest</span><br><span class="line"><span class="meta">#</span><span class="bash"> e176b0d7d3d8775a293701d85029421eebf0ae6d013e79edb791c47df0e8c857</span></span><br><span class="line"></span><br><span class="line">docker ps -a</span><br><span class="line"><span class="meta">#</span><span class="bash"> 状态为 healthy之后就可以用宿主机ip进行访问了，Up 3 minutes (healthy)</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改gitlab地址</span></span><br><span class="line">打开文件 /etc/gitlab/gitlab.rb 文件并找到 </span><br><span class="line"><span class="meta">#</span><span class="bash"> external_url <span class="string">&#x27;GENERATED_EXTERNAL_URL&#x27;</span> 这行，去掉注释，并按照下面的格式修改。</span></span><br><span class="line">external_url &#x27;http://gitlab.chenxii.com&#x27;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 然后执行下面的命令使配置生效</span></span><br><span class="line">sudo docker exec gitlab gitlab-ctl reconfigure</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改完之后仓库的地址：</span></span><br><span class="line">git@gitlab.chenxii.com:gitlab-instance-8190bce8/Monitoring.git</span><br><span class="line">http://gitlab.chenxii.com/gitlab-instance-8190bce8/Monitoring.git</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将代码传到gitlab</span></span><br><span class="line">git remote add origin http://192.168.8.188/root/springboot-demo.git</span><br><span class="line">git push -u origin --all</span><br><span class="line">git push -u origin --tags</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull gitlab/gitlab-ce:latest</span><br><span class="line"></span><br><span class="line">docker run -d  -p 443:443 -p 80:80 -p 222:22 --name gitlab gitlab/gitlab-ce:latest</span><br><span class="line"><span class="meta">#</span><span class="bash"> e176b0d7d3d8775a293701d85029421eebf0ae6d013e79edb791c47df0e8c857</span></span><br><span class="line"></span><br><span class="line">docker ps -a</span><br><span class="line"><span class="meta">#</span><span class="bash"> 状态为 healthy之后就可以用宿主机ip进行访问了，Up 3 minutes (healthy)</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改gitlab地址</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打开文件 /etc/gitlab/gitlab.rb 文件并找到</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> external_url <span class="string">&#x27;GENERATED_EXTERNAL_URL&#x27;</span> 这行，去掉注释，并按照下面的格式修改。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用hosts里配置的域名，git提交会被redirect，最好用ip</span></span><br><span class="line">external_url &#x27;http://gitlab.chenxii.com&#x27; 或者 external_url &#x27;http://192.168.8.188&#x27;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 然后执行下面的命令使配置生效</span></span><br><span class="line">sudo docker exec gitlab gitlab-ctl reconfigure</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改完之后仓库的地址：</span></span><br><span class="line">git@gitlab.chenxii.com:gitlab-instance-8190bce8/Monitoring.git</span><br><span class="line">http://gitlab.chenxii.com/gitlab-instance-8190bce8/Monitoring.git</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将代码传到gitlab</span></span><br><span class="line">git remote add origin http://192.168.8.188/root/springboot-demo.git</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;init repo&quot;</span><br><span class="line">git push -u origin --all</span><br><span class="line">git push -u origin --tags</span><br></pre></td></tr></table></figure>
 
 <p>初次登录需要重设密码，之后可以用root + 新密码登录。</p>
-<p>![image-20210614004633199](/Users/chenxii/Library/Application Support/typora-user-images/image-20210614004633199.png)</p>
+<p><img src="https://images2.imgbox.com/64/6c/RyYwQe13_o.png" alt="image-20210614004633199"></p>
 <br>
 
 <h2 id="Jenkins安装"><a href="#Jenkins安装" class="headerlink" title="Jenkins安装"></a>Jenkins安装</h2><p>使用Docker配置Jenkins</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull jenkins/jenkins:lts</span><br><span class="line"></span><br><span class="line">docker run -d -p 8081:8080 --name jenkins jenkins/jenkins:lts</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用docker logs查看密码</span></span><br><span class="line">docker logs container_id</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker pull jenkins/jenkins:lts</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Jenkins Docker镜像中没有Maven，所以将宿主机的Maven挂载到Docker容器</span></span><br><span class="line">docker run -d -p 8081:8080 --name jenkins \</span><br><span class="line">-v /opt/jdk/jdk1.8.0_181:/usr/lib/jvm/java-1.8-openjdk \</span><br><span class="line">-v /opt/maven/maven-3.5.4:/usr/local/maven3 jenkins/jenkins:lts</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用docker logs查看Jenkins初始化密码</span></span><br><span class="line">docker logs container_id</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>安装推荐插件之后，创建用户进入Jenkins</p>
-<p>![image-20210614012408214](/Users/chenxii/Library/Application Support/typora-user-images/image-20210614012408214.png)</p>
+<p><img src="https://images2.imgbox.com/93/db/JTE2OpS2_o.png" alt="image-20210614012408214"></p>
 <br>
 
 <h2 id="安装Jenkins插件"><a href="#安装Jenkins插件" class="headerlink" title="安装Jenkins插件"></a>安装Jenkins插件</h2><h3 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h3><p>下载地址：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz"> apache-maven-3.8.1-bin.tar.gz</a></p>
 <p>配置：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 因为maven-3.8.1报错，换成了3.5.4版本</span></span><br><span class="line">sudo mv ~/Downloads/apache-maven-3.5.4-bin.tar.gz /opt/maven  </span><br><span class="line">sudo tar -zxvf apache-maven-3.5.4-bin.tar.gz</span><br><span class="line">cd apache-maven-3.5.4</span><br><span class="line">sudo mv apache-maven-3.5.4/opt /maven-3.5.4</span><br><span class="line"></span><br><span class="line">vim ~/.bashrc</span><br><span class="line">export MAVEN_HOME=/opt/maven/maven-3.5.4</span><br><span class="line">export PATH=$PATH:$MAVEN_HOME/bin</span><br></pre></td></tr></table></figure>
 
+<br>
+
+<h2 id="配置Gitlab-Key"><a href="#配置Gitlab-Key" class="headerlink" title="配置Gitlab Key"></a>配置Gitlab Key</h2><h3 id="SSH-Key"><a href="#SSH-Key" class="headerlink" title="SSH Key"></a>SSH Key</h3><p>在 Gitlab 中 SSH Key 页面（<a target="_blank" rel="noopener" href="http://192.168.8.188/-/profile/keys%EF%BC%89%EF%BC%8C%E5%B0%86%E8%87%AA%E5%B7%B1%E6%9C%AC%E5%9C%B0">http://192.168.8.188/-/profile/keys），将自己本地</a> ~/.ssh/id_rsa.pub 内容存进去，这样传代码不需要每次都输入密码。</p>
+<h3 id="Access-Tokens"><a href="#Access-Tokens" class="headerlink" title="Access Tokens"></a>Access Tokens</h3><p>1、给Jenkins安装Publish Over SSH插件</p>
+<p>2、Jenkins需要从Gitlab拉取代码，所以需要为Jenkins配置一个Access Tokens，类似：5nU3oGSxyZXsxHyuwekH，生成之后将其配置到 <strong>系统配置</strong> &gt; <strong>Publish over SSH</strong> &gt; <strong>Key</strong> 保存。</p>
+<br>
+
+<h2 id="Jenkins报错"><a href="#Jenkins报错" class="headerlink" title="Jenkins报错"></a>Jenkins报错</h2><h3 id="mvn命令找不到"><a href="#mvn命令找不到" class="headerlink" title="mvn命令找不到"></a>mvn命令找不到</h3><p>Jenkins报错 mvn 命令找不到，因为 Docker Jenkins里没有Maven。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ mvn clean</span><br><span class="line"></span><br><span class="line">/var/jenkins_home/workspace/springboot-demo_master@tmp/durable-c0a723ef/script.sh: 1: /var/jenkins_home/workspace/springboot-demo_master@tmp/durable-c0a723ef/script.sh: mvn: not found</span><br><span class="line"></span><br><span class="line">script returned exit code 127</span><br></pre></td></tr></table></figure>
+
+<p>配置如下：</p>
+<p>在这里卡了很长时间，最后找到一个解决方案：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43437874/article/details/107087363">Jenkins打包Maven项目找不到mvn解决办法script.sh: line 1: mvn: not found</a></p>
+<p>启动命令中将宿主机上的maven路径挂在到Docker容器的 /usr/local/maven3目录下，然后在 <strong>系统配置</strong> &gt; <strong>全局属性</strong> 下，将MAVEN_HOME追加到环境变量中，然后扫描流水线就可以下载依赖了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># docker run中挂载宿主机maven到docker容器中</span><br><span class="line">-v /opt/maven/maven-3.5.4:/usr/local/maven3 jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>还有一种挂载方式不需要重新运行镜像，直接给容器挂载新的目录：</p>
+<p>修改 /var/run/docker/containerid/容器id/hostconfig.json 和 /var/run/docker/containerid/容器id/config.v2.json</p>
+<p>参见：<a target="_blank" rel="noopener" href="https://blog.51cto.com/hjun169/2440799"><strong>docker给已经启动容器添加挂载目录</strong></a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MAVEN_HOME</td>
+<td>/usr/local/maven3</td>
+</tr>
+<tr>
+<td>PATH+EXTRA</td>
+<td>$MAVEN_HOME/bin</td>
+</tr>
+</tbody></table>
+<p><img src="https://images2.imgbox.com/3b/e8/TdGnBFXO_o.png" alt="image-20210614215244759"></p>
+<p><img src="https://images2.imgbox.com/d3/52/bjcUGUDG_o.png" alt="image-20210614220211651"></p>
+<br>
+
+<h3 id="docker命令找不到"><a href="#docker命令找不到" class="headerlink" title="docker命令找不到"></a>docker命令找不到</h3><p>解决方案：</p>
+<blockquote>
+<p>给启动的Docker容器挂载宿主机的 docker 环境</p>
+<p>参见：<a target="_blank" rel="noopener" href="https://blog.51cto.com/hjun169/2440799">docker给已经启动容器添加挂载目录</a></p>
+</blockquote>
+<br>
+
+<h3 id="var-run-docker-sock-connect-permission-denied"><a href="#var-run-docker-sock-connect-permission-denied" class="headerlink" title="/var/run/docker.sock: connect: permission denied"></a>/var/run/docker.sock: connect: permission denied</h3><p>运行到 docker 构建镜像的时候提示权限不足，/var/run/docker.sock 只有 root 权限才能调用，可以将 jenkins 用户加到 docker 组下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo gpasswd -a jenkins docker</span><br><span class="line">newgrp docker</span><br></pre></td></tr></table></figure>
+
+<p>但是这里docker是挂载了宿主机的docker目录，所以不存在docker组，直接将 /var/run/docker.sock 改成 777 权限：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker exec -u 0 -it 容器id /bin/bash</span><br><span class="line">chmod -R 777 /var/run/docker.sock</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<p>再次构建：</p>
+<p><img src="https://images2.imgbox.com/8d/31/wRrUrFYS_o.png" alt="image-20210614233909378"></p>
+<p><img src="https://images2.imgbox.com/39/35/yfF9ESMJ_o.png" alt="image-20210614234227087"></p>
+<p><img src="https://images2.imgbox.com/f3/7e/jHhCBKRU_o.png" alt="image-20210614234254467"></p>
+<p><img src="https://images2.imgbox.com/fc/de/nCRwYNJE_o.png" alt="image-20210614234453876"></p>
+<p>20次的流水线扫描，上百次 Bing 搜索，终于成功看到了赏心悦目的绿色和接口返回值 🎉</p>
+<br>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实上个月已经做个一个 Jenkins Pipeline 的实践项目，但是上次 Jenkins 和 Gitlab 都是虚拟机安装，没有使用 Docker，所以这次两天的实践基本上是填 Docker 中遇到的坑，端午节假期今天结束了，很庆幸虽然这两天断断续续但还是赶在最后的时间点部署成功了。对 Docker 、 Jenkins 和 Gitlab 这一套技术有了更深的理解。</p>
 
                 <hr>
                 
@@ -252,11 +314,11 @@
                 <div class="toc-wrap">
                     <h3 style="border-left: none; margin-top: 10px;">
                         <!--  
-                            Docker+Jenkins+..
+                            Gitlab+Jenkins+..
                            -->
-                        Docker+Jenkin..
+                        Gitlab+Jenkin..
                     </h3>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%B5%8B%E8%AF%95%E9%A1%B9%E7%9B%AE"><span class="toc-text">搭建测试项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8ADockerhub%E8%B4%A6%E6%88%B7%E6%B3%A8%E5%86%8C"><span class="toc-text">Docker安装以及Dockerhub账户注册</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gitlab%E5%AE%89%E8%A3%85"><span class="toc-text">Gitlab安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jenkins%E5%AE%89%E8%A3%85"><span class="toc-text">Jenkins安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Jenkins%E6%8F%92%E4%BB%B6"><span class="toc-text">安装Jenkins插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#maven"><span class="toc-text">maven</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%B5%8B%E8%AF%95%E9%A1%B9%E7%9B%AE"><span class="toc-text">搭建测试项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8ADockerhub%E8%B4%A6%E6%88%B7%E6%B3%A8%E5%86%8C"><span class="toc-text">Docker安装以及Dockerhub账户注册</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gitlab%E5%AE%89%E8%A3%85"><span class="toc-text">Gitlab安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jenkins%E5%AE%89%E8%A3%85"><span class="toc-text">Jenkins安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Jenkins%E6%8F%92%E4%BB%B6"><span class="toc-text">安装Jenkins插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#maven"><span class="toc-text">maven</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEGitlab-Key"><span class="toc-text">配置Gitlab Key</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-Key"><span class="toc-text">SSH Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Access-Tokens"><span class="toc-text">Access Tokens</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jenkins%E6%8A%A5%E9%94%99"><span class="toc-text">Jenkins报错</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mvn%E5%91%BD%E4%BB%A4%E6%89%BE%E4%B8%8D%E5%88%B0"><span class="toc-text">mvn命令找不到</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker%E5%91%BD%E4%BB%A4%E6%89%BE%E4%B8%8D%E5%88%B0"><span class="toc-text">docker命令找不到</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#var-run-docker-sock-connect-permission-denied"><span class="toc-text">&#x2F;var&#x2F;run&#x2F;docker.sock: connect: permission denied</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -277,8 +339,8 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#SpringBoot"
-                           title="SpringBoot">SpringBoot</a>
+                        <a class="tag" href="/tags/#持续集成"
+                           title="持续集成">持续集成</a>
                         
                     </div>
                 </section>
