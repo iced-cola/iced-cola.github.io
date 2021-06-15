@@ -278,6 +278,34 @@
 
 <div class="post-preview "
      style="background-image: url('/images/th.jpeg')">
+    <a href="/2019/05/12/ajax返回error可能原因分析/">
+        <h2 class="post-title">
+            ajax返回error可能原因分析
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-12
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                ajax总是进入error的可能原因
+后台返回：
+Successfully completed request
+
+前端ajax总是执行error部分的代码。
+原因：
+后台只返回了 “success” 字符串，不是规范的json格式，所以没有执行预期逻辑。
+最好在后台返回 严格规范 的json防止..
+            </p>
+        </div>
+    </a>
+</div>
+
+<hr>
+
+
+<div class="post-preview "
+     style="background-image: url('/images/th.jpeg')">
     <a href="/2019/04/29/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/">
         <h2 class="post-title">
             Spring Boot中使用Swagger2构建强大的RESTful API文档
@@ -464,33 +492,6 @@
 <hr>
 
 
-<div class="post-preview "
-     style="background-image: url('/images/th.jpeg')">
-    <a href="/2019/01/03/LeetCode之3Sum/">
-        <h2 class="post-title">
-            LeetCode之3Sum
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-03
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                题目内容输入一个数组，例如{-1 0 1 2 -1 -4}，从数组中找三个数（a,b,c），使得其和0，输出所有的（a,b,c）组合。
-要求abc不能重复，并且a&lt;=b&lt;=c。
-例：
-S = {-1, 0, 1, 2, -1, -4}；
-输出：
-(-1, 0 ,1)
-(-1, -1,..
-            </p>
-        </div>
-    </a>
-</div>
-
-<hr>
-
-
 
 <!-- 翻页 pager -->
 
@@ -558,18 +559,18 @@ S = {-1, 0, 1, 2, -1, -4}；
                 <div class="tags">
                     
                         
-                        <a href="/Tags/#持续集成" title="持续集成"
-                        rel="1">持续集成</a>
+                        <a href="/Tags/#Element" title="Element"
+                        rel="1">Element</a>
                         
                     
                         
                         <a href="/Tags/#生活" title="生活"
-                        rel="1">生活</a>
+                        rel="2">生活</a>
                         
                     
                         
-                        <a href="/Tags/#Element" title="Element"
-                        rel="1">Element</a>
+                        <a href="/Tags/#持续集成" title="持续集成"
+                        rel="1">持续集成</a>
                         
                     
                         
@@ -598,13 +599,13 @@ S = {-1, 0, 1, 2, -1, -4}；
                         
                     
                         
-                        <a href="/Tags/#Jenkins" title="Jenkins"
-                        rel="1">Jenkins</a>
+                        <a href="/Tags/#LeetCode" title="LeetCode"
+                        rel="7">LeetCode</a>
                         
                     
                         
-                        <a href="/Tags/#LeetCode" title="LeetCode"
-                        rel="7">LeetCode</a>
+                        <a href="/Tags/#Jenkins" title="Jenkins"
+                        rel="1">Jenkins</a>
                         
                     
                         

@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Element的Nav导航高亮</title>
+    <url>/2021/05/13/Element%E7%9A%84Nav%E5%AF%BC%E8%88%AA%E9%AB%98%E4%BA%AE/</url>
+    <content><![CDATA[<p>这两天遇到一个问题：element的Nav菜单点击之后，跳转到相应页面，然后点击之后的菜单要高亮显示。菜单写成了组件。</p>
+<p>研究了好长时间没解决，今天晚上找到一个解决方案，完美的解决了问题！记录一下。</p>
+<p>链接🔗：<a href="https://www.cnblogs.com/liuqin-always/p/11603708.html">vue 中使用element-ui的menu选中项高亮的问题</a></p>
+<span id="more"></span>
+
+<br>
+
+<p>nav组件：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;padding-left: 15px&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-menu</span> <span class="attr">:default-active</span>=<span class="string">&#x27;$route.name&#x27;</span> <span class="attr">class</span>=<span class="string">&quot;el-menu-vertical-demo&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">active-text-color</span>=<span class="string">&quot;#409EFF&quot;</span> <span class="attr">router</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">open</span>=<span class="string">&quot;handleOpen&quot;</span> @<span class="attr">close</span>=<span class="string">&quot;handleClose&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;allQuestions&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Questions<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;tags&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Tags<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;users&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Users<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">el-menu</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>使用:route.name和router，在点击菜单后跳转到相应的页面，其中一个页面：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pane&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-row</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">header1</span>&gt;</span><span class="tag">&lt;/<span class="name">header1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-col</span> <span class="attr">:span</span>=<span class="string">&quot;4&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">side-bar</span> <span class="attr">style</span>=<span class="string">&quot;margin-top: 15px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">side-bar</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">el-row</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> SideBar <span class="keyword">from</span> <span class="string">&#x27;../components/SideBar.vue&#x27;</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">&#x27;../components/Header.vue&#x27;</span></span></span><br><span class="line"><span class="javascript">    <span class="attr">components</span>: &#123;</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;side-bar&#x27;</span>: SideBar,</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;header1&#x27;</span>: Header,</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>路由的配置：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">    routes: [&#123;</span><br><span class="line">            path: &#x27;/users&#x27;,</span><br><span class="line">            name: &#x27;users&#x27;,</span><br><span class="line">            component: User</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>发现这样配置之后会将 index添加到path中，菜单也能高亮显示。</p>
+]]></content>
+      <categories>
+        <category>Element</category>
+      </categories>
+      <tags>
+        <tag>Element</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>25岁的最后一天</title>
+    <url>/2020/09/30/25%E5%B2%81%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/</url>
+    <content><![CDATA[<p>刚才把之前写的内容都整理了一遍，挂的图片能换的都换了，还有些现在看起来很尴尬的内容直接删掉了，折腾一次真累。歇了一下打开日历才发现今天已经是9月30号了。今年很巧的是中秋节和国庆节碰在了一起，在贴吧里看到很多学生还因为假期的问题耿耿于怀，但是对于像我一样的待业青年，好像每一天都是假期，只不过心里不是那么放松。</p>
+<br>
+
+<span id="more"></span>
+
+<p>昨天下午回到空无一人的家里，虽然什么吃的也没有，但是家里的干净舒服的大床倒是让我好好睡了一觉，很久没有睡得这么舒服了。以前总是觉得买房的人很傻，买完房子就要一直住在一个地方，而且还要背负繁重的房贷。但是最近我突然有了很强烈的想买房的愿望，自己的房子才是真正能落脚的地方。现在就想好好工作努力攒钱，希望能在一两年之内有一套自己的房子，不管是在哪个城市，偏远一点也无所谓。</p>
+<br>
+
+<p>昨天晚上联系上了一个住得不远的初中同学，刚好放假她也在家，聊了一会儿通过她介绍了一个房东，希望能找到一个地方安静的待一段时间。</p>
+<br>
+
+<p>25岁今天就要画上句号了，希望26岁能交上好运吧。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Gitlab+Jenkins+Docker自动部署SpringBoot微服务</title>
     <url>/2021/06/13/Docker-Jenkins-Gitlab%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1/</url>
     <content><![CDATA[<blockquote>
@@ -123,63 +180,6 @@
       </categories>
       <tags>
         <tag>持续集成</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>25岁的最后一天</title>
-    <url>/2020/09/30/25%E5%B2%81%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/</url>
-    <content><![CDATA[<p>刚才把之前写的内容都整理了一遍，挂的图片能换的都换了，还有些现在看起来很尴尬的内容直接删掉了，折腾一次真累。歇了一下打开日历才发现今天已经是9月30号了。今年很巧的是中秋节和国庆节碰在了一起，在贴吧里看到很多学生还因为假期的问题耿耿于怀，但是对于像我一样的待业青年，好像每一天都是假期，只不过心里不是那么放松。</p>
-<br>
-
-<span id="more"></span>
-
-<p>昨天下午回到空无一人的家里，虽然什么吃的也没有，但是家里的干净舒服的大床倒是让我好好睡了一觉，很久没有睡得这么舒服了。以前总是觉得买房的人很傻，买完房子就要一直住在一个地方，而且还要背负繁重的房贷。但是最近我突然有了很强烈的想买房的愿望，自己的房子才是真正能落脚的地方。现在就想好好工作努力攒钱，希望能在一两年之内有一套自己的房子，不管是在哪个城市，偏远一点也无所谓。</p>
-<br>
-
-<p>昨天晚上联系上了一个住得不远的初中同学，刚好放假她也在家，聊了一会儿通过她介绍了一个房东，希望能找到一个地方安静的待一段时间。</p>
-<br>
-
-<p>25岁今天就要画上句号了，希望26岁能交上好运吧。</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Element的Nav导航高亮</title>
-    <url>/2021/05/13/Element%E7%9A%84Nav%E5%AF%BC%E8%88%AA%E9%AB%98%E4%BA%AE/</url>
-    <content><![CDATA[<p>这两天遇到一个问题：element的Nav菜单点击之后，跳转到相应页面，然后点击之后的菜单要高亮显示。菜单写成了组件。</p>
-<p>研究了好长时间没解决，今天晚上找到一个解决方案，完美的解决了问题！记录一下。</p>
-<p>链接🔗：<a href="https://www.cnblogs.com/liuqin-always/p/11603708.html">vue 中使用element-ui的menu选中项高亮的问题</a></p>
-<span id="more"></span>
-
-<br>
-
-<p>nav组件：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;padding-left: 15px&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-menu</span> <span class="attr">:default-active</span>=<span class="string">&#x27;$route.name&#x27;</span> <span class="attr">class</span>=<span class="string">&quot;el-menu-vertical-demo&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">active-text-color</span>=<span class="string">&quot;#409EFF&quot;</span> <span class="attr">router</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">open</span>=<span class="string">&quot;handleOpen&quot;</span> @<span class="attr">close</span>=<span class="string">&quot;handleClose&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;allQuestions&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Questions<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;tags&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Tags<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;users&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Users<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">el-menu</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>使用:route.name和router，在点击菜单后跳转到相应的页面，其中一个页面：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pane&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-row</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">header1</span>&gt;</span><span class="tag">&lt;/<span class="name">header1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-col</span> <span class="attr">:span</span>=<span class="string">&quot;4&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">side-bar</span> <span class="attr">style</span>=<span class="string">&quot;margin-top: 15px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">side-bar</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">el-row</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> SideBar <span class="keyword">from</span> <span class="string">&#x27;../components/SideBar.vue&#x27;</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">&#x27;../components/Header.vue&#x27;</span></span></span><br><span class="line"><span class="javascript">    <span class="attr">components</span>: &#123;</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;side-bar&#x27;</span>: SideBar,</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;header1&#x27;</span>: Header,</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>路由的配置：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">    routes: [&#123;</span><br><span class="line">            path: &#x27;/users&#x27;,</span><br><span class="line">            name: &#x27;users&#x27;,</span><br><span class="line">            component: User</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>发现这样配置之后会将 index添加到path中，菜单也能高亮显示。</p>
-]]></content>
-      <categories>
-        <category>Element</category>
-      </categories>
-      <tags>
-        <tag>Element</tag>
       </tags>
   </entry>
   <entry>
@@ -448,6 +448,47 @@
       </tags>
   </entry>
   <entry>
+    <title>Java注解简单例子</title>
+    <url>/2019/05/15/Java%E6%B3%A8%E8%A7%A3%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90/</url>
+    <content><![CDATA[<p>了解Java注解（@Annotation）</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
+</blockquote>
+<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
+<span id="more"></span>
+
+
+
+<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
+<p>四个元注解：</p>
+<ul>
+<li>@Target</li>
+<li>@Retention</li>
+<li>@Document</li>
+<li>Inherited</li>
+</ul>
+<p>注解主要是用户按自己的需求来实现。</p>
+<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>先创建两个注解，@Digits和@NotEmpty，用来注解属性是否满足给定条件。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段只能为数字，且最大长度为maxLength，最大小数位为fraction</span></span><br><span class="line"><span class="comment"> * 默认没有小数位</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Digits &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxLength</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fraction</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段不能为空</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotEmpty &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>定义一个处理类处理自定义注解：（主要利用反射机制）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 处理自定义注解</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationProcesser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Table table)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Class clazz = table.getClass();</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(<span class="string">&quot;class not found!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        String fieldName;</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------------------------&quot;</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Annotation[] annotations = field.getDeclaredAnnotations();</span><br><span class="line">            fieldName = field.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot;--&gt; info: into &quot;</span> + fieldName);</span><br><span class="line">            <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + annotation.annotationType());</span><br><span class="line">                <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Digits) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @Digits annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">int</span> maxLength = ((Digits) annotation).maxLength();</span><br><span class="line">                    <span class="keyword">int</span> annotatedFraction = ((Digits) annotation).fraction();</span><br><span class="line">                    String[] fraction = String.valueOf(table.getCount()).split(<span class="string">&quot;\\.&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (String.valueOf(table.getCount()).length() &gt; maxLength) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: maxLength exceed!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (fraction.length &gt; <span class="number">1</span> &amp;&amp; fraction[<span class="number">1</span>].length() &gt; annotatedFraction) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error：fraction length exceed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> NotEmpty) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @NotEmpty annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">if</span> (table.getDescription() == <span class="keyword">null</span> || <span class="string">&quot;&quot;</span>.equals(table.getDescription())) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: empty is not allowed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>主测试类：（<strong>省略getter和setter</strong>）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits(maxLength = 6, fraction = 2)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">&quot;description1&quot;</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">&quot;description2&quot;</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description3&quot;</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java字节码解析</title>
     <url>/2020/11/18/Java%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a href="https://www.jianshu.com/p/252f381a6bc4">一文让你明白Java字节码</a></p>
@@ -554,47 +595,6 @@
 
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://images2.imgbox.com/b5/62/ZKPXcYOv_o.png"></p>
 <p>to be continued…</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java注解简单例子</title>
-    <url>/2019/05/15/Java%E6%B3%A8%E8%A7%A3%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90/</url>
-    <content><![CDATA[<p>了解Java注解（@Annotation）</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
-</blockquote>
-<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
-<span id="more"></span>
-
-
-
-<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
-<p>四个元注解：</p>
-<ul>
-<li>@Target</li>
-<li>@Retention</li>
-<li>@Document</li>
-<li>Inherited</li>
-</ul>
-<p>注解主要是用户按自己的需求来实现。</p>
-<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>先创建两个注解，@Digits和@NotEmpty，用来注解属性是否满足给定条件。</p>
-<p>代码如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段只能为数字，且最大长度为maxLength，最大小数位为fraction</span></span><br><span class="line"><span class="comment"> * 默认没有小数位</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Digits &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxLength</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fraction</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段不能为空</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotEmpty &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>定义一个处理类处理自定义注解：（主要利用反射机制）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 处理自定义注解</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationProcesser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Table table)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Class clazz = table.getClass();</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(<span class="string">&quot;class not found!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        String fieldName;</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------------------------&quot;</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Annotation[] annotations = field.getDeclaredAnnotations();</span><br><span class="line">            fieldName = field.getName();</span><br><span class="line">            System.out.println(<span class="string">&quot;--&gt; info: into &quot;</span> + fieldName);</span><br><span class="line">            <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + annotation.annotationType());</span><br><span class="line">                <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Digits) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @Digits annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">int</span> maxLength = ((Digits) annotation).maxLength();</span><br><span class="line">                    <span class="keyword">int</span> annotatedFraction = ((Digits) annotation).fraction();</span><br><span class="line">                    String[] fraction = String.valueOf(table.getCount()).split(<span class="string">&quot;\\.&quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (String.valueOf(table.getCount()).length() &gt; maxLength) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: maxLength exceed!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (fraction.length &gt; <span class="number">1</span> &amp;&amp; fraction[<span class="number">1</span>].length() &gt; annotatedFraction) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error：fraction length exceed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> NotEmpty) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--&gt; info: get @NotEmpty annotation on &quot;</span> + fieldName);</span><br><span class="line">                    <span class="keyword">if</span> (table.getDescription() == <span class="keyword">null</span> || <span class="string">&quot;&quot;</span>.equals(table.getDescription())) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; error: empty is not allowed!&quot;</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;--&gt; info: &quot;</span> + fieldName + <span class="string">&quot; validate success!&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>主测试类：（<strong>省略getter和setter</strong>）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits(maxLength = 6, fraction = 2)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">&quot;description1&quot;</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">&quot;description2&quot;</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description3&quot;</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">&quot;description5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>Java</category>
@@ -1115,75 +1115,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Jenkinsfile cd命令不生效的问题</title>
-    <url>/2021/06/05/Jenkinsfile-cd%E5%91%BD%E4%BB%A4%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>今天晚上给前端项目配置Jenkins流水线的时候遇到一个问题：cd 命令不生效，<code>sh 'cd ask_front'</code> 这个语句执行前后 <code>pwd</code> 的输出是一样的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ pwd</span><br><span class="line">/home/jingh527/.jenkins/workspace/try-ask_master</span><br></pre></td></tr></table></figure>
-
-<p>去Jenkins机器上看了上面这个目录结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">try-ask_master</span><br><span class="line">-- ask</span><br><span class="line">-- ask_front</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>Jenkinsfile的定义：</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm uninstall *&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf node_modules&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf package-lock.json&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm cache clean --force&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在执行到 npm 命令相关的地方就开始报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ npm run dev</span><br><span class="line">npm ERR! code ENOENT</span><br><span class="line">npm ERR! syscall open</span><br><span class="line">npm ERR! path /home/jingh527/.jenkins/workspace/try-ask_master/package.json</span><br><span class="line">npm ERR! errno -2</span><br><span class="line">npm ERR! enoent ENOENT: no such file or directory, open &#x27;/home/jingh527/.jenkins/workspace/try-ask_master/package.json&#x27;</span><br><span class="line">npm ERR! enoent This is related to npm not being able to find a file.</span><br><span class="line">npm ERR! enoent </span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /home/node/.npm/_logs/2021-06-04T17_20_39_229Z-debug.log</span><br><span class="line">script returned exit code 254</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在网上找了一会儿资料，看到一个帖子：<a href="https://blog.csdn.net/liumiaocn/article/details/102632742">Jenkins基础：Jenkinsfile注意事项：条件跳转与当前路径</a></p>
-<blockquote>
-<p>cd demo、npm install、npm run build这本是三条命令，强硬地使用&amp;&amp;写在了一起，为什么不能分开使用三个sh ‘’的原因是因为，在具体的实现的时候，显然执行完返回当前目录会恢复为原始状态。这是一个非常容易被忘记的问题。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">stage(&#x27;Build Angular Project&#x27;) &#123; // build angular demo app</span><br><span class="line">    sh &#x27;cd demo &amp;&amp; npm install &amp;&amp; npm run build&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>才反应过来脚本写得有问题，于是改了一下，将多个操作用 &amp;&amp; 连接起来，就部署成功了。</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm uninstall * &amp;&amp; rm -rf node_modules &amp;&amp; rm -rf package-lock.json &amp;&amp; npm cache clean --force &amp;&amp; npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Jenkins</category>
-      </categories>
-      <tags>
-        <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode之3Sum</title>
-    <url>/2019/01/03/LeetCode%E4%B9%8B3Sum/</url>
-    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p>输入一个数组，例如{-1 0 1 2 -1 -4}，从数组中找三个数（a,b,c），使得其和0，输出所有的（a,b,c）组合。</p>
-<p>要求abc不能重复，并且a&lt;=b&lt;=c。</p>
-<p>例：</p>
-<p>S = {-1, 0, 1, 2, -1, -4}；</p>
-<p>输出：</p>
-<p>(-1, 0 ,1)</p>
-<p>(-1, -1, 2)</p>
-<span id="more"></span>
-
-
-
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>一看到题目，不问代码行数，不问时间复杂度，便排出三个循环。。但是循环非常耗时，显然不是题目的本意。想了好长时间没有什么进展。</p>
-<p>先将给定数组排序，然后指定一个数，在数组中找出两个数并且这两个数的和是目标数值的相反数：<a href="http://www.cnblogs.com/xcr1234/p/5285727.html">【LeetCode】3Sum 解题报告</a></p>
-<p>在网上找到了篇比较有新意的文章：[<a href="https://www.cnblogs.com/xcr1234/p/5285727.html">3Sum algorithm - 非常容易理解的实现 （java)</a>] 。</p>
-<hr>
-<p>最后发现维基百科中就有收录：<a href="https://zh.wikipedia.org/zh-hans/3SUM">维基百科—3SUM</a> ，还有更一般的情形 N SUM。</p>
-<figure class="highlight pascal"><table><tr><td class="code"><pre><span class="line">sort(S);</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">0</span> <span class="keyword">to</span> n-<span class="number">3</span> <span class="keyword">do</span></span><br><span class="line">   a = S[i];</span><br><span class="line">   start = i+<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">end</span> = n-<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">while</span> (start &lt; <span class="keyword">end</span>) <span class="keyword">do</span></span><br><span class="line">      b = S[start]</span><br><span class="line">      c = S[<span class="keyword">end</span>];</span><br><span class="line">      <span class="keyword">if</span> (a+b+c == <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         output a, b, c;</span><br><span class="line">         <span class="comment">// Continue search for all triplet combinations summing to zero.</span></span><br><span class="line">          <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (a+b+c &gt; <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         start = start + <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
-<p>伪代码还挺容易理解的。</p>
-<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><p>因为知乎上有人宣称证明了哥德巴赫猜想的原因，这两天还特意了解了下猜想证明的历史，“1+2”、“1+3”之类的证明，虽然一点也没看懂。感觉数学真的很有魅力，严谨清晰的逻辑，精妙完美的结论，自然界中的一切每时每刻都在遵循着其中的规律运行，更加感慨于人类的智慧，都找不到合适的赞美的词了。</p>
-<p>“超越数”、“黄金分割”、“哥德巴赫猜想”、“黎曼猜想”…</p>
-<p>停下思绪，回到现实：<strong>当你理解它的时候你觉得进入了天堂，当你不理解它的时候你仿佛进入了地狱</strong>，看哭了…</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>LeetCode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java面试题</title>
     <url>/2020/10/29/Java%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
     <content><![CDATA[<p>最近在面试中遇到的一些问题，虽然很多都是最最基础的问题，但是很多问题要么是没回答出来要么是说的丢三落四。作为工作两年的我来说，感觉很丢人啊。顺便记下来，给后来人做个参考，最近自己也多花点时间打打基础。题目顺序不分类型和先后。</p>
@@ -1266,6 +1197,75 @@
       </categories>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode之3Sum</title>
+    <url>/2019/01/03/LeetCode%E4%B9%8B3Sum/</url>
+    <content><![CDATA[<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p>输入一个数组，例如{-1 0 1 2 -1 -4}，从数组中找三个数（a,b,c），使得其和0，输出所有的（a,b,c）组合。</p>
+<p>要求abc不能重复，并且a&lt;=b&lt;=c。</p>
+<p>例：</p>
+<p>S = {-1, 0, 1, 2, -1, -4}；</p>
+<p>输出：</p>
+<p>(-1, 0 ,1)</p>
+<p>(-1, -1, 2)</p>
+<span id="more"></span>
+
+
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>一看到题目，不问代码行数，不问时间复杂度，便排出三个循环。。但是循环非常耗时，显然不是题目的本意。想了好长时间没有什么进展。</p>
+<p>先将给定数组排序，然后指定一个数，在数组中找出两个数并且这两个数的和是目标数值的相反数：<a href="http://www.cnblogs.com/xcr1234/p/5285727.html">【LeetCode】3Sum 解题报告</a></p>
+<p>在网上找到了篇比较有新意的文章：[<a href="https://www.cnblogs.com/xcr1234/p/5285727.html">3Sum algorithm - 非常容易理解的实现 （java)</a>] 。</p>
+<hr>
+<p>最后发现维基百科中就有收录：<a href="https://zh.wikipedia.org/zh-hans/3SUM">维基百科—3SUM</a> ，还有更一般的情形 N SUM。</p>
+<figure class="highlight pascal"><table><tr><td class="code"><pre><span class="line">sort(S);</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">0</span> <span class="keyword">to</span> n-<span class="number">3</span> <span class="keyword">do</span></span><br><span class="line">   a = S[i];</span><br><span class="line">   start = i+<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">end</span> = n-<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">while</span> (start &lt; <span class="keyword">end</span>) <span class="keyword">do</span></span><br><span class="line">      b = S[start]</span><br><span class="line">      c = S[<span class="keyword">end</span>];</span><br><span class="line">      <span class="keyword">if</span> (a+b+c == <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         output a, b, c;</span><br><span class="line">         <span class="comment">// Continue search for all triplet combinations summing to zero.</span></span><br><span class="line">          <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (a+b+c &gt; <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         start = start + <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>伪代码还挺容易理解的。</p>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><p>因为知乎上有人宣称证明了哥德巴赫猜想的原因，这两天还特意了解了下猜想证明的历史，“1+2”、“1+3”之类的证明，虽然一点也没看懂。感觉数学真的很有魅力，严谨清晰的逻辑，精妙完美的结论，自然界中的一切每时每刻都在遵循着其中的规律运行，更加感慨于人类的智慧，都找不到合适的赞美的词了。</p>
+<p>“超越数”、“黄金分割”、“哥德巴赫猜想”、“黎曼猜想”…</p>
+<p>停下思绪，回到现实：<strong>当你理解它的时候你觉得进入了天堂，当你不理解它的时候你仿佛进入了地狱</strong>，看哭了…</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jenkinsfile cd命令不生效的问题</title>
+    <url>/2021/06/05/Jenkinsfile-cd%E5%91%BD%E4%BB%A4%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>今天晚上给前端项目配置Jenkins流水线的时候遇到一个问题：cd 命令不生效，<code>sh 'cd ask_front'</code> 这个语句执行前后 <code>pwd</code> 的输出是一样的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ pwd</span><br><span class="line">/home/jingh527/.jenkins/workspace/try-ask_master</span><br></pre></td></tr></table></figure>
+
+<p>去Jenkins机器上看了上面这个目录结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">try-ask_master</span><br><span class="line">-- ask</span><br><span class="line">-- ask_front</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>Jenkinsfile的定义：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm uninstall *&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf node_modules&quot;</span></span><br><span class="line">                sh <span class="string">&quot;rm -rf package-lock.json&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm cache clean --force&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在执行到 npm 命令相关的地方就开始报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+ npm run dev</span><br><span class="line">npm ERR! code ENOENT</span><br><span class="line">npm ERR! syscall open</span><br><span class="line">npm ERR! path /home/jingh527/.jenkins/workspace/try-ask_master/package.json</span><br><span class="line">npm ERR! errno -2</span><br><span class="line">npm ERR! enoent ENOENT: no such file or directory, open &#x27;/home/jingh527/.jenkins/workspace/try-ask_master/package.json&#x27;</span><br><span class="line">npm ERR! enoent This is related to npm not being able to find a file.</span><br><span class="line">npm ERR! enoent </span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /home/node/.npm/_logs/2021-06-04T17_20_39_229Z-debug.log</span><br><span class="line">script returned exit code 254</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在网上找了一会儿资料，看到一个帖子：<a href="https://blog.csdn.net/liumiaocn/article/details/102632742">Jenkins基础：Jenkinsfile注意事项：条件跳转与当前路径</a></p>
+<blockquote>
+<p>cd demo、npm install、npm run build这本是三条命令，强硬地使用&amp;&amp;写在了一起，为什么不能分开使用三个sh ‘’的原因是因为，在具体的实现的时候，显然执行完返回当前目录会恢复为原始状态。这是一个非常容易被忘记的问题。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">stage(&#x27;Build Angular Project&#x27;) &#123; // build angular demo app</span><br><span class="line">    sh &#x27;cd demo &amp;&amp; npm install &amp;&amp; npm run build&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>才反应过来脚本写得有问题，于是改了一下，将多个操作用 &amp;&amp; 连接起来，就部署成功了。</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image <span class="string">&#x27;node:10&#x27;</span></span><br><span class="line">            args <span class="string">&#x27;-itd -p 9001:8080&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage (<span class="string">&quot;编译&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始编译项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;pwd&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm uninstall * &amp;&amp; rm -rf node_modules &amp;&amp; rm -rf package-lock.json &amp;&amp; npm cache clean --force &amp;&amp; npm install&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目编译结束 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage (<span class="string">&quot;部署&quot;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&quot;======== 开始部署项目 ========&quot;</span></span><br><span class="line">                sh <span class="string">&quot;cd ask_front &amp;&amp; npm run dev&quot;</span></span><br><span class="line">                echo <span class="string">&quot;======== 项目成功部署 ========&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -5689,6 +5689,65 @@
       </categories>
       <tags>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>越南子宫国有化计划</title>
+    <url>/2021/06/15/%E8%B6%8A%E5%8D%97%E5%AD%90%E5%AE%AB%E5%9B%BD%E6%9C%89%E5%8C%96%E8%AE%A1%E5%88%92/</url>
+    <content><![CDATA[<p>越南子宫国有化计划（Vietnam Womb Nationalization）</p>
+<blockquote>
+<p>人口（英文:Population）是一个内容复杂、综合多种<a href="https://baike.baidu.com/item/%E7%A4%BE%E4%BC%9A%E5%85%B3%E7%B3%BB/6543215">社会关系</a>的<a href="https://baike.baidu.com/item/%E7%A4%BE%E4%BC%9A%E5%AE%9E%E4%BD%93/841786">社会实体</a>，具有<a href="https://baike.baidu.com/item/%E6%80%A7%E5%88%AB/500566">性别</a>和<a href="https://baike.baidu.com/item/%E5%B9%B4%E9%BE%84/7616972">年龄</a>及自然构成，多种社会构成和社会关系、经济构成和经济关系。是一定数量个人的综合，强调规模。</p>
+<p>人口的出生、死亡、婚配，处于家庭关系、经济关系、<a href="https://baike.baidu.com/item/%E6%94%BF%E6%B2%BB%E5%85%B3%E7%B3%BB/10849899">政治关系</a>及社会关系之中，一切社会活动、社会关系、社会现象和社会问题都同人口发展过程相关。<a href="https://baike.baidu.com/item/%E4%BA%BA%E5%8F%A3/32987"><sup>1</sup></a></p>
+</blockquote>
+<h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><h2 id="世界人口概况"><a href="#世界人口概况" class="headerlink" title="世界人口概况"></a>世界人口概况</h2><p>人口问题越来越引起国际社会的重视。从1954年起，联合国几次召开世界性人口会议。</p>
+<p>世界人口变化：</p>
+<p><img src="https://www.un.org/sites/www.un.org/files/2016/07/28/world-population.jpg" alt="世界人口变化趋势图"></p>
+<p>全球人口中有61%（47亿）生活在亚洲，17%（13亿）生活在非洲，10%（7.5亿）生活在欧洲，8%（6.5亿）生活在拉丁美洲及加勒比（地区），其余5%生活在北美洲（3.7亿）和大洋洲（4300万）。中国（14.4亿）和印度（13.9亿）仍然是世界上两个人口最多的国家，其数量均超过了10亿，分别占世界总人口的19%和18%。</p>
+<p>亚洲将是未来全球人口增长的第二大贡献者，从2015年至2050年，亚洲人口预计将增长9亿人。<a href="https://www.un.org/zh/sections/issues-depth/population/"><sup>2</sup></a></p>
+<br>
+
+<h2 id="越南人口概况"><a href="#越南人口概况" class="headerlink" title="越南人口概况"></a>越南人口概况</h2><p>2019年，越南公开人口和住房普查结果，截至2019年4月1日，越南总人口达96,208,984人，在东南亚地区排名第3位。能在亚洲这样一个人口第一大洲排名第三，可见越南人口问题已经很严重了！</p>
+<h1 id="当下越南人口问题"><a href="#当下越南人口问题" class="headerlink" title="当下越南人口问题"></a>当下越南人口问题</h1><h2 id="社会发展问题"><a href="#社会发展问题" class="headerlink" title="社会发展问题"></a>社会发展问题</h2><p>显而易见：住房难，看病难，读书难。</p>
+<h2 id="环境问题"><a href="#环境问题" class="headerlink" title="环境问题"></a>环境问题</h2><p>越南经济发展水平不高，底层人口太多导致资源消耗多，环境污染严重，如果底层人口能少50%，那越南的鸽子笼能少99.99%，人口对环境的影响之大显而易见。</p>
+<h2 id="越南国家安全问题"><a href="#越南国家安全问题" class="headerlink" title="越南国家安全问题"></a>越南国家安全问题</h2><p>越南底层人口太多，受教育水平低，容易被自由、民主等西方错误思潮所误导。越南禁枪，任何越南个人和组织都不足以威胁越南政府统治，但是会给政府的统治造成一些不必要的工作量。</p>
+<h2 id="人口老龄化问题"><a href="#人口老龄化问题" class="headerlink" title="人口老龄化问题"></a>人口老龄化问题</h2><p>底层人口过多，经济发展水平有限，穷逼生了太多小穷逼，小穷逼长大了变成大穷逼，赚不到钱，养不起老一辈穷逼，不能让他们的穷逼父母住上高端疗养院、请保姆甚至去西方国家养老，出现了养老难问题。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>越南社会问题99%都是穷人的问题，越南网络上广泛讨论的教育医疗和住房，都是穷逼们的问题。简单的反证法，如果100%的人年收入500万，还会有人说现在越南房价贵吗？如果所有人都年收入500万，都有钱去读贵族学校，还会有人抱怨在越南读书难吗？如果所有人年收入500万，所有人都有钱享受特供医疗资源，还会有人抱怨越南看病难吗？答案都是否，所以，解决了穷逼，也就解决了穷逼的问题。那穷逼从哪里来的呢？答案很简单，99%的穷逼来自穷逼，一群大穷逼生下了小穷逼，小穷逼长成了大穷逼，大穷逼又生小穷逼…..因此可以知道：解决穷逼才是所有问题的最终解决方案。</p>
+<h2 id="人口政策"><a href="#人口政策" class="headerlink" title="人口政策"></a>人口政策</h2><p>鉴于当前越南的人口形势，最简单有效的方法就是将子宫收归国有，将生育权从越南底层人手中收回到政府，由越南国家权力机关来统一分配婴儿的生育。按照可支配年收入来决定可生育婴儿数量。越南经济这些年已经取得了很大进步，赶英超美也是分分钟的事了，因此参照越南当前的经济水平，做以下规定：</p>
+<table>
+<thead>
+<tr>
+<th>年收入（越南盾）</th>
+<th>可生育婴儿数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0-40</td>
+<td>0</td>
+</tr>
+<tr>
+<td>40-70</td>
+<td>1</td>
+</tr>
+<tr>
+<td>70-100</td>
+<td>2</td>
+</tr>
+<tr>
+<td>100及以上</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<h2 id="政策影响"><a href="#政策影响" class="headerlink" title="政策影响"></a>政策影响</h2><p>如果上述政策得以实施，越南所有新生婴儿都会出生在一个经济水平在平均线上的家庭，可以彻底解决当下很多小孩营养不良、不能上贵族学校甚至没钱治病之类的低级问题。另外，由于生育门槛的设立，很多家庭不会再有孩子，全国新生婴儿数量将很下滑，很多公立幼儿园、小学、中学甚至很多大专院校都可以撤销，越南政府每年从教育投资中节省出的开支是相当可观的，这部分钱用于提高非洲留学生的奖学金和住宿条件，如此一来，愿意来越南的留学生人数将逐渐增加，越南在非洲国家中的声望将迅速提高，越南将得到更多的国际话语权 🇻🇳，因此，这个政策对越南是何等有利，任何一个反对此政策的越南人都将是不爱国的人，不爱国的人应该得到应有的惩罚，游街示众、入刑，要鼓励亲人朋友之间的互相检举。</p>
+<h2 id="法理依据和严格执法"><a href="#法理依据和严格执法" class="headerlink" title="法理依据和严格执法"></a>法理依据和严格执法</h2><p>越南经过这几年的发展，早已经是文明国家、法治国家 ，一切政策都要有法律依据。很多穷人肯定是不愿意轻易放弃生育权力的，越穷越生是一种落后的传统观念，很多受教育水平不高的群众肯定不理解国家的政策。为了能让政策更好的落地，势必要出台相应的法律，越南人大可以出台一部法律《越南生育法》，对生育权力作出明确的规定，以及对违反规定的人，做出相应的处罚，比如年可支配收入低于40万越南盾，生育一孩的男性和女性死刑、违反规定出生的孩子一律流产，包括已出生的，其他的可以依次类推。如有逃逸的，可以参考上世纪计划生育实行连坐，“联户”制度值得参考，如有成员违反的，全员无期或者死刑。</p>
+<p>严格的执行下去，保证政策的效果和预期一致。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><a href="https://www.un.org/zh/index.html">健康地球上的和平、尊严与平等</a></p>
+<p>从子宫里彻底消灭穷逼，创造一个只有富人的越南！</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
       </tags>
   </entry>
 </search>
