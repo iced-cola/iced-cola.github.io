@@ -190,7 +190,7 @@
 <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">proxyTable: &#123;</span><br><span class="line">    proxy: &#123;</span><br><span class="line">        &#x27;/&#x27;: &#123;</span><br><span class="line">            target: &#x27;http:<span class="comment">//localhost:8081/&#x27;,</span></span><br><span class="line">            changeOrigin: <span class="literal">true</span>,</span><br><span class="line">            pathRewrite: &#123;</span><br><span class="line">                &#x27;^/&#x27;: &#x27;&#x27;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>后台地址是：localhost:8081，浏览器直接访问后台地址能正常返回数据。但是通过axios访问却一直报404错误。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">sendAction</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">	<span class="built_in">this</span>.$axios.get(<span class="string">&#x27;/name&#x27;</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;res: &#x27;</span>, res)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">sendAction</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">	<span class="built_in">this</span>.$axios.get(<span class="string">&#x27;/name&#x27;</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">	    <span class="built_in">console</span>.log(<span class="string">&#x27;res: &#x27;</span>, res)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <br>
 
@@ -201,6 +201,7 @@
 <li>配置完跨域代理之后，一定要重启项目，<code>npm run ddev</code> ;</li>
 <li>确保配置没问题，并且请求中的URL在被代理正则替换之后是浏览器能正常访问返回数据的正确地址；</li>
 <li>代理插件可能有缓存，删除 node_modules 之后，重新 <code>npm install</code> ， <code>npm run dev</code> ；</li>
+<li>更换前端项目端口然后重启；</li>
 <li>检查是否搭了梯子，代理可能会受到影响；</li>
 <li>为 axios 配置 baseUrl …</li>
 </ul>
