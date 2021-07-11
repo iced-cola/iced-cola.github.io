@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="个人博客">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="alternate" type="application/atom+xml" title="Chenxii" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        在MacOS下编译OpenJDK12｜Chenxii&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://iced-cola.github.io/2021/07/11/在MacOS下编译OpenJDK12/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<style>
+    header.intro-header {
+        background-image: url('/images/th.jpeg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Chenxii
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/Tags/">Tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="/images/th.jpeg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('/images/th.jpeg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>在MacOS下编译OpenJDK12</h1>
+                    
+                    <span class="meta">
+                         作者 Chenxii
+                        <span>
+                          日期 2021-07-11
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Java"
+                           title="Java">Java</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            在MacOS下编译OpenJDK12
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <blockquote>
+<p>学了这么久的Java，学习基本还停留在怎么使用API上。知道集合怎么用、字符串有什么现成的处理方法，却不知道API实现背后的底层逻辑，于是有了想深入学习的想法。一个月之前就打算开始学习《深入理解Java虚拟机》这本书，可是第一章的编译JDK就遇到问题了。花了一天半的时间，在Linux、Windows，MacOS 3 个平台上分别进行了尝试，将遇到的问题及解决方法记录一下。</p>
+<p>上周末在 Ubuntu18.04 的虚拟机上编译了一下，解决了几个常见问题之后成功编译，但是在Windows和MacOS上貌似要难一些。</p>
+</blockquote>
+<!--readmore-->
+
+<h1 id="在-MacOS10-15下编译-OpenJDK8"><a href="#在-MacOS10-15下编译-OpenJDK8" class="headerlink" title="在 MacOS10/15下编译 OpenJDK8"></a>在 MacOS10/15下编译 OpenJDK8</h1><p>这个版本的OpenJDK在Ubuntu18.04上编译成功，在MacOS10.15上虽然编译通过，但是使用的时候报错，原因未知：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; build/macosx-x86_64-normal-server-release/jdk/bin/java -version</span><br><span class="line">&gt;&gt; bash[1]    90140 bus error  build/macosx-x86_64-normal-server-release/jdk/bin/java -version</span><br></pre></td></tr></table></figure>
+
+<h2 id="源码获取"><a href="#源码获取" class="headerlink" title="源码获取"></a>源码获取</h2><p>在openjdk官网上的下载链接有错误，点击之后跳转到错误提示页面，正确的下载地址为：<a target="_blank" rel="noopener" href="https://download.java.net/openjdk/openjdk/jdk8/promoted/b132/openjdk-8-src-b132-03_mar_2014.zip">下载OpenJDK8源码</a></p>
+<p>2、下载之后解压到本地并将目录下所有文件权限改为777</p>
+<p>3、安装必要的库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install freetype</span><br><span class="line">brew install ccache</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="configure及错误解决"><a href="#configure及错误解决" class="headerlink" title="configure及错误解决"></a>configure及错误解决</h2><p>新建一个文件 init_env.sh，初始化环境变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 设定语言选项，必须设置</span><br><span class="line">export LANG=C</span><br><span class="line"># Mac平台，C编译器不再是GCC，是clang</span><br><span class="line">export CC=gcc</span><br><span class="line"># 跳过clang的一些严格的语法检查，不然会将N多的警告作为Error</span><br><span class="line">export COMPILER_WARNINGS_FATAL=false</span><br><span class="line"># 链接时使用的参数</span><br><span class="line">export LFLAGS=&#x27;-Xlinker -lstdc++&#x27;</span><br><span class="line"># 是否使用clang</span><br><span class="line">export USE_CLANG=true</span><br><span class="line"># 使用64位数据模型</span><br><span class="line">export LP64=1</span><br><span class="line"># 告诉编译平台是64位，不然会按32位来编译</span><br><span class="line">export ARCH_DATA_MODEL=64</span><br><span class="line"># 允许自动下载依赖</span><br><span class="line">export ALLOW_DOWNLOADS=true</span><br><span class="line"># 并行编译的线程数，编译时间长，为了不影响其他工作，我选择为2</span><br><span class="line">export HOTSPOT_BUILD_JOBS=2</span><br><span class="line"># 是否跳过与先前版本的比较</span><br><span class="line">export SKIP_COMPARE_IMAGES=true</span><br><span class="line"># 是否使用预编译头文件，加快编译速度</span><br><span class="line">export USE_PRECOMPILED_HEADER=true</span><br><span class="line"># 是否使用增量编译</span><br><span class="line">export INCREMENTAL_BUILD=true</span><br><span class="line"># 编译内容</span><br><span class="line">export BUILD_LANGTOOLS=true</span><br><span class="line">export BUILD_JAXP=false</span><br><span class="line">export BUILD_JAXWS=false</span><br><span class="line">export BUILD_CORBA=false</span><br><span class="line">export BUILD_HOTSPOT=true</span><br><span class="line">export BUILD_JDK=true</span><br><span class="line"># 编译版本</span><br><span class="line">export SKIP_DEBUG_BUILD=true</span><br><span class="line">export SKIP_FASTDEBUG_BUILD=false</span><br><span class="line">export DEBUG_NAME=debug</span><br><span class="line"># 避开javaws和浏览器Java插件之类的部分的build</span><br><span class="line">export BUILD_DEPLOY=false</span><br><span class="line">export BUILD_INSTALL=false</span><br><span class="line"># 加上产生调试信息时需要的 objcopy</span><br><span class="line">export OBJCOPY=gobjcopy</span><br></pre></td></tr></table></figure>
+
+<p>执行 <code>source init_env.sh</code></p>
+<p>执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure --with-freetype-include=/usr/<span class="built_in">local</span>/include/freetype2 --with-freetype-lib=/usr/<span class="built_in">local</span>/lib/</span><br></pre></td></tr></table></figure>
+
+<p>需要等待一段时间。</p>
+<p>1、报错：The C compiler (located as /usr/bin/gcc) does not seem to be the required GCC compiler.</p>
+<blockquote>
+<p>打开文件common/autoconf/generated-configure.sh，搜索compiler is required<br>找到该行之后，将其注释掉。</p>
+</blockquote>
+<p>如果还有其他问题的话，多搜一搜，网上基本能找到答案。</p>
+<h2 id="make及报错解决"><a href="#make及报错解决" class="headerlink" title="make及报错解决"></a>make及报错解决</h2><p>1、执行make</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make all</span><br></pre></td></tr></table></figure>
+
+<p>2、/bin/sh: line 0: cd: /Users/chenxii/Documents/Java/jdk8/jdk8/langtools/make: No such file or directory</p>
+<blockquote>
+<p>参见：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34703703/jdk8-build-error-langtools">https://stackoverflow.com/questions/34703703/jdk8-build-error-langtools</a><br>执行 ./get_source.sh 获取源码</p>
+</blockquote>
+<p>3、lcm.cpp:52:35: error: ordered comparison between pointer and zero (‘address’ (aka ‘unsigned char *’) and ‘int’)</p>
+<blockquote>
+<p>编辑/hotspot/src/share/vm/opto/lcm.cpp:52</p>
+<p>原：if (Universe::narrow_oop_base() &gt; 0) </p>
+<p>修改后： if (Universe::narrow_oop_base() != NULL)</p>
+</blockquote>
+<p>4、runtime/virtualspace.cpp, error: ordered comparison between pointer and zero</p>
+<blockquote>
+<p>修改openjdk/hotspot/src/share/vm/runtime/virtualspace.cpp<br>修改331行为if (base() != 0) {</p>
+</blockquote>
+<p>5、fatal error: ‘JavaNativeFoundation/JavaNativeFoundation.h’ file not found</p>
+<p>先查找JavaNativeFoundation.h文件位置，然后替换：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; sudo find / -name <span class="string">&quot;*JavaNativeFoundation.h*&quot;</span></span><br><span class="line">&gt;&gt; Password: </span><br><span class="line">&gt;&gt; find: /Library/Application Support/com.apple.TCC: Operation not permitted</span><br><span class="line">/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/JavaNativeFoundation.framework/Versions/A/Headers/JavaNativeFoundation.h</span><br><span class="line">/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaNativeFoundation.framework/Versions/A/Headers/JavaNativeFoundation.h</span><br></pre></td></tr></table></figure>
+
+<p>编辑：vim hotspot/make/bsd/makefiles/saproc.make 61行：<br>SALIBS = -g -framework Foundation -F/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/JavaVM.framework/Frameworks -framework JavaNativeFoundation -framework Security -framework CoreFoundation</p>
+<p>105行：<br>-I/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/JavaVM.framework/Headers</p>
+<p>同样的问题可能还会再其他文件中出现：</p>
+<p>同样替换 jdk/make/lib/PlatformLibraries.gmk 和 jdk/make/lib/Awt2dLibraries.gmk 文件中的路径。</p>
+<br>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>解决完上述错误后，编译成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">----- Build times -------</span><br><span class="line">Start 2021-07-11 10:50:45</span><br><span class="line">End   2021-07-11 10:59:52</span><br><span class="line">00:00:16 corba</span><br><span class="line">00:00:50 demos</span><br><span class="line">00:01:24 docs</span><br><span class="line">00:02:10 hotspot</span><br><span class="line">00:01:01 images</span><br><span class="line">00:00:09 jaxp</span><br><span class="line">00:00:14 jaxws</span><br><span class="line">00:02:35 jdk</span><br><span class="line">00:00:18 langtools</span><br><span class="line">00:00:08 nashorn</span><br><span class="line">00:09:07 TOTAL</span><br><span class="line">-------------------------</span><br><span class="line">Finished building OpenJDK for target &#x27;all&#x27;</span><br><span class="line"></span><br><span class="line">WARNING: You have the following ALT_ variables set:</span><br><span class="line">ALT_PARALLEL_COMPILE_JOBS=2</span><br><span class="line">ALT_ variables are deprecated and will be ignored. Please clean your environment.</span><br></pre></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; build/macosx-x86_64-normal-server-release/jdk/bin/java -version</span><br><span class="line">&gt;&gt; [1]    90140 bus error  build/macosx-x86_64-normal-server-release/jdk/bin/java -version</span><br></pre></td></tr></table></figure>
+
+<p>测试直接报错，这个错误在网上查了好像没什么人遇到这个问题，无法解决。</p>
+<br>
+
+<h1 id="在-MacOS10-15-上编译OpenJDK12"><a href="#在-MacOS10-15-上编译OpenJDK12" class="headerlink" title="在 MacOS10.15 上编译OpenJDK12"></a>在 MacOS10.15 上编译OpenJDK12</h1><p>在MacOS下编译8版本测试报错之后，想着去Windows系统下编译也可以的，反正Windows平台配置高一点，调试学习起来可能也更容易一些。搞了三四个小时，卡在了 configure 识别不出已安装的 Visual Studio2013，想换2010版本还找不到安装包，于是放弃了。</p>
+<p>看到有人说，越新的版本越容易通过。刚好我机器上装了 jdk11，所以就尝试了编译 jdk12。</p>
+<h2 id="源码获取-amp-环境准备"><a href="#源码获取-amp-环境准备" class="headerlink" title="源码获取&amp;环境准备"></a>源码获取&amp;环境准备</h2><p>1、从官方库获取会非常慢，建议从github获取，速度会快很多。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; git <span class="built_in">clone</span> https://github.com/openjdk/jdk12u.git openjdk12u</span><br></pre></td></tr></table></figure>
+
+<p>2、安装和配置Java11</p>
+<p>3、安装必要软件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">xcode-select --install</span><br><span class="line">brew install ccache</span><br><span class="line">brew install freetype</span><br><span class="line">brew install autoconf</span><br><span class="line">chmod -R 777 openjdk12u</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h2><p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; ./configure</span><br></pre></td></tr></table></figure>
+
+<p>应该是之前编译 8 版本的时候解决了很多环境问题，这里就报了一个错：</p>
+<p>…/test/hotspot/gtest/classfile/test_symbolTable.cpp:62:6: error: explicitly assigning value of variable of type ‘TempNewSymbol’ to itself [-Werror,-Wself-assign-overloaded].</p>
+<blockquote>
+<p>找到该文件，将第 62 行直接注释掉。</p>
+</blockquote>
+<br>
+
+<h2 id="make-images"><a href="#make-images" class="headerlink" title="make images"></a>make images</h2><p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; make images</span><br></pre></td></tr></table></figure>
+
+<p>这里也很顺利，没有报错直接一次编译成功。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Note: Recompile with -Xlint:unchecked for details.</span><br><span class="line">Creating support/demos/image/jfc/CodePointIM/CodePointIM.jar</span><br><span class="line">Creating support/demos/image/jfc/FileChooserDemo/FileChooserDemo.jar</span><br><span class="line">Creating support/demos/image/jfc/SwingSet2/SwingSet2.jar</span><br><span class="line">Creating support/demos/image/jfc/J2Ddemo/J2Ddemo.jar</span><br><span class="line">Creating support/demos/image/jfc/Font2DTest/Font2DTest.jar</span><br><span class="line">Creating support/demos/image/jfc/Metalworks/Metalworks.jar</span><br><span class="line">Creating support/demos/image/jfc/Notepad/Notepad.jar</span><br><span class="line">Creating support/demos/image/jfc/Stylepad/Stylepad.jar</span><br><span class="line">Creating support/demos/image/jfc/SampleTree/SampleTree.jar</span><br><span class="line">Creating support/demos/image/jfc/TableExample/TableExample.jar</span><br><span class="line">Creating support/demos/image/jfc/TransparentRuler/TransparentRuler.jar</span><br><span class="line">Creating jdk image</span><br><span class="line">Creating CDS archive for jdk image</span><br><span class="line">Stopping sjavac server</span><br><span class="line">Finished building target &#x27;images&#x27; in configuration &#x27;macosx-x86_64-server-release&#x27;</span><br><span class="line">(base)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>测试：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; build/macosx-x86_64-server-release/jdk/bin/java -version</span><br><span class="line">openjdk version <span class="string">&quot;12.0.2-internal&quot;</span> 2019-07-16</span><br><span class="line">OpenJDK Runtime Environment (build 12.0.2-internal+0-adhoc.chenxii.openjdk12u)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 12.0.2-internal+0-adhoc.chenxii.openjdk12u, mixed mode)</span><br><span class="line">(base)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="导入-Clion"><a href="#导入-Clion" class="headerlink" title="导入 Clion"></a>导入 Clion</h2><p>安装 Clion，然后直接从先有代码创建新项目，选择 src 目录导入即可，参考：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1584598">JVM | Clion导入OpenJDK11源码并调试</a></p>
+<br>
+
+<h2 id="一点感想"><a href="#一点感想" class="headerlink" title="一点感想"></a>一点感想</h2><p>上个周末就想完成的事情，可是上周末加了两天班。这周末花了两天时间，不停的查各种资料，最终换了个版本算是达成目标。不过这还只是学习这本书的序章而已，真正的挑战才刚刚开始！</p>
+<br>
+
+<p>参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://codertang.com/2019/11/11/build-jdk8/">MacOS 下编译 OpenJDK8</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiao_cai_ming/article/details/109820102">mac下编译JDK12</a></li>
+</ul>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/06/22/记Vue-proxyTable跨域代理配置失效问题/" data-toggle="tooltip" data-placement="top"
+                           title="记Vue-proxyTable跨域代理配置失效问题">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <h3 style="border-left: none; margin-top: 10px;">
+                        <!--  
+                            在MacOS下编译OpenJD..
+                           -->
+                        在MacOS下编译Open..
+                    </h3>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8-MacOS10-15%E4%B8%8B%E7%BC%96%E8%AF%91-OpenJDK8"><span class="toc-text">在 MacOS10&#x2F;15下编译 OpenJDK8</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E8%8E%B7%E5%8F%96"><span class="toc-text">源码获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#configure%E5%8F%8A%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3"><span class="toc-text">configure及错误解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#make%E5%8F%8A%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3"><span class="toc-text">make及报错解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8-MacOS10-15-%E4%B8%8A%E7%BC%96%E8%AF%91OpenJDK12"><span class="toc-text">在 MacOS10.15 上编译OpenJDK12</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E8%8E%B7%E5%8F%96-amp-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">源码获取&amp;环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#configure"><span class="toc-text">configure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#make-images"><span class="toc-text">make images</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5-Clion"><span class="toc-text">导入 Clion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%82%B9%E6%84%9F%E6%83%B3"><span class="toc-text">一点感想</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                <!-- 
+                <section>
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Java"
+                           title="Java">Java</a>
+                        
+                    </div>
+                </section>
+                 -->
+
+                <!-- Friends Blog -->
+                <!-- 
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Kaijun&#39;s Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                        <li><a target="_blank" rel="noopener" href="https://baidu.com">Hux Blog</a></li>
+                        
+                    </ul>
+                </div>
+                 -->
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Chenxii 2018-2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Themed by <a target="_blank" rel="noopener" href="https://github.com/chenxii81/hexo-theme-anisina">Chenxii81</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://iced-cola.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>

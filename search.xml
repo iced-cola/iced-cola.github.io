@@ -1,63 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>25岁的最后一天</title>
-    <url>/2020/09/30/25%E5%B2%81%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/</url>
-    <content><![CDATA[<p>刚才把之前写的内容都整理了一遍，挂的图片能换的都换了，还有些现在看起来很尴尬的内容直接删掉了，折腾一次真累。歇了一下打开日历才发现今天已经是9月30号了。今年很巧的是中秋节和国庆节碰在了一起，在贴吧里看到很多学生还因为假期的问题耿耿于怀，但是对于像我一样的待业青年，好像每一天都是假期，只不过心里不是那么放松。</p>
-<br>
-
-<span id="more"></span>
-
-<p>昨天下午回到空无一人的家里，虽然什么吃的也没有，但是家里的干净舒服的大床倒是让我好好睡了一觉，很久没有睡得这么舒服了。以前总是觉得买房的人很傻，买完房子就要一直住在一个地方，而且还要背负繁重的房贷。但是最近我突然有了很强烈的想买房的愿望，自己的房子才是真正能落脚的地方。现在就想好好工作努力攒钱，希望能在一两年之内有一套自己的房子，不管是在哪个城市，偏远一点也无所谓。</p>
-<br>
-
-<p>昨天晚上联系上了一个住得不远的初中同学，刚好放假她也在家，聊了一会儿通过她介绍了一个房东，希望能找到一个地方安静的待一段时间。</p>
-<br>
-
-<p>25岁今天就要画上句号了，希望26岁能交上好运吧。</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Element的Nav导航高亮</title>
-    <url>/2021/05/13/Element%E7%9A%84Nav%E5%AF%BC%E8%88%AA%E9%AB%98%E4%BA%AE/</url>
-    <content><![CDATA[<p>这两天遇到一个问题：element的Nav菜单点击之后，跳转到相应页面，然后点击之后的菜单要高亮显示。菜单写成了组件。</p>
-<p>研究了好长时间没解决，今天晚上找到一个解决方案，完美的解决了问题！记录一下。</p>
-<p>链接🔗：<a href="https://www.cnblogs.com/liuqin-always/p/11603708.html">vue 中使用element-ui的menu选中项高亮的问题</a></p>
-<span id="more"></span>
-
-<br>
-
-<p>nav组件：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;padding-left: 15px&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-menu</span> <span class="attr">:default-active</span>=<span class="string">&#x27;$route.name&#x27;</span> <span class="attr">class</span>=<span class="string">&quot;el-menu-vertical-demo&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">active-text-color</span>=<span class="string">&quot;#409EFF&quot;</span> <span class="attr">router</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">open</span>=<span class="string">&quot;handleOpen&quot;</span> @<span class="attr">close</span>=<span class="string">&quot;handleClose&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;allQuestions&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Questions<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;tags&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Tags<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;users&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Users<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">el-menu</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>使用:route.name和router，在点击菜单后跳转到相应的页面，其中一个页面：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pane&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-row</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">header1</span>&gt;</span><span class="tag">&lt;/<span class="name">header1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-col</span> <span class="attr">:span</span>=<span class="string">&quot;4&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">side-bar</span> <span class="attr">style</span>=<span class="string">&quot;margin-top: 15px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">side-bar</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">el-row</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> SideBar <span class="keyword">from</span> <span class="string">&#x27;../components/SideBar.vue&#x27;</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">&#x27;../components/Header.vue&#x27;</span></span></span><br><span class="line"><span class="javascript">    <span class="attr">components</span>: &#123;</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;side-bar&#x27;</span>: SideBar,</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;header1&#x27;</span>: Header,</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>路由的配置：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">    routes: [&#123;</span><br><span class="line">            path: &#x27;/users&#x27;,</span><br><span class="line">            name: &#x27;users&#x27;,</span><br><span class="line">            component: User</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>发现这样配置之后会将 index添加到path中，菜单也能高亮显示。</p>
-]]></content>
-      <categories>
-        <category>Element</category>
-      </categories>
-      <tags>
-        <tag>Element</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Gitlab+Jenkins+Docker自动部署SpringBoot微服务</title>
     <url>/2021/06/13/Docker-Jenkins-Gitlab%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1/</url>
     <content><![CDATA[<blockquote>
@@ -183,6 +126,63 @@
       </tags>
   </entry>
   <entry>
+    <title>25岁的最后一天</title>
+    <url>/2020/09/30/25%E5%B2%81%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/</url>
+    <content><![CDATA[<p>刚才把之前写的内容都整理了一遍，挂的图片能换的都换了，还有些现在看起来很尴尬的内容直接删掉了，折腾一次真累。歇了一下打开日历才发现今天已经是9月30号了。今年很巧的是中秋节和国庆节碰在了一起，在贴吧里看到很多学生还因为假期的问题耿耿于怀，但是对于像我一样的待业青年，好像每一天都是假期，只不过心里不是那么放松。</p>
+<br>
+
+<span id="more"></span>
+
+<p>昨天下午回到空无一人的家里，虽然什么吃的也没有，但是家里的干净舒服的大床倒是让我好好睡了一觉，很久没有睡得这么舒服了。以前总是觉得买房的人很傻，买完房子就要一直住在一个地方，而且还要背负繁重的房贷。但是最近我突然有了很强烈的想买房的愿望，自己的房子才是真正能落脚的地方。现在就想好好工作努力攒钱，希望能在一两年之内有一套自己的房子，不管是在哪个城市，偏远一点也无所谓。</p>
+<br>
+
+<p>昨天晚上联系上了一个住得不远的初中同学，刚好放假她也在家，聊了一会儿通过她介绍了一个房东，希望能找到一个地方安静的待一段时间。</p>
+<br>
+
+<p>25岁今天就要画上句号了，希望26岁能交上好运吧。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Element的Nav导航高亮</title>
+    <url>/2021/05/13/Element%E7%9A%84Nav%E5%AF%BC%E8%88%AA%E9%AB%98%E4%BA%AE/</url>
+    <content><![CDATA[<p>这两天遇到一个问题：element的Nav菜单点击之后，跳转到相应页面，然后点击之后的菜单要高亮显示。菜单写成了组件。</p>
+<p>研究了好长时间没解决，今天晚上找到一个解决方案，完美的解决了问题！记录一下。</p>
+<p>链接🔗：<a href="https://www.cnblogs.com/liuqin-always/p/11603708.html">vue 中使用element-ui的menu选中项高亮的问题</a></p>
+<span id="more"></span>
+
+<br>
+
+<p>nav组件：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;padding-left: 15px&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-menu</span> <span class="attr">:default-active</span>=<span class="string">&#x27;$route.name&#x27;</span> <span class="attr">class</span>=<span class="string">&quot;el-menu-vertical-demo&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">active-text-color</span>=<span class="string">&quot;#409EFF&quot;</span> <span class="attr">router</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">open</span>=<span class="string">&quot;handleOpen&quot;</span> @<span class="attr">close</span>=<span class="string">&quot;handleClose&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;/&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;allQuestions&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Questions<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;tags&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Tags<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">index</span>=<span class="string">&quot;users&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>Users<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">el-menu</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>使用:route.name和router，在点击菜单后跳转到相应的页面，其中一个页面：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pane&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-row</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">header1</span>&gt;</span><span class="tag">&lt;/<span class="name">header1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">el-col</span> <span class="attr">:span</span>=<span class="string">&quot;4&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">side-bar</span> <span class="attr">style</span>=<span class="string">&quot;margin-top: 15px&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">side-bar</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">el-row</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> SideBar <span class="keyword">from</span> <span class="string">&#x27;../components/SideBar.vue&#x27;</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">&#x27;../components/Header.vue&#x27;</span></span></span><br><span class="line"><span class="javascript">    <span class="attr">components</span>: &#123;</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;side-bar&#x27;</span>: SideBar,</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;header1&#x27;</span>: Header,</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>路由的配置：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">    routes: [&#123;</span><br><span class="line">            path: &#x27;/users&#x27;,</span><br><span class="line">            name: &#x27;users&#x27;,</span><br><span class="line">            component: User</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>发现这样配置之后会将 index添加到path中，菜单也能高亮显示。</p>
+]]></content>
+      <categories>
+        <category>Element</category>
+      </categories>
+      <tags>
+        <tag>Element</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git配置代理</title>
     <url>/2019/04/06/Git%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
     <content><![CDATA[<p>git的代理配置</p>
@@ -212,6 +212,41 @@
       </categories>
       <tags>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo博客同时部署到github和coding并设置双线解析</title>
+    <url>/2018/11/19/Hexo%E5%8D%9A%E5%AE%A2%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%88%B0github%E5%92%8Ccoding%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%8F%8C%E7%BA%BF%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>因为github服务器禁止了百度爬虫，所以不能百度收录不了站点，导致访问量很低，本来不想折腾的，想了一下还是将博客也部署到了coding上，方便百度的收录。</p>
+<span id="more"></span>
+
+
+
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><ol>
+<li><p>在coding上创建一个名为 <strong>用户名</strong> (不是昵称)的项目，并开启pages服务；</p>
+</li>
+<li><p>将本地ssh公钥文件添加到coding的SSH公钥中并测试是否能访问：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -T -p 443 git@git-ssh.coding.net</span><br></pre></td></tr></table></figure></li>
+<li><p>在站点配置文件中添加上coding仓库地址：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:Kotobuki-Tsumugi/Kotobuki-Tsumugi.github.io.git</span></span><br><span class="line">    <span class="attr">coding:</span> <span class="string">git@git.dev.tencent.com:Kobobuki-Tsumugi/Kobobuki-Tsumugi.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在站点目录/source下创建一个名为Staticfile的空文件；</p>
+</li>
+<li><p>生成并上传静态文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+<li><p>在域名解析中新增两条CNAME记录，指向username.coding.me，注意区分境外线路和默认线路，指向coding的必须为默认线路，如果不能正常访问，可以先暂停github的解析，待coding的解析成功后再开启github的解析，解析反应不及时。</p>
+</li>
+<li><p>向百度提交站点sitemap文件地址。</p>
+</li>
+</ol>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>其中也遇到一些玄学的问题：</p>
+<p><img src="https://images2.imgbox.com/0e/48/c6Y1zWYh_o.png" alt="coding提示域名绑定异常"></p>
+<p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com/">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com/">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
+]]></content>
+      <categories>
+        <category>博客维护</category>
+      </categories>
+      <tags>
+        <tag>博客维护</tag>
       </tags>
   </entry>
   <entry>
@@ -248,41 +283,6 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!user/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">source_path = <span class="string">&quot;/Users/youyou2608/Kotobuki&quot;</span></span><br><span class="line">target_path = <span class="string">&quot;/Users/youyou2608/BlogBack&quot;</span></span><br><span class="line">filter_files = [<span class="string">&quot;db.json&quot;</span>, <span class="string">&quot;public&quot;</span>, <span class="string">&quot;package-lock.json&quot;</span>, <span class="string">&quot;node_modules&quot;</span>, <span class="string">&quot;.deploy_git&quot;</span>]</span><br><span class="line">file_updated = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">copy_files</span>(<span class="params">source_dir, target_dir</span>):</span></span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> os.listdir(source_dir):</span><br><span class="line">        <span class="keyword">if</span> f <span class="keyword">in</span> filter_files:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        source_file = os.path.join(source_dir, f)</span><br><span class="line">        target_file = os.path.join(target_dir, f)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(source_file):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_dir):</span><br><span class="line">                os.makedirs(target_dir)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_file) <span class="keyword">or</span> (</span><br><span class="line">                    os.path.exists(target_file) <span class="keyword">and</span> os.path.getsize(target_file) != os.path.getsize(source_file)):</span><br><span class="line">                <span class="built_in">open</span>(target_file, <span class="string">&quot;wb&quot;</span>).write(<span class="built_in">open</span>(source_file, <span class="string">&quot;rb&quot;</span>).read())</span><br><span class="line">                file_updated.append(source_file)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(source_file):</span><br><span class="line">            copy_files(source_file, target_file)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;开始Hexo站点源文件复制..&quot;</span>)</span><br><span class="line">    copy_files(source_path, target_path)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;站点源文件复制完毕..&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>在 /etc/profile 中添加一行：alias ‘copy_hexo_source’=’python copy_hexo_source.py’ ，这样终端运行 copy_hexo_source 就可以复制文件了。</p>
-]]></content>
-      <categories>
-        <category>博客维护</category>
-      </categories>
-      <tags>
-        <tag>博客维护</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo博客同时部署到github和coding并设置双线解析</title>
-    <url>/2018/11/19/Hexo%E5%8D%9A%E5%AE%A2%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%88%B0github%E5%92%8Ccoding%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%8F%8C%E7%BA%BF%E8%A7%A3%E6%9E%90/</url>
-    <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>因为github服务器禁止了百度爬虫，所以不能百度收录不了站点，导致访问量很低，本来不想折腾的，想了一下还是将博客也部署到了coding上，方便百度的收录。</p>
-<span id="more"></span>
-
-
-
-<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><ol>
-<li><p>在coding上创建一个名为 <strong>用户名</strong> (不是昵称)的项目，并开启pages服务；</p>
-</li>
-<li><p>将本地ssh公钥文件添加到coding的SSH公钥中并测试是否能访问：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -T -p 443 git@git-ssh.coding.net</span><br></pre></td></tr></table></figure></li>
-<li><p>在站点配置文件中添加上coding仓库地址：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:Kotobuki-Tsumugi/Kotobuki-Tsumugi.github.io.git</span></span><br><span class="line">    <span class="attr">coding:</span> <span class="string">git@git.dev.tencent.com:Kobobuki-Tsumugi/Kobobuki-Tsumugi.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在站点目录/source下创建一个名为Staticfile的空文件；</p>
-</li>
-<li><p>生成并上传静态文件：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
-<li><p>在域名解析中新增两条CNAME记录，指向username.coding.me，注意区分境外线路和默认线路，指向coding的必须为默认线路，如果不能正常访问，可以先暂停github的解析，待coding的解析成功后再开启github的解析，解析反应不及时。</p>
-</li>
-<li><p>向百度提交站点sitemap文件地址。</p>
-</li>
-</ol>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>其中也遇到一些玄学的问题：</p>
-<p><img src="https://images2.imgbox.com/0e/48/c6Y1zWYh_o.png" alt="coding提示域名绑定异常"></p>
-<p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com/">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com/">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
 ]]></content>
       <categories>
         <category>博客维护</category>
@@ -1460,6 +1460,29 @@
       </tags>
   </entry>
   <entry>
+    <title>MacBook Pro 2020指纹无反应</title>
+    <url>/2021/05/09/MacBook-Pro-2020%E6%8C%87%E7%BA%B9%E6%97%A0%E5%8F%8D%E5%BA%94/</url>
+    <content><![CDATA[<blockquote>
+<p>记得上个月重装了一次系统，然后指纹都被清掉了，重装完系统之后发现无法录入指纹，按压指纹没有反应。</p>
+</blockquote>
+<br>
+
+<p>昨天晚上发版，有一个配置没有提交，导致今天早上☀️生产部署失败⚠️了，七点不到⏰就去公司🏙处理。想趁着今天刚好周末有时间，去售后看看。可是售后人🚶太多了，笔记本💻的号都排完了，只能预约下周六。</p>
+<p>回来之后无意之间搜了一下这个问题，其实之前就有搜过很多帖子，但是没找到有用的信息。第一个搜索结果很熟悉：<a href="https://discussionschinese.apple.com/thread/251698511">Macbook Pro 2020 指纹识别失灵 无法使用</a> ，因为以前就看过，不抱希望的点进去看了一下，结果发现之前没仔细看描述：<strong>插上电源 大部分时候就是不灵敏 开屏解锁，填充密码等都是，不插电源正常。</strong> 回想了一下，好像我确实一直插着电在用，我把电源拔掉一试，竟然可以正常使用。</p>
+<p>但是每次用指纹都要拔掉电源很麻烦，往下看到一个有用答案⭐️：</p>
+<blockquote>
+<p>我也有同样的问题 研究了半天 感觉是电源没有接地的原因 我在楼上插着充电器就不能用指纹 楼下就能 好无语😓 然后我偶然间发现插着电源用指纹的时候手掌手臂尽量接触电脑的金属表面 指纹也能重新识别😂</p>
+</blockquote>
+<p><strong>只要用指纹的时候手掌接触机身就可以正常识别。</strong></p>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mac OS下RIME输入法的配置</title>
     <url>/2019/11/09/Mac-OS%E4%B8%8BRIME%E8%BE%93%E5%85%A5%E6%B3%95%E7%9A%84%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>Mac OS下RIME输入法配置</p>
@@ -1478,29 +1501,6 @@
 </ul>
 <p>安装完体验了两个小时，输入体验很不错，没遇到什么问题，以后应该会一直用下去。</p>
 <p>各种软件还是去国产化吧，对待国产软件，有替代则替代，能不用则不用。</p>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MacBook Pro 2020指纹无反应</title>
-    <url>/2021/05/09/MacBook-Pro-2020%E6%8C%87%E7%BA%B9%E6%97%A0%E5%8F%8D%E5%BA%94/</url>
-    <content><![CDATA[<blockquote>
-<p>记得上个月重装了一次系统，然后指纹都被清掉了，重装完系统之后发现无法录入指纹，按压指纹没有反应。</p>
-</blockquote>
-<br>
-
-<p>昨天晚上发版，有一个配置没有提交，导致今天早上☀️生产部署失败⚠️了，七点不到⏰就去公司🏙处理。想趁着今天刚好周末有时间，去售后看看。可是售后人🚶太多了，笔记本💻的号都排完了，只能预约下周六。</p>
-<p>回来之后无意之间搜了一下这个问题，其实之前就有搜过很多帖子，但是没找到有用的信息。第一个搜索结果很熟悉：<a href="https://discussionschinese.apple.com/thread/251698511">Macbook Pro 2020 指纹识别失灵 无法使用</a> ，因为以前就看过，不抱希望的点进去看了一下，结果发现之前没仔细看描述：<strong>插上电源 大部分时候就是不灵敏 开屏解锁，填充密码等都是，不插电源正常。</strong> 回想了一下，好像我确实一直插着电在用，我把电源拔掉一试，竟然可以正常使用。</p>
-<p>但是每次用指纹都要拔掉电源很麻烦，往下看到一个有用答案⭐️：</p>
-<blockquote>
-<p>我也有同样的问题 研究了半天 感觉是电源没有接地的原因 我在楼上插着充电器就不能用指纹 楼下就能 好无语😓 然后我偶然间发现插着电源用指纹的时候手掌手臂尽量接触电脑的金属表面 指纹也能重新识别😂</p>
-</blockquote>
-<p><strong>只要用指纹的时候手掌接触机身就可以正常识别。</strong></p>
 ]]></content>
       <categories>
         <category>其他</category>
@@ -2160,6 +2160,57 @@
       </categories>
       <tags>
         <tag>IDEA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring Boot中使用Swagger2构建强大的RESTful API文档</title>
+    <url>/2019/04/29/Spring-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Swagger2%E6%9E%84%E5%BB%BA%E5%BC%BA%E5%A4%A7%E7%9A%84RESTful-API%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>Spring Boot中使用Swagger2构建强大的RESTful API文档</p>
+<p>由于Spring Boot能够快速开发、便捷部署等特性，相信有很大一部分Spring Boot的用户会用来构建RESTful API。而我们构建RESTful API的目的通常都是由于多终端的原因，这些终端会共用很多底层业务逻辑，因此我们会抽象出这样一层来同时服务于多个移动端或者Web前端。</p>
+<span id="more"></span>
+
+<p>这样一来，我们的RESTful API就有可能要面对多个开发人员或多个开发团队：IOS开发、Android开发或是Web开发等。为了减少与其他团队平时开发期间的频繁沟通成本，传统做法我们会创建一份RESTful API文档来记录所有接口细节，然而这样的做法有以下几个问题：</p>
+<ul>
+<li>由于接口众多，并且细节复杂（需要考虑不同的HTTP请求类型、HTTP头部信息、HTTP请求内容等），高质量地创建这份文档本身就是件非常吃力的事，下游的抱怨声不绝于耳。</li>
+<li>随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。</li>
+</ul>
+<p>为了解决上面这样的问题，本文将介绍RESTful API的重磅好伙伴Swagger2，它可以轻松的整合到Spring Boot中，并与Spring MVC程序配合组织出强大RESTful API文档。它既可以减少我们创建文档的工作量，同时说明内容又整合入实现代码中，让维护文档和修改代码整合为一体，可以让我们在修改代码逻辑的同时方便的修改文档说明。另外Swagger2也提供了强大的页面测试功能来调试每个RESTful API。具体效果如下图所示：</p>
+<p><img src="http://blog.didispace.com/content/images/2016/04/swagger2_1.png"></p>
+<p><img src="http://blog.didispace.com/content/images/2016/04/swagger2_1.png"></p>
+<p>下面来具体介绍，如果在Spring Boot中使用Swagger2。首先，我们需要一个Spring Boot实现的RESTful API工程，若您没有做过这类内容，建议先阅读<br><a href="http://blog.didispace.com/springbootrestfulapi/">Spring Boot构建一个较为复杂的RESTful APIs和单元测试</a>。</p>
+<p>下面的内容我们会以<a href="http://git.oschina.net/didispace/SpringBoot-Learning">教程样例</a>中的Chapter3-1-1进行下面的实验（Chpater3-1-5是我们的结果工程，亦可参考）。</p>
+<h4 id="添加Swagger2依赖"><a href="#添加Swagger2依赖" class="headerlink" title="添加Swagger2依赖"></a>添加Swagger2依赖</h4><p>在<code>pom.xml</code>中加入Swagger2的依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="创建Swagger2配置类"><a href="#创建Swagger2配置类" class="headerlink" title="创建Swagger2配置类"></a>创建Swagger2配置类</h4><p>在<code>Application.java</code>同级创建Swagger2的配置类<code>Swagger2</code>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swagger2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.didispace.web&quot;</span>))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">                .title(<span class="string">&quot;Spring Boot中使用Swagger2构建RESTful APIs&quot;</span>)</span><br><span class="line">                .description(<span class="string">&quot;更多Spring Boot相关文章请关注：http://blog.didispace.com/&quot;</span>)</span><br><span class="line">                .termsOfServiceUrl(<span class="string">&quot;http://blog.didispace.com/&quot;</span>)</span><br><span class="line">                .contact(<span class="string">&quot;程序猿DD&quot;</span>)</span><br><span class="line">                .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上代码所示，通过<code>@Configuration</code>注解，让Spring来加载该类配置。再通过<code>@EnableSwagger2</code>注解来启用Swagger2。</p>
+<p>再通过<code>createRestApi</code>函数创建<code>Docket</code>的Bean之后，<code>apiInfo()</code>用来创建该Api的基本信息（这些基本信息会展现在文档页面中）。<code>select()</code>函数返回一个<code>ApiSelectorBuilder</code>实例用来控制哪些接口暴露给Swagger来展现，本例采用指定扫描的包路径来定义，Swagger会扫描该包下所有Controller定义的API，并产生文档内容（除了被<code>@ApiIgnore</code>指定的请求）。</p>
+<h4 id="添加文档内容"><a href="#添加文档内容" class="headerlink" title="添加文档内容"></a>添加文档内容</h4><p>在完成了上述配置后，其实已经可以生产文档内容，但是这样的文档主要针对请求本身，而描述主要来源于函数等命名产生，对用户并不友好，我们通常需要自己增加一些说明来丰富文档内容。如下所示，我们通过<code>@ApiOperation</code>注解来给API增加说明、通过<code>@ApiImplicitParams</code>、<code>@ApiImplicitParam</code>注解来给参数增加说明。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(value=&quot;/users&quot;)</span>     <span class="comment">// 通过这里配置使下面的映射都在/users下，可去除</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> Map&lt;Long, User&gt; users = Collections.synchronizedMap(<span class="keyword">new</span> HashMap&lt;Long, User&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;获取用户列表&quot;, notes=&quot;&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&#123;&quot;&quot;&#125;, method=RequestMethod.GET)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getUserList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;User&gt; r = <span class="keyword">new</span> ArrayList&lt;User&gt;(users.values());</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;创建用户&quot;, notes=&quot;根据User对象创建用户&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户详细实体user&quot;, required = true, dataType = &quot;User&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;&quot;, method=RequestMethod.POST)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">postUser</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span> </span>&#123;</span><br><span class="line">        users.put(user.getId(), user);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;获取用户详细信息&quot;, notes=&quot;根据url的id来获取用户详细信息&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.GET)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> users.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;更新用户详细信息&quot;, notes=&quot;根据url的id来指定更新对象，并根据传过来的user信息来更新用户详细信息&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParams(&#123;</span></span><br><span class="line"><span class="meta">            @ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;),</span></span><br><span class="line"><span class="meta">            @ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户详细实体user&quot;, required = true, dataType = &quot;User&quot;)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.PUT)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">putUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id, <span class="meta">@RequestBody</span> User user)</span> </span>&#123;</span><br><span class="line">        User u = users.get(id);</span><br><span class="line">        u.setName(user.getName());</span><br><span class="line">        u.setAge(user.getAge());</span><br><span class="line">        users.put(id, u);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;删除用户&quot;, notes=&quot;根据url的id来指定删除对象&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.DELETE)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">deleteUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        users.remove(id);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完成上述代码添加上，启动Spring Boot程序，访问：<a href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a><br>。就能看到前文所展示的RESTful API的页面。我们可以再点开具体的API请求，以POST类型的/users请求为例，可找到上述代码中我们配置的Notes信息以及参数user的描述信息，如下图所示。</p>
+<p>[<img src="http://blog.didispace.com/content/images/2016/04/swagger2_2.png" alt="alt"><img src="http://blog.didispace.com/content/images/2016/04/swagger2_2.png"></p>
+<h4 id="API文档访问与调试"><a href="#API文档访问与调试" class="headerlink" title="API文档访问与调试"></a>API文档访问与调试</h4><p>在上图请求的页面中，我们看到user的Value是个输入框？是的，Swagger除了查看接口功能外，还提供了调试测试功能，我们可以点击上图中右侧的Model Schema（黄色区域：它指明了User的数据结构），此时Value中就有了user对象的模板，我们只需要稍适修改，点击下方<code>“Try it out！”</code>按钮，即可完成了一次请求调用！</p>
+<p>此时，你也可以通过几个GET请求来验证之前的POST请求是否正确。</p>
+<p>相比为这些接口编写文档的工作，我们增加的配置内容是非常少而且精简的，对于原有代码的侵入也在忍受范围之内。因此，在构建RESTful API的同时，加入swagger来对API文档进行管理，是个不错的选择。</p>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><p>本文的相关例子可以查看下面仓库中的<code>chapter3-1-5</code>目录：</p>
+<ul>
+<li>Github：<a href="https://github.com/dyc87112/SpringBoot-Learning/tree/1.x">https://github.com/dyc87112/SpringBoot-Learning</a></li>
+<li>Gitee：<a href="https://gitee.com/didispace/SpringBoot-Learning/tree/1.x">https://gitee.com/didispace/SpringBoot-Learning</a></li>
+</ul>
+<p><strong>如果您觉得本文不错，欢迎Star支持，您的关注是我坚持的动力！</strong></p>
+<h4 id="参考信息"><a href="#参考信息" class="headerlink" title="参考信息"></a>参考信息</h4><ul>
+<li><a href="http://swagger.io/">Swagger官方网站</a></li>
+</ul>
+<p>无作者本人授权请勿转载。</p>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
       </tags>
   </entry>
   <entry>
@@ -3286,57 +3337,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Spring Boot中使用Swagger2构建强大的RESTful API文档</title>
-    <url>/2019/04/29/Spring-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Swagger2%E6%9E%84%E5%BB%BA%E5%BC%BA%E5%A4%A7%E7%9A%84RESTful-API%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>Spring Boot中使用Swagger2构建强大的RESTful API文档</p>
-<p>由于Spring Boot能够快速开发、便捷部署等特性，相信有很大一部分Spring Boot的用户会用来构建RESTful API。而我们构建RESTful API的目的通常都是由于多终端的原因，这些终端会共用很多底层业务逻辑，因此我们会抽象出这样一层来同时服务于多个移动端或者Web前端。</p>
-<span id="more"></span>
-
-<p>这样一来，我们的RESTful API就有可能要面对多个开发人员或多个开发团队：IOS开发、Android开发或是Web开发等。为了减少与其他团队平时开发期间的频繁沟通成本，传统做法我们会创建一份RESTful API文档来记录所有接口细节，然而这样的做法有以下几个问题：</p>
-<ul>
-<li>由于接口众多，并且细节复杂（需要考虑不同的HTTP请求类型、HTTP头部信息、HTTP请求内容等），高质量地创建这份文档本身就是件非常吃力的事，下游的抱怨声不绝于耳。</li>
-<li>随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。</li>
-</ul>
-<p>为了解决上面这样的问题，本文将介绍RESTful API的重磅好伙伴Swagger2，它可以轻松的整合到Spring Boot中，并与Spring MVC程序配合组织出强大RESTful API文档。它既可以减少我们创建文档的工作量，同时说明内容又整合入实现代码中，让维护文档和修改代码整合为一体，可以让我们在修改代码逻辑的同时方便的修改文档说明。另外Swagger2也提供了强大的页面测试功能来调试每个RESTful API。具体效果如下图所示：</p>
-<p><img src="http://blog.didispace.com/content/images/2016/04/swagger2_1.png"></p>
-<p><img src="http://blog.didispace.com/content/images/2016/04/swagger2_1.png"></p>
-<p>下面来具体介绍，如果在Spring Boot中使用Swagger2。首先，我们需要一个Spring Boot实现的RESTful API工程，若您没有做过这类内容，建议先阅读<br><a href="http://blog.didispace.com/springbootrestfulapi/">Spring Boot构建一个较为复杂的RESTful APIs和单元测试</a>。</p>
-<p>下面的内容我们会以<a href="http://git.oschina.net/didispace/SpringBoot-Learning">教程样例</a>中的Chapter3-1-1进行下面的实验（Chpater3-1-5是我们的结果工程，亦可参考）。</p>
-<h4 id="添加Swagger2依赖"><a href="#添加Swagger2依赖" class="headerlink" title="添加Swagger2依赖"></a>添加Swagger2依赖</h4><p>在<code>pom.xml</code>中加入Swagger2的依赖</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="创建Swagger2配置类"><a href="#创建Swagger2配置类" class="headerlink" title="创建Swagger2配置类"></a>创建Swagger2配置类</h4><p>在<code>Application.java</code>同级创建Swagger2的配置类<code>Swagger2</code>。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swagger2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.didispace.web&quot;</span>))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">                .title(<span class="string">&quot;Spring Boot中使用Swagger2构建RESTful APIs&quot;</span>)</span><br><span class="line">                .description(<span class="string">&quot;更多Spring Boot相关文章请关注：http://blog.didispace.com/&quot;</span>)</span><br><span class="line">                .termsOfServiceUrl(<span class="string">&quot;http://blog.didispace.com/&quot;</span>)</span><br><span class="line">                .contact(<span class="string">&quot;程序猿DD&quot;</span>)</span><br><span class="line">                .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如上代码所示，通过<code>@Configuration</code>注解，让Spring来加载该类配置。再通过<code>@EnableSwagger2</code>注解来启用Swagger2。</p>
-<p>再通过<code>createRestApi</code>函数创建<code>Docket</code>的Bean之后，<code>apiInfo()</code>用来创建该Api的基本信息（这些基本信息会展现在文档页面中）。<code>select()</code>函数返回一个<code>ApiSelectorBuilder</code>实例用来控制哪些接口暴露给Swagger来展现，本例采用指定扫描的包路径来定义，Swagger会扫描该包下所有Controller定义的API，并产生文档内容（除了被<code>@ApiIgnore</code>指定的请求）。</p>
-<h4 id="添加文档内容"><a href="#添加文档内容" class="headerlink" title="添加文档内容"></a>添加文档内容</h4><p>在完成了上述配置后，其实已经可以生产文档内容，但是这样的文档主要针对请求本身，而描述主要来源于函数等命名产生，对用户并不友好，我们通常需要自己增加一些说明来丰富文档内容。如下所示，我们通过<code>@ApiOperation</code>注解来给API增加说明、通过<code>@ApiImplicitParams</code>、<code>@ApiImplicitParam</code>注解来给参数增加说明。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(value=&quot;/users&quot;)</span>     <span class="comment">// 通过这里配置使下面的映射都在/users下，可去除</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> Map&lt;Long, User&gt; users = Collections.synchronizedMap(<span class="keyword">new</span> HashMap&lt;Long, User&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;获取用户列表&quot;, notes=&quot;&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&#123;&quot;&quot;&#125;, method=RequestMethod.GET)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getUserList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;User&gt; r = <span class="keyword">new</span> ArrayList&lt;User&gt;(users.values());</span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;创建用户&quot;, notes=&quot;根据User对象创建用户&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户详细实体user&quot;, required = true, dataType = &quot;User&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;&quot;, method=RequestMethod.POST)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">postUser</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span> </span>&#123;</span><br><span class="line">        users.put(user.getId(), user);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;获取用户详细信息&quot;, notes=&quot;根据url的id来获取用户详细信息&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.GET)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> users.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;更新用户详细信息&quot;, notes=&quot;根据url的id来指定更新对象，并根据传过来的user信息来更新用户详细信息&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParams(&#123;</span></span><br><span class="line"><span class="meta">            @ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;),</span></span><br><span class="line"><span class="meta">            @ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户详细实体user&quot;, required = true, dataType = &quot;User&quot;)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.PUT)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">putUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id, <span class="meta">@RequestBody</span> User user)</span> </span>&#123;</span><br><span class="line">        User u = users.get(id);</span><br><span class="line">        u.setName(user.getName());</span><br><span class="line">        u.setAge(user.getAge());</span><br><span class="line">        users.put(id, u);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value=&quot;删除用户&quot;, notes=&quot;根据url的id来指定删除对象&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;id&quot;, value = &quot;用户ID&quot;, required = true, dataType = &quot;Long&quot;)</span></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/&#123;id&#125;&quot;, method=RequestMethod.DELETE)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">deleteUser</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span> </span>&#123;</span><br><span class="line">        users.remove(id);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>完成上述代码添加上，启动Spring Boot程序，访问：<a href="http://localhost:8080/swagger-ui.html">http://localhost:8080/swagger-ui.html</a><br>。就能看到前文所展示的RESTful API的页面。我们可以再点开具体的API请求，以POST类型的/users请求为例，可找到上述代码中我们配置的Notes信息以及参数user的描述信息，如下图所示。</p>
-<p>[<img src="http://blog.didispace.com/content/images/2016/04/swagger2_2.png" alt="alt"><img src="http://blog.didispace.com/content/images/2016/04/swagger2_2.png"></p>
-<h4 id="API文档访问与调试"><a href="#API文档访问与调试" class="headerlink" title="API文档访问与调试"></a>API文档访问与调试</h4><p>在上图请求的页面中，我们看到user的Value是个输入框？是的，Swagger除了查看接口功能外，还提供了调试测试功能，我们可以点击上图中右侧的Model Schema（黄色区域：它指明了User的数据结构），此时Value中就有了user对象的模板，我们只需要稍适修改，点击下方<code>“Try it out！”</code>按钮，即可完成了一次请求调用！</p>
-<p>此时，你也可以通过几个GET请求来验证之前的POST请求是否正确。</p>
-<p>相比为这些接口编写文档的工作，我们增加的配置内容是非常少而且精简的，对于原有代码的侵入也在忍受范围之内。因此，在构建RESTful API的同时，加入swagger来对API文档进行管理，是个不错的选择。</p>
-<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><p>本文的相关例子可以查看下面仓库中的<code>chapter3-1-5</code>目录：</p>
-<ul>
-<li>Github：<a href="https://github.com/dyc87112/SpringBoot-Learning/tree/1.x">https://github.com/dyc87112/SpringBoot-Learning</a></li>
-<li>Gitee：<a href="https://gitee.com/didispace/SpringBoot-Learning/tree/1.x">https://gitee.com/didispace/SpringBoot-Learning</a></li>
-</ul>
-<p><strong>如果您觉得本文不错，欢迎Star支持，您的关注是我坚持的动力！</strong></p>
-<h4 id="参考信息"><a href="#参考信息" class="headerlink" title="参考信息"></a>参考信息</h4><ul>
-<li><a href="http://swagger.io/">Swagger官方网站</a></li>
-</ul>
-<p>无作者本人授权请勿转载。</p>
-]]></content>
-      <categories>
-        <category>SpringBoot</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SpringBoot整合redis报错</title>
     <url>/2021/03/07/SpringBoot%E6%95%B4%E5%90%88redis%E6%8A%A5%E9%94%99/</url>
     <content><![CDATA[<p>在SpringBoot中整合Redis进行Token登录，测试方法中一直报错：</p>
@@ -4085,39 +4085,33 @@
       </tags>
   </entry>
   <entry>
-    <title>thymeleaf传值给bootstrap的modal</title>
-    <url>/2020/10/24/thymeleaf%E4%BC%A0%E5%80%BC%E7%BB%99bootstrap%E7%9A%84modal/</url>
-    <content><![CDATA[<p>给模态框传值是一个很常见的需求，尤其是在操作表格的时候，添加、编辑数据都需要给模态框传值。一般如果是html的话很好处理，在Thymeleaf里因为值是动态的所以遇到点问题。</p>
+    <title>mabtis-generator的使用</title>
+    <url>/2021/04/27/mabtis-generator%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>MyBatisGenerator的配置和使用</p>
+<br>
+
 <span id="more"></span>
 
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>这是模态框的定义：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 修改数据 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal fade&quot;</span> <span class="attr">id</span>=<span class="string">&quot;edit_bill&quot;</span> <span class="attr">role</span>=<span class="string">&quot;dialog&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-dialog&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-content&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-header&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">p</span>&gt;</span>新增数据<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-body&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">form</span> <span class="attr">th:action</span>=<span class="string">&quot;@&#123;/bill/edit&#125;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;billId1&quot;</span>&gt;</span>id<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;billId&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">id</span>=<span class="string">&quot;billId&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default&quot;</span>&gt;</span>提交表单<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-footer&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default&quot;</span> <span class="attr">data-dismiss</span>=<span class="string">&quot;modal&quot;</span>&gt;</span>关闭</span><br><span class="line">                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- mybatis-generator自动生成代码插件 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.generator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-generator-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>这是按钮的定义：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">th:if</span>=<span class="string">&quot;$&#123;not #lists.isEmpty(result.getData().getDataList())&#125;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">th:each</span>=<span class="string">&quot;bill, stat: $&#123;result.getData().getDataList()&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">style</span>=<span class="string">&quot;display: none&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;bill.billId&#125;&quot;</span>&gt;</span>Test001<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;btn-group&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;edit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-info&quot;</span> <span class="attr">data-toggle</span>=<span class="string">&quot;modal&quot;</span> <span class="attr">data-target</span>=<span class="string">&quot;#edit_bill&quot;</span> <span class="attr">th:attr</span>=<span class="string">&quot;data-bill-id=$&#123;bill.billId&#125;&quot;</span>&gt;</span>修改<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>想在点击修改按钮的时候将 <code>billId</code> 这个值传到弹出框里。</p>
-<p>值得注意的是Thymeleaf中data-*的写法： </p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 不是 --&gt;</span></span><br><span class="line">data-bill-id=&quot;$&#123;bill.billId&#125;&quot;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 而是 --&gt;</span></span><br><span class="line">th:attr=&quot;data-bill-id=$&#123;bill.billId&#125;&quot;</span><br></pre></td></tr></table></figure>
-
+<p>更新pom文件导入依赖后在idea侧边栏能看到mybatisGenerator插件。</p>
+<p><img src="https://images2.imgbox.com/ee/a0/h1JH6RCQ_o.png" alt="image-20210427004620531"></p>
+<p>配置完成后可以直接双击运行。</p>
 <br>
 
-<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>点击按钮的时候执行通过事件取值，但是我没成功，甚至连log都没输出，应该是没有执行，不知道是不是和Thymeleaf有关。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    <span class="title">$</span>(<span class="params"><span class="string">&#x27;#edit_bill&#x27;</span></span>).<span class="title">on</span>(<span class="params"><span class="string">&#x27;show.bs.modal&#x27;</span>, <span class="keyword">function</span> (event) &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">var</span> billId = $(event.relatedTarget.data(<span class="string">&#x27;bill-id&#x27;</span>);</span></span></span><br><span class="line"><span class="params"><span class="function">        $(event.currentTarget).find(<span class="string">&#x27;input[name=&quot;billId&quot;]&#x27;</span>).val(billId);</span></span></span><br><span class="line"><span class="params"><span class="function">    &#125;</span>)</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="配置generatorConfig-xml"><a href="#配置generatorConfig-xml" class="headerlink" title="配置generatorConfig.xml"></a>配置generatorConfig.xml</h2><p>在项目resources目录下新建generatorConfig.xml文件，文件内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">generatorConfiguration</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--mysql 连接数据库jar 这里选择自己本地位置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classPathEntry</span></span></span><br><span class="line"><span class="tag">            <span class="attr">location</span>=<span class="string">&quot;/Users/jingh527/.m2/try-ask-repo/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22.jar&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">&quot;testTables&quot;</span> <span class="attr">targetRuntime</span>=<span class="string">&quot;MyBatis3&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 是否去除自动生成的注释 true：是 ： false:否 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suppressAllComments&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--数据库连接的信息：驱动类、连接地址、用户名、密码 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">connectionURL</span>=<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">userId</span>=<span class="string">&quot;admin&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">password</span>=<span class="string">&quot;admin&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和</span></span><br><span class="line"><span class="comment">           NUMERIC 类型解析为java.math.BigDecimal --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;forceBigDecimals&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- targetProject:生成PO类的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.po&quot;</span></span></span><br><span class="line"><span class="tag">                            <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 从数据库返回的值被清理前后的空格 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;trimStrings&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- targetProject:mapper映射文件生成的位置</span></span><br><span class="line"><span class="comment">           如果maven工程只是单独的一个工程，targetProject=&quot;src/main/java&quot;</span></span><br><span class="line"><span class="comment">           若果maven工程是分模块的工程，targetProject=&quot;所属模块的名称&quot;，例如：</span></span><br><span class="line"><span class="comment">           targetProject=&quot;ecps-manager-mapper&quot;，下同--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.dao&quot;</span></span></span><br><span class="line"><span class="tag">                         <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sqlMapGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- targetPackage：mapper接口生成的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">type</span>=<span class="string">&quot;XMLMAPPER&quot;</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.dao&quot;</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaClientGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 指定数据库表 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">schema</span>=<span class="string">&quot;&quot;</span> <span class="attr">tableName</span>=<span class="string">&quot;table1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">schema</span>=<span class="string">&quot;&quot;</span> <span class="attr">tableName</span>=<span class="string">&quot;table2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p>需要注意数据连接信息，以及驱动jar包，可以复制maven本地仓库里的jar包地址。</p>
 <br>
 
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>这种写法能成功取到值，对js不是很了解，看不出两者有什么差别。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$(document).on(<span class="string">&quot;click&quot;</span>, <span class="string">&quot;#edit&quot;</span>, function() &#123;</span><br><span class="line">    <span class="keyword">var</span> billId = $(<span class="keyword">this</span>).data(<span class="string">&quot;bill-id&quot;</span>);</span><br><span class="line">    $(<span class="string">&quot;#billId&quot;</span>).val(billId);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>双击图一中的mybatis-generator:generate，自动下载完插件依赖后，代码就生成完了。</p>
 ]]></content>
       <categories>
-        <category>Thymeleaf</category>
+        <category>数据库</category>
       </categories>
       <tags>
-        <tag>Thymeleaf</tag>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -4163,33 +4157,39 @@
       </tags>
   </entry>
   <entry>
-    <title>mabtis-generator的使用</title>
-    <url>/2021/04/27/mabtis-generator%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>MyBatisGenerator的配置和使用</p>
-<br>
-
+    <title>thymeleaf传值给bootstrap的modal</title>
+    <url>/2020/10/24/thymeleaf%E4%BC%A0%E5%80%BC%E7%BB%99bootstrap%E7%9A%84modal/</url>
+    <content><![CDATA[<p>给模态框传值是一个很常见的需求，尤其是在操作表格的时候，添加、编辑数据都需要给模态框传值。一般如果是html的话很好处理，在Thymeleaf里因为值是动态的所以遇到点问题。</p>
 <span id="more"></span>
 
-<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- mybatis-generator自动生成代码插件 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.generator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-generator-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>这是模态框的定义：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 修改数据 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal fade&quot;</span> <span class="attr">id</span>=<span class="string">&quot;edit_bill&quot;</span> <span class="attr">role</span>=<span class="string">&quot;dialog&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-dialog&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-content&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-header&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">p</span>&gt;</span>新增数据<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-body&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">form</span> <span class="attr">th:action</span>=<span class="string">&quot;@&#123;/bill/edit&#125;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;billId1&quot;</span>&gt;</span>id<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;billId&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">id</span>=<span class="string">&quot;billId&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default&quot;</span>&gt;</span>提交表单<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-footer&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default&quot;</span> <span class="attr">data-dismiss</span>=<span class="string">&quot;modal&quot;</span>&gt;</span>关闭</span><br><span class="line">                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>更新pom文件导入依赖后在idea侧边栏能看到mybatisGenerator插件。</p>
-<p><img src="https://images2.imgbox.com/ee/a0/h1JH6RCQ_o.png" alt="image-20210427004620531"></p>
-<p>配置完成后可以直接双击运行。</p>
+<p>这是按钮的定义：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tr</span> <span class="attr">th:if</span>=<span class="string">&quot;$&#123;not #lists.isEmpty(result.getData().getDataList())&#125;&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">th:each</span>=<span class="string">&quot;bill, stat: $&#123;result.getData().getDataList()&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">style</span>=<span class="string">&quot;display: none&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;bill.billId&#125;&quot;</span>&gt;</span>Test001<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;btn-group&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;edit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-info&quot;</span> <span class="attr">data-toggle</span>=<span class="string">&quot;modal&quot;</span> <span class="attr">data-target</span>=<span class="string">&quot;#edit_bill&quot;</span> <span class="attr">th:attr</span>=<span class="string">&quot;data-bill-id=$&#123;bill.billId&#125;&quot;</span>&gt;</span>修改<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>想在点击修改按钮的时候将 <code>billId</code> 这个值传到弹出框里。</p>
+<p>值得注意的是Thymeleaf中data-*的写法： </p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 不是 --&gt;</span></span><br><span class="line">data-bill-id=&quot;$&#123;bill.billId&#125;&quot;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 而是 --&gt;</span></span><br><span class="line">th:attr=&quot;data-bill-id=$&#123;bill.billId&#125;&quot;</span><br></pre></td></tr></table></figure>
+
 <br>
 
-<h2 id="配置generatorConfig-xml"><a href="#配置generatorConfig-xml" class="headerlink" title="配置generatorConfig.xml"></a>配置generatorConfig.xml</h2><p>在项目resources目录下新建generatorConfig.xml文件，文件内容如下：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">generatorConfiguration</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--mysql 连接数据库jar 这里选择自己本地位置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">classPathEntry</span></span></span><br><span class="line"><span class="tag">            <span class="attr">location</span>=<span class="string">&quot;/Users/jingh527/.m2/try-ask-repo/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22.jar&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">&quot;testTables&quot;</span> <span class="attr">targetRuntime</span>=<span class="string">&quot;MyBatis3&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 是否去除自动生成的注释 true：是 ： false:否 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suppressAllComments&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--数据库连接的信息：驱动类、连接地址、用户名、密码 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">connectionURL</span>=<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">userId</span>=<span class="string">&quot;admin&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">password</span>=<span class="string">&quot;admin&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和</span></span><br><span class="line"><span class="comment">           NUMERIC 类型解析为java.math.BigDecimal --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;forceBigDecimals&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- targetProject:生成PO类的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.po&quot;</span></span></span><br><span class="line"><span class="tag">                            <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 从数据库返回的值被清理前后的空格 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;trimStrings&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- targetProject:mapper映射文件生成的位置</span></span><br><span class="line"><span class="comment">           如果maven工程只是单独的一个工程，targetProject=&quot;src/main/java&quot;</span></span><br><span class="line"><span class="comment">           若果maven工程是分模块的工程，targetProject=&quot;所属模块的名称&quot;，例如：</span></span><br><span class="line"><span class="comment">           targetProject=&quot;ecps-manager-mapper&quot;，下同--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.dao&quot;</span></span></span><br><span class="line"><span class="tag">                         <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sqlMapGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- targetPackage：mapper接口生成的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">type</span>=<span class="string">&quot;XMLMAPPER&quot;</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetPackage</span>=<span class="string">&quot;com.xxx.yyy.dao&quot;</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetProject</span>=<span class="string">&quot;src/main/java&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;enableSubPackages&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaClientGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 指定数据库表 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">schema</span>=<span class="string">&quot;&quot;</span> <span class="attr">tableName</span>=<span class="string">&quot;table1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">schema</span>=<span class="string">&quot;&quot;</span> <span class="attr">tableName</span>=<span class="string">&quot;table2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>点击按钮的时候执行通过事件取值，但是我没成功，甚至连log都没输出，应该是没有执行，不知道是不是和Thymeleaf有关。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    <span class="title">$</span>(<span class="params"><span class="string">&#x27;#edit_bill&#x27;</span></span>).<span class="title">on</span>(<span class="params"><span class="string">&#x27;show.bs.modal&#x27;</span>, <span class="keyword">function</span> (event) &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">var</span> billId = $(event.relatedTarget.data(<span class="string">&#x27;bill-id&#x27;</span>);</span></span></span><br><span class="line"><span class="params"><span class="function">        $(event.currentTarget).find(<span class="string">&#x27;input[name=&quot;billId&quot;]&#x27;</span>).val(billId);</span></span></span><br><span class="line"><span class="params"><span class="function">    &#125;</span>)</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>需要注意数据连接信息，以及驱动jar包，可以复制maven本地仓库里的jar包地址。</p>
 <br>
 
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>双击图一中的mybatis-generator:generate，自动下载完插件依赖后，代码就生成完了。</p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>这种写法能成功取到值，对js不是很了解，看不出两者有什么差别。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$(document).on(<span class="string">&quot;click&quot;</span>, <span class="string">&quot;#edit&quot;</span>, function() &#123;</span><br><span class="line">    <span class="keyword">var</span> billId = $(<span class="keyword">this</span>).data(<span class="string">&quot;bill-id&quot;</span>);</span><br><span class="line">    $(<span class="string">&quot;#billId&quot;</span>).val(billId);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
 ]]></content>
       <categories>
-        <category>数据库</category>
+        <category>Thymeleaf</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
+        <tag>Thymeleaf</tag>
       </tags>
   </entry>
   <entry>
@@ -4831,27 +4831,6 @@
       </tags>
   </entry>
   <entry>
-    <title>再记Hexo博客恢复</title>
-    <url>/2019/06/09/%E5%86%8D%E8%AE%B0Hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D/</url>
-    <content><![CDATA[<p>Hexo博客恢复</p>
-<p>从官网下载 Nodejs <strong>二进制</strong> 文件（.tar.xz），解压到 /opt 目录下，添加连接：</p>
-<p><code>sudo tar -xvf xxxx.tar.xz</code></p>
-<p><code>sudo ln -s /opt/node-linux-x64xxxx/bin/node /usr/local/bin/node</code></p>
-<p><code>sudo ln -s /opt/node..../bin/npm /usr/local/bin/npm</code></p>
-<p>然后进入博客文件夹，执行</p>
-<p><code>sudo npm install</code></p>
-<p>即可完成恢复。</p>
-<hr>
-<p>折腾了半天一直各种报错，没想到这么简单。。</p>
-]]></content>
-      <categories>
-        <category>博客维护</category>
-      </categories>
-      <tags>
-        <tag>博客维护</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Let’s Encrypt给网站加密</title>
     <url>/2020/11/07/%E4%BD%BF%E7%94%A8Let%E2%80%99s-Encrypt%E7%BB%99%E7%BD%91%E7%AB%99%E5%8A%A0%E5%AF%86/</url>
     <content><![CDATA[<p>使用 <strong>Let’s Encrypt</strong> 给网站加密</p>
@@ -4883,6 +4862,27 @@
       </categories>
       <tags>
         <tag>SSL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>再记Hexo博客恢复</title>
+    <url>/2019/06/09/%E5%86%8D%E8%AE%B0Hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D/</url>
+    <content><![CDATA[<p>Hexo博客恢复</p>
+<p>从官网下载 Nodejs <strong>二进制</strong> 文件（.tar.xz），解压到 /opt 目录下，添加连接：</p>
+<p><code>sudo tar -xvf xxxx.tar.xz</code></p>
+<p><code>sudo ln -s /opt/node-linux-x64xxxx/bin/node /usr/local/bin/node</code></p>
+<p><code>sudo ln -s /opt/node..../bin/npm /usr/local/bin/npm</code></p>
+<p>然后进入博客文件夹，执行</p>
+<p><code>sudo npm install</code></p>
+<p>即可完成恢复。</p>
+<hr>
+<p>折腾了半天一直各种报错，没想到这么简单。。</p>
+]]></content>
+      <categories>
+        <category>博客维护</category>
+      </categories>
+      <tags>
+        <tag>博客维护</tag>
       </tags>
   </entry>
   <entry>
@@ -4919,6 +4919,124 @@
       </categories>
       <tags>
         <tag>折腾</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在MacOS下编译OpenJDK12</title>
+    <url>/2021/07/11/%E5%9C%A8MacOS%E4%B8%8B%E7%BC%96%E8%AF%91OpenJDK12/</url>
+    <content><![CDATA[<blockquote>
+<p>学了这么久的Java，学习基本还停留在怎么使用API上。知道集合怎么用、字符串有什么现成的处理方法，却不知道API实现背后的底层逻辑，于是有了想深入学习的想法。一个月之前就打算开始学习《深入理解Java虚拟机》这本书，可是第一章的编译JDK就遇到问题了。花了一天半的时间，在Linux、Windows，MacOS 3 个平台上分别进行了尝试，将遇到的问题及解决方法记录一下。</p>
+<p>上周末在 Ubuntu18.04 的虚拟机上编译了一下，解决了几个常见问题之后成功编译，但是在Windows和MacOS上貌似要难一些。</p>
+</blockquote>
+<!--readmore-->
+
+<h1 id="在-MacOS10-15下编译-OpenJDK8"><a href="#在-MacOS10-15下编译-OpenJDK8" class="headerlink" title="在 MacOS10/15下编译 OpenJDK8"></a>在 MacOS10/15下编译 OpenJDK8</h1><p>这个版本的OpenJDK在Ubuntu18.04上编译成功，在MacOS10.15上虽然编译通过，但是使用的时候报错，原因未知：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; build/macosx-x86_64-normal-server-release/jdk/bin/java -version</span><br><span class="line">&gt;&gt; bash[1]    90140 bus error  build/macosx-x86_64-normal-server-release/jdk/bin/java -version</span><br></pre></td></tr></table></figure>
+
+<h2 id="源码获取"><a href="#源码获取" class="headerlink" title="源码获取"></a>源码获取</h2><p>在openjdk官网上的下载链接有错误，点击之后跳转到错误提示页面，正确的下载地址为：<a href="https://download.java.net/openjdk/openjdk/jdk8/promoted/b132/openjdk-8-src-b132-03_mar_2014.zip">下载OpenJDK8源码</a></p>
+<p>2、下载之后解压到本地并将目录下所有文件权限改为777</p>
+<p>3、安装必要的库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install freetype</span><br><span class="line">brew install ccache</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="configure及错误解决"><a href="#configure及错误解决" class="headerlink" title="configure及错误解决"></a>configure及错误解决</h2><p>新建一个文件 init_env.sh，初始化环境变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 设定语言选项，必须设置</span><br><span class="line">export LANG=C</span><br><span class="line"># Mac平台，C编译器不再是GCC，是clang</span><br><span class="line">export CC=gcc</span><br><span class="line"># 跳过clang的一些严格的语法检查，不然会将N多的警告作为Error</span><br><span class="line">export COMPILER_WARNINGS_FATAL=false</span><br><span class="line"># 链接时使用的参数</span><br><span class="line">export LFLAGS=&#x27;-Xlinker -lstdc++&#x27;</span><br><span class="line"># 是否使用clang</span><br><span class="line">export USE_CLANG=true</span><br><span class="line"># 使用64位数据模型</span><br><span class="line">export LP64=1</span><br><span class="line"># 告诉编译平台是64位，不然会按32位来编译</span><br><span class="line">export ARCH_DATA_MODEL=64</span><br><span class="line"># 允许自动下载依赖</span><br><span class="line">export ALLOW_DOWNLOADS=true</span><br><span class="line"># 并行编译的线程数，编译时间长，为了不影响其他工作，我选择为2</span><br><span class="line">export HOTSPOT_BUILD_JOBS=2</span><br><span class="line"># 是否跳过与先前版本的比较</span><br><span class="line">export SKIP_COMPARE_IMAGES=true</span><br><span class="line"># 是否使用预编译头文件，加快编译速度</span><br><span class="line">export USE_PRECOMPILED_HEADER=true</span><br><span class="line"># 是否使用增量编译</span><br><span class="line">export INCREMENTAL_BUILD=true</span><br><span class="line"># 编译内容</span><br><span class="line">export BUILD_LANGTOOLS=true</span><br><span class="line">export BUILD_JAXP=false</span><br><span class="line">export BUILD_JAXWS=false</span><br><span class="line">export BUILD_CORBA=false</span><br><span class="line">export BUILD_HOTSPOT=true</span><br><span class="line">export BUILD_JDK=true</span><br><span class="line"># 编译版本</span><br><span class="line">export SKIP_DEBUG_BUILD=true</span><br><span class="line">export SKIP_FASTDEBUG_BUILD=false</span><br><span class="line">export DEBUG_NAME=debug</span><br><span class="line"># 避开javaws和浏览器Java插件之类的部分的build</span><br><span class="line">export BUILD_DEPLOY=false</span><br><span class="line">export BUILD_INSTALL=false</span><br><span class="line"># 加上产生调试信息时需要的 objcopy</span><br><span class="line">export OBJCOPY=gobjcopy</span><br></pre></td></tr></table></figure>
+
+<p>执行 <code>source init_env.sh</code></p>
+<p>执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure --with-freetype-include=/usr/<span class="built_in">local</span>/include/freetype2 --with-freetype-lib=/usr/<span class="built_in">local</span>/lib/</span><br></pre></td></tr></table></figure>
+
+<p>需要等待一段时间。</p>
+<p>1、报错：The C compiler (located as /usr/bin/gcc) does not seem to be the required GCC compiler.</p>
+<blockquote>
+<p>打开文件common/autoconf/generated-configure.sh，搜索compiler is required<br>找到该行之后，将其注释掉。</p>
+</blockquote>
+<p>如果还有其他问题的话，多搜一搜，网上基本能找到答案。</p>
+<h2 id="make及报错解决"><a href="#make及报错解决" class="headerlink" title="make及报错解决"></a>make及报错解决</h2><p>1、执行make</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make all</span><br></pre></td></tr></table></figure>
+
+<p>2、/bin/sh: line 0: cd: /Users/chenxii/Documents/Java/jdk8/jdk8/langtools/make: No such file or directory</p>
+<blockquote>
+<p>参见：<a href="https://stackoverflow.com/questions/34703703/jdk8-build-error-langtools">https://stackoverflow.com/questions/34703703/jdk8-build-error-langtools</a><br>执行 ./get_source.sh 获取源码</p>
+</blockquote>
+<p>3、lcm.cpp:52:35: error: ordered comparison between pointer and zero (‘address’ (aka ‘unsigned char *’) and ‘int’)</p>
+<blockquote>
+<p>编辑/hotspot/src/share/vm/opto/lcm.cpp:52</p>
+<p>原：if (Universe::narrow_oop_base() &gt; 0) </p>
+<p>修改后： if (Universe::narrow_oop_base() != NULL)</p>
+</blockquote>
+<p>4、runtime/virtualspace.cpp, error: ordered comparison between pointer and zero</p>
+<blockquote>
+<p>修改openjdk/hotspot/src/share/vm/runtime/virtualspace.cpp<br>修改331行为if (base() != 0) {</p>
+</blockquote>
+<p>5、fatal error: ‘JavaNativeFoundation/JavaNativeFoundation.h’ file not found</p>
+<p>先查找JavaNativeFoundation.h文件位置，然后替换：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; sudo find / -name <span class="string">&quot;*JavaNativeFoundation.h*&quot;</span></span><br><span class="line">&gt;&gt; Password: </span><br><span class="line">&gt;&gt; find: /Library/Application Support/com.apple.TCC: Operation not permitted</span><br><span class="line">/Library/Developer/CommandLineTools/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/JavaNativeFoundation.framework/Versions/A/Headers/JavaNativeFoundation.h</span><br><span class="line">/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/JavaVM.framework/Versions/A/Frameworks/JavaNativeFoundation.framework/Versions/A/Headers/JavaNativeFoundation.h</span><br></pre></td></tr></table></figure>
+
+<p>编辑：vim hotspot/make/bsd/makefiles/saproc.make 61行：<br>SALIBS = -g -framework Foundation -F/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/JavaVM.framework/Frameworks -framework JavaNativeFoundation -framework Security -framework CoreFoundation</p>
+<p>105行：<br>-I/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/JavaVM.framework/Headers</p>
+<p>同样的问题可能还会再其他文件中出现：</p>
+<p>同样替换 jdk/make/lib/PlatformLibraries.gmk 和 jdk/make/lib/Awt2dLibraries.gmk 文件中的路径。</p>
+<br>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>解决完上述错误后，编译成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">----- Build times -------</span><br><span class="line">Start 2021-07-11 10:50:45</span><br><span class="line">End   2021-07-11 10:59:52</span><br><span class="line">00:00:16 corba</span><br><span class="line">00:00:50 demos</span><br><span class="line">00:01:24 docs</span><br><span class="line">00:02:10 hotspot</span><br><span class="line">00:01:01 images</span><br><span class="line">00:00:09 jaxp</span><br><span class="line">00:00:14 jaxws</span><br><span class="line">00:02:35 jdk</span><br><span class="line">00:00:18 langtools</span><br><span class="line">00:00:08 nashorn</span><br><span class="line">00:09:07 TOTAL</span><br><span class="line">-------------------------</span><br><span class="line">Finished building OpenJDK for target &#x27;all&#x27;</span><br><span class="line"></span><br><span class="line">WARNING: You have the following ALT_ variables set:</span><br><span class="line">ALT_PARALLEL_COMPILE_JOBS=2</span><br><span class="line">ALT_ variables are deprecated and will be ignored. Please clean your environment.</span><br></pre></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; build/macosx-x86_64-normal-server-release/jdk/bin/java -version</span><br><span class="line">&gt;&gt; [1]    90140 bus error  build/macosx-x86_64-normal-server-release/jdk/bin/java -version</span><br></pre></td></tr></table></figure>
+
+<p>测试直接报错，这个错误在网上查了好像没什么人遇到这个问题，无法解决。</p>
+<br>
+
+<h1 id="在-MacOS10-15-上编译OpenJDK12"><a href="#在-MacOS10-15-上编译OpenJDK12" class="headerlink" title="在 MacOS10.15 上编译OpenJDK12"></a>在 MacOS10.15 上编译OpenJDK12</h1><p>在MacOS下编译8版本测试报错之后，想着去Windows系统下编译也可以的，反正Windows平台配置高一点，调试学习起来可能也更容易一些。搞了三四个小时，卡在了 configure 识别不出已安装的 Visual Studio2013，想换2010版本还找不到安装包，于是放弃了。</p>
+<p>看到有人说，越新的版本越容易通过。刚好我机器上装了 jdk11，所以就尝试了编译 jdk12。</p>
+<h2 id="源码获取-amp-环境准备"><a href="#源码获取-amp-环境准备" class="headerlink" title="源码获取&amp;环境准备"></a>源码获取&amp;环境准备</h2><p>1、从官方库获取会非常慢，建议从github获取，速度会快很多。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; git <span class="built_in">clone</span> https://github.com/openjdk/jdk12u.git openjdk12u</span><br></pre></td></tr></table></figure>
+
+<p>2、安装和配置Java11</p>
+<p>3、安装必要软件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">xcode-select --install</span><br><span class="line">brew install ccache</span><br><span class="line">brew install freetype</span><br><span class="line">brew install autoconf</span><br><span class="line">chmod -R 777 openjdk12u</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h2><p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; ./configure</span><br></pre></td></tr></table></figure>
+
+<p>应该是之前编译 8 版本的时候解决了很多环境问题，这里就报了一个错：</p>
+<p>…/test/hotspot/gtest/classfile/test_symbolTable.cpp:62:6: error: explicitly assigning value of variable of type ‘TempNewSymbol’ to itself [-Werror,-Wself-assign-overloaded].</p>
+<blockquote>
+<p>找到该文件，将第 62 行直接注释掉。</p>
+</blockquote>
+<br>
+
+<h2 id="make-images"><a href="#make-images" class="headerlink" title="make images"></a>make images</h2><p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; make images</span><br></pre></td></tr></table></figure>
+
+<p>这里也很顺利，没有报错直接一次编译成功。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Note: Recompile with -Xlint:unchecked for details.</span><br><span class="line">Creating support/demos/image/jfc/CodePointIM/CodePointIM.jar</span><br><span class="line">Creating support/demos/image/jfc/FileChooserDemo/FileChooserDemo.jar</span><br><span class="line">Creating support/demos/image/jfc/SwingSet2/SwingSet2.jar</span><br><span class="line">Creating support/demos/image/jfc/J2Ddemo/J2Ddemo.jar</span><br><span class="line">Creating support/demos/image/jfc/Font2DTest/Font2DTest.jar</span><br><span class="line">Creating support/demos/image/jfc/Metalworks/Metalworks.jar</span><br><span class="line">Creating support/demos/image/jfc/Notepad/Notepad.jar</span><br><span class="line">Creating support/demos/image/jfc/Stylepad/Stylepad.jar</span><br><span class="line">Creating support/demos/image/jfc/SampleTree/SampleTree.jar</span><br><span class="line">Creating support/demos/image/jfc/TableExample/TableExample.jar</span><br><span class="line">Creating support/demos/image/jfc/TransparentRuler/TransparentRuler.jar</span><br><span class="line">Creating jdk image</span><br><span class="line">Creating CDS archive for jdk image</span><br><span class="line">Stopping sjavac server</span><br><span class="line">Finished building target &#x27;images&#x27; in configuration &#x27;macosx-x86_64-server-release&#x27;</span><br><span class="line">(base)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>测试：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt; build/macosx-x86_64-server-release/jdk/bin/java -version</span><br><span class="line">openjdk version <span class="string">&quot;12.0.2-internal&quot;</span> 2019-07-16</span><br><span class="line">OpenJDK Runtime Environment (build 12.0.2-internal+0-adhoc.chenxii.openjdk12u)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 12.0.2-internal+0-adhoc.chenxii.openjdk12u, mixed mode)</span><br><span class="line">(base)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="导入-Clion"><a href="#导入-Clion" class="headerlink" title="导入 Clion"></a>导入 Clion</h2><p>安装 Clion，然后直接从先有代码创建新项目，选择 src 目录导入即可，参考：<a href="https://cloud.tencent.com/developer/article/1584598">JVM | Clion导入OpenJDK11源码并调试</a></p>
+<br>
+
+<h2 id="一点感想"><a href="#一点感想" class="headerlink" title="一点感想"></a>一点感想</h2><p>上个周末就想完成的事情，可是上周末加了两天班。这周末花了两天时间，不停的查各种资料，最终换了个版本算是达成目标。不过这还只是学习这本书的序章而已，真正的挑战才刚刚开始！</p>
+<br>
+
+<p>参考资料：</p>
+<ul>
+<li><a href="https://codertang.com/2019/11/11/build-jdk8/">MacOS 下编译 OpenJDK8</a></li>
+<li><a href="https://blog.csdn.net/xiao_cai_ming/article/details/109820102">mac下编译JDK12</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -5253,30 +5371,6 @@
       </tags>
   </entry>
   <entry>
-    <title>最近减重心得</title>
-    <url>/2021/03/11/%E6%9C%80%E8%BF%91%E5%87%8F%E9%87%8D%E5%BF%83%E5%BE%97/</url>
-    <content><![CDATA[<h2 id="体重暴增"><a href="#体重暴增" class="headerlink" title="体重暴增"></a>体重暴增</h2><p>鉴于去年年底的两三个月在饮食方面有点不规律，导致从十一月份到今年一月份体重从55kg一下涨到了接近59kg，创下了体重记录的新高。前两天回去翻了19年的体重记录，因为那时候其实也买了一个体重称，每天关注体重的，发现那时候我的体重竟然才53kg，这几个月长了5kg左右，因为吃得多还没有运动，那段时间加班也是每天很晚才吃饭。<span id="more"></span></p>
-<p><img src="https://images2.imgbox.com/b3/1e/ODamB6aP_o.png" alt="很久之前的体重记录"></p>
-<p>一直都对体重比较敏感，每天在地铁站里看到那些挺着个大肚子的中年油腻男总是一脸鄙视，真不知道他们为什么能忍受那样的自己。</p>
-<br>
-
-<h2 id="不可原谅的油腻"><a href="#不可原谅的油腻" class="headerlink" title="不可原谅的油腻"></a>不可原谅的油腻</h2><p>一直很反感那些中年油腻男，其实生活再艰难，也总是能挤出点时间来打理自己的。从二月初开始跑步控制体重之后，更加觉得，所有肥胖的人都怪他们自己，要么就是抵不住美食的诱惑、要么就是忍受不了运动的煎熬，宁愿每天拖着肥胖的身体也不愿节食运动。前两个周末，因为晚上下雨没去跑步，正好赶上周五晚上，就放松一下去了小区门口的汉堡王，看到体重严重超标的一男一女，当时就想着，要是我是这个体重的话，吃米饭都会有罪恶感的，更别提汉堡可乐炸鸡这样的高热量食物了。</p>
-<br>
-
-<h2 id="节食-运动"><a href="#节食-运动" class="headerlink" title="节食+运动"></a>节食+运动</h2><p>从2月份开始每天骑单车+跑步，平均每天一个小时的锻炼时间。除了过年中断之外，还坚持了一段时间，不过效果不明显，到了57.30kg就减不下去了，那段时间还坚持不吃早餐和晚餐，中午也只是6.5一份的刀削面。</p>
-<p><img src="https://images2.imgbox.com/3b/67/ZOomPKd1_o.png" alt="2月运动记录"></p>
-<p>反而是进入3月份之后，已经连续一个星期没有去运动了，午餐和晚餐也正常吃了，只是早餐还是继续没有，昨天晚上体重竟然下降到了57.15kg，今天晚上更是只有56.70kg，一下子又有动力了。昨天没吃早餐和午饭，今天晚上没吃早餐和晚饭，回来就吃了一个橘子。晚上去了益田假日广场，本来想去看看13寸的MacBook Pro，走过美食区的时候，真的好饿，还是忍住了没去吃。（13寸的MacBook Pro的屏幕还是有点小，在便携性和屏幕大小之间纠结，好像2020款的键盘手感也不如2015款这么好，犹豫要不要买）。</p>
-<p><img src="https://images2.imgbox.com/c4/10/Xl9Jo2Va_o.png" alt="最近的体重"></p>
-<p>今天又重新分派了开发任务，周天就要移交，周末应该要加班，这两天都会很忙，暂时决定明天晚上开始跑步，不知道有没有时间去，可能会加班到很晚。</p>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>最近学到的IDEA使用技巧</title>
     <url>/2021/02/05/%E6%9C%80%E8%BF%91%E5%AD%A6%E5%88%B0%E7%9A%84IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<p>昨天晚上加班到凌晨3点，和前辈一起改一段代码，代码提交完，在等测试的时候，和前辈交流了一下IDEA的使用技巧，学到了很多东西。上次有这种感觉还是实习的时候，那时候学会了很多Sublime的小技巧。</p>
@@ -5298,6 +5392,30 @@
       </categories>
       <tags>
         <tag>IDEA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>最近减重心得</title>
+    <url>/2021/03/11/%E6%9C%80%E8%BF%91%E5%87%8F%E9%87%8D%E5%BF%83%E5%BE%97/</url>
+    <content><![CDATA[<h2 id="体重暴增"><a href="#体重暴增" class="headerlink" title="体重暴增"></a>体重暴增</h2><p>鉴于去年年底的两三个月在饮食方面有点不规律，导致从十一月份到今年一月份体重从55kg一下涨到了接近59kg，创下了体重记录的新高。前两天回去翻了19年的体重记录，因为那时候其实也买了一个体重称，每天关注体重的，发现那时候我的体重竟然才53kg，这几个月长了5kg左右，因为吃得多还没有运动，那段时间加班也是每天很晚才吃饭。<span id="more"></span></p>
+<p><img src="https://images2.imgbox.com/b3/1e/ODamB6aP_o.png" alt="很久之前的体重记录"></p>
+<p>一直都对体重比较敏感，每天在地铁站里看到那些挺着个大肚子的中年油腻男总是一脸鄙视，真不知道他们为什么能忍受那样的自己。</p>
+<br>
+
+<h2 id="不可原谅的油腻"><a href="#不可原谅的油腻" class="headerlink" title="不可原谅的油腻"></a>不可原谅的油腻</h2><p>一直很反感那些中年油腻男，其实生活再艰难，也总是能挤出点时间来打理自己的。从二月初开始跑步控制体重之后，更加觉得，所有肥胖的人都怪他们自己，要么就是抵不住美食的诱惑、要么就是忍受不了运动的煎熬，宁愿每天拖着肥胖的身体也不愿节食运动。前两个周末，因为晚上下雨没去跑步，正好赶上周五晚上，就放松一下去了小区门口的汉堡王，看到体重严重超标的一男一女，当时就想着，要是我是这个体重的话，吃米饭都会有罪恶感的，更别提汉堡可乐炸鸡这样的高热量食物了。</p>
+<br>
+
+<h2 id="节食-运动"><a href="#节食-运动" class="headerlink" title="节食+运动"></a>节食+运动</h2><p>从2月份开始每天骑单车+跑步，平均每天一个小时的锻炼时间。除了过年中断之外，还坚持了一段时间，不过效果不明显，到了57.30kg就减不下去了，那段时间还坚持不吃早餐和晚餐，中午也只是6.5一份的刀削面。</p>
+<p><img src="https://images2.imgbox.com/3b/67/ZOomPKd1_o.png" alt="2月运动记录"></p>
+<p>反而是进入3月份之后，已经连续一个星期没有去运动了，午餐和晚餐也正常吃了，只是早餐还是继续没有，昨天晚上体重竟然下降到了57.15kg，今天晚上更是只有56.70kg，一下子又有动力了。昨天没吃早餐和午饭，今天晚上没吃早餐和晚饭，回来就吃了一个橘子。晚上去了益田假日广场，本来想去看看13寸的MacBook Pro，走过美食区的时候，真的好饿，还是忍住了没去吃。（13寸的MacBook Pro的屏幕还是有点小，在便携性和屏幕大小之间纠结，好像2020款的键盘手感也不如2015款这么好，犹豫要不要买）。</p>
+<p><img src="https://images2.imgbox.com/c4/10/Xl9Jo2Va_o.png" alt="最近的体重"></p>
+<p>今天又重新分派了开发任务，周天就要移交，周末应该要加班，这两天都会很忙，暂时决定明天晚上开始跑步，不知道有没有时间去，可能会加班到很晚。</p>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
@@ -5717,27 +5835,6 @@
       </tags>
   </entry>
   <entry>
-    <title>记一次Tomcat 8005端口Cannot assign requested address的经历</title>
-    <url>/2019/04/24/%E8%AE%B0%E4%B8%80%E6%AC%A1Tomcat-8005%E7%AB%AF%E5%8F%A3Cannot-assign-requested-address%E7%9A%84%E7%BB%8F%E5%8E%86/</url>
-    <content><![CDATA[<p>记一次Tomcat 8005端口Cannot assign requested address : Jvm Bind的经历</p>
-<p>一个正在做毕设的老乡遇到的问题：Tomcat启动的时候，报了[8005] Jvm Bind相关的异常，大概内容是端口已被占用的意思。</p>
-<p>一. 先从运行/bin/shutdown.bat，再次关闭Tomcat，重新启动问题依然存在；</p>
-<p>二. netstat -ano查看端口使用情况，未发现8080,8009,8005相关的端口被占用；</p>
-<p>三. 打开任务管理器，确认javaw.exe未在运行，问题依然存在；</p>
-<p>四. 重启机器，问题依然存在；</p>
-<p>五. 参照：[<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html">Tomcat启动报错:严重: StandardServer.await: create[8005] java.net.BindException: Cannot assign requested address](https://www.cnblogs.com/heshan664754022/p/3807672.html)</a> ， ping了localhost，发现收到的响应来自ipp[47.89.54.215]，打开C:/windows/system32/drivers/etc/hosts，发现以下内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">47.89.54.215       localhost</span><br><span class="line">47.89.54.215	hao.360.cn</span><br><span class="line">47.89.54.215	www.hao123.com</span><br><span class="line">47.89.54.215	www.3600.com</span><br><span class="line">47.89.54.215	www.114la.com</span><br><span class="line">47.89.54.215	www.duba.com</span><br><span class="line">47.89.54.215	www.hao360.cn</span><br><span class="line">47.89.54.215	123.sogou.com</span><br><span class="line">47.89.54.215	web.sogou.com</span><br><span class="line">47.89.54.215	www.hao123.cn</span><br><span class="line">47.89.54.215	hao.qq.com</span><br><span class="line">47.89.54.215	www.1616.net</span><br><span class="line">47.89.54.215	hao.rising.cn</span><br><span class="line">47.89.54.215	daohang.qq.com</span><br></pre></td></tr></table></figure>
-
-<p>看到daohang.qq，hao123，duba，hao360，123.sougou之类的字眼，国内流氓软件那么多？”的问题又浮现在脑海。</p>
-]]></content>
-      <categories>
-        <category>Tomcat</category>
-      </categories>
-      <tags>
-        <tag>Tomcat</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>越南子宫国有化计划</title>
     <url>/2021/06/15/%E8%B6%8A%E5%8D%97%E5%AD%90%E5%AE%AB%E5%9B%BD%E6%9C%89%E5%8C%96%E8%AE%A1%E5%88%92/</url>
     <content><![CDATA[<p>越南子宫国有化计划（Vietnam Womb Nationalization）</p>
@@ -5794,6 +5891,27 @@
       </categories>
       <tags>
         <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记一次Tomcat 8005端口Cannot assign requested address的经历</title>
+    <url>/2019/04/24/%E8%AE%B0%E4%B8%80%E6%AC%A1Tomcat-8005%E7%AB%AF%E5%8F%A3Cannot-assign-requested-address%E7%9A%84%E7%BB%8F%E5%8E%86/</url>
+    <content><![CDATA[<p>记一次Tomcat 8005端口Cannot assign requested address : Jvm Bind的经历</p>
+<p>一个正在做毕设的老乡遇到的问题：Tomcat启动的时候，报了[8005] Jvm Bind相关的异常，大概内容是端口已被占用的意思。</p>
+<p>一. 先从运行/bin/shutdown.bat，再次关闭Tomcat，重新启动问题依然存在；</p>
+<p>二. netstat -ano查看端口使用情况，未发现8080,8009,8005相关的端口被占用；</p>
+<p>三. 打开任务管理器，确认javaw.exe未在运行，问题依然存在；</p>
+<p>四. 重启机器，问题依然存在；</p>
+<p>五. 参照：[<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html">Tomcat启动报错:严重: StandardServer.await: create[8005] java.net.BindException: Cannot assign requested address](https://www.cnblogs.com/heshan664754022/p/3807672.html)</a> ， ping了localhost，发现收到的响应来自ipp[47.89.54.215]，打开C:/windows/system32/drivers/etc/hosts，发现以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">47.89.54.215       localhost</span><br><span class="line">47.89.54.215	hao.360.cn</span><br><span class="line">47.89.54.215	www.hao123.com</span><br><span class="line">47.89.54.215	www.3600.com</span><br><span class="line">47.89.54.215	www.114la.com</span><br><span class="line">47.89.54.215	www.duba.com</span><br><span class="line">47.89.54.215	www.hao360.cn</span><br><span class="line">47.89.54.215	123.sogou.com</span><br><span class="line">47.89.54.215	web.sogou.com</span><br><span class="line">47.89.54.215	www.hao123.cn</span><br><span class="line">47.89.54.215	hao.qq.com</span><br><span class="line">47.89.54.215	www.1616.net</span><br><span class="line">47.89.54.215	hao.rising.cn</span><br><span class="line">47.89.54.215	daohang.qq.com</span><br></pre></td></tr></table></figure>
+
+<p>看到daohang.qq，hao123，duba，hao360，123.sougou之类的字眼，国内流氓软件那么多？”的问题又浮现在脑海。</p>
+]]></content>
+      <categories>
+        <category>Tomcat</category>
+      </categories>
+      <tags>
+        <tag>Tomcat</tag>
       </tags>
   </entry>
 </search>
